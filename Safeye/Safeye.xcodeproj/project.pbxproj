@@ -29,6 +29,16 @@
 		5F244A9B27F70FFD00BFE1FB /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A9A27F70FFD00BFE1FB /* EventView.swift */; };
 		5F244A9D27F711A500BFE1FB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A9C27F711A500BFE1FB /* MapView.swift */; };
 		5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A9E27F711B900BFE1FB /* SettingsView.swift */; };
+		5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AA427F717AA00BFE1FB /* LoginViewModel.swift */; };
+		5F244AA727F717C200BFE1FB /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AA627F717C200BFE1FB /* RegisterViewModel.swift */; };
+		5F244AA927F717EF00BFE1FB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AA827F717EF00BFE1FB /* HomeViewModel.swift */; };
+		5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AAA27F7180400BFE1FB /* ProfileViewModel.swift */; };
+		5F244AAD27F7181A00BFE1FB /* CreateEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AAC27F7181A00BFE1FB /* CreateEventViewModel.swift */; };
+		5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AAE27F7183200BFE1FB /* AddContactViewModel.swift */; };
+		5F244AB127F7184B00BFE1FB /* AddSafePlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB027F7184B00BFE1FB /* AddSafePlaceViewModel.swift */; };
+		5F244AB327F7185C00BFE1FB /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB227F7185C00BFE1FB /* EventViewModel.swift */; };
+		5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB427F7186E00BFE1FB /* MapViewModel.swift */; };
+		5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +84,16 @@
 		5F244A9A27F70FFD00BFE1FB /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		5F244A9C27F711A500BFE1FB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		5F244A9E27F711B900BFE1FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5F244AA427F717AA00BFE1FB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		5F244AA627F717C200BFE1FB /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		5F244AA827F717EF00BFE1FB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		5F244AAA27F7180400BFE1FB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		5F244AAC27F7181A00BFE1FB /* CreateEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewModel.swift; sourceTree = "<group>"; };
+		5F244AAE27F7183200BFE1FB /* AddContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewModel.swift; sourceTree = "<group>"; };
+		5F244AB027F7184B00BFE1FB /* AddSafePlaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSafePlaceViewModel.swift; sourceTree = "<group>"; };
+		5F244AB227F7185C00BFE1FB /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		5F244AB427F7186E00BFE1FB /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +253,16 @@
 		5F8B94F627F70A610067C6C9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5F244AA427F717AA00BFE1FB /* LoginViewModel.swift */,
+				5F244AA627F717C200BFE1FB /* RegisterViewModel.swift */,
+				5F244AA827F717EF00BFE1FB /* HomeViewModel.swift */,
+				5F244AAA27F7180400BFE1FB /* ProfileViewModel.swift */,
+				5F244AAC27F7181A00BFE1FB /* CreateEventViewModel.swift */,
+				5F244AAE27F7183200BFE1FB /* AddContactViewModel.swift */,
+				5F244AB027F7184B00BFE1FB /* AddSafePlaceViewModel.swift */,
+				5F244AB227F7185C00BFE1FB /* EventViewModel.swift */,
+				5F244AB427F7186E00BFE1FB /* MapViewModel.swift */,
+				5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -377,20 +407,30 @@
 				5F244A8E27F70E8700BFE1FB /* RegisterView.swift in Sources */,
 				5F244A9D27F711A500BFE1FB /* MapView.swift in Sources */,
 				5F0EA30727F6F9E100FBD77B /* Safeye.xcdatamodeld in Sources */,
+				5F244AA927F717EF00BFE1FB /* HomeViewModel.swift in Sources */,
 				5F0EA30427F6F9E100FBD77B /* Persistence.swift in Sources */,
 				5F244A9027F70E9B00BFE1FB /* HomeView.swift in Sources */,
+				5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */,
 				5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
+				5F244AA727F717C200BFE1FB /* RegisterViewModel.swift in Sources */,
+				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
+				5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */,
 				5F244A8627F70B8800BFE1FB /* inputField.swift in Sources */,
 				5F0EA2FB27F6F9E000FBD77B /* SafeyeApp.swift in Sources */,
 				5F244A8C27F70E7300BFE1FB /* LoginView.swift in Sources */,
 				5F244A9B27F70FFD00BFE1FB /* EventView.swift in Sources */,
+				5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */,
 				5F244A9427F70EEA00BFE1FB /* CreateEventView.swift in Sources */,
+				5F244AB327F7185C00BFE1FB /* EventViewModel.swift in Sources */,
 				5F244A9227F70EC600BFE1FB /* ProfileView.swift in Sources */,
 				5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */,
 				5F244A9627F70F0A00BFE1FB /* AddContactView.swift in Sources */,
 				5F244A9927F70F6200BFE1FB /* AddSafePlaceView.swift in Sources */,
+				5F244AAD27F7181A00BFE1FB /* CreateEventViewModel.swift in Sources */,
+				5F244AB127F7184B00BFE1FB /* AddSafePlaceViewModel.swift in Sources */,
+				5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
