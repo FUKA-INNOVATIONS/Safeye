@@ -16,7 +16,6 @@
 		5F0EA31127F6F9E200FBD77B /* SafeyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EA31027F6F9E200FBD77B /* SafeyeTests.swift */; };
 		5F0EA31B27F6F9E200FBD77B /* SafeyeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EA31A27F6F9E200FBD77B /* SafeyeUITests.swift */; };
 		5F0EA31D27F6F9E200FBD77B /* SafeyeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EA31C27F6F9E200FBD77B /* SafeyeUITestsLaunchTests.swift */; };
-		5F244A8627F70B8800BFE1FB /* inputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A8527F70B8800BFE1FB /* inputField.swift */; };
 		5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A8727F70CC900BFE1FB /* Theme.swift */; };
 		5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A8927F70CFA00BFE1FB /* AuthenticationService.swift */; };
 		5F244A8C27F70E7300BFE1FB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A8B27F70E7300BFE1FB /* LoginView.swift */; };
@@ -52,6 +51,13 @@
 		5F244ACD27F71B1E00BFE1FB /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ACC27F71B1E00BFE1FB /* ProfileRepository.swift */; };
 		5F244ACF27F71B3500BFE1FB /* EventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ACE27F71B3500BFE1FB /* EventRepository.swift */; };
 		5F244AD127F71B4B00BFE1FB /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */; };
+		5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */; };
+		5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */; };
+		5F244AD727F71C4000BFE1FB /* buttonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD627F71C4000BFE1FB /* buttonModifier.swift */; };
+		5F244AD927F71C4F00BFE1FB /* avatarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */; };
+		5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */; };
+		5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */; };
+		5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +90,6 @@
 		5F0EA31627F6F9E200FBD77B /* SafeyeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafeyeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F0EA31A27F6F9E200FBD77B /* SafeyeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeyeUITests.swift; sourceTree = "<group>"; };
 		5F0EA31C27F6F9E200FBD77B /* SafeyeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeyeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		5F244A8527F70B8800BFE1FB /* inputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputField.swift; sourceTree = "<group>"; };
 		5F244A8727F70CC900BFE1FB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		5F244A8927F70CFA00BFE1FB /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		5F244A8B27F70E7300BFE1FB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -120,6 +125,13 @@
 		5F244ACC27F71B1E00BFE1FB /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
 		5F244ACE27F71B3500BFE1FB /* EventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepository.swift; sourceTree = "<group>"; };
 		5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
+		5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = safeButtonModifier.swift; sourceTree = "<group>"; };
+		5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = panicButtonModifier.swift; sourceTree = "<group>"; };
+		5F244AD627F71C4000BFE1FB /* buttonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonModifier.swift; sourceTree = "<group>"; };
+		5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = avatarModifier.swift; sourceTree = "<group>"; };
+		5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleTextModifier.swift; sourceTree = "<group>"; };
+		5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = descriptionTextModifier.swift; sourceTree = "<group>"; };
+		5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputFieldModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,7 +258,13 @@
 		5F244A8227F70B2A00BFE1FB /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
-				5F244A8527F70B8800BFE1FB /* inputField.swift */,
+				5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */,
+				5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */,
+				5F244AD627F71C4000BFE1FB /* buttonModifier.swift */,
+				5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */,
+				5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */,
+				5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */,
+				5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -456,12 +474,14 @@
 				5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
+				5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */,
 				5F244ACB27F71B1200BFE1FB /* AuthenticationRepository.swift in Sources */,
 				5F244AA727F717C200BFE1FB /* RegisterViewModel.swift in Sources */,
+				5F244AD927F71C4F00BFE1FB /* avatarModifier.swift in Sources */,
 				5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */,
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
+				5F244AD727F71C4000BFE1FB /* buttonModifier.swift in Sources */,
 				5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */,
-				5F244A8627F70B8800BFE1FB /* inputField.swift in Sources */,
 				5F0EA2FB27F6F9E000FBD77B /* SafeyeApp.swift in Sources */,
 				5F244AC127F71A4400BFE1FB /* ProfileModel.swift in Sources */,
 				5F244A8C27F70E7300BFE1FB /* LoginView.swift in Sources */,
@@ -477,12 +497,16 @@
 				5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */,
 				5F244ACF27F71B3500BFE1FB /* EventRepository.swift in Sources */,
 				5F244A9627F70F0A00BFE1FB /* AddContactView.swift in Sources */,
+				5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */,
+				5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */,
 				5F244A9927F70F6200BFE1FB /* AddSafePlaceView.swift in Sources */,
 				5F244AC527F71A6900BFE1FB /* SettingModel.swift in Sources */,
+				5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */,
 				5F244AAD27F7181A00BFE1FB /* CreateEventViewModel.swift in Sources */,
 				5F244AB127F7184B00BFE1FB /* AddSafePlaceViewModel.swift in Sources */,
 				5F244AC727F71A8000BFE1FB /* EventStatusModel.swift in Sources */,
 				5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */,
+				5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
