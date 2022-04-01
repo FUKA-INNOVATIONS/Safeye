@@ -16,6 +16,7 @@
 		5F0EA31127F6F9E200FBD77B /* SafeyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EA31027F6F9E200FBD77B /* SafeyeTests.swift */; };
 		5F0EA31B27F6F9E200FBD77B /* SafeyeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EA31A27F6F9E200FBD77B /* SafeyeUITests.swift */; };
 		5F0EA31D27F6F9E200FBD77B /* SafeyeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EA31C27F6F9E200FBD77B /* SafeyeUITestsLaunchTests.swift */; };
+		5F244A8627F70B8800BFE1FB /* inputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A8527F70B8800BFE1FB /* inputField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		5F0EA31627F6F9E200FBD77B /* SafeyeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafeyeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F0EA31A27F6F9E200FBD77B /* SafeyeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeyeUITests.swift; sourceTree = "<group>"; };
 		5F0EA31C27F6F9E200FBD77B /* SafeyeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeyeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5F244A8527F70B8800BFE1FB /* inputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,12 @@
 		5F0EA2F927F6F9E000FBD77B /* Safeye */ = {
 			isa = PBXGroup;
 			children = (
+				5F244A8427F70B3A00BFE1FB /* Config */,
+				5F244A8327F70B3300BFE1FB /* Components */,
+				5F244A8227F70B2A00BFE1FB /* Modifiers */,
+				5F244A7F27F70AF500BFE1FB /* Data */,
+				5F8B94F627F70A610067C6C9 /* ViewModels */,
+				5F8B94F527F70A570067C6C9 /* Views */,
 				5F0EA2FA27F6F9E000FBD77B /* SafeyeApp.swift */,
 				5F0EA2FC27F6F9E000FBD77B /* ContentView.swift */,
 				5F0EA2FE27F6F9E100FBD77B /* Assets.xcassets */,
@@ -131,6 +139,73 @@
 				5F0EA31C27F6F9E200FBD77B /* SafeyeUITestsLaunchTests.swift */,
 			);
 			path = SafeyeUITests;
+			sourceTree = "<group>";
+		};
+		5F244A7F27F70AF500BFE1FB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5F244A8127F70B1B00BFE1FB /* Repositories */,
+				5F244A8027F70B0300BFE1FB /* Services */,
+				5F8B94F727F70A730067C6C9 /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5F244A8027F70B0300BFE1FB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5F244A8127F70B1B00BFE1FB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		5F244A8227F70B2A00BFE1FB /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				5F244A8527F70B8800BFE1FB /* inputField.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		5F244A8327F70B3300BFE1FB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5F244A8427F70B3A00BFE1FB /* Config */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		5F8B94F527F70A570067C6C9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F8B94F627F70A610067C6C9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5F8B94F727F70A730067C6C9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +341,7 @@
 				5F0EA30727F6F9E100FBD77B /* Safeye.xcdatamodeld in Sources */,
 				5F0EA30427F6F9E100FBD77B /* Persistence.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
+				5F244A8627F70B8800BFE1FB /* inputField.swift in Sources */,
 				5F0EA2FB27F6F9E000FBD77B /* SafeyeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
