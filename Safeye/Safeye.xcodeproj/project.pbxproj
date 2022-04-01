@@ -61,6 +61,9 @@
 		5F244AE327F71FEE00BFE1FB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */; };
 		5F244AE527F7200500BFE1FB /* InputComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE427F7200500BFE1FB /* InputComponent.swift */; };
 		5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE627F7202A00BFE1FB /* TextComponent.swift */; };
+		5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEA27F7217800BFE1FB /* Camera.swift */; };
+		5F244AED27F721A300BFE1FB /* Microphone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEC27F721A300BFE1FB /* Microphone.swift */; };
+		5F244AEF27F721B100BFE1FB /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEE27F721B100BFE1FB /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +141,9 @@
 		5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		5F244AE427F7200500BFE1FB /* InputComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputComponent.swift; sourceTree = "<group>"; };
 		5F244AE627F7202A00BFE1FB /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
+		5F244AEA27F7217800BFE1FB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		5F244AEC27F721A300BFE1FB /* Microphone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Microphone.swift; sourceTree = "<group>"; };
+		5F244AEE27F721B100BFE1FB /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +194,7 @@
 		5F0EA2F927F6F9E000FBD77B /* Safeye */ = {
 			isa = PBXGroup;
 			children = (
+				5F244AE827F7213E00BFE1FB /* Utils */,
 				5F8B94F527F70A570067C6C9 /* Views */,
 				5F244A8327F70B3300BFE1FB /* Components */,
 				5F8B94F627F70A610067C6C9 /* ViewModels */,
@@ -291,6 +298,24 @@
 				5F244A8727F70CC900BFE1FB /* Theme.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		5F244AE827F7213E00BFE1FB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5F244AE927F7215500BFE1FB /* Device */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		5F244AE927F7215500BFE1FB /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				5F244AEA27F7217800BFE1FB /* Camera.swift */,
+				5F244AEC27F721A300BFE1FB /* Microphone.swift */,
+				5F244AEE27F721B100BFE1FB /* Location.swift */,
+			);
+			path = Device;
 			sourceTree = "<group>";
 		};
 		5F8B94F527F70A570067C6C9 /* Views */ = {
@@ -476,6 +501,7 @@
 				5F244AA927F717EF00BFE1FB /* HomeViewModel.swift in Sources */,
 				5F0EA30427F6F9E100FBD77B /* Persistence.swift in Sources */,
 				5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */,
+				5F244AEF27F721B100BFE1FB /* Location.swift in Sources */,
 				5F244ACD27F71B1E00BFE1FB /* ProfileRepository.swift in Sources */,
 				5F244A9027F70E9B00BFE1FB /* HomeView.swift in Sources */,
 				5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */,
@@ -508,6 +534,7 @@
 				5F244A9227F70EC600BFE1FB /* ProfileView.swift in Sources */,
 				5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */,
 				5F244ACF27F71B3500BFE1FB /* EventRepository.swift in Sources */,
+				5F244AED27F721A300BFE1FB /* Microphone.swift in Sources */,
 				5F244A9627F70F0A00BFE1FB /* AddContactView.swift in Sources */,
 				5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */,
 				5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */,
@@ -516,6 +543,7 @@
 				5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */,
 				5F244AAD27F7181A00BFE1FB /* CreateEventViewModel.swift in Sources */,
 				5F244AB127F7184B00BFE1FB /* AddSafePlaceViewModel.swift in Sources */,
+				5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */,
 				5F244AC727F71A8000BFE1FB /* EventStatusModel.swift in Sources */,
 				5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */,
 				5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */,
