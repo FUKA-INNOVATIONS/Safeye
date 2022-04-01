@@ -42,6 +42,12 @@
 		5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB827F7198B00BFE1FB /* EventService.swift */; };
 		5F244ABB27F719A500BFE1FB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ABA27F719A500BFE1FB /* ProfileService.swift */; };
 		5F244ABD27F719D600BFE1FB /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ABC27F719D600BFE1FB /* SettingService.swift */; };
+		5F244ABF27F71A3500BFE1FB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ABE27F71A3500BFE1FB /* UserModel.swift */; };
+		5F244AC127F71A4400BFE1FB /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AC027F71A4400BFE1FB /* ProfileModel.swift */; };
+		5F244AC327F71A5700BFE1FB /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AC227F71A5700BFE1FB /* EventModel.swift */; };
+		5F244AC527F71A6900BFE1FB /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AC427F71A6900BFE1FB /* SettingModel.swift */; };
+		5F244AC727F71A8000BFE1FB /* EventStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AC627F71A8000BFE1FB /* EventStatusModel.swift */; };
+		5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AC827F71ACF00BFE1FB /* TrustedContactModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +106,12 @@
 		5F244AB827F7198B00BFE1FB /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		5F244ABA27F719A500BFE1FB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		5F244ABC27F719D600BFE1FB /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
+		5F244ABE27F71A3500BFE1FB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		5F244AC027F71A4400BFE1FB /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		5F244AC227F71A5700BFE1FB /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		5F244AC427F71A6900BFE1FB /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		5F244AC627F71A8000BFE1FB /* EventStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatusModel.swift; sourceTree = "<group>"; };
+		5F244AC827F71ACF00BFE1FB /* TrustedContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustedContactModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				5F244A8027F70B0300BFE1FB /* Services */,
-				5F244A8127F70B1B00BFE1FB /* Repositories */,
 				5F8B94F727F70A730067C6C9 /* Models */,
+				5F244A8127F70B1B00BFE1FB /* Repositories */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -279,6 +291,12 @@
 		5F8B94F727F70A730067C6C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5F244ABE27F71A3500BFE1FB /* UserModel.swift */,
+				5F244AC027F71A4400BFE1FB /* ProfileModel.swift */,
+				5F244AC227F71A5700BFE1FB /* EventModel.swift */,
+				5F244AC427F71A6900BFE1FB /* SettingModel.swift */,
+				5F244AC627F71A8000BFE1FB /* EventStatusModel.swift */,
+				5F244AC827F71ACF00BFE1FB /* TrustedContactModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -420,19 +438,23 @@
 				5F0EA30427F6F9E100FBD77B /* Persistence.swift in Sources */,
 				5F244A9027F70E9B00BFE1FB /* HomeView.swift in Sources */,
 				5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */,
+				5F244AC327F71A5700BFE1FB /* EventModel.swift in Sources */,
 				5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
 				5F244AA727F717C200BFE1FB /* RegisterViewModel.swift in Sources */,
+				5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */,
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
 				5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */,
 				5F244A8627F70B8800BFE1FB /* inputField.swift in Sources */,
 				5F0EA2FB27F6F9E000FBD77B /* SafeyeApp.swift in Sources */,
+				5F244AC127F71A4400BFE1FB /* ProfileModel.swift in Sources */,
 				5F244A8C27F70E7300BFE1FB /* LoginView.swift in Sources */,
 				5F244ABB27F719A500BFE1FB /* ProfileService.swift in Sources */,
 				5F244A9B27F70FFD00BFE1FB /* EventView.swift in Sources */,
 				5F244ABD27F719D600BFE1FB /* SettingService.swift in Sources */,
 				5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */,
+				5F244ABF27F71A3500BFE1FB /* UserModel.swift in Sources */,
 				5F244A9427F70EEA00BFE1FB /* CreateEventView.swift in Sources */,
 				5F244AB327F7185C00BFE1FB /* EventViewModel.swift in Sources */,
 				5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */,
@@ -440,8 +462,10 @@
 				5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */,
 				5F244A9627F70F0A00BFE1FB /* AddContactView.swift in Sources */,
 				5F244A9927F70F6200BFE1FB /* AddSafePlaceView.swift in Sources */,
+				5F244AC527F71A6900BFE1FB /* SettingModel.swift in Sources */,
 				5F244AAD27F7181A00BFE1FB /* CreateEventViewModel.swift in Sources */,
 				5F244AB127F7184B00BFE1FB /* AddSafePlaceViewModel.swift in Sources */,
+				5F244AC727F71A8000BFE1FB /* EventStatusModel.swift in Sources */,
 				5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
