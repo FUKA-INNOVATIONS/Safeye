@@ -59,7 +59,7 @@
 		5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */; };
 		5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */; };
 		5F244AE327F71FEE00BFE1FB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */; };
-		5F244AE527F7200500BFE1FB /* InputComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE427F7200500BFE1FB /* InputComponent.swift */; };
+		5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */; };
 		5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE627F7202A00BFE1FB /* TextComponent.swift */; };
 		5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEA27F7217800BFE1FB /* Camera.swift */; };
 		5F244AED27F721A300BFE1FB /* Microphone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEC27F721A300BFE1FB /* Microphone.swift */; };
@@ -139,7 +139,7 @@
 		5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = descriptionTextModifier.swift; sourceTree = "<group>"; };
 		5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputFieldModifier.swift; sourceTree = "<group>"; };
 		5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
-		5F244AE427F7200500BFE1FB /* InputComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputComponent.swift; sourceTree = "<group>"; };
+		5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldComponent.swift; sourceTree = "<group>"; };
 		5F244AE627F7202A00BFE1FB /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		5F244AEA27F7217800BFE1FB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		5F244AEC27F721A300BFE1FB /* Microphone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Microphone.swift; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */,
-				5F244AE427F7200500BFE1FB /* InputComponent.swift */,
+				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 			);
 			path = Components;
@@ -515,7 +515,7 @@
 				5F244AA727F717C200BFE1FB /* RegisterViewModel.swift in Sources */,
 				5F244AD927F71C4F00BFE1FB /* avatarModifier.swift in Sources */,
 				5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */,
-				5F244AE527F7200500BFE1FB /* InputComponent.swift in Sources */,
+				5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */,
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
 				5F244AD727F71C4000BFE1FB /* buttonModifier.swift in Sources */,
 				5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */,

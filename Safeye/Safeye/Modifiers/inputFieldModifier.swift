@@ -5,4 +5,13 @@
 //  Created by FUKA on 1.4.2022.
 //
 
-import Foundation
+import SwiftUI
+
+struct inputFieldModifier: ViewModifier {
+    func body(content: Content) -> some View {
+            content
+                .disableAutocorrection(true)
+                .autocapitalization(.none)
+                .padding()
+        }
+}
