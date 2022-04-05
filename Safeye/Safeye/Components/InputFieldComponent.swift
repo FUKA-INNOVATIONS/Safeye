@@ -13,6 +13,9 @@ import SwiftUI
 struct InputFieldComponent: View {
     @State var title: String
     @State var text: String
+    
+    // This is the parent
+    // Bind it here
 
         var body: some View {
             VStack(alignment: .leading) {

@@ -10,14 +10,17 @@ import CoreData
 
 struct ContentView: View {
     
-    var emailField = InputFieldComponent(title: "Email address", text: "")
+    // var showEmailField = InputFieldComponent(title: "Email address", text: "")
+    
     
     var body: some View {
         Section {
-            emailField
+            // emailField
+            InputFieldComponent(title: "Email address", text: "")
         }
     }
     
+
 }
 
 
