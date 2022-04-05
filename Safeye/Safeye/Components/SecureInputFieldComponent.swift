@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct SecureInputFieldComponent: View {
-    // @Binding var
+    
+    let title: String
+    @Binding var secureText: String
+    
     
     var body: some View {
-        //SecureField(LocalizedStringKe, text: <#T##Binding<String>#>)
-        return Text("Hello")
+        VStack(alignment: .leading) {
+            Text(title)
+            SecureField(title, text: $secureText)
+        }
     }
 }
 
 struct SecureInputFieldComponent_Previews: PreviewProvider {
     static var previews: some View {
-        SecureInputFieldComponent()
+        SecureInputFieldComponent(title: "Password", secureText: .constant("12445"))
     }
 }

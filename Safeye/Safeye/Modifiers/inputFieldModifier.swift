@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct inputFieldModifier: ViewModifier {
+struct InputFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
             content
                 .disableAutocorrection(true)
