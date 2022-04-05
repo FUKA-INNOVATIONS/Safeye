@@ -11,8 +11,8 @@
 import SwiftUI
 
 struct InputFieldComponent: View {
-    @State var title: String
-    @State var text: String
+    let title: String
+    @Binding var inputText: String
     
     // This is the parent
     // Bind it here
@@ -20,7 +20,7 @@ struct InputFieldComponent: View {
         var body: some View {
             VStack(alignment: .leading) {
                 Text(title)
-                TextField(title, text: $text)
+                TextField(title, text: $inputText)
             }
             .modifier(inputFieldModifier())
         }
@@ -28,7 +28,9 @@ struct InputFieldComponent: View {
 
 
 struct InputFieldComponent_Previews: PreviewProvider {
+    @State var inputText: String = "Hello input"
+    
     static var previews: some View {
-        InputFieldComponent(title: "Email address", text: "")
+        InputFieldComponent(title: "Email address", inputText: .constant("hello binding"))
     }
 }

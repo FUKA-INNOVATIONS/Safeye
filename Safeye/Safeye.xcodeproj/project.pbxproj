@@ -64,6 +64,8 @@
 		5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEA27F7217800BFE1FB /* Camera.swift */; };
 		5F244AED27F721A300BFE1FB /* Microphone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEC27F721A300BFE1FB /* Microphone.swift */; };
 		5F244AEF27F721B100BFE1FB /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEE27F721B100BFE1FB /* Location.swift */; };
+		5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */; };
+		5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +146,8 @@
 		5F244AEA27F7217800BFE1FB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		5F244AEC27F721A300BFE1FB /* Microphone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Microphone.swift; sourceTree = "<group>"; };
 		5F244AEE27F721B100BFE1FB /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secureInputFieldModifier.swift; sourceTree = "<group>"; };
+		5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputFieldComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +282,7 @@
 				5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */,
 				5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */,
 				5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */,
+				5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */,
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
+				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -507,7 +513,9 @@
 				5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */,
 				5F244AD127F71B4B00BFE1FB /* SettingRepository.swift in Sources */,
 				5F244AC327F71A5700BFE1FB /* EventModel.swift in Sources */,
+				5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */,
 				5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */,
+				5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
 				5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */,
