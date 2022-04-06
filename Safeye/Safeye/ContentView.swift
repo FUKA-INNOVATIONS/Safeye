@@ -12,6 +12,7 @@ struct ContentView: View {
     // var showEmailField = InputFieldComponent(title: "Email address", text: "")
     @State var inputText: String = "Hello input"
     @State var passsword: String = ""
+    @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
     
     let sayHello = { print("Hello") }
     
@@ -19,11 +20,23 @@ struct ContentView: View {
     var body: some View {
         Section {
             VStack {
-                InputFieldComponent(title: "Email address", inputText: $inputText)
-                SecureInputFieldComponent(title: "Password", secureText: $passsword)
-                BasicButtonComponent(label: "Tap tap", action: sayHello)
+                // InputFieldComponent(title: "Email address", inputText: $inputText)
+                // SecureInputFieldComponent(title: "Password", secureText: $passsword)
+                // BasicButtonComponent(label: "Tap tap", action: sayHello)
+                
+                if AuthenticationViewModel.isSignedIn {
+                    // User is signed in
+                    BasicButtonComponent(label: "Sign out") {
+                        AuthenticationViewModel.signOut()
+                    }
+                } else {
+                    LoginView() // Show Login
+                }
                 
             }
+        }
+        .onAppear {
+            AuthenticationViewModel.signedIn = AuthenticationViewModel.isSignedIn
         }
     }
     
