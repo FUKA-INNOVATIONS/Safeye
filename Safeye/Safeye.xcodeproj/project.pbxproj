@@ -53,8 +53,8 @@
 		5F244AD127F71B4B00BFE1FB /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */; };
 		5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */; };
 		5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */; };
+		5F244AD927F71C4F00BFE1FB /* AvatarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD827F71C4F00BFE1FB /* AvatarModifier.swift */; };
 		5F244AD727F71C4000BFE1FB /* BasicButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */; };
-		5F244AD927F71C4F00BFE1FB /* avatarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */; };
 		5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */; };
 		5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */; };
 		5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */; };
@@ -70,6 +70,7 @@
 		5F2EAD8E27FDB6A8006FDFD9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2EAD8D27FDB6A8006FDFD9 /* FirebaseAuth */; };
 		5F2EAD9027FDB6A8006FDFD9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2EAD8F27FDB6A8006FDFD9 /* FirebaseFirestore */; };
 		5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */; };
+    6AD96E4427FD49E600063439 /* AvatarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD96E4327FD49E600063439 /* AvatarComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,8 +140,8 @@
 		5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = safeButtonModifier.swift; sourceTree = "<group>"; };
 		5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = panicButtonModifier.swift; sourceTree = "<group>"; };
+		5F244AD827F71C4F00BFE1FB /* AvatarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarModifier.swift; sourceTree = "<group>"; };
 		5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonModifier.swift; sourceTree = "<group>"; };
-		5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = avatarModifier.swift; sourceTree = "<group>"; };
 		5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleTextModifier.swift; sourceTree = "<group>"; };
 		5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = descriptionTextModifier.swift; sourceTree = "<group>"; };
 		5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputFieldModifier.swift; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 		5F244AEE27F721B100BFE1FB /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secureInputFieldModifier.swift; sourceTree = "<group>"; };
 		5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputFieldComponent.swift; sourceTree = "<group>"; };
+		6AD96E4327FD49E600063439 /* AvatarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarComponent.swift; sourceTree = "<group>"; };
 		5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,8 +288,8 @@
 			children = (
 				5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */,
 				5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */,
+				5F244AD827F71C4F00BFE1FB /* AvatarModifier.swift */,
 				5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */,
-				5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */,
 				5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */,
 				5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */,
 				5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */,
@@ -303,6 +305,7 @@
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
+				6AD96E4327FD49E600063439 /* AvatarComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -539,7 +542,7 @@
 				5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */,
 				5F244ACB27F71B1200BFE1FB /* AuthenticationRepository.swift in Sources */,
 				5F244AA727F717C200BFE1FB /* RegisterViewModel.swift in Sources */,
-				5F244AD927F71C4F00BFE1FB /* avatarModifier.swift in Sources */,
+				5F244AD927F71C4F00BFE1FB /* AvatarModifier.swift in Sources */,
 				5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */,
 				5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */,
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
@@ -571,6 +574,7 @@
 				5F244AAD27F7181A00BFE1FB /* CreateEventViewModel.swift in Sources */,
 				5F244AB127F7184B00BFE1FB /* AddSafePlaceViewModel.swift in Sources */,
 				5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */,
+				6AD96E4427FD49E600063439 /* AvatarComponent.swift in Sources */,
 				5F244AC727F71A8000BFE1FB /* EventStatusModel.swift in Sources */,
 				5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */,
 				5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */,
@@ -660,7 +664,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -714,7 +718,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -791,7 +795,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WD4RSN9DBA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.fuka.SafeyeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -811,7 +815,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WD4RSN9DBA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.fuka.SafeyeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
