@@ -29,7 +29,6 @@ struct RegisterView: View {
             }
             
         }
-        .padding()
         .navigationTitle("Create new account")
     }
 }

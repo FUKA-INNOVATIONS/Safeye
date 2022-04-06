@@ -30,15 +30,17 @@ struct LoginView: View {
                     }
                     // Email and password is provided, try to sign the user in
                     viewModel.signIn(email: email, password: password)
-                    print("LOGIN")
+                    print("LOGIN attempt")
                     
                 })
                 
                 NavigationLink("Create a new account", destination: RegisterView(viewModel: viewModel))
                     .padding()
             }
-            .padding()
             .navigationTitle("Sign in")
+            .alert("Login failed", isPresented: $viewModel.signinError) {
+                Button("OK", role: .cancel) { }
+            }
         }
     }
 }

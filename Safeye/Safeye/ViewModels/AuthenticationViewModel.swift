@@ -10,31 +10,35 @@
  TODO: Class Explanation
  */
 
-import FirebaseAuth // Import Firebase Authentication
+import SwiftUI
 
 class AuthenticationViewModel: ObservableObject {
-    let auth = Auth.auth()
+    let authService = AuthenticationService.getInstance
     
     @Published var signedIn = false
+    @Published var signinError = false
     
     var isSignedIn: Bool {
-        return auth.currentUser != nil
+        return authService.currentUser != nil
     }
     
     func signIn(email: String, password: String) { // Login user with email and password
-        auth.signIn(withEmail: email, password: password) { [weak self] result, error in
+        authService.signIn(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
+                self?.signinError = true
+                // print("Error in signIn() -> viewModel: \(error?.localizedDescription)")
                 return
             }
             // Login Success
             DispatchQueue.main.async {
+                self?.signinError = false
                 self?.signedIn = true
             }
         }
     }
     
     func signUp(email: String, password: String) { // Create new user account with email and password
-        auth.createUser(withEmail: email, password: password) { [weak self] result, error in
+        authService.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
                 return
             }
@@ -46,7 +50,7 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func signOut() { // Logout user
-        try? auth.signOut()
+        try? authService.signOut()
         self.signedIn = false
     }
     
