@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
     
@@ -14,12 +13,16 @@ struct ContentView: View {
     @State var inputText: String = "Hello input"
     @State var passsword: String = ""
     
+    let sayHello = { print("Hello") }
+    
+    
     var body: some View {
         Section {
-            // emailField
             VStack {
                 InputFieldComponent(title: "Email address", inputText: $inputText)
                 SecureInputFieldComponent(title: "Password", secureText: $passsword)
+                BasicButtonComponent(label: "Tap tap", action: sayHello)
+                
             }
         }
     }

@@ -53,12 +53,12 @@
 		5F244AD127F71B4B00BFE1FB /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */; };
 		5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */; };
 		5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */; };
-		5F244AD727F71C4000BFE1FB /* buttonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD627F71C4000BFE1FB /* buttonModifier.swift */; };
+		5F244AD727F71C4000BFE1FB /* BasicButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */; };
 		5F244AD927F71C4F00BFE1FB /* avatarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */; };
 		5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */; };
 		5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */; };
 		5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */; };
-		5F244AE327F71FEE00BFE1FB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */; };
+		5F244AE327F71FEE00BFE1FB /* BasicButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */; };
 		5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */; };
 		5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE627F7202A00BFE1FB /* TextComponent.swift */; };
 		5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEA27F7217800BFE1FB /* Camera.swift */; };
@@ -135,12 +135,12 @@
 		5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = safeButtonModifier.swift; sourceTree = "<group>"; };
 		5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = panicButtonModifier.swift; sourceTree = "<group>"; };
-		5F244AD627F71C4000BFE1FB /* buttonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonModifier.swift; sourceTree = "<group>"; };
+		5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonModifier.swift; sourceTree = "<group>"; };
 		5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = avatarModifier.swift; sourceTree = "<group>"; };
 		5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleTextModifier.swift; sourceTree = "<group>"; };
 		5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = descriptionTextModifier.swift; sourceTree = "<group>"; };
 		5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputFieldModifier.swift; sourceTree = "<group>"; };
-		5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonComponent.swift; sourceTree = "<group>"; };
 		5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldComponent.swift; sourceTree = "<group>"; };
 		5F244AE627F7202A00BFE1FB /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		5F244AEA27F7217800BFE1FB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 			children = (
 				5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */,
 				5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */,
-				5F244AD627F71C4000BFE1FB /* buttonModifier.swift */,
+				5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */,
 				5F244AD827F71C4F00BFE1FB /* avatarModifier.swift */,
 				5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */,
 				5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */,
@@ -290,7 +290,7 @@
 		5F244A8327F70B3300BFE1FB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */,
+				5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */,
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
@@ -525,7 +525,7 @@
 				5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */,
 				5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */,
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
-				5F244AD727F71C4000BFE1FB /* buttonModifier.swift in Sources */,
+				5F244AD727F71C4000BFE1FB /* BasicButtonModifier.swift in Sources */,
 				5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */,
 				5F0EA2FB27F6F9E000FBD77B /* SafeyeApp.swift in Sources */,
 				5F244AC127F71A4400BFE1FB /* ProfileModel.swift in Sources */,
@@ -536,7 +536,7 @@
 				5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */,
 				5F244ABF27F71A3500BFE1FB /* UserModel.swift in Sources */,
 				5F244A9427F70EEA00BFE1FB /* CreateEventView.swift in Sources */,
-				5F244AE327F71FEE00BFE1FB /* ButtonComponent.swift in Sources */,
+				5F244AE327F71FEE00BFE1FB /* BasicButtonComponent.swift in Sources */,
 				5F244AB327F7185C00BFE1FB /* EventViewModel.swift in Sources */,
 				5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */,
 				5F244A9227F70EC600BFE1FB /* ProfileView.swift in Sources */,
