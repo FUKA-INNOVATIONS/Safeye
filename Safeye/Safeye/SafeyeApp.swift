@@ -6,15 +6,24 @@
 //
 
 import SwiftUI
+import Firebase // Import Firebase
 
 @main
 struct SafeyeApp: App {
     let persistenceController = PersistenceController.shared
+    
+    init() {
+        FirebaseApp.configure() // Initialize Firebase
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            let AuthenticationViewModel = AuthenticationViewModel()
+            NavigationView {
+                ContentView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .environmentObject(AuthenticationViewModel)
+            }
         }
     }
 }
