@@ -18,6 +18,7 @@ struct SecureInputFieldComponent: View {
             Text(title)
             SecureField(title, text: $secureText)
         }
+        .modifier(inputFieldModifier())
     }
 }
 

@@ -53,12 +53,12 @@
 		5F244AD127F71B4B00BFE1FB /* SettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */; };
 		5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */; };
 		5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */; };
-		5F244AD727F71C4000BFE1FB /* buttonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD627F71C4000BFE1FB /* buttonModifier.swift */; };
 		5F244AD927F71C4F00BFE1FB /* AvatarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD827F71C4F00BFE1FB /* AvatarModifier.swift */; };
+		5F244AD727F71C4000BFE1FB /* BasicButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */; };
 		5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */; };
 		5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */; };
 		5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */; };
-		5F244AE327F71FEE00BFE1FB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */; };
+		5F244AE327F71FEE00BFE1FB /* BasicButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */; };
 		5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */; };
 		5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AE627F7202A00BFE1FB /* TextComponent.swift */; };
 		5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEA27F7217800BFE1FB /* Camera.swift */; };
@@ -66,10 +66,11 @@
 		5F244AEF27F721B100BFE1FB /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AEE27F721B100BFE1FB /* Location.swift */; };
 		5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */; };
 		5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */; };
-		6AD96E4427FD49E600063439 /* AvatarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD96E4327FD49E600063439 /* AvatarComponent.swift */; };
-		6AFA6EEF27FDF9AB00AFDFC3 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFA6EEE27FDF9AB00AFDFC3 /* FirebaseAuth */; };
-		6AFA6EF127FDF9AB00AFDFC3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFA6EF027FDF9AB00AFDFC3 /* FirebaseFirestore */; };
-		6AFA6EF327FDF9AB00AFDFC3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFA6EF227FDF9AB00AFDFC3 /* FirebaseStorage */; };
+		5F2EAD8B27FD8B91006FDFD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */; };
+		5F2EAD8E27FDB6A8006FDFD9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2EAD8D27FDB6A8006FDFD9 /* FirebaseAuth */; };
+		5F2EAD9027FDB6A8006FDFD9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2EAD8F27FDB6A8006FDFD9 /* FirebaseFirestore */; };
+		5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */; };
+    6AD96E4427FD49E600063439 /* AvatarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD96E4327FD49E600063439 /* AvatarComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,12 +140,12 @@
 		5F244AD027F71B4B00BFE1FB /* SettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRepository.swift; sourceTree = "<group>"; };
 		5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = safeButtonModifier.swift; sourceTree = "<group>"; };
 		5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = panicButtonModifier.swift; sourceTree = "<group>"; };
-		5F244AD627F71C4000BFE1FB /* buttonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonModifier.swift; sourceTree = "<group>"; };
 		5F244AD827F71C4F00BFE1FB /* AvatarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarModifier.swift; sourceTree = "<group>"; };
+		5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonModifier.swift; sourceTree = "<group>"; };
 		5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = titleTextModifier.swift; sourceTree = "<group>"; };
 		5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = descriptionTextModifier.swift; sourceTree = "<group>"; };
 		5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputFieldModifier.swift; sourceTree = "<group>"; };
-		5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonComponent.swift; sourceTree = "<group>"; };
 		5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldComponent.swift; sourceTree = "<group>"; };
 		5F244AE627F7202A00BFE1FB /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		5F244AEA27F7217800BFE1FB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -153,6 +154,8 @@
 		5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secureInputFieldModifier.swift; sourceTree = "<group>"; };
 		5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputFieldComponent.swift; sourceTree = "<group>"; };
 		6AD96E4327FD49E600063439 /* AvatarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarComponent.swift; sourceTree = "<group>"; };
+		5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,9 +163,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AFA6EEF27FDF9AB00AFDFC3 /* FirebaseAuth in Frameworks */,
-				6AFA6EF127FDF9AB00AFDFC3 /* FirebaseFirestore in Frameworks */,
-				6AFA6EF327FDF9AB00AFDFC3 /* FirebaseStorage in Frameworks */,
+				5F2EAD8E27FDB6A8006FDFD9 /* FirebaseAuth in Frameworks */,
+				5F2EAD9027FDB6A8006FDFD9 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +208,7 @@
 		5F0EA2F927F6F9E000FBD77B /* Safeye */ = {
 			isa = PBXGroup;
 			children = (
+				5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */,
 				5F244AE827F7213E00BFE1FB /* Utils */,
 				5F8B94F527F70A570067C6C9 /* Views */,
 				5F244A8327F70B3300BFE1FB /* Components */,
@@ -285,8 +288,8 @@
 			children = (
 				5F244AD227F71BB700BFE1FB /* safeButtonModifier.swift */,
 				5F244AD427F71C1A00BFE1FB /* panicButtonModifier.swift */,
-				5F244AD627F71C4000BFE1FB /* buttonModifier.swift */,
 				5F244AD827F71C4F00BFE1FB /* AvatarModifier.swift */,
+				5F244AD627F71C4000BFE1FB /* BasicButtonModifier.swift */,
 				5F244ADA27F71C7D00BFE1FB /* titleTextModifier.swift */,
 				5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */,
 				5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */,
@@ -298,7 +301,7 @@
 		5F244A8327F70B3300BFE1FB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5F244AE227F71FEE00BFE1FB /* ButtonComponent.swift */,
+				5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */,
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
@@ -363,6 +366,7 @@
 				5F244AB227F7185C00BFE1FB /* EventViewModel.swift */,
 				5F244AB427F7186E00BFE1FB /* MapViewModel.swift */,
 				5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */,
+				5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -397,9 +401,8 @@
 			);
 			name = Safeye;
 			packageProductDependencies = (
-				6AFA6EEE27FDF9AB00AFDFC3 /* FirebaseAuth */,
-				6AFA6EF027FDF9AB00AFDFC3 /* FirebaseFirestore */,
-				6AFA6EF227FDF9AB00AFDFC3 /* FirebaseStorage */,
+				5F2EAD8D27FDB6A8006FDFD9 /* FirebaseAuth */,
+				5F2EAD8F27FDB6A8006FDFD9 /* FirebaseFirestore */,
 			);
 			productName = Safeye;
 			productReference = 5F0EA2F727F6F9E000FBD77B /* Safeye.app */;
@@ -474,7 +477,7 @@
 			);
 			mainGroup = 5F0EA2EE27F6F9E000FBD77B;
 			packageReferences = (
-				6AFA6EED27FDF9AB00AFDFC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5F2EAD8C27FDB6A8006FDFD9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5F0EA2F827F6F9E000FBD77B /* Products */;
 			projectDirPath = "";
@@ -493,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F0EA30227F6F9E100FBD77B /* Preview Assets.xcassets in Resources */,
+				5F2EAD8B27FD8B91006FDFD9 /* GoogleService-Info.plist in Resources */,
 				5F0EA2FF27F6F9E100FBD77B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,8 +546,9 @@
 				5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */,
 				5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */,
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
-				5F244AD727F71C4000BFE1FB /* buttonModifier.swift in Sources */,
+				5F244AD727F71C4000BFE1FB /* BasicButtonModifier.swift in Sources */,
 				5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */,
+				5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */,
 				5F0EA2FB27F6F9E000FBD77B /* SafeyeApp.swift in Sources */,
 				5F244AC127F71A4400BFE1FB /* ProfileModel.swift in Sources */,
 				5F244A8C27F70E7300BFE1FB /* LoginView.swift in Sources */,
@@ -553,7 +558,7 @@
 				5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */,
 				5F244ABF27F71A3500BFE1FB /* UserModel.swift in Sources */,
 				5F244A9427F70EEA00BFE1FB /* CreateEventView.swift in Sources */,
-				5F244AE327F71FEE00BFE1FB /* ButtonComponent.swift in Sources */,
+				5F244AE327F71FEE00BFE1FB /* BasicButtonComponent.swift in Sources */,
 				5F244AB327F7185C00BFE1FB /* EventViewModel.swift in Sources */,
 				5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */,
 				5F244A9227F70EC600BFE1FB /* ProfileView.swift in Sources */,
@@ -899,7 +904,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6AFA6EED27FDF9AB00AFDFC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		5F2EAD8C27FDB6A8006FDFD9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -910,20 +915,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6AFA6EEE27FDF9AB00AFDFC3 /* FirebaseAuth */ = {
+		5F2EAD8D27FDB6A8006FDFD9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6AFA6EED27FDF9AB00AFDFC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 5F2EAD8C27FDB6A8006FDFD9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		6AFA6EF027FDF9AB00AFDFC3 /* FirebaseFirestore */ = {
+		5F2EAD8F27FDB6A8006FDFD9 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6AFA6EED27FDF9AB00AFDFC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 5F2EAD8C27FDB6A8006FDFD9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
-		};
-		6AFA6EF227FDF9AB00AFDFC3 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6AFA6EED27FDF9AB00AFDFC3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 
