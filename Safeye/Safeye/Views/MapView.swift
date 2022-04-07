@@ -18,19 +18,27 @@ struct MapView: View {
     
     @StateObject private var viewModel = MapViewModel()
     
+    /*
+     Locations array:
+     Currently made up of dummy data
+     TODO fetch the home locations of users trusted contacts and their own created
+     safe spaces to use
+    */
     let locations = [
-        Location(name: "Home", coordinate: CLLocationCoordinate2D(latitude: 60.219, longitude: 24.749)),
-        Location(name: "Campus", coordinate: CLLocationCoordinate2D(latitude: 60.224, longitude: 24.756)),
-        Location(name: "Buck", coordinate: CLLocationCoordinate2D(latitude: 51.508, longitude: -0.076))
+        Location(name: "SafeSpace 1", coordinate: CLLocationCoordinate2D(latitude: 60.170011, longitude: 24.937062)),
+        Location(name: "SafeSpace 2", coordinate: CLLocationCoordinate2D(latitude: 60.167650, longitude: 24.962106)),
+        Location(name: "SafeSpace 3", coordinate: CLLocationCoordinate2D(latitude: 60.164396, longitude: 24.937056)),
+        Location(name: "SafeSpace 4", coordinate: CLLocationCoordinate2D(latitude: 60.181991, longitude: 24.950927))
+        
     ]
-
     
     var body: some View {
         Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: locations) { location in
             MapAnnotation(coordinate: location.coordinate) {
+                // TODO create own component for how safe spaces are displayed
                 Circle()
-                    .stroke(.red, lineWidth: 3)
-                    .frame(width: 44, height: 44)
+                    .stroke(.blue, lineWidth: 3)
+                    .frame(width: 20, height: 20)
             }
         }
         .ignoresSafeArea()
@@ -44,45 +52,5 @@ struct MapView: View {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView()
-    }
-}
-
-final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    
-    @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.5, longitude: -0.12), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-    
-    var locationManager: CLLocationManager?
-    
-    func checkIfLocationServicesIsEnabled() {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager = CLLocationManager()
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager?.delegate = self
-            
-        } else {
-            print("Show Alert saying location not active")
-        }
-    }
-    
-    private func checkLocationAuthorization() {
-        guard let locationManager = locationManager else { return }
-
-        switch locationManager.authorizationStatus {
-            
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            print("Your location is restricted (parental controls)")
-        case .denied:
-            print("You have denied this permission")
-        case .authorizedAlways, .authorizedWhenInUse:
-            mapRegion = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-        @unknown default:
-            break
-        }
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
     }
 }
