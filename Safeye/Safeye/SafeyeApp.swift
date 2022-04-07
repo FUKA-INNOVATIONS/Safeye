@@ -18,11 +18,12 @@ struct SafeyeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            let AuthenticationViewModel = AuthenticationViewModel()
+            //let AuthenticationViewModel = // AuthenticationViewModel()
             NavigationView {
-                ContentView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .environmentObject(AuthenticationViewModel)
+                MapView()
+                //ContentView()
+                  //  .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                  //  .environmentObject(AuthenticationViewModel)
             }
         }
     }
