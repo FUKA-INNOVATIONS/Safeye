@@ -10,6 +10,7 @@ import Foundation
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
+    // If the users does not allow location, map should center on Helsinki
     @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 60.170, longitude: 24.941), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     
     var locationManager: CLLocationManager?
