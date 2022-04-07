@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct AvatarComponent: View {
-
+    let size: CGFloat
+    init (size: CGFloat) {
+        self.size = size
+    }
+    
         var body: some View {
             AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png")) { phase in
                 if let image = phase.image {
@@ -21,13 +25,13 @@ struct AvatarComponent: View {
                     ProgressView()
                 }
             }
-            .avatarImage(size: 100)
+            .avatarImage(size: size)
         }
 }
 
 struct AvatarComponent_Previews: PreviewProvider {
     static var previews: some View {
-        AvatarComponent()
+        AvatarComponent(size: 50)
     }
 }
 
