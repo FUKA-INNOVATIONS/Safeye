@@ -19,6 +19,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             locationManager = CLLocationManager()
             locationManager?.desiredAccuracy = kCLLocationAccuracyBest
             locationManager?.delegate = self
+            locationManager?.distanceFilter = 1
             
         } else {
             print("Show Alert saying location not active")
