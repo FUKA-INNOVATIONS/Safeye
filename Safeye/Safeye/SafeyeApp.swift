@@ -3,7 +3,7 @@
 //  Safeye
 //
 //  Created by FUKA on 1.4.2022.
-//
+// This is just to test push to git
 
 import SwiftUI
 import Firebase // Import Firebase
