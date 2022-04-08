@@ -2,7 +2,18 @@
 //  avatarModifier.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created by gintare on 6.4.2022.
 //
 
-import Foundation
+import SwiftUI
+
+struct AvatarModifier: ViewModifier {
+    let size: CGFloat
+    func body(content: Content) -> some View {
+            content
+            .scaledToFit()
+            .frame(width: size, height: size, alignment: .center)
+            .clipShape(Circle())
+            .aspectRatio(contentMode: .fit)
+    }
+}
