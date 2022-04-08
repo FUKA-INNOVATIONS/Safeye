@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
     var body: some View {
+   
         VStack {
+            BasicButtonComponent(label: "Sign out") {
+                // Sign out button
+                AuthenticationViewModel.signOut()
+                        }
             Group{
             Spacer()
                 Text("FirstName LastName").font(.system(size: 25, weight: .bold))

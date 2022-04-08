@@ -68,6 +68,7 @@
 		5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */; };
 		5F2EAD8B27FD8B91006FDFD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */; };
 		5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */; };
+		D5148A5327FF5C8800E98347 /* NavItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5148A5227FF5C8800E98347 /* NavItem.swift */; };
 		6A7DB4A6280017F60054DD47 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6A966EA327FEBB3800FC9F5C /* FirebaseAuth */; };
 		6A7DB4A7280017F60054DD47 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6A966EA527FEBB3800FC9F5C /* FirebaseFirestore */; };
 		6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */; };
@@ -162,6 +163,7 @@
 		5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputFieldComponent.swift; sourceTree = "<group>"; };
 		5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		D5148A5227FF5C8800E98347 /* NavItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavItem.swift; sourceTree = "<group>"; };
 		6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItemComponent.swift; sourceTree = "<group>"; };
 		6A7DB4AA280034FD0054DD47 /* SettingsListViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListViewComponent.swift; sourceTree = "<group>"; };
 		6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewComponent.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
+				D5148A5227FF5C8800E98347 /* NavItem.swift */,
 				6AD96E4327FD49E600063439 /* AvatarComponent.swift */,
 				6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */,
 				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
@@ -547,6 +550,7 @@
 				5F244A9D27F711A500BFE1FB /* MapView.swift in Sources */,
 				5F0EA30727F6F9E100FBD77B /* Safeye.xcdatamodeld in Sources */,
 				5F244AA927F717EF00BFE1FB /* HomeViewModel.swift in Sources */,
+				D5148A5327FF5C8800E98347 /* NavItem.swift in Sources */,
 				5F0EA30427F6F9E100FBD77B /* Persistence.swift in Sources */,
 				5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */,
 				5F244AEF27F721B100BFE1FB /* Location.swift in Sources */,
