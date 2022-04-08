@@ -7,13 +7,7 @@
 
 import SwiftUI
 
-struct navItem: View {
-    // @Binding var action: Any
-    let label: String
-    let action: () -> Void
-    
-    // This is the parent
-    // Bind it here
+struct NavItem: View {
 
         var body: some View {
             TabView {

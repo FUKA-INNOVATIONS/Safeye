@@ -16,6 +16,7 @@ struct ProfileView: View {
                 .foregroundColor(Color.white)
                 .font(.system(size: 100.0))
         }
+        NavItem()
     }
 }
 
