@@ -3,16 +3,34 @@
 //  Safeye
 //
 //  Created by gintare on 7.4.2022.
-//
+//  Edited by FUKA on 8.4.2022.
 
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var editProfileMode = false
+    @ObservedObject var profileViewModel = ProfileViewModel()
+    
+    init() {
+        self.profileViewModel.getProfile()
+        print("ProfileView init")
+    }
+    
     var body: some View {
         VStack {
             Group{
             Spacer()
-                Text("FirstName LastName").font(.system(size: 25, weight: .bold))
+                Text("\(profileViewModel.profileDetails?.fullName ?? "No name")").font(.system(size: 25, weight: .bold))
+                
+                // Show edit profile view in a Modal
+                BasicButtonComponent(label: "Edit profile details") {
+                    editProfileMode.toggle()
+                }
+                .sheet(isPresented: $editProfileMode) {
+                    ProfileEditView()
+                }
+                
+                
             AvatarComponent(size: 80)
             Spacer()
             }
