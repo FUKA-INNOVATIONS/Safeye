@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+        var body: some View {
+            ZStack {
+                Color.green
+                
+                Image(systemName: "slider.horizontal.3")
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 100.0))
+            }
+            
+        }
 }
 
 struct SettingsView_Previews: PreviewProvider {

@@ -70,6 +70,7 @@
 		5F2EAD8E27FDB6A8006FDFD9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2EAD8D27FDB6A8006FDFD9 /* FirebaseAuth */; };
 		5F2EAD9027FDB6A8006FDFD9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5F2EAD8F27FDB6A8006FDFD9 /* FirebaseFirestore */; };
 		5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */; };
+		D5148A5327FF5C8800E98347 /* navItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5148A5227FF5C8800E98347 /* navItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +155,7 @@
 		5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputFieldComponent.swift; sourceTree = "<group>"; };
 		5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		D5148A5227FF5C8800E98347 /* navItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = navItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +305,7 @@
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
+				D5148A5227FF5C8800E98347 /* navItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				5F244A9D27F711A500BFE1FB /* MapView.swift in Sources */,
 				5F0EA30727F6F9E100FBD77B /* Safeye.xcdatamodeld in Sources */,
 				5F244AA927F717EF00BFE1FB /* HomeViewModel.swift in Sources */,
+				D5148A5327FF5C8800E98347 /* navItem.swift in Sources */,
 				5F0EA30427F6F9E100FBD77B /* Persistence.swift in Sources */,
 				5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */,
 				5F244AEF27F721B100BFE1FB /* Location.swift in Sources */,
@@ -660,7 +664,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -714,7 +718,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -731,7 +735,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Safeye/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = WD4RSN9DBA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -760,7 +764,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Safeye/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = WD4RSN9DBA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -791,7 +795,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WD4RSN9DBA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.fuka.SafeyeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -811,7 +815,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WD4RSN9DBA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.fuka.SafeyeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

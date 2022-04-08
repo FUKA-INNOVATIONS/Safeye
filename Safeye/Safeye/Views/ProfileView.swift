@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color.blue
+            
+            Image(systemName: "person.fill")
+                .foregroundColor(Color.white)
+                .font(.system(size: 100.0))
+        }
     }
 }
 

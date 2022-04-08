@@ -9,7 +9,13 @@ import SwiftUI
 
 struct MapView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color.gray
+            
+            Image(systemName: "map.fill")
+                .foregroundColor(Color.white)
+                .font(.system(size: 100.0))
+        }
     }
 }
 

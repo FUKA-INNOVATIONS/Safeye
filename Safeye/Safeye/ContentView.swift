@@ -20,6 +20,7 @@ struct ContentView: View {
                     // User is signed in
                     BasicButtonComponent(label: "Sign out") { // Sign out button
                         AuthenticationViewModel.signOut()
+                        
                     }
                 } else {
                     // User has not signed in
@@ -31,6 +32,7 @@ struct ContentView: View {
         .onAppear {
             AuthenticationViewModel.signedIn = AuthenticationViewModel.isSignedIn
         }
+        
     }
     
 }
