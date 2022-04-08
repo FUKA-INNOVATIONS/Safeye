@@ -732,7 +732,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Safeye/Preview Content\"";
-				DEVELOPMENT_TEAM = WD4RSN9DBA;
+				DEVELOPMENT_TEAM = X9LKA75DEX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to allow trusted contacts to find you in an emergency";
@@ -746,11 +746,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.fuka.Safeye;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.dfallow.Safeye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -762,7 +762,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Safeye/Preview Content\"";
-				DEVELOPMENT_TEAM = WD4RSN9DBA;
+				DEVELOPMENT_TEAM = X9LKA75DEX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to allow trusted contacts to find you in an emergency";
@@ -776,11 +776,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.fuka.Safeye;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.dfallow.Safeye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
