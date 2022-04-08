@@ -12,8 +12,9 @@ struct ContentView: View {
     @State var inputText: String = "Hello input"
     @State var passsword: String = ""
     @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
-    
+
     var body: some View {
+   
         Section {
             VStack {
                 if AuthenticationViewModel.isSignedIn {
@@ -28,6 +29,8 @@ struct ContentView: View {
                     BasicButtonComponent(label: "Sign out") { // Sign out button
                         AuthenticationViewModel.signOut()
                     }
+
+                    NavItem()
                 } else {
                     // User has not signed in
                     LoginView() // Show Login
@@ -38,6 +41,7 @@ struct ContentView: View {
         .onAppear {
             AuthenticationViewModel.signedIn = AuthenticationViewModel.isSignedIn
         }
+        
     }
     
 }
