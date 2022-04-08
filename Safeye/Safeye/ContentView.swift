@@ -6,21 +6,35 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
     
-    // var showEmailField = InputFieldComponent(title: "Email address", text: "")
     @State var inputText: String = "Hello input"
     @State var passsword: String = ""
+    @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
     
     var body: some View {
         Section {
-            // emailField
             VStack {
-                InputFieldComponent(title: "Email address", inputText: $inputText)
-                SecureInputFieldComponent(title: "Password", secureText: $passsword)
+                if AuthenticationViewModel.isSignedIn {
+                    // User is signed in
+
+                    HStack {
+                        NavigationLink("Go to MapView", destination: MapView())
+                            .padding()
+                    }
+                    BasicButtonComponent(label: "Sign out") { // Sign out button
+                        AuthenticationViewModel.signOut()
+                    }
+                } else {
+                    // User has not signed in
+                    LoginView() // Show Login
+                }
+                
             }
+        }
+        .onAppear {
+            AuthenticationViewModel.signedIn = AuthenticationViewModel.isSignedIn
         }
     }
     
