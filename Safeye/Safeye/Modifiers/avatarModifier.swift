@@ -12,7 +12,7 @@ struct AvatarModifier: ViewModifier {
     func body(content: Content) -> some View {
             content
             .scaledToFit()
-            .frame(width: size, height: size, alignment: .topLeading)
+            .frame(width: size, height: size, alignment: .center)
             .clipShape(Circle())
             .aspectRatio(contentMode: .fit)
     }
