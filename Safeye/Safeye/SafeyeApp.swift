@@ -20,6 +20,7 @@ struct SafeyeApp: App {
         WindowGroup {
             let AuthenticationViewModel = AuthenticationViewModel()
             NavigationView {
+                //MapView()
                 ContentView()
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
                     .environmentObject(AuthenticationViewModel)
