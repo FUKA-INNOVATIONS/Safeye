@@ -19,18 +19,18 @@ struct UserDetailsComponent: View {
         VStack(alignment: .leading) {
             HStack{
                 Image("icon-add")
-                Text("\(viewModel.profileDetails?.address ?? "Homeless")")
+                Text("Address: \(viewModel.profileDetails?.address ?? "Homeless")")
             }
             HStack{
                 Image("icon-add")
-                Text("\(viewModel.profileDetails?.birthday ?? "Still in mama's stomach")")
+                Text("Born: \(viewModel.profileDetails?.birthday ?? "Still in mama's stomach")")
             }
             HStack{
                 Image("icon-add")
                 VStack(alignment: .leading){
-                    Text("\(viewModel.profileDetails?.bloodType ?? "Water engine")")
-                    Text("\(viewModel.profileDetails?.illness ?? "Are you serious")")
-                    Text("\(viewModel.profileDetails?.allergies ?? "Teachers who teaches for only getting salary")")
+                    Text("Blood type: \(viewModel.profileDetails?.bloodType ?? "Water engine")")
+                    Text("Illness: \(viewModel.profileDetails?.illness ?? "Are you serious")")
+                    Text("Allergies: \(viewModel.profileDetails?.allergies ?? "Teachers who teaches for only getting salary")")
                 }
             }
         }

@@ -51,6 +51,7 @@ struct ProfileView: View {
             }
             //a button will be placed here?
         }
+        
     }
 }
 

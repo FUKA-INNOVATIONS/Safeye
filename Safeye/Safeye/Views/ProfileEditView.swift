@@ -19,21 +19,33 @@ struct ProfileEditView: View {
     @State var illness = ""
     @State var allergies = ""
     
-    // self.fullName = self.profileViewModel.profileDetails?.fullName
-    
     private var bloodTypes = ["A", "A+", "B"]
+    
     
     init() {
         print("ProfileEditView init")
         profileViewModel.getProfile()
     }
     
+    
     var body: some View {
         
-        VStack() {
+        if profileViewModel.profileExists { // Profile exists and user has all profile details
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+                self.fullName = profileViewModel.profileDetails!.fullName
+                self.address = profileViewModel.profileDetails!.address
+                self.birthday = profileViewModel.profileDetails!.birthday
+                self.bloodType = profileViewModel.profileDetails!.bloodType
+                self.illness = profileViewModel.profileDetails!.illness
+                self.allergies = profileViewModel.profileDetails!.allergies
+            }
             
+        }
+        
+        return VStack() {
             if profileViewModel.profileExists {
                 Text("Please fill the fileds you want to update")
+                
             } else {
                 Text("Please fill all fields to create new profile")
             }
@@ -67,7 +79,8 @@ struct ProfileEditView: View {
                 }
             }
             
-            BasicButtonComponent(label: "Save details go back") { // Button saves profile details
+        
+            BasicButtonComponent(label: "Save & go back") { // Button to save profile details
                 print("Save profile details pressed")
                 
                 if !profileViewModel.profileExists { // User has no profile, create new one
@@ -79,15 +92,24 @@ struct ProfileEditView: View {
                         return
                     }
                     
-                    
+                    // Insert profile data into the database
                     profileViewModel.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
+                    
+                    presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
+                    
                     
                 } else { // User has profile, update existing
                     print("User has a profile, update it")
                     
-                    profileViewModel.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
+                    // User has filled all form fields
+                    if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 {
+                        self.showEmptyFieldAlert = true // Show alert box
+                        return
+                    }
                     
-                    // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
+                    // Update profile data in the database
+                    profileViewModel.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
+                    presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
                 }
             }
             .alert(isPresented: $showEmptyFieldAlert) { // Alert user about emptu fields
@@ -98,6 +120,7 @@ struct ProfileEditView: View {
             }
             
             
+            
         }
         
         
@@ -105,7 +128,7 @@ struct ProfileEditView: View {
 }
 
 /* struct ProfileEditView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileEditView()
-    }
-} */
+ static var previews: some View {
+ ProfileEditView()
+ }
+ } */

@@ -9,9 +9,6 @@ import SwiftUI
 
 
 struct ContentView: View {
-    
-    @State var inputText: String = "Hello input"
-    @State var passsword: String = ""
     @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
     @ObservedObject var profileViewModel = ProfileViewModel()
     @State var createProfileMode = false
@@ -21,7 +18,12 @@ struct ContentView: View {
     }
     
     var body: some View {
-        Section {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+            // profileViewModel.getProfile()
+        }
+        
+        
+        return Section {
             VStack {
                 if AuthenticationViewModel.isSignedIn {
                     // User is signed in
