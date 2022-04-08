@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SelectContactGridComponent: View {
     let layout = [
-        GridItem(.fixed(120)),
-        GridItem(.fixed(120))
+        GridItem(.fixed(90))
+        // GridItem(.fixed(90))
     ]
     
         var body: some View {
