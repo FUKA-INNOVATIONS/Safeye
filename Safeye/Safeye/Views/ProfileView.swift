@@ -46,11 +46,11 @@ struct ProfileView: View {
                 
                 //size with icons doesn't work properly, will figure this out later
                 ListViewComponent(item: "safeSpace", size: 40)
-                
                 Spacer()
             }
-            //a button will be placed here?
+            
         }
+        
         
     }
 }

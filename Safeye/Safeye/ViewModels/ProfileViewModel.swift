@@ -39,7 +39,7 @@ class ProfileViewModel: ObservableObject {
                 for document in snapshot!.documents {
                     self.profileExists = true
                     print("Profile fetched")
-                    print("\(document.documentID) => \(document.data())")
+                    // print("\(document.documentID) => \(document.data())")
                     
                     let profileId = document.documentID
                     let userId = document["userId"]
@@ -92,8 +92,7 @@ class ProfileViewModel: ObservableObject {
                     "allergies": allergies,
                 ]) { error in
                     if error == nil {
-                        // Get updated data and update profileDetails variable
-                        
+                        self.getProfile() // Update app state with new data
                     } else {
                         // Something went wrong while adding profile details on the first time after account creation
                         print("Something went wrong while adding profile details on the first time after account creation")

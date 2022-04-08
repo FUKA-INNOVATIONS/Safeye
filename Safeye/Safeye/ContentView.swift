@@ -18,9 +18,9 @@ struct ContentView: View {
     }
     
     var body: some View {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-            // profileViewModel.getProfile()
-        }
+        /* DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+            profileViewModel.getProfile()
+        }*/
         
         
         return Section {
@@ -41,6 +41,8 @@ struct ContentView: View {
                                 .padding()
                         }
                         BasicButtonComponent(label: "Sign out") { // Sign out button
+                            profileViewModel.profileExists = false
+                            profileViewModel.profileDetails = nil
                             AuthenticationViewModel.signOut()
                         }
                     } else {

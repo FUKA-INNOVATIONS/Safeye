@@ -30,7 +30,8 @@ struct ProfileEditView: View {
     
     var body: some View {
         
-        if profileViewModel.profileExists { // Profile exists and user has all profile details
+        // Profile exists and user has all profile details, prefell all fields
+        if profileViewModel.profileExists {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
                 self.fullName = profileViewModel.profileDetails!.fullName
                 self.address = profileViewModel.profileDetails!.address
@@ -53,6 +54,7 @@ struct ProfileEditView: View {
             HStack{
                 InputFieldComponent(title: "Full name", inputText: $fullName)
             }
+            
             HStack{
                 InputFieldComponent(title: "Address", inputText: $address)
             }
