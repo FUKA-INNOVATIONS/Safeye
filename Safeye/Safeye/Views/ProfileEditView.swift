@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct ProfileEditView: View {
-    @ObservedObject var profileViewModel = ProfileViewModel()
+    @ObservedObject var profileViewModel: ProfileViewModel
     @State private var showEmptyFieldAlert = false
-    @Environment(\.presentationMode) var presentationMode // To close Modal view
+    // @Environment(\.presentationMode) var presentationMode // To close Modal view
+    @Environment(\.dismiss) var dismiss
     
-    @State var fullName = ""
-    @State var address = ""
-    @State var birthday = ""
-    @State var bloodType = ""
-    @State var illness = ""
-    @State var allergies = ""
+    @State private var fullName = ""
+    @State private var address = ""
+    @State private var birthday = ""
+    @State private var bloodType = ""
+    @State private var illness = ""
+    @State private var allergies = ""
     
-    private var bloodTypes = ["A", "A+", "B"]
+    @State private var bloodTypes = ["A", "A+", "B"]
     
-    
-    init() {
-        print("ProfileEditView init")
-        profileViewModel.getProfile()
-    }
+    /* init() {
+     print("ProfileEditView init")
+     profileViewModel.getProfile()
+     } */
     
     
     var body: some View {
@@ -81,7 +81,7 @@ struct ProfileEditView: View {
                 }
             }
             
-        
+            
             BasicButtonComponent(label: "Save & go back") { // Button to save profile details
                 print("Save profile details pressed")
                 
@@ -97,7 +97,8 @@ struct ProfileEditView: View {
                     // Insert profile data into the database
                     profileViewModel.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
                     
-                    presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
+                    // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
+                    dismiss()
                     
                     
                 } else { // User has profile, update existing
@@ -111,7 +112,9 @@ struct ProfileEditView: View {
                     
                     // Update profile data in the database
                     profileViewModel.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
-                    presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
+                    
+                    // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
+                    dismiss()
                 }
             }
             .alert(isPresented: $showEmptyFieldAlert) { // Alert user about emptu fields

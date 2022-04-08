@@ -8,36 +8,31 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var editProfileMode = false
-    @ObservedObject var profileViewModel = ProfileViewModel()
-    
-    init() {
-        self.profileViewModel.getProfile()
-        print("ProfileView init")
-    }
+    @StateObject var profileViewModel = ProfileViewModel()
+    @State private var showingEditProfile = false
     
     var body: some View {
         VStack {
             Group{
-            Spacer()
-                Text("\(profileViewModel.profileDetails?.fullName ?? "No name")").font(.system(size: 25, weight: .bold))
+                Spacer()
+                Text("\(profileViewModel.profileDetails?.fullName ?? "No name")")
+                    .font(.system(size: 25, weight: .bold))
                 
                 // Show edit profile view in a Modal
                 BasicButtonComponent(label: "Edit profile details") {
-                    editProfileMode.toggle()
+                    showingEditProfile = true
                 }
-                .sheet(isPresented: $editProfileMode) {
-                    ProfileEditView()
+                .sheet(isPresented: $showingEditProfile) {
+                    ProfileEditView(profileViewModel: profileViewModel)
                 }
                 
-                
-            AvatarComponent(size: 80)
-            Spacer()
+                AvatarComponent(size: 80)
+                Spacer()
             }
             Group {
                 Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
                 ListViewComponent(item: "avatar", size: 50)
-            Spacer()
+                Spacer()
             }
             UserDetailsComponent()
             Spacer()
@@ -49,6 +44,9 @@ struct ProfileView: View {
                 Spacer()
             }
             
+        }
+        .onAppear {
+            profileViewModel.getProfile()
         }
         
         

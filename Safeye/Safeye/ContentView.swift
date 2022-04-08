@@ -10,18 +10,14 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
-    @ObservedObject var profileViewModel = ProfileViewModel()
-    @State var createProfileMode = false
+    @StateObject var profileViewModel = ProfileViewModel()
+    @State private var showingCreateProfile = false
     
-    init() {
-        profileViewModel.getProfile()
-    }
-    
+
     var body: some View {
-        /* DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-            profileViewModel.getProfile()
-        }*/
-        
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+         profileViewModel.getProfile()
+         }*/
         
         return Section {
             VStack {
@@ -48,10 +44,10 @@ struct ContentView: View {
                     } else {
                         Text("In order to be safe, you must create a profile")
                         BasicButtonComponent(label: "Create a profile") {
-                            createProfileMode.toggle()
+                            showingCreateProfile = true
                         }
-                        .sheet(isPresented: $createProfileMode) {
-                            ProfileEditView()
+                        .sheet(isPresented: $showingCreateProfile) {
+                            ProfileEditView(profileViewModel: profileViewModel)
                         }
                         
                     }
@@ -62,6 +58,9 @@ struct ContentView: View {
                     LoginView() // Show Login
                 }
                 
+            }
+            .onAppear {
+                profileViewModel.getProfile()
             }
         }
         .onAppear {
