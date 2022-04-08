@@ -11,12 +11,12 @@ struct SelectContactComponent: View {
     
         var body: some View {
             VStack{
-                AvatarComponent(size: 40).padding(.top)
+                AvatarComponent(size: 30).padding(.top)
                 Text("Name Surname")
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.white)
                     .padding(.bottom)
-                    .frame(width: 130, height: 30, alignment: .center)
+                    .frame(width: 120, height: 20, alignment: .center)
             }
             .fixedSize()
             .background(.gray)

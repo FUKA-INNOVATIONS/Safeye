@@ -8,35 +8,46 @@
 import SwiftUI
 
 struct CreateEventView: View {
-    @State var date: String = ""
-    @State var type: String = ""
+    @State var startDate = Date()
+    @State var endDate = Date()
+    @State var eventType = ""
     @State var locationDetails: String = ""
     @State var otherInfo: String = ""
-    
-    
+    @State var selectedContacts: Array = []
+    let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
     
     var body: some View {
-        ScrollView(.vertical){
+        VStack{
+            Form {
+                Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
+                    SelectContactGridComponent()
+                }
+                Section(header: Text("Estimated event date and time")) {
+                    DatePicker("Start*", selection: $startDate)
+                    DatePicker("End", selection: $endDate)
+                }
+                Section(header: Text("Event type*")) {
+                    Picker(selection: $eventType, label: Text("Select event type")) {
+                        ForEach(eventTypesArray, id: \.self) {
+                            Text($0).tag($0)
+                        }
+                    }
+                }
+                Section(header: Text("Location*")) {
+                    TextField("Describe location plan for the event", text: $locationDetails)
+                }
+                Section(header: Text("Other valuable details")) {
+                    TextField("Anything else?", text: $otherInfo)
+                }
+                
+            }.navigationBarTitle("Add event information", displayMode: .inline)
             Spacer()
-            Group {
-                Text("Trusted contacts").font(.system(size: 20, weight: .bold))
-                Text("Select trusted contacts for the event")
-                SelectContactGridComponent()
-            }
-            Spacer(minLength: 20)
-            Group {
-                Text("Event details").font(.system(size: 20, weight: .bold))
-                Text("These details will be visible for the selected contacts").font(.system(size: 15))
-            }
-            Spacer(minLength: 20)
-            Group {
-                InputFieldComponent(title: "When is the event taking place?", inputText: $date).border(.gray)
-                InputFieldComponent(title: "What type of event is it?", inputText: $type).border(.gray)
-                InputFieldComponent(title: "Where is the event taking place?", inputText: $locationDetails).border(.gray)
-                InputFieldComponent(title: "Additional information", inputText: $otherInfo).border(.gray)
-            }
-            Text("By pressing 'Save', your event details will be saved and tracking mode will be enabled immediatly.")
-            BasicButtonComponent(label: "Save", action: { print("Activated")})
+            
+            BasicButtonComponent(label: "Save & activate", action: { print("Activated")})
+            Text("Saving will also enable the tracking mode")
+                .font(.system(size: 15))
+                .foregroundColor(.blue)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
         
     }

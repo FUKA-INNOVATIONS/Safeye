@@ -22,6 +22,8 @@ struct ContentView: View {
                     HStack {
                         NavigationLink("Go to MapView", destination: MapView())
                             .padding()
+                        NavigationLink("Create event", destination: CreateEventView())
+                            .padding()
                     }
                     BasicButtonComponent(label: "Sign out") { // Sign out button
                         AuthenticationViewModel.signOut()
