@@ -20,14 +20,14 @@ struct ContentView: View {
                 if AuthenticationViewModel.isSignedIn {
                     // User is signed in
 
-                    HStack {
-                        NavigationLink("Go to MapView", destination: MapView())
-                            .padding()
-                    }
-                    BasicButtonComponent(label: "Sign out") { // Sign out button
-                        AuthenticationViewModel.signOut()
-                        
-                    }
+//                    HStack {
+//                        NavigationLink("Go to MapView", destination: MapView())
+//                            .padding()
+//                    }
+//                    BasicButtonComponent(label: "Sign out") { // Sign out button
+//                        AuthenticationViewModel.signOut()
+//
+//                    }
                     NavItem()
                 } else {
                     // User has not signed in

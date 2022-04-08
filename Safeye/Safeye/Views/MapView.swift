@@ -58,7 +58,6 @@ struct MapView: View {
         .onAppear {
             viewModel.checkIfLocationServicesIsEnabled()
         }
-        NavItem()
     }
 }
 
