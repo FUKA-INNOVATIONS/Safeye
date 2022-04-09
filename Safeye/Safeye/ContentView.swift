@@ -26,24 +26,7 @@ struct ContentView: View {
                 if AuthVM.isSignedIn {
                     // User is signed in
                     
-                    if ProfileVM.profileExists {
-                        Section {
-                            Text(ProfileVM.profileDetails?.fullName ?? "No name")
-                        }
-                        
-                        HStack {
-                            NavigationLink("Go to MapView", destination: MapView())
-                                .padding()
-                            
-                            NavigationLink("Go to ProfileView", destination: NavigationLazyView(ProfileView().environmentObject(ProfileVM)))
-                                .padding()
-                        }
-                        BasicButtonComponent(label: "Sign out") { // Sign out button
-                            ProfileVM.profileExists = false
-                            ProfileVM.profileDetails = nil
-                            AuthVM.signOut()
-                        }
-                    } else {
+                    if !ProfileVM.profileExists { // User has no profile, create new one
                         Text("In order to be safe, you must create a profile")
                         BasicButtonComponent(label: "Create a profile") {
                             showingCreateProfile = true
@@ -51,14 +34,9 @@ struct ContentView: View {
                         .sheet(isPresented: $showingCreateProfile) {
                             ProfileEditView()
                         }
-                        
                     }
                     
                     
-
-
-                    NavItem()
-
                 } else {
                     // User has not signed in
                     LoginView() // Show Login
