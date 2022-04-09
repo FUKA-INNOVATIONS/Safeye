@@ -19,6 +19,9 @@ struct MapView: View {
     
     @StateObject private var viewModel = MapViewModel()
     
+    @State private var draggedOffset = CGSize.zero
+    @State private var listOpen = false
+    
     /*
      Locations array:
      Currently made up of dummy data
@@ -37,32 +40,104 @@ struct MapView: View {
     //]
     
     var body: some View {
-        Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: locations) { location in
-            MapAnnotation(coordinate: location.coordinate) {
-                // TODO create own component for how safe spaces are displayed
-                if location.own == true {
-                    // Users own created safe space
-                    Circle()
-                        .stroke(.purple, lineWidth: 3)
-                        .frame(width: 30, height: 30)
-                } else {
-                    // Trusted contacts home location
-                Circle()
-                    .stroke(.blue, lineWidth: 3)
-                    .frame(width: 20, height: 20)
+        
+        ZStack {
+            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: locations) { location in
+                        MapAnnotation(coordinate: location.coordinate) {
+                            // TODO create own component for how safe spaces are displayed
+                            if location.own == true {
+                                // Users own created safe space
+                                Circle()
+                                    .stroke(.purple, lineWidth: 3)
+                                    .frame(width: 30, height: 30)
+                            } else {
+                                // Trusted contacts home location
+                            Circle()
+                                .stroke(.blue, lineWidth: 3)
+                                .frame(width: 20, height: 20)
+                            }
+                        }
+                    }
+                    .ignoresSafeArea()
+                    .accentColor(Color(.systemPurple))
+                    .onAppear {
+                        viewModel.checkIfLocationServicesIsEnabled()
+                    }
+            MapCurtainComponent()
+                .animation(.spring())
+                .padding(15)
+                .offset(y: self.draggedOffset.height + 620)
+                .gesture(DragGesture()
+                    .onChanged { value in
+                        // Whilst the drag out list is being dragged
+                    
+                    if value.translation.height < 0 && !listOpen {
+                        // User is opening the trusted contacts list
+                        if value.translation.height > -250 {
+                            self.draggedOffset = value.translation
+                        }
+                        else {
+                            self.draggedOffset = CGSize(width: 0, height: -250)
+                        }
+                        
+                    }
+                    else {
+                        // User is closing the trusted contacts list
+                        if value.translation.height < 250 {
+                            self.draggedOffset = CGSize(width: 0, height: value.translation.height - 250)
+                        }
+                        else if value.translation.height < 0 {
+                            // TODO fix being able to drag list continously up once it has opened
+                            self.draggedOffset = CGSize(width: 0, height: -250)
+                        }
+                        else {
+                            self.draggedOffset = CGSize.zero
+                        }
+                    }
+                    
+                    
                 }
-            }
+                    .onEnded { value in
+                        // When the dragging action stops whilst opening list
+                    if !listOpen {
+                        // Happens after user removes finger when opening
+                        if value.translation.height < -150 {
+                            // Past a certain height list will full open
+                            self.draggedOffset = CGSize(width: 0, height: -250)
+                            listOpen = true
+                        }
+                        else {
+                            // Below that same height list will close
+                            self.draggedOffset = CGSize.zero
+                        }
+                    }
+                    else {
+                        // When user is dragging stops whilst closing list
+                        if value.translation.height > 150 {
+                            // Past this point list will close
+                            self.draggedOffset = CGSize.zero
+                            listOpen = false
+                        }
+                        else {
+                            // List will remain open
+                            self.draggedOffset = CGSize(width: 0, height: -250)
+                        }
+                    }
+                    
+                    
+                    
+                }
+                )
         }
-        .ignoresSafeArea()
-        .accentColor(Color(.systemPurple))
-        .onAppear {
-            viewModel.checkIfLocationServicesIsEnabled()
-        }
+        
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView()
+        Group {
+            MapView()
+            MapView()
+        }
     }
 }
