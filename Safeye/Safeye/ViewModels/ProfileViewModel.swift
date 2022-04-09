@@ -9,12 +9,17 @@ import Foundation
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
+    let profileService = ProfileService.getInstance
+    
     @Published var profileDetails: ProfileModel?
     @Published var profileExists = false
     
+    
+    /* var isProvileExisist: Bool {
+        return false
+    } */
+    
     func getProfile() {
-        let profileService = ProfileService.getInstance
-        
         print("getProfile() called from inside ProfileViewModel")
         
         // Check if user is authenticated, if yes, then get user id, otherwise exit fetching prodile data
@@ -77,9 +82,7 @@ class ProfileViewModel: ObservableObject {
                 print("No signed in user found")
                 return
             }
-            
-            let profileService = ProfileService.getInstance
-            
+                        
             // Save data in database
             profileService.collection("profiles").addDocument(
                 data:[
@@ -102,7 +105,6 @@ class ProfileViewModel: ObservableObject {
     
     
     func upateDetails(fullName: String, address: String, birthday: String, bloodType: String, illness: String, allergies: String) {
-        let profileService = ProfileService.getInstance
         let profileId = profileDetails?.id ?? ""
         
         

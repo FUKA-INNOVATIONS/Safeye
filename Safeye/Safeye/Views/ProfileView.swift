@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @StateObject var profileViewModel = ProfileViewModel()
+    @EnvironmentObject var ProfileVM: ProfileViewModel
+    
     @State private var showingEditProfile = false
     
     var body: some View {
         VStack {
             Group{
                 Spacer()
-                Text("\(profileViewModel.profileDetails?.fullName ?? "No name")")
+                Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
                     .font(.system(size: 25, weight: .bold))
                 
                 // Show edit profile view in a Modal
@@ -23,7 +24,7 @@ struct ProfileView: View {
                     showingEditProfile = true
                 }
                 .sheet(isPresented: $showingEditProfile) {
-                    ProfileEditView(profileViewModel: profileViewModel)
+                    ProfileEditView()
                 }
                 
                 AvatarComponent(size: 80)
@@ -46,9 +47,8 @@ struct ProfileView: View {
             
         }
         .onAppear {
-            profileViewModel.getProfile()
+            ProfileVM.getProfile()
         }
-        
         
     }
 }

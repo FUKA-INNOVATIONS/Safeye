@@ -9,28 +9,24 @@
 import SwiftUI
 
 struct UserDetailsComponent: View {
-    @ObservedObject var viewModel = ProfileViewModel()
-    
-    init() {
-        viewModel.getProfile()
-    }
-    
+    @EnvironmentObject var profileVM: ProfileViewModel
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
                 Image("icon-add")
-                Text("Address: \(viewModel.profileDetails?.address ?? "Homeless")")
+                Text("Address: \(profileVM.profileDetails?.address ?? "Homeless")")
             }
             HStack{
                 Image("icon-add")
-                Text("Born: \(viewModel.profileDetails?.birthday ?? "Still in mama's stomach")")
+                Text("Born: \(profileVM.profileDetails?.birthday ?? "Still in mama's stomach")")
             }
             HStack{
                 Image("icon-add")
                 VStack(alignment: .leading){
-                    Text("Blood type: \(viewModel.profileDetails?.bloodType ?? "Water engine")")
-                    Text("Illness: \(viewModel.profileDetails?.illness ?? "Are you serious")")
-                    Text("Allergies: \(viewModel.profileDetails?.allergies ?? "Teachers who teaches for only getting salary")")
+                    Text("Blood type: \(profileVM.profileDetails?.bloodType ?? "Water engine")")
+                    Text("Illness: \(profileVM.profileDetails?.illness ?? "Are you serious")")
+                    Text("Allergies: \(profileVM.profileDetails?.allergies ?? "Teachers who teaches for only getting salary")")
                 }
             }
         }

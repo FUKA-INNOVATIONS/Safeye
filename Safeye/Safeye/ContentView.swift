@@ -9,8 +9,9 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
-    @StateObject var profileViewModel = ProfileViewModel()
+    @EnvironmentObject var AuthVM: AuthenticationViewModel
+    @EnvironmentObject var ProfileVM: ProfileViewModel
+    
     @State private var showingCreateProfile = false
     
 
@@ -21,25 +22,25 @@ struct ContentView: View {
         
         return Section {
             VStack {
-                if AuthenticationViewModel.isSignedIn {
+                if AuthVM.isSignedIn {
                     // User is signed in
                     
-                    if profileViewModel.profileExists {
+                    if ProfileVM.profileExists {
                         Section {
-                            Text(profileViewModel.profileDetails?.fullName ?? "No name")
+                            Text(ProfileVM.profileDetails?.fullName ?? "No name")
                         }
                         
                         HStack {
                             NavigationLink("Go to MapView", destination: MapView())
                                 .padding()
                             
-                            NavigationLink("Go to ProfileView", destination: NavigationLazyView(ProfileView()))
+                            NavigationLink("Go to ProfileView", destination: NavigationLazyView(ProfileView().environmentObject(ProfileVM)))
                                 .padding()
                         }
                         BasicButtonComponent(label: "Sign out") { // Sign out button
-                            profileViewModel.profileExists = false
-                            profileViewModel.profileDetails = nil
-                            AuthenticationViewModel.signOut()
+                            ProfileVM.profileExists = false
+                            ProfileVM.profileDetails = nil
+                            AuthVM.signOut()
                         }
                     } else {
                         Text("In order to be safe, you must create a profile")
@@ -47,7 +48,7 @@ struct ContentView: View {
                             showingCreateProfile = true
                         }
                         .sheet(isPresented: $showingCreateProfile) {
-                            ProfileEditView(profileViewModel: profileViewModel)
+                            ProfileEditView()
                         }
                         
                     }
@@ -60,11 +61,11 @@ struct ContentView: View {
                 
             }
             .onAppear {
-                profileViewModel.getProfile()
+                ProfileVM.getProfile()
             }
         }
         .onAppear {
-            AuthenticationViewModel.signedIn = AuthenticationViewModel.isSignedIn
+            AuthVM.signedIn = AuthVM.isSignedIn
         }
     }
     
