@@ -22,10 +22,22 @@ struct SafeyeApp: App {
     var body: some Scene {
         return WindowGroup {
             NavigationView {
-                ContentView()
-                // .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .environmentObject(AuthVM)
-                    .environmentObject(ProfileVM)
+                VStack {
+                    ContentView()
+                        .environmentObject(AuthVM)
+                        .environmentObject(ProfileVM)
+                    
+                    
+                    if AuthVM.isSignedIn {
+                        NavItem()
+                            .environmentObject(ProfileVM)
+                            .environmentObject(AuthVM)
+                    }
+                    
+                }
+                .onAppear {
+                    AuthVM.signedIn = AuthVM.isSignedIn
+                }
             }
             
         }
