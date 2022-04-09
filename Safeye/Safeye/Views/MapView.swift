@@ -65,8 +65,9 @@ struct MapView: View {
                     }
             MapCurtainComponent()
                 .animation(.spring())
+                .cornerRadius(20)
                 .padding(15)
-                .offset(y: self.draggedOffset.height + 620)
+                .offset(y: self.draggedOffset.height + 450)
                 .gesture(DragGesture()
                     .onChanged { value in
                         // Whilst the drag out list is being dragged
