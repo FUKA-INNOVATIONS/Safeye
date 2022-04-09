@@ -21,6 +21,7 @@ struct ContentView: View {
          }*/
         
         return Section {
+
             VStack {
                 if AuthVM.isSignedIn {
                     // User is signed in
@@ -54,6 +55,10 @@ struct ContentView: View {
                     }
                     
                     
+
+
+                    NavItem()
+
                 } else {
                     // User has not signed in
                     LoginView() // Show Login
@@ -67,6 +72,7 @@ struct ContentView: View {
         .onAppear {
             AuthVM.signedIn = AuthVM.isSignedIn
         }
+        
     }
     
 }

@@ -11,9 +11,14 @@ struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     
     @State private var showingEditProfile = false
-    
+
     var body: some View {
+   
         VStack {
+            BasicButtonComponent(label: "Sign out") {
+                // Sign out button
+                AuthenticationViewModel.signOut()
+                        }
             Group{
                 Spacer()
                 Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
