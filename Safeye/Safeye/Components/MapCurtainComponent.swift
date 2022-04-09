@@ -21,7 +21,7 @@ struct MapCurtainComponent: View {
             CurtainTCListComponent()
             
         }
-        .background(Color.white)
+        .modifier(CurtainModifier())
         
     }
 }

@@ -17,8 +17,9 @@ struct CurtainTCComponent: View {
             BasicButtonComponent(label: "Focus") {
                 
             }
+            .modifier(TCItemModifier())
+        }
         
-        }.padding(10)
     }
 }
 

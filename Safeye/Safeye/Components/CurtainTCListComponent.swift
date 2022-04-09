@@ -15,7 +15,8 @@ struct CurtainTCListComponent: View {
                         CurtainTCComponent()
                     }
                 }
-            }.padding(15).frame( height: 300)
+            }
+                .modifier(TCListModifier())
         }
 }
 
