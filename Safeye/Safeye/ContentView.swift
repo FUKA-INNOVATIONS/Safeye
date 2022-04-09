@@ -3,43 +3,74 @@
 //  Safeye
 //
 //  Created by FUKA on 1.4.2022.
-//
+//  Edited by FUKA on 8.4.2022.
 
 import SwiftUI
 
+
 struct ContentView: View {
+    @EnvironmentObject var AuthVM: AuthenticationViewModel
+    @EnvironmentObject var ProfileVM: ProfileViewModel
     
-    @State var inputText: String = "Hello input"
-    @State var passsword: String = ""
-    @EnvironmentObject var AuthenticationViewModel: AuthenticationViewModel
+    @State private var showingCreateProfile = false
+    
 
     var body: some View {
-   
-        Section {
-            VStack {
-                if AuthenticationViewModel.isSignedIn {
-                    // User is signed in
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+         profileViewModel.getProfile()
+         }*/
+        
+        return Section {
 
-                    HStack {
-                        NavigationLink("Go to MapView", destination: MapView())
-                            .padding()
-                        NavigationLink("Create event", destination: CreateEventView())
-                            .padding()
+            VStack {
+                if AuthVM.isSignedIn {
+                    // User is signed in
+                    
+                    if ProfileVM.profileExists {
+                        Section {
+                            Text(ProfileVM.profileDetails?.fullName ?? "No name")
+                        }
+                        
+                        HStack {
+                            NavigationLink("Go to MapView", destination: MapView())
+                                .padding()
+                            
+                            NavigationLink("Go to ProfileView", destination: NavigationLazyView(ProfileView().environmentObject(ProfileVM)))
+                                .padding()
+                        }
+                        BasicButtonComponent(label: "Sign out") { // Sign out button
+                            ProfileVM.profileExists = false
+                            ProfileVM.profileDetails = nil
+                            AuthVM.signOut()
+                        }
+                    } else {
+                        Text("In order to be safe, you must create a profile")
+                        BasicButtonComponent(label: "Create a profile") {
+                            showingCreateProfile = true
+                        }
+                        .sheet(isPresented: $showingCreateProfile) {
+                            ProfileEditView()
+                        }
+                        
                     }
-                    BasicButtonComponent(label: "Sign out") { // Sign out button
-                        AuthenticationViewModel.signOut()
-                    }
+                    
+                    
+
 
                     NavItem()
+
                 } else {
                     // User has not signed in
                     LoginView() // Show Login
                 }
                 
             }
+            .onAppear {
+                ProfileVM.getProfile()
+            }
         }
         .onAppear {
-            AuthenticationViewModel.signedIn = AuthenticationViewModel.isSignedIn
+            AuthVM.signedIn = AuthVM.isSignedIn
         }
         
     }
@@ -47,8 +78,8 @@ struct ContentView: View {
 }
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+/* struct ContentView_Previews: PreviewProvider {
+ static var previews: some View {
+ ContentView()
+ }
+ } */
