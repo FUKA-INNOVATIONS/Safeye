@@ -23,14 +23,14 @@ struct SafeyeApp: App {
         return WindowGroup {
             NavigationView {
                 VStack {
-                    ContentView()
-                        .environmentObject(AuthVM)
-                        .environmentObject(ProfileVM)
-                    
                     
                     if AuthVM.isSignedIn {
-                        NavItem()
+                        ContentView()
+                            .environmentObject(AuthVM)
                             .environmentObject(ProfileVM)
+                    } else {
+                        // User is not signed in
+                        LoginView()
                             .environmentObject(AuthVM)
                     }
                     
@@ -38,6 +38,7 @@ struct SafeyeApp: App {
                 .onAppear {
                     AuthVM.signedIn = AuthVM.isSignedIn
                 }
+                
             }
             
         }
