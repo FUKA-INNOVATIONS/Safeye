@@ -18,7 +18,6 @@ struct ProfileView: View {
         ZStack {
             VStack {
                 Group{
-                    Spacer()
                     Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
                         .font(.system(size: 25, weight: .bold))
                     
@@ -39,7 +38,6 @@ struct ProfileView: View {
                         ListViewComponent(item: "avatar", size: 50)
                         Button(action: {
                             showingAddContact = true
-                            print("modal: ($showingAddContact.wrappedValue)")
                         })
                         { Image("icon-add") }
                         Spacer(minLength: 20)
@@ -60,7 +58,7 @@ struct ProfileView: View {
             .onAppear {
                 ProfileVM.getProfile()
             }
-            AddContactView(isShowing: $showingAddContact)
+            AddContactView(isShowing: $showingAddContact, searchInput: "123")
         }
         
     }

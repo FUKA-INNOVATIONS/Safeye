@@ -4,6 +4,7 @@
 //
 //  Created by FUKA on 1.4.2022.
 //  Edited by FUKa 8.4.2022.
+//  Edited by gintare 10.4.2022.
 
 import Foundation
 
@@ -17,4 +18,5 @@ struct ProfileModel: Identifiable {
     var bloodType: String
     var illness: String     // TODO: change to [String]
     var allergies: String   // TODO: change to [String]
+    var connectionCode: String
 }

@@ -3,12 +3,13 @@
 //  Safeye
 //
 //  Created by gintare on 9.4.2022.
-//
+//  Edit by gintare 10.4.2022.
 
 import SwiftUI
 
 struct SearchFieldComponent: View {
     @Binding var searchInput: String
+    
     var body: some View {
         HStack {
             HStack {

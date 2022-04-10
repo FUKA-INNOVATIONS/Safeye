@@ -13,6 +13,7 @@ struct SafeyeApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject var AuthVM = AuthenticationViewModel()
     @StateObject var ProfileVM = ProfileViewModel()
+    @StateObject var AddContactVM = AddContactViewModel()
     
     init() {
         FirebaseApp.configure() // Initialize Firebase
@@ -28,6 +29,7 @@ struct SafeyeApp: App {
                         ContentView()
                             .environmentObject(AuthVM)
                             .environmentObject(ProfileVM)
+                            .environmentObject(AddContactVM)
                     } else {
                         // User is not signed in
                         LoginView()

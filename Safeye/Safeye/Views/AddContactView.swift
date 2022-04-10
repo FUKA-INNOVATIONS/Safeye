@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AddContactView: View {
     @Binding var isShowing: Bool
-    @State var searchInput: String = ""
-    var isFound: Bool = true
-    
+    @State var searchInput: String
+    @EnvironmentObject var AddContactVM: AddContactViewModel
+        
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 500
     let maxHeight: CGFloat = 600
@@ -53,14 +53,24 @@ struct AddContactView: View {
             
             ZStack {
                 VStack {
+                    
+                    //  Search for contact with a code
                     SearchFieldComponent(searchInput: $searchInput)
+                        .onChange(of: searchInput) {_ in
+                            AddContactVM.findProfile(searchCode: searchInput)
+                        }
                     // Button(action: { isShowing = false}, label: {Text("Close")})
                     Spacer()
-                    if isFound {
+                    //  If searched code matches an existing profile, display avatar, full name and 'add' button
+                    if AddContactVM.profileFound {
                         AvatarComponent(size: 100)
-                        Text("FirstName LastName")
+                        Text("\(AddContactVM.trustedContactDetails?.fullName ?? "No name")")
+                        BasicButtonComponent(label: "Add", action: { AddContactVM.addTrustedContact()})
+                    } else {
+                        Text("User not found.")
                     }
-                    BasicButtonComponent(label: "Add", action: { print("Added")})
+                    
+                    
                     Spacer()
                 }
             }
@@ -104,6 +114,6 @@ struct AddContactView: View {
 
 struct AddContactView_Previews: PreviewProvider {
     static var previews: some View {
-        AddContactView(isShowing: .constant(true))
+        AddContactView(isShowing: .constant(true), searchInput: "123")
     }
 }
