@@ -11,6 +11,7 @@ struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     
     @State private var showingEditProfile = false
+    @State private var showModal = false
     
     var body: some View {
         VStack {
@@ -46,10 +47,13 @@ struct ProfileView: View {
             }
             
         }
+      AddContactView(isShowing: $showModal)
         .onAppear {
             ProfileVM.getProfile()
         }
-        
+            
+
+        }
     }
 }
 
