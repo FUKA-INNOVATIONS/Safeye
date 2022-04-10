@@ -11,20 +11,35 @@ import Firebase // Import Firebase
 @main
 struct SafeyeApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject var AuthVM = AuthenticationViewModel()
+    @StateObject var ProfileVM = ProfileViewModel()
     
     init() {
         FirebaseApp.configure() // Initialize Firebase
+        
     }
-
+    
     var body: some Scene {
-        WindowGroup {
-            let AuthenticationViewModel = AuthenticationViewModel()
+        return WindowGroup {
             NavigationView {
-                //MapView()
-                ContentView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .environmentObject(AuthenticationViewModel)
+                VStack {
+                    ContentView()
+                        .environmentObject(AuthVM)
+                        .environmentObject(ProfileVM)
+                    
+                    
+                    if AuthVM.isSignedIn {
+                        NavItem()
+                            .environmentObject(ProfileVM)
+                            .environmentObject(AuthVM)
+                    }
+                    
+                }
+                .onAppear {
+                    AuthVM.signedIn = AuthVM.isSignedIn
+                }
             }
+            
         }
     }
 }

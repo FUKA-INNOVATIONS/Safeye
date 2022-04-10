@@ -15,24 +15,22 @@ struct ListViewComponent: View {
         self.size = size
     }
     
-        var body: some View {
-            ScrollView(.horizontal, showsIndicators: true) {
-                HStack {
-                    if item == "avatar" {
-                        ForEach(0..<7) {_ in
-                            AvatarComponent(size: size)
-                        }.padding(5)
-                    } else if item == "safeSpace" {
-                        ForEach(0..<7) {_ in
-                            SafeSpaceComponent(size: size)
-                        }.padding(5)
-                    }
-                    //icon is temporary, will have to change
-                    Image("icon-add").padding(10)
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: true) {
+            HStack {
+                if item == "avatar" {
+                    ForEach(0..<7) {_ in
+                        AvatarComponent(size: size)
+                    }.padding(5)
+                } else if item == "safeSpace" {
+                    ForEach(0..<7) {_ in
+                        SafeSpaceComponent(size: size)
+                    }.padding(5)
                 }
-            }.padding(15)
-                
-        }
+            }
+        }.padding(15)
+        
+    }
 }
 
 struct ListViewComponent_Previews: PreviewProvider {

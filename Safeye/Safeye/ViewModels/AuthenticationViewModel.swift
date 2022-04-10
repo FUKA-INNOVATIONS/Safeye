@@ -3,6 +3,7 @@
 //  Safeye
 //
 //  Created by FUKA on 6.4.2022.
+//  Edited by FUKA on 8.4.2022.
 //
 
 
@@ -21,6 +22,23 @@ class AuthenticationViewModel: ObservableObject {
     var isSignedIn: Bool {
         return authService.currentUser != nil
     }
+    
+    
+    // Get and return current logged in user, if user is not logged in return nil
+    func getCurrentUser() -> UserModel? {
+        // Google recommended way of getting current user
+        if authService.currentUser != nil { // User is signed in, get id and email TODO: refacor code
+            let userId = authService.currentUser?.uid
+            let userEmail = authService.currentUser?.email
+            return UserModel(id: userId, email: userEmail!)
+        } else {
+            // No user is signed in.
+            return nil
+        }
+        
+    } // end of getCurrentUser()
+    
+    
     
     func signIn(email: String, password: String) { // Login user with email and password
         authService.signIn(withEmail: email, password: password) { [weak self] result, error in

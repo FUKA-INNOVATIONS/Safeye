@@ -8,10 +8,20 @@
 import SwiftUI
 
 struct SettingsView: View {
-
+    @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var AuthVM: AuthenticationViewModel
+    
     var body: some View {
-
-        SettingsListViewComponent(settingsView: true)
+        
+        VStack {
+            BasicButtonComponent(label: "Sign out") { // Sign out button
+                ProfileVM.profileExists = false
+                ProfileVM.profileDetails = nil
+                AuthVM.signOut()
+            }
+            SettingsListViewComponent(settingsView: true)
+        }
+        
     }
 }
 
