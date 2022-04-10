@@ -2,15 +2,56 @@
 //  CreateEventView.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created by gintare on 8.4.2022.
 //
 
 import SwiftUI
 
 struct CreateEventView: View {
+    @State var startDate = Date()
+    @State var endDate = Date()
+    @State var eventType = ""
+    @State var locationDetails: String = ""
+    @State var otherInfo: String = ""
+    @State var selectedContacts: Array = []
+    let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Form {
+                Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
+                    SelectContactGridComponent()
+                }
+                Section(header: Text("Estimated event date and time")) {
+                    DatePicker("Start*", selection: $startDate)
+                    DatePicker("End", selection: $endDate)
+                }
+                Section(header: Text("Event type*")) {
+                    Picker(selection: $eventType, label: Text("Select event type")) {
+                        ForEach(eventTypesArray, id: \.self) {
+                            Text($0).tag($0)
+                        }
+                    }
+                }
+                Section(header: Text("Location*")) {
+                    TextField("Describe location plan for the event", text: $locationDetails)
+                }
+                Section(header: Text("Other valuable details")) {
+                    TextField("Anything else?", text: $otherInfo)
+                }
+                
+            }.navigationBarTitle("Add event information", displayMode: .inline)
+            Spacer()
+            
+            BasicButtonComponent(label: "Save & activate", action: { print("Activated")})
+            Text("Saving will also enable the tracking mode")
+                .font(.system(size: 15))
+                .foregroundColor(.blue)
+                .frame(maxWidth: .infinity, alignment: .center)
+        }
+        
     }
+    
 }
 
 struct CreateEventView_Previews: PreviewProvider {
