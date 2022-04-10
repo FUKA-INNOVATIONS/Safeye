@@ -74,6 +74,12 @@
 		5F33FB282801ABC50065FB88 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F33FB272801ABC50065FB88 /* FirebaseAuth */; };
 		5F33FB2A2801ABC50065FB88 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5F33FB292801ABC50065FB88 /* FirebaseFirestore */; };
 		5F5962022802CD7900C8F682 /* PanicButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5962012802CD7900C8F682 /* PanicButtonComponent.swift */; };
+		6A2CFC2B280182F40046395D /* MapCurtainComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */; };
+		6A2CFC2D2801B9280046395D /* CurtainTCListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */; };
+		6A2CFC2F2801BABD0046395D /* CurtainTCComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */; };
+		6A2CFC312801C11A0046395D /* CurtainModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC302801C11A0046395D /* CurtainModifier.swift */; };
+		6A2CFC332801C8B80046395D /* TCListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC322801C8B80046395D /* TCListModifier.swift */; };
+		6A2CFC352801CAA10046395D /* TCItemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC342801CAA10046395D /* TCItemModifier.swift */; };
 		6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */; };
 		6ABCDD2227FF096F009563E7 /* ListViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */; };
 		6ABCDD2427FF1B19009563E7 /* UserDetailsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */; };
@@ -171,6 +177,12 @@
 		5F2EAD8A27FD8B91006FDFD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		5F5962012802CD7900C8F682 /* PanicButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanicButtonComponent.swift; sourceTree = "<group>"; };
+		6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCurtainComponent.swift; sourceTree = "<group>"; };
+		6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurtainTCListComponent.swift; sourceTree = "<group>"; };
+		6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurtainTCComponent.swift; sourceTree = "<group>"; };
+		6A2CFC302801C11A0046395D /* CurtainModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurtainModifier.swift; sourceTree = "<group>"; };
+		6A2CFC322801C8B80046395D /* TCListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCListModifier.swift; sourceTree = "<group>"; };
+		6A2CFC342801CAA10046395D /* TCItemModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCItemModifier.swift; sourceTree = "<group>"; };
 		6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItemComponent.swift; sourceTree = "<group>"; };
 		6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewComponent.swift; sourceTree = "<group>"; };
 		6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsComponent.swift; sourceTree = "<group>"; };
@@ -326,6 +338,9 @@
 				5F244ADC27F71C9700BFE1FB /* descriptionTextModifier.swift */,
 				5F244ADE27F71CAF00BFE1FB /* inputFieldModifier.swift */,
 				5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */,
+				6A2CFC302801C11A0046395D /* CurtainModifier.swift */,
+				6A2CFC322801C8B80046395D /* TCListModifier.swift */,
+				6A2CFC342801CAA10046395D /* TCItemModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -344,6 +359,10 @@
 				6ABCDD2727FFF8F9009563E7 /* SelectContactComponent.swift */,
 				6ABCDD29280000EE009563E7 /* SelectContactsGridComponent.swift */,
 				6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */,
+				6A7DB4AA280034FD0054DD47 /* SettingsListViewComponent.swift */,
+				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
+				6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */,
+				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
 				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
@@ -580,11 +599,14 @@
 				5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */,
 				5F244AD127F71B4B00BFE1FB /* SettingRepository.swift in Sources */,
 				5F244AC327F71A5700BFE1FB /* EventModel.swift in Sources */,
+				6A2CFC2D2801B9280046395D /* CurtainTCListComponent.swift in Sources */,
 				6ABCDD2227FF096F009563E7 /* ListViewComponent.swift in Sources */,
 				5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */,
 				5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */,
+				6A2CFC2B280182F40046395D /* MapCurtainComponent.swift in Sources */,
 				5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
+				6A2CFC312801C11A0046395D /* CurtainModifier.swift in Sources */,
 				5F23EE0A2801B54800623B0C /* SettingsListViewComponent.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
 				5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */,
@@ -592,6 +614,7 @@
 				5F244ACB27F71B1200BFE1FB /* AuthenticationRepository.swift in Sources */,
 				5F244AA727F717C200BFE1FB /* RegisterViewModel.swift in Sources */,
 				5F244AD927F71C4F00BFE1FB /* AvatarModifier.swift in Sources */,
+				6A2CFC332801C8B80046395D /* TCListModifier.swift in Sources */,
 				5F244AC927F71ACF00BFE1FB /* TrustedContactModel.swift in Sources */,
 				5F244AE527F7200500BFE1FB /* InputFieldComponent.swift in Sources */,
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
@@ -608,6 +631,7 @@
 				5F244A9B27F70FFD00BFE1FB /* EventView.swift in Sources */,
 				5F244ABD27F719D600BFE1FB /* SettingService.swift in Sources */,
 				5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */,
+				6A2CFC352801CAA10046395D /* TCItemModifier.swift in Sources */,
 				5F244ABF27F71A3500BFE1FB /* UserModel.swift in Sources */,
 				5F244A9427F70EEA00BFE1FB /* CreateEventView.swift in Sources */,
 				6ABCDD2627FFEC7B009563E7 /* SafeSpaceComponent.swift in Sources */,
@@ -619,6 +643,7 @@
 				5F244ACF27F71B3500BFE1FB /* EventRepository.swift in Sources */,
 				5F244AED27F721A300BFE1FB /* Microphone.swift in Sources */,
 				5F244A9627F70F0A00BFE1FB /* AddContactView.swift in Sources */,
+				6A2CFC2F2801BABD0046395D /* CurtainTCComponent.swift in Sources */,
 				5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */,
 				5F244ADD27F71C9700BFE1FB /* descriptionTextModifier.swift in Sources */,
 				5F244A9927F70F6200BFE1FB /* AddSafePlaceView.swift in Sources */,

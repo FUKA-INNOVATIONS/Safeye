@@ -36,7 +36,6 @@ struct ContentView: View {
                         }
                     }
                     
-                    
                 } else {
                     // User has not signed in
                     LoginView() // Show Login
