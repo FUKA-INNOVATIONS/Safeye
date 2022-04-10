@@ -23,10 +23,10 @@ struct ContentView: View {
         return Section {
 
             VStack {
-                if AuthVM.isSignedIn {
-                    // User is signed in
                     
-                    if !ProfileVM.profileExists { // User has no profile, create new one
+                    if !ProfileVM.profileExists {
+                        // User has no profile, create new one
+                        // Is displayed the first time a user joins the app
                         Text("In order to be safe, you must create a profile")
                         BasicButtonComponent(label: "Create a profile") {
                             showingCreateProfile = true
@@ -34,12 +34,14 @@ struct ContentView: View {
                         .sheet(isPresented: $showingCreateProfile) {
                             ProfileEditView()
                         }
+                    } else {
+                        // User has profile -> show the app
+                        NavItem()
+                            .environmentObject(ProfileVM)
+                            .environmentObject(AuthVM)
+                        
                     }
                     
-                } else {
-                    // User has not signed in
-                    LoginView() // Show Login
-                }
                 
             }
             .onAppear {

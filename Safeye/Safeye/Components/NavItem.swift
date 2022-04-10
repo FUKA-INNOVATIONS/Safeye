@@ -29,7 +29,7 @@ struct NavItem: View {
                 }
             
             ProfileView()
-                .tabItem(){
+               .tabItem(){
                     Image(systemName: "person.fill")
                     Text("Profile")
                 }
