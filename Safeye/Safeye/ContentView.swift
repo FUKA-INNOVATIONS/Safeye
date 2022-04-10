@@ -14,32 +14,34 @@ struct ContentView: View {
     
     @State private var showingCreateProfile = false
     
-
+    
     var body: some View {
         /*DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
          profileViewModel.getProfile()
          }*/
         
         return Section {
-
+            
             VStack {
-                if AuthVM.isSignedIn {
-                    // User is signed in
-                    
-                    if !ProfileVM.profileExists { // User has no profile, create new one
-                        Text("In order to be safe, you must create a profile")
-                        BasicButtonComponent(label: "Create a profile") {
-                            showingCreateProfile = true
-                        }
-                        .sheet(isPresented: $showingCreateProfile) {
-                            ProfileEditView()
-                        }
+                
+                if !ProfileVM.profileExists {
+                    // User has no profile, create new one
+                    // Is displayed the first time a user joins the app
+                    Text("In order to be safe, you must create a profile")
+                    BasicButtonComponent(label: "Create a profile") {
+                        showingCreateProfile = true
                     }
-                    
+                    .sheet(isPresented: $showingCreateProfile) {
+                        ProfileEditView()
+                    }
                 } else {
-                    // User has not signed in
-                    LoginView() // Show Login
+                    // User has profile -> show the app
+                    NavItem()
+                        .environmentObject(ProfileVM)
+                        .environmentObject(AuthVM)
+                    
                 }
+                
                 
             }
             .onAppear {
