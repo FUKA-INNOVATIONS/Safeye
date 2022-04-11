@@ -58,7 +58,7 @@ struct ProfileView: View {
             .onAppear {
                 ProfileVM.getProfile()
             }
-            AddContactView(isShowing: $showingAddContact, searchInput: "123")
+            AddContactView(isShowing: $showingAddContact, searchInput: "")
         }
         
     }

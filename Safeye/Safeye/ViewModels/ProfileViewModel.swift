@@ -14,7 +14,7 @@ class ProfileViewModel: ObservableObject {
     
     @Published var profileDetails: ProfileModel?
     @Published var profileExists = false
-    
+    @Published var trustedContactDetails: TrustedContactModel?
     
     /* var isProvileExisist: Bool {
         return false
@@ -69,12 +69,31 @@ class ProfileViewModel: ObservableObject {
     } // end of getProfile()
     
     
-    func getProfileByID(profileID: String?) {
-        // TODO
-    }
-    
-    
-    
+    func getProfileById(profileId: String) {
+        // Fetch profile data
+        profileService.collection("profiles").whereField("userId", isEqualTo: profileId).getDocuments() { snapshot, error in
+            if let error = error {
+                print("Error getting single profile: \(error)")
+            } else {
+                if snapshot!.count < 1 {
+                    print("no profile")
+                    return
+                }
+                
+                for document in snapshot!.documents {
+                    print("Profile fetched")
+ 
+                    let profileId = document.documentID
+                    let userId = document["userId"]
+                    let fullName = document["fullName"]
+                    
+                    DispatchQueue.main.async {
+                        self.trustedContactDetails = TrustedContactModel(id: profileId, userId: userId as! String, fullName: fullName as! String)
+                    }
+                }
+            }
+        }
+    } // end of getProfileById()
     
     
     // Add profile details for the first time after accound registration

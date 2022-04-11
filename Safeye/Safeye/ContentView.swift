@@ -40,6 +40,7 @@ struct ContentView: View {
                     NavItem()
                         .environmentObject(ProfileVM)
                         .environmentObject(AuthVM)
+                        .environmentObject(AddContactVM)
                     
                 }
                 

@@ -9,18 +9,21 @@ import SwiftUI
 
 class AddContactViewModel: ObservableObject {
     let profileService = ProfileService.getInstance
-    let userId = AuthenticationService.getInstance.currentUser!.uid
     
     @Published var connectionDetails: ContactConnectionModel?
     @Published var profileFound = false
     @Published var trustedContactDetails: TrustedContactModel?
     @Published var connectionsPending = false
-    @Published var pendingRequest: String = ""
+    @Published var pendingRequest: String? = nil
+    @Published var pendingArray = []
     @Published var foundTrustedContacts = false
+    @Published var trustedContactList = []
     
-    var targetId: String = ""
+    private var targetId: String = ""
     
     func findProfile(searchCode: String?) {
+        
+        //TODO: user shouldn't be able to find themselves or add themselves!!!
         
         // Fetch profile data
         profileService.collection("profiles").whereField("connectionCode", isEqualTo: searchCode!).getDocuments() { snapshot, error in
@@ -53,7 +56,7 @@ class AddContactViewModel: ObservableObject {
     // Add user as trusted contact and create a new entry in 'connections' collection
     func addTrustedContact() {
         var hasher = Hasher()
-        hasher.combine(userId)
+        hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
         hasher.combine(targetId)
         let connectionId = String(hasher.finalize())
         
@@ -61,13 +64,14 @@ class AddContactViewModel: ObservableObject {
         profileService.collection("connections").addDocument(
             data:[
                 "connectionId": connectionId,
-                "ownerId": userId,
+                "ownerId": AuthenticationService.getInstance.currentUser!.uid,
                 "targetId": targetId,
                 "status": false
             ]) { error in
                 if error == nil {
-                    // TODO: If successful this should trigger a notification sent to target user
+                    // TODO: If successful this should trigger a notification sent to target user (Sprint 3?)
                     print("Connection created with ID: \(connectionId)")
+                    self.profileFound = false
                 } else {
                     // Connection wasn't created
                     print("Failed to add trusted contact")
@@ -75,10 +79,11 @@ class AddContactViewModel: ObservableObject {
             }
     } // end of addTrustedContact()
     
-    
+    // fetch all pending requests for logged in user
     func getPendingConnectionRequests() {
-        
-        profileService.collection("connections").whereField("status", isEqualTo: false).whereField("targetId", isEqualTo: userId).getDocuments() { snapshot, error in
+        self.pendingArray = []
+
+        profileService.collection("connections").whereField("status", isEqualTo: false).whereField("targetId", isEqualTo: AuthenticationService.getInstance.currentUser!.uid).getDocuments() { snapshot, error in
             if let error = error {
                 print("Error fetching connection requests \(error)")
             } else {
@@ -92,25 +97,40 @@ class AddContactViewModel: ObservableObject {
             for document in snapshot!.documents {
                 self.connectionsPending = true
                 print("There is a pending request with Id: \(document.documentID)")
+                
+                
                 self.pendingRequest = document.documentID
+                
+                let tcId = document["ownerId"]
+                self.pendingArray.append(tcId as! String)
+                print(self.pendingArray)
             }
         }
     } // end of getPendingConnectionRequests()
     
+    // confirm pending requests
     func confirmConnectionRequest() {
-        profileService.collection("connections").document(pendingRequest).setData(["status": true], merge: true) { error in
-            if error == nil {
-                print("Request confirmed")
-            } else {
-                print("Error confirming connection request")
+        if pendingRequest == nil {
+            print("There is nothing to confirm")
+        } else {
+            profileService.collection("connections").document(pendingRequest!).setData(["status": true], merge: true) { error in
+                if error == nil {
+                    print("Request confirmed")
+                    self.pendingRequest = nil
+                    self.getPendingConnectionRequests()
+                } else {
+                    print("Error confirming connection request")
+                }
             }
         }
     }
     
     
     // TODO: unfinished
+    // fetch all user's trusted contacts
     func fetchAllUsersContacts() {
-        profileService.collection("connections").whereField("targetId", isEqualTo: userId).whereField("status", isEqualTo: true).getDocuments() { snapshot, error in
+        self.trustedContactList = []
+        profileService.collection("connections").whereField("targetId", isEqualTo: AuthenticationService.getInstance.currentUser!.uid).whereField("status", isEqualTo: true).getDocuments() { snapshot, error in
             if let error = error {
                 print("Error fetching contacts: \(error)")
             } else {
@@ -121,7 +141,9 @@ class AddContactViewModel: ObservableObject {
                 }
                 for document in snapshot!.documents {
                     self.foundTrustedContacts = true
-                    print("Found trusted contacts")
+                    let tcId = document["ownerId"]
+                    self.trustedContactList.append(tcId!)
+                    print("Trusted contact list: \(self.trustedContactList)")
                 }
             }
         }

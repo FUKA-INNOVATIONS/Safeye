@@ -55,22 +55,22 @@ struct AddContactView: View {
                 VStack {
                     
                     //  Search for contact with a code
-                    SearchFieldComponent(searchInput: $searchInput)
-                        .onChange(of: searchInput) {_ in
-                            AddContactVM.findProfile(searchCode: searchInput)
-                        }
-                    // Button(action: { isShowing = false}, label: {Text("Close")})
+                    VStack {
+                        SearchFieldComponent(searchInput: $searchInput)
+                        Button(action: { AddContactVM.findProfile(searchCode: searchInput) }, label: {Text("Search")})
+                    }
+
                     Spacer()
                     //  If searched code matches an existing profile, display avatar, full name and 'add' button
                     if AddContactVM.profileFound {
                         AvatarComponent(size: 100)
                         Text("\(AddContactVM.trustedContactDetails?.fullName ?? "No name")")
-                        BasicButtonComponent(label: "Add", action: { AddContactVM.addTrustedContact()})
+                        BasicButtonComponent(label: "Add", action: { AddContactVM.addTrustedContact()
+                            searchInput = ""
+                        })
                     } else {
-                        Text("User not found.")
+                        Text("Nothing to display.")
                     }
-                    
-                    
                     Spacer()
                 }
             }
@@ -114,6 +114,6 @@ struct AddContactView: View {
 
 struct AddContactView_Previews: PreviewProvider {
     static var previews: some View {
-        AddContactView(isShowing: .constant(true), searchInput: "123")
+        AddContactView(isShowing: .constant(true), searchInput: "")
     }
 }
