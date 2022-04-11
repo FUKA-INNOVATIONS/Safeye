@@ -3,7 +3,7 @@
 //  Safeye
 //
 //  Created by gintare on 8.4.2022.
-//
+//  Edited by FUKA 11.4.2022
 
 import SwiftUI
 
@@ -13,8 +13,12 @@ struct CreateEventView: View {
     @State var eventType = ""
     @State var locationDetails: String = ""
     @State var otherInfo: String = ""
-    @State var selectedContacts: Array = []
+    @State var selectedContacts: Array = ["Contact 1", "Contact 2"]
+    @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
+    
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
+    
+    @ObservedObject var EventVM = EventViewModel()
     
     var body: some View {
         VStack{
@@ -43,7 +47,7 @@ struct CreateEventView: View {
             }.navigationBarTitle("Add event information", displayMode: .inline)
             Spacer()
             
-            BasicButtonComponent(label: "Save & activate", action: { print("Activated")})
+            BasicButtonComponent(label: "Save & activate", action: { EventVM.createEvent(startDate, endDate, otherInfo, selectedContacts, coordinates) })
             Text("Saving will also enable the tracking mode")
                 .font(.system(size: 15))
                 .foregroundColor(.blue)

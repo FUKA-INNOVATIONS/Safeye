@@ -17,6 +17,12 @@ struct ProfileView: View {
         
         ZStack {
             VStack {
+                NavigationLink {
+                    CreateEventView()
+                } label: {
+                    Text("Create event")
+                }
+
                 Group{
                     Spacer()
                     Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
