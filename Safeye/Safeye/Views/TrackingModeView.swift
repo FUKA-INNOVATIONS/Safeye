@@ -26,14 +26,14 @@ struct TrackingModeView: View {
                 viewModel.activatePanicMode()
                 panicMode = true
                 }) {
-                    PanicButtonComponent(panicmode: $panicMode)
+                    TrackingModeButtonComponent(panicmode: $panicMode)
             }
             :
             Button(action: {
                 viewModel.disableTrackingMode()
                 panicMode = false
                 }) {
-                    PanicButtonComponent(panicmode: $panicMode)
+                    TrackingModeButtonComponent(panicmode: $panicMode)
                 }
             //PanicButtonComponent()
             Spacer()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PanicButtonComponent: View {
+struct TrackingModeButtonComponent: View {
     
     @Binding var panicmode: Bool
     
@@ -16,7 +16,7 @@ struct PanicButtonComponent: View {
          panicmode ?
             Text("Are you Safe?")
              .foregroundColor(Color.white)
-             .frame(width: 200, height: 200)
+             .frame(width: 150, height: 150)
              .font(.system(size: 35))
              .background(Color.green)
              .clipShape(Circle())
@@ -30,11 +30,6 @@ struct PanicButtonComponent: View {
              .clipShape(Circle())
          }
         
-      //  .frame(width: 200, height: 200)
-      //  .foregroundColor(Color.black)
-      //  .font(.system(size: 55))
-      //  .background(Color.red)
-      //  .clipShape(Circle())
  }
 
 

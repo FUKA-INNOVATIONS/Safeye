@@ -19,6 +19,8 @@ class EventViewModel: ObservableObject {
     func activatePanicMode() {
         print("Panic Mode")
         mode = "Panic"
+        
+        // TODO Panic Mode functionality #41
     }
     
     // User pressed the safe button -> disabling panic mode
