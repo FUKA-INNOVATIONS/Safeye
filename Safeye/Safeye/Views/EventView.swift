@@ -18,7 +18,6 @@ struct EventView: View {
             
             Text("Current Status: \(viewModel.mode)")
                 .font(.largeTitle)
-                .padding(.top, 100)
             
             Spacer()
             viewModel.mode == "Tracking" ?
@@ -55,7 +54,9 @@ struct EventView: View {
         
             Spacer()
             
-        }.ignoresSafeArea()
+        }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         
     }
 }
