@@ -11,6 +11,8 @@ import SwiftUI
 
 class ProfileViewModel: ObservableObject {
     let profileService = ProfileService.getInstance
+    var profile: ProfileModel?
+
     
     @Published var profileDetails: ProfileModel?
     @Published var profileExists = false
@@ -69,8 +71,9 @@ class ProfileViewModel: ObservableObject {
     } // end of getProfile()
     
     
-    func getProfileById(profileId: String) {
+    func getProfileById(profileId: String) -> ProfileModel {
         // Fetch profile data
+        
         profileService.collection("profiles").whereField("userId", isEqualTo: profileId).getDocuments() { snapshot, error in
             if let error = error {
                 print("Error getting single profile: \(error)")
@@ -86,13 +89,31 @@ class ProfileViewModel: ObservableObject {
                     let profileId = document.documentID
                     let userId = document["userId"]
                     let fullName = document["fullName"]
+                    let address = document["address"]
+                    let birthday = document["birthday"]
+                    let bloodType = document["bloodType"]
+                    let illness = document["illness"]
+                    let allergies = document["allergies"]
+                    let connectionCode = document["connectionCode"]
+                    
+                    let profileTC = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
                     
                     DispatchQueue.main.async {
                         self.trustedContactDetails = TrustedContactModel(id: profileId, userId: userId as! String, fullName: fullName as! String)
                     }
+                    
+                   // self.profile = profileTC
+                    
                 }
+                
             }
         }
+//        guard let p = profileTC else {
+//            return
+//        }
+            
+        }
+        
     } // end of getProfileById()
     
     

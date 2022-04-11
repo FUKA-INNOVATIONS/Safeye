@@ -9,6 +9,7 @@ import SwiftUI
 
 class AddContactViewModel: ObservableObject {
     let profileService = ProfileService.getInstance
+    @ObservedObject var ProfileVM = ProfileViewModel()
     
     @Published var connectionDetails: ContactConnectionModel?
     @Published var profileFound = false
@@ -144,6 +145,8 @@ class AddContactViewModel: ObservableObject {
                     let tcId = document["ownerId"]
                     self.trustedContactList.append(tcId!)
                     print("Trusted contact list: \(self.trustedContactList)")
+                    let tcProfile = self.ProfileVM.getProfileById(profileId: tcId as! String)
+                    print(tcProfile)
                 }
             }
         }

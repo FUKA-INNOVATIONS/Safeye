@@ -51,7 +51,7 @@ struct SettingsView: View {
             Button(action: {
                 AddContactVM.fetchAllUsersContacts()
                 for contact in AddContactVM.trustedContactList {
-                    let tcProfile: () = ProfileVM.getProfileById(profileId: contact as! String)
+                    let tcProfile = ProfileVM.getProfileById(profileId: contact as! String)
                     tcList.append(tcProfile)
                 }
                 print("TC list: \(tcList)")
