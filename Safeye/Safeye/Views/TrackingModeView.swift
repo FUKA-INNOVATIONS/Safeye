@@ -36,7 +36,7 @@ struct TrackingModeView: View {
             // User is in panic mode presses are you safe button
             Button(action: {
                 
-                viewModel.disableTrackingMode()
+                viewModel.disablePanicMode()
                 panicMode = false
                 
                 }) {
