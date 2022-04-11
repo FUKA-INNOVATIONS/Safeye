@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TrackingModeView: View {
+struct EventView: View {
     
     @StateObject private var viewModel = EventViewModel()
     @State var panicMode: Bool = false
@@ -48,15 +48,10 @@ struct TrackingModeView: View {
             //Send value of tracking: true to map view
             NavigationLink("View Map", destination: MapView())
                 .padding()
-                
-            // Needs to be replace with button
-            NavigationLink("End", destination: ProfileView())
-            Button(action: {
-            }) {
-                NavigationLink(destination: ContentView()) {
-                    Text("Disable Tracking")
-                }
-            }
+            
+            // Replace with button?
+            NavigationLink("Disable Tracking", destination: ContentView())
+                .disabled(true)
         
             Spacer()
             
@@ -67,7 +62,7 @@ struct TrackingModeView: View {
 
 struct TrackingModeView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackingModeView()
+        EventView()
 .previewInterfaceOrientation(.portraitUpsideDown)
     }
 }

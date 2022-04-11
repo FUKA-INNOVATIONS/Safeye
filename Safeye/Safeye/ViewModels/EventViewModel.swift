@@ -30,6 +30,12 @@ class EventViewModel: ObservableObject {
         
         // TODO Panic Mode functionality #41 -> disable panic mode
     }
+    
+    // User Pressed to disable tracking mode
+    func disableTrackingMode() {
+        print("Disabled tracking mode")
+        
+    }
 
     
     

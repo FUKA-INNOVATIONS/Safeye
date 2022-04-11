@@ -21,7 +21,9 @@ struct SafeyeApp: App {
     
     var body: some Scene {
         return WindowGroup {
-            NavigationView {
+            
+          NavigationView {
+              
                 VStack {
 
                     if AuthVM.isSignedIn {
@@ -39,7 +41,7 @@ struct SafeyeApp: App {
                     AuthVM.signedIn = AuthVM.isSignedIn
                 }
                 
-            }
+          }
             
         }
     }
