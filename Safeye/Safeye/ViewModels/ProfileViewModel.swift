@@ -12,6 +12,7 @@ import SwiftUI
 class ProfileViewModel: ObservableObject {
     let profileService = ProfileService.getInstance
     var profile: ProfileModel?
+    var otherProfile: ProfileModel?
 
     
     @Published var profileDetails: ProfileModel?
@@ -71,8 +72,9 @@ class ProfileViewModel: ObservableObject {
     } // end of getProfile()
     
     
-    func getProfileById(profileId: String) -> ProfileModel {
+    func getProfileById(profileId: String) {
         // Fetch profile data
+        
         
         profileService.collection("profiles").whereField("userId", isEqualTo: profileId).getDocuments() { snapshot, error in
             if let error = error {
@@ -102,17 +104,14 @@ class ProfileViewModel: ObservableObject {
                         self.trustedContactDetails = TrustedContactModel(id: profileId, userId: userId as! String, fullName: fullName as! String)
                     }
                     
-                   // self.profile = profileTC
+                    self.otherProfile = profileTC
                     
                 }
                 
             }
         }
-//        guard let p = profileTC else {
-//            return
-//        }
-            
-        }
+        
+        
         
     } // end of getProfileById()
     
