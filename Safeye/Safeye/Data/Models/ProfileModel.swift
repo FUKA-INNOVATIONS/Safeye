@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct ProfileModel: Identifiable {
+struct ProfileModel: Identifiable, Hashable {
     var id: String?
     var userId: String
     var fullName: String

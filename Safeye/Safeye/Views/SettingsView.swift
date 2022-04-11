@@ -10,16 +10,28 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AuthVM: AuthenticationViewModel
-    @EnvironmentObject var AddContactVM: AddContactViewModel
+    @ObservedObject var AddContactVM = AddContactViewModel()
+    var PS = ProfileService()
     @State var tcList = []
-        
+    @State var contacts: [ProfileModel] = [ProfileModel]()
+
+    
     var body: some View {
         
-        VStack {
+        return VStack {
+            
+            ForEach(AddContactVM.trustedContacts) {profile in
+                Text("\(profile.fullName)")
+                
+            }
+            
             BasicButtonComponent(label: "Sign out") { // Sign out button
                 ProfileVM.profileExists = false
                 ProfileVM.profileDetails = nil
                 AuthVM.signOut()
+            }
+            .onAppear {
+                self.AddContactVM.fetchAllUsersContacts()
             }
             HStack{
                 Text("Connection code: \(ProfileVM.profileDetails?.connectionCode ?? "No code")")
@@ -28,7 +40,7 @@ struct SettingsView: View {
                     pasteboard.string = ProfileVM.profileDetails?.connectionCode
                     print("Copied")
                 }, label: {Text("Copy")})
-   
+                
             }.padding()
             
             VStack {
@@ -48,23 +60,16 @@ struct SettingsView: View {
                 Button(action: { AddContactVM.confirmConnectionRequest() }, label: { Text("Confirm") })
                 
             }
-            Button(action: {
-                AddContactVM.fetchAllUsersContacts()
-                for contact in AddContactVM.trustedContactList {
-                    let tcProfile = ProfileVM.getProfileById(profileId: contact as! String)
-                    tcList.append(tcProfile)
-                }
-                print("TC list: \(tcList)")
-            }, label: { Text("Fetch all TCs") })
             
             SettingsListViewComponent(settingsView: true)
         }
         
+        
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
+/* struct SettingsView_Previews: PreviewProvider {
+ static var previews: some View {
+ SettingsView()
+ }
+ } */

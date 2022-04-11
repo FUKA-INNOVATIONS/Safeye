@@ -19,8 +19,9 @@ class AddContactViewModel: ObservableObject {
     @Published var pendingRequest: String? = nil
     @Published var pendingArray = []
     @Published var foundTrustedContacts = false
-    @Published var trustedContactList = []
-    @Published var trustedContacts: [ProfileModel?]?
+    @Published var trustedContactList: [String] = [String]()
+    //@Published var trustedContacts: Set<ProfileModel> = Set<ProfileModel>()
+    @Published var trustedContacts: [ProfileModel] = [ProfileModel]()
     
     private var targetId: String = ""
     
@@ -133,8 +134,9 @@ class AddContactViewModel: ObservableObject {
     // fetch all user's trusted contacts
     func fetchAllUsersContacts() {
         self.trustedContactList = []
+        let userId = AuthenticationService.getInstance.currentUser?.uid
         
-        profileService.collection("connections").whereField("targetId", isEqualTo: "fYicGXYa9eWWKxp8nsuehv0fYAV2").whereField("status", isEqualTo: true).getDocuments() { snapshot, error in
+        profileService.collection("connections").whereField("targetId", isEqualTo: userId).whereField("status", isEqualTo: true).getDocuments() { snapshot, error in
             if let error = error {
                 print("Error fetching contacts: \(error)")
             } else {
@@ -143,26 +145,43 @@ class AddContactViewModel: ObservableObject {
                     print("No trusted contacts yet")
                     return
                 }
+                
+                print("Yes: \(snapshot!.count)")
+                
+                
+                
                 for document in snapshot!.documents {
                     print("Snapshot: \(document["ownerId"] ?? "")")
                     
                     self.foundTrustedContacts = true
                     let tcId = document["ownerId"]
-                    self.trustedContactList.append(tcId!)
+                    self.trustedContactList.append(tcId! as! String)
                     print("Trusted contact list: \(self.trustedContactList)")
                     
-                    print("before calling ser")
+                    
                 
                     
-                    let tContacts = self.profileService2.getProfiles(for: tcId as! String)
-                    print("trusted contacats: \(tContacts)")
+                    // self.trustedContacts =  self.profileService2.getProfiles(for: tcId as! String)
                     
-                    DispatchQueue.main.async {
+                    /* DispatchQueue.main.async {
                         self.trustedContacts = self.profileService2.getProfiles(for: tcId as! String)
-                    }
+                    } */
                     
                 }
+                
             }
+            print("before calling fetchProfiles")
+            self.profileService2.fetchProfiles(for: self.trustedContactList)
+            
+            DispatchQueue.main.async {
+                self.trustedContacts = self.profileService2.getProfiles()!
+            }
+            
+            // let x = self.profileService2.getProfiles()
+            // print("Finlay? : \(x!.count)")
+            
         }
+        
+        
     }
 }
