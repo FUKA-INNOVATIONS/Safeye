@@ -22,16 +22,23 @@ struct TrackingModeView: View {
             
             Spacer()
             viewModel.mode == "Tracking" ?
+            // User is currently in tracking mode, presses panic button for help
             Button(action: {
+                // Actions after panic button Has been pressed
+                
                 viewModel.activatePanicMode()
                 panicMode = true
+                
                 }) {
                     TrackingModeButtonComponent(panicmode: $panicMode)
             }
             :
+            // User is in panic mode presses are you safe button
             Button(action: {
+                
                 viewModel.disableTrackingMode()
                 panicMode = false
+                
                 }) {
                     TrackingModeButtonComponent(panicmode: $panicMode)
                 }

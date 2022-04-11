@@ -22,23 +22,22 @@ struct SafeyeApp: App {
     var body: some Scene {
         return WindowGroup {
             NavigationView {
-                TrackingModeView()
-//                VStack {
-//
-//                    if AuthVM.isSignedIn {
-//                        ContentView()
-//                            .environmentObject(AuthVM)
-//                            .environmentObject(ProfileVM)
-//                    } else {
-//                        // User is not signed in
-//                        LoginView()
-//                            .environmentObject(AuthVM)
-//                    }
-//
-//                }
-//                .onAppear {
-//                    AuthVM.signedIn = AuthVM.isSignedIn
-//                }
+                VStack {
+
+                    if AuthVM.isSignedIn {
+                        ContentView()
+                            .environmentObject(AuthVM)
+                            .environmentObject(ProfileVM)
+                    } else {
+                        // User is not signed in
+                        LoginView()
+                            .environmentObject(AuthVM)
+                    }
+
+                }
+                .onAppear {
+                    AuthVM.signedIn = AuthVM.isSignedIn
+                }
                 
             }
             
