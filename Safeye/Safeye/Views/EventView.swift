@@ -56,7 +56,6 @@ struct EventView: View {
             
         }
         .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
         
     }
 }
