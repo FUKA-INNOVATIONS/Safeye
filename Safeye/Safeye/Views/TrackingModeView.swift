@@ -9,18 +9,33 @@ import SwiftUI
 
 struct TrackingModeView: View {
     
-    @State var mode = "Tracking"
+    @StateObject private var viewModel = EventViewModel()
+    @State var panicMode: Bool = false
     
     var body: some View {
     
         VStack {
             
-            Text("Current Status: \(mode)")
+            Text("Current Status: \(viewModel.mode)")
                 .font(.largeTitle)
                 .padding(.top, 100)
             
             Spacer()
-            PanicButtonComponent()
+            viewModel.mode == "Tracking" ?
+            Button(action: {
+                viewModel.activatePanicMode()
+                panicMode = true
+                }) {
+                    PanicButtonComponent(panicmode: $panicMode)
+            }
+            :
+            Button(action: {
+                viewModel.disableTrackingMode()
+                panicMode = false
+                }) {
+                    PanicButtonComponent(panicmode: $panicMode)
+                }
+            //PanicButtonComponent()
             Spacer()
         
             //Send value of tracking: true to map view
