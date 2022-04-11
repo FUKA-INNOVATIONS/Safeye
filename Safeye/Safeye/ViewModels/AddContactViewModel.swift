@@ -9,6 +9,7 @@ import SwiftUI
 
 class AddContactViewModel: ObservableObject {
     let profileService = ProfileService.getInstance
+    let profileService2 = ProfileService()
     @ObservedObject var ProfileVM = ProfileViewModel()
     
     @Published var connectionDetails: ContactConnectionModel?
@@ -19,6 +20,7 @@ class AddContactViewModel: ObservableObject {
     @Published var pendingArray = []
     @Published var foundTrustedContacts = false
     @Published var trustedContactList = []
+    @Published var trustedContacts: [ProfileModel?]?
     
     private var targetId: String = ""
     
@@ -131,7 +133,8 @@ class AddContactViewModel: ObservableObject {
     // fetch all user's trusted contacts
     func fetchAllUsersContacts() {
         self.trustedContactList = []
-        profileService.collection("connections").whereField("targetId", isEqualTo: AuthenticationService.getInstance.currentUser!.uid).whereField("status", isEqualTo: true).getDocuments() { snapshot, error in
+        
+        profileService.collection("connections").whereField("targetId", isEqualTo: "fYicGXYa9eWWKxp8nsuehv0fYAV2").whereField("status", isEqualTo: true).getDocuments() { snapshot, error in
             if let error = error {
                 print("Error fetching contacts: \(error)")
             } else {
@@ -141,12 +144,23 @@ class AddContactViewModel: ObservableObject {
                     return
                 }
                 for document in snapshot!.documents {
+                    print("Snapshot: \(document["ownerId"] ?? "")")
+                    
                     self.foundTrustedContacts = true
                     let tcId = document["ownerId"]
                     self.trustedContactList.append(tcId!)
                     print("Trusted contact list: \(self.trustedContactList)")
-                    let tcProfile = self.ProfileVM.getProfileById(profileId: tcId as! String)
-                    print(tcProfile)
+                    
+                    print("before calling ser")
+                
+                    
+                    let tContacts = self.profileService2.getProfiles(for: tcId as! String)
+                    print("trusted contacats: \(tContacts)")
+                    
+                    DispatchQueue.main.async {
+                        self.trustedContacts = self.profileService2.getProfiles(for: tcId as! String)
+                    }
+                    
                 }
             }
         }

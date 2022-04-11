@@ -18,6 +18,11 @@ class ProfileViewModel: ObservableObject {
     @Published var profileDetails: ProfileModel?
     @Published var profileExists = false
     @Published var trustedContactDetails: TrustedContactModel?
+    @Published var trustedContacts: ProfileModel?
+    
+    var getTrustedContact: ProfileModel? {
+        return trustedContacts
+    }
     
     /* var isProvileExisist: Bool {
         return false
@@ -72,6 +77,8 @@ class ProfileViewModel: ObservableObject {
     } // end of getProfile()
     
     
+    
+    
     func getProfileById(profileId: String) {
         // Fetch profile data
         
@@ -103,9 +110,7 @@ class ProfileViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.trustedContactDetails = TrustedContactModel(id: profileId, userId: userId as! String, fullName: fullName as! String)
                     }
-                    
-                    self.otherProfile = profileTC
-                    
+
                 }
                 
             }
