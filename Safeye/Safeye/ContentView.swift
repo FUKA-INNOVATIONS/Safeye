@@ -14,11 +14,13 @@ struct ContentView: View {
     
     @State private var showingCreateProfile = false
     
+    @State var goMapView = false
+    
     
     var body: some View {
-        /*DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-         profileViewModel.getProfile()
-         }*/
+        /* DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.goMapView = true
+         } */
         
         return Section {
             
@@ -47,6 +49,12 @@ struct ContentView: View {
             .onAppear {
                 ProfileVM.getProfile()
             }
+            .background(
+                NavigationLink(destination: MapView(), isActive: $goMapView) {
+                    EmptyView()
+                }
+                    .hidden()
+            )
         }
         .onAppear {
             AuthVM.signedIn = AuthVM.isSignedIn
