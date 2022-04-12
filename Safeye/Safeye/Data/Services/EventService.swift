@@ -23,9 +23,9 @@ class EventService {
     }
     
     /* enum ReturnType {
-        case event(Event)
-        case error(Bool)
-    } */
+     case event(Event)
+     case error(Bool)
+     } */
     
     
     func createEvent(_ event: Event) -> Bool {
@@ -84,9 +84,17 @@ class EventService {
     
     func deleteEvent() {}
     
-    func changeStatus() {}
-    
-    func activatePanic() {}
+    func changeStatus(_ eventID: String, _ newStatus: EventStatus) {
+        let eventRef = eventDB.document(eventID)
+        
+        eventRef.updateData(["status":newStatus.rawValue]) { err in
+            if let err = err {
+                print("Error changing event status: \(err)")
+            } else {
+                print("Event status successfully updated to: \(newStatus)")
+            }
+        }
+    }
     
     func subscribeContact() {}
     

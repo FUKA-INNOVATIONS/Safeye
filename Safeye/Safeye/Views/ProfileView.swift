@@ -25,6 +25,10 @@ struct ProfileView: View {
                     Text("Edit event")
                 }
                 
+               /* BasicButtonComponent(label: "SOS!") {
+                    let id = "qGcGgDF8K3FvJjplNYP4"
+                    EventVM.changeStatus(id, EventStatus.STARTED)
+                } */
 
                 Group{
                     Spacer()

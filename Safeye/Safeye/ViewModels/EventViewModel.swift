@@ -16,6 +16,7 @@ class EventViewModel: ObservableObject {
     @Published var eventExists = false
     @Published var didCreateEvent = false
     @Published var eventError: String = ""
+    @Published var panicMode = false
     
     
     func createEvent(newEvent: Event) {
@@ -30,7 +31,7 @@ class EventViewModel: ObservableObject {
     
     
     
-    
+    // Get details for a specific event
     func getDetails(for eventID: String) {
         DispatchQueue.main.async {
             self.eventDetails =  self.eventService.getEvent(eventID)
@@ -45,7 +46,10 @@ class EventViewModel: ObservableObject {
     
     func deleteEvent() {}
     
-    func changeStatus() {}
+    func changeStatus(_ eventID: String,_ newStatus: EventStatus) {
+        if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.panicMode = true  } }
+        eventService.changeStatus(eventID, newStatus)
+    }
     
     func activatePanic() {}
     
