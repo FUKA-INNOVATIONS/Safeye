@@ -43,7 +43,7 @@ class EventService {
     
     func updateEvent(_ event: Event) {
         self.editEvent(event)
-    }
+    } // end of updateEvent
     
     
     
@@ -79,10 +79,8 @@ class EventService {
         catch {
             print(error)
         }
-    }
+    } // end of editEcent
     
-    
-    func deleteEvent() {}
     
     func changeStatus(_ eventID: String, _ newStatus: EventStatus) {
         let eventRef = eventDB.document(eventID)
@@ -94,13 +92,15 @@ class EventService {
                 print("Event status successfully updated to: \(newStatus)")
             }
         }
-    }
+    } // end of changeStatus
+    
+    func deleteEvent() {}
     
     func subscribeContact() {}
     
     func unsubscribeContact() {}
     
-    func getLocation() {}
+    // func getLocation() {}
     
     func setLocation() {}
     

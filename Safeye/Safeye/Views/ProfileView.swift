@@ -22,13 +22,8 @@ struct ProfileView: View {
                 NavigationLink {
                     CreateEventView()
                 } label: {
-                    Text("Edit event")
+                    Text("Create event")
                 }
-                
-               /* BasicButtonComponent(label: "SOS!") {
-                    let id = "qGcGgDF8K3FvJjplNYP4"
-                    EventVM.changeStatus(id, EventStatus.STARTED)
-                } */
 
                 Group{
                     Spacer()

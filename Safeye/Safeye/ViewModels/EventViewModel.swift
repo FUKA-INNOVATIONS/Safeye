@@ -51,13 +51,11 @@ class EventViewModel: ObservableObject {
         eventService.changeStatus(eventID, newStatus)
     }
     
-    func activatePanic() {}
-    
     func subscribeContact() {}
     
     func unsubscribeContact() {}
     
-    func getLocation() {}
+    // func getLocation() {}
     
     func setLocation() {}
     

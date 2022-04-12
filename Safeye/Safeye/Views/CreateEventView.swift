@@ -14,6 +14,7 @@ struct CreateEventView: View {
     @State var locationDetails: String = ""
     @State var otherInfo: String = ""
     @State var selectedContacts: Array = ["Contact 1", "Contact 2"]
+    @State var selectedContacts2: [String] = [String]()
     @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
@@ -49,7 +50,7 @@ struct CreateEventView: View {
             Spacer()
             
             let id = "qGcGgDF8K3FvJjplNYP4"
-            let updatedEvent = Event(id: id, ownerId: authUID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
+            let updatedEvent = Event(id: id, ownerId: authUID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
             BasicButtonComponent(label: "Save & activate", action: { EventVM.updateEvent( updatedEvent ) })
             Text("Saving will also enable the tracking mode")
                 .font(.system(size: 15))

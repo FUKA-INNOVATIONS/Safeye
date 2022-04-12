@@ -9,19 +9,19 @@ import SwiftUI
 
 struct SelectContactComponent: View {
     
-        var body: some View {
-            VStack{
-                AvatarComponent(size: 30).padding(.top)
-                Text("Name Surname")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(.white)
-                    .padding(.bottom)
-                    .frame(width: 120, height: 20, alignment: .center)
-            }
-            .fixedSize()
-            .background(.gray)
-            
+    var body: some View {
+        VStack{
+            AvatarComponent(size: 30).padding(.top)
+            Text("Name Surname")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(.white)
+                .padding(.bottom)
+                .frame(width: 120, height: 20, alignment: .center)
         }
+        .fixedSize()
+        .background(.gray)
+        
+    }
 }
 
 struct SelectContactComponent_Previews: PreviewProvider {
