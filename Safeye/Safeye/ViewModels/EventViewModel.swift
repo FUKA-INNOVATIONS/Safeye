@@ -18,6 +18,32 @@ class EventViewModel: ObservableObject {
     @Published var eventError: String = ""
     @Published var panicMode = false
     
+    ////////////////////////////////////////////////////////////////////////////////////////// David
+    @Published var mode = "Tracking"
+    
+    // User presses panic mode
+    func activatePanicMode() {
+        print("Panic Mode activated")
+        mode = "Panic"
+        
+        // TODO Panic Mode functionality #41 -> activate panic mode
+    }
+    
+    // User pressed the safe button -> disabling panic mode
+    func disablePanicMode() {
+        print("Disabled panic mode")
+        mode = "Tracking"
+        
+        // TODO Panic Mode functionality #41 -> disable panic mode
+    }
+    
+    // User Pressed to disable tracking mode
+    func disableTrackingMode() {
+        print("Disabled tracking mode")
+        
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////// David
+    
     
     func createEvent(newEvent: Event) {
         print("Hello from create event")
