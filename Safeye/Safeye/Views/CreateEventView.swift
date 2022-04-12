@@ -48,8 +48,9 @@ struct CreateEventView: View {
             }.navigationBarTitle("Add event information", displayMode: .inline)
             Spacer()
             
-            let newEvent = Event(ownerId: authUID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
-            BasicButtonComponent(label: "Save & activate", action: { EventVM.createEvent( newEvent: newEvent ) })
+            let id = "qGcGgDF8K3FvJjplNYP4"
+            let updatedEvent = Event(id: id, ownerId: authUID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
+            BasicButtonComponent(label: "Save & activate", action: { EventVM.updateEvent( updatedEvent ) })
             Text("Saving will also enable the tracking mode")
                 .font(.system(size: 15))
                 .foregroundColor(.blue)

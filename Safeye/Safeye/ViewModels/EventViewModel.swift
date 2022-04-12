@@ -15,6 +15,7 @@ class EventViewModel: ObservableObject {
     @Published var eventDetails: Event?
     @Published var eventExists = false
     @Published var didCreateEvent = false
+    @Published var eventError: String = ""
     
     
     func createEvent(newEvent: Event) {
@@ -34,6 +35,10 @@ class EventViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.eventDetails =  self.eventService.getEvent(eventID)
         }
+    }
+    
+    func updateEvent(_ event: Event) {
+        self.eventService.updateEvent(event)
     }
     
     func editEvent() {}

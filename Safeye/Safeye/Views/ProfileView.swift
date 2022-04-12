@@ -22,12 +22,9 @@ struct ProfileView: View {
                 NavigationLink {
                     CreateEventView()
                 } label: {
-                    Text("Create event")
+                    Text("Edit event")
                 }
                 
-                BasicButtonComponent(label: "fetch event") {
-                    EventVM.getDetails(for: "qGcGgDF8K3FvJjplNYP4")
-                }
 
                 Group{
                     Spacer()

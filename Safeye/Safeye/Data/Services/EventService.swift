@@ -22,9 +22,10 @@ class EventService {
         return self.eventDetails ?? nil
     }
     
-    
-    
-    
+    /* enum ReturnType {
+        case event(Event)
+        case error(Bool)
+    } */
     
     
     func createEvent(_ event: Event) -> Bool {
@@ -38,6 +39,11 @@ class EventService {
         }
         
     } // end of createEvent
+    
+    
+    func updateEvent(_ event: Event) {
+        self.editEvent(event)
+    }
     
     
     
@@ -65,7 +71,16 @@ class EventService {
     
     
     
-    func editEvent() {}
+    private func editEvent(_ event: Event) {
+        let eventRef = eventDB.document(event.id!)
+        do {
+            try eventRef.setData(from: event)
+        }
+        catch {
+            print(error)
+        }
+    }
+    
     
     func deleteEvent() {}
     
@@ -82,3 +97,4 @@ class EventService {
     func setLocation() {}
     
 }
+
