@@ -7,7 +7,7 @@
 
 import CoreText
 
-enum EventStatus: String, CaseIterable {
+enum EventStatus: String, CaseIterable, Codable {
     case STARTED = "Started",
          PAUSED = "Paused",
          PANIC = "Panic"

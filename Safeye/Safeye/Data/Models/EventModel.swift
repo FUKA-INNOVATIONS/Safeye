@@ -7,9 +7,10 @@
 
 import Foundation
 
+import FirebaseFirestoreSwift
 
-struct Event: Identifiable {
-    var id: String?
+struct Event: Codable {
+    @DocumentID var id: String?
     var ownerId: String
     var status: EventStatus
     var startTime: Date

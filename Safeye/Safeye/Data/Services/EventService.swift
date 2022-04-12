@@ -14,6 +14,7 @@ class EventService {
     // Get instance of Firestore database -> events colletion
     private var eventDB = Firestore.firestore().collection("events")
     
+    
     func createEvent(event: Event) -> Bool {
         let created = eventDB.addDocument(data: [
             
