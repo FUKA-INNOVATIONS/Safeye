@@ -56,15 +56,19 @@ struct AddSafePlaceView: View {
                 .gesture(dragGesture)
         VStack {
             VStack{
-                TextField("Street", text: $street) .padding()
+                TextField("Street", text: $street).padding()
                 TextField("City", text: $city).padding()
                 TextField("Zip", text: $zip).padding()
                     
             }
             .textFieldStyle(.roundedBorder)
-         
-         
+        
+            NavigationLink(destination: MapView()) {
+                               Text("Choose From Map?")
+            }
+
             BasicButtonComponent(label: "Add", action: { print("Added")})
+            
             Spacer()
               
                 }
