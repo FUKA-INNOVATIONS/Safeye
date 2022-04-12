@@ -11,6 +11,7 @@ struct AddSafePlaceView: View {
     @Binding var isShowing: Bool
     var isFound: Bool = true
     
+    @State var name = ""
     @State var street = ""
     @State var city = ""
     @State var zip = ""
@@ -56,6 +57,7 @@ struct AddSafePlaceView: View {
                 .gesture(dragGesture)
         VStack {
             VStack{
+                TextField("Name", text: $name).padding()
                 TextField("Street", text: $street).padding()
                 TextField("City", text: $city).padding()
                 TextField("Zip", text: $zip).padding()
