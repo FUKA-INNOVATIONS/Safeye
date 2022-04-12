@@ -3,12 +3,15 @@
 //  Safeye
 //
 //  Created by FUKA on 8.4.2022.
-//
+//  Edit by gintare on 10.4.2022.
 
 import SwiftUI
 
 struct ProfileEditView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    
+    @EnvironmentObject var AuthVM: AuthenticationViewModel
+    
     @State private var showEmptyFieldAlert = false
 
     @Environment(\.dismiss) var dismiss
@@ -19,6 +22,7 @@ struct ProfileEditView: View {
     @State private var bloodType = ""
     @State private var illness = ""
     @State private var allergies = ""
+    @State private var connectionCode = ""
     
     @State private var bloodTypes = ["A", "A+", "B"]
     
@@ -94,8 +98,13 @@ struct ProfileEditView: View {
                         return
                     }
                     
+                    // Hash the code needed to search for the user
+                    var hasher = Hasher()
+                    hasher.combine(AuthVM.authService.currentUser!.uid)
+                    let connectionHash = String(hasher.finalize())
+                    
                     // Insert profile data into the database
-                    ProfileVM.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
+                    ProfileVM.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
                     dismiss()
