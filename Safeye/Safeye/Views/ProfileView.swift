@@ -13,6 +13,8 @@ struct ProfileView: View {
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
     
+    @ObservedObject var EventVM = EventViewModel()
+    
     var body: some View {
         
         ZStack {
@@ -21,6 +23,10 @@ struct ProfileView: View {
                     CreateEventView()
                 } label: {
                     Text("Create event")
+                }
+                
+                BasicButtonComponent(label: "fetch event") {
+                    EventVM.getDetails(for: "qGcGgDF8K3FvJjplNYP4")
                 }
 
                 Group{

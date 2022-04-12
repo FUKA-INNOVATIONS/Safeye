@@ -13,37 +13,57 @@ import Firebase // Import firebase
 class EventService {
     // Get instance of Firestore database -> events colletion
     private var eventDB = Firestore.firestore().collection("events")
+    private var eventDetails: Event?
+    @Published var eventErrors: String = ""
     
     
-    func createEvent(event: Event) -> Bool {
-        let created = eventDB.addDocument(data: [
-            
-            
-            "ownerId": event.ownerId,
-            "status": event.status.rawValue,
-            "startTime": event.startTime,
-            "endTime": event.endTime,
-            "otherInfo": event.otherInfo,
-            "trustedContacts": event.trustedContacts,
-            "coordinates": event.coordinates,
-            
-        ], completion: { error in
-            
-            if let error = error {
-                print("Error creating event: \(error)")
-                return
-            } else {
-                print("Event successfully created!")
-            }
-        })
-        // print("CREATED: \(created.documentID)")
-        return true
+    func getEvent(_ eventID: String) -> Event? {
+        self.fetchDetails(eventID: eventID)
+        return self.eventDetails ?? nil
+    }
+    
+    
+    
+    
+    
+    
+    func createEvent(_ event: Event) -> Bool {
+        do {
+            _ = try eventDB.addDocument(from: event)
+            return true
+        }
+        catch {
+            print(error)
+            return false
+        }
         
     } // end of createEvent
     
     
     
-    func getDetails() {}
+    private func fetchDetails(eventID: String) {
+        let eventRef = eventDB.document(eventID)
+        
+        eventRef.getDocument { document, error in
+            if let error = error as NSError? {
+                self.eventErrors = "eventService: Error getting event: \(error.localizedDescription)"
+            }
+            else {
+                if let document = document {
+                    do {
+                        self.eventDetails = try document.data(as: Event.self)
+                        print("Fetched event: \(String(describing: self.eventDetails))")
+                    }
+                    catch {
+                        print(error)
+                    }
+                }
+            }
+        }
+    } // end of getDetails
+    
+    
+    
     
     func editEvent() {}
     

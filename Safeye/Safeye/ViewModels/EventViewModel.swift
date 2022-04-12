@@ -17,41 +17,24 @@ class EventViewModel: ObservableObject {
     @Published var didCreateEvent = false
     
     
-    func createEvent(
-        _ startTime: Date,
-        _ endTime: Date,
-        _ otherInfo: String,
-        _ trustedContacts: [String],
-        _ coordinates: [String : Double]
-    ) {
+    func createEvent(newEvent: Event) {
         print("Hello from create event")
-        // Create new Event instance
-        let newEvent = Event(ownerId: userID, status: EventStatus.STARTED, startTime: startTime, endTime: endTime, otherInfo: otherInfo, trustedContacts: trustedContacts, coordinates: coordinates)
         
         // Save event in database, returns true if succeeded
-        let didCreateEvenet = eventService.createEvent(event: newEvent)
+        let didCreateEvenet = eventService.createEvent(newEvent)
         
-        
-        if didCreateEvenet { // new event created, return object
-            
-        } else {
-            print("ASDASDASDASDASDASDFASDASASDS")
-        }
-        
-        /* if didCreateEvenet {
-            self.didCreateEvent = true // creating new event succeeded
-            // move to event view and pass id/object
-            // newEvent.id = didCreateEvenet.documentID
-        } else {
-            self.didCreateEvent = false // creation failed
-        } */
+        didCreateEvenet ? print("EventVM -> New event succeeded") : print("EventVM -> New event failed")
         
     } // end of createEvent()
     
     
     
     
-    func getDetails() {}
+    func getDetails(for eventID: String) {
+        DispatchQueue.main.async {
+            self.eventDetails =  self.eventService.getEvent(eventID)
+        }
+    }
     
     func editEvent() {}
     

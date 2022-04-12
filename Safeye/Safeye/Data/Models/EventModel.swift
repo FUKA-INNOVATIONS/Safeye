@@ -16,9 +16,10 @@ struct Event: Codable {
     var startTime: Date
     var endTime: Date
     var otherInfo: String
+    var eventType: String
     var trustedContacts: [String]
     var audioFiles: [URL]?
-    var coordinates: [String : Double]?
+    var coordinates: [String : Double]
     
     
     
