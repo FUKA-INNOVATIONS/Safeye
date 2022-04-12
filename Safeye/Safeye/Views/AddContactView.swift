@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AddContactView: View {
     @Binding var isShowing: Bool
-    @State var searchInput: String = ""
-    var isFound: Bool = true
-    
+    @State var searchInput: String
+    @EnvironmentObject var AddContactVM: AddContactViewModel
+        
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 500
     let maxHeight: CGFloat = 600
@@ -53,14 +53,24 @@ struct AddContactView: View {
             
             ZStack {
                 VStack {
-                    SearchFieldComponent(searchInput: $searchInput)
-                    // Button(action: { isShowing = false}, label: {Text("Close")})
-                    Spacer()
-                    if isFound {
-                        AvatarComponent(size: 100)
-                        Text("FirstName LastName")
+                    
+                    //  Search for contact with a code
+                    VStack {
+                        SearchFieldComponent(searchInput: $searchInput)
+                        Button(action: { AddContactVM.findProfile(searchCode: searchInput) }, label: {Text("Search")})
                     }
-                    BasicButtonComponent(label: "Add", action: { print("Added")})
+
+                    Spacer()
+                    //  If searched code matches an existing profile, display avatar, full name and 'add' button
+                    if AddContactVM.profileFound {
+                        AvatarComponent(size: 100)
+                        Text("\(AddContactVM.trustedContactDetails?.fullName ?? "No name")")
+                        BasicButtonComponent(label: "Add", action: { AddContactVM.addTrustedContact()
+                            searchInput = ""
+                        })
+                    } else {
+                        Text("Nothing to display.")
+                    }
                     Spacer()
                 }
             }
@@ -104,6 +114,6 @@ struct AddContactView: View {
 
 struct AddContactView_Previews: PreviewProvider {
     static var previews: some View {
-        AddContactView(isShowing: .constant(true))
+        AddContactView(isShowing: .constant(true), searchInput: "")
     }
 }

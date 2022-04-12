@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var AddContactVM: AddContactViewModel
     
     @State private var showingCreateProfile = false
     
@@ -41,6 +42,7 @@ struct ContentView: View {
                     NavItem()
                         .environmentObject(ProfileVM)
                         .environmentObject(AuthVM)
+                        .environmentObject(AddContactVM)
                     
                 }
                 

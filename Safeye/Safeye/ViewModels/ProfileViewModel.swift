@@ -4,16 +4,25 @@
 //
 //  Created by FUKA on 1.4.2022.
 //  Edit by FUKA on 8.4.2022.
+// Edit by gintare on 10.4.2022.
 
 import Foundation
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
     let profileService = ProfileService.getInstance
+    var profile: ProfileModel?
+    var otherProfile: ProfileModel?
+
     
     @Published var profileDetails: ProfileModel?
     @Published var profileExists = false
+    @Published var trustedContactDetails: TrustedContactModel?
+    @Published var trustedContacts: ProfileModel?
     
+    var getTrustedContact: ProfileModel? {
+        return trustedContacts
+    }
     
     /* var isProvileExisist: Bool {
         return false
@@ -54,10 +63,11 @@ class ProfileViewModel: ObservableObject {
                     let bloodType = document["bloodType"]
                     let illness = document["illness"]
                     let allergies = document["allergies"]
+                    let connectionCode = document["connectionCode"]
                     
                     // Create new Profile object and update @Published object in main thread
                     DispatchQueue.main.async {
-                        self.profileDetails = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String)
+                        self.profileDetails = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
                     }
                 }
             }
@@ -65,6 +75,50 @@ class ProfileViewModel: ObservableObject {
         
         
     } // end of getProfile()
+    
+    
+    
+    
+    func getProfileById(profileId: String) {
+        // Fetch profile data
+        
+        
+        profileService.collection("profiles").whereField("userId", isEqualTo: profileId).getDocuments() { snapshot, error in
+            if let error = error {
+                print("Error getting single profile: \(error)")
+            } else {
+                if snapshot!.count < 1 {
+                    print("no profile")
+                    return
+                }
+                
+                for document in snapshot!.documents {
+                    print("Profile fetched")
+ 
+                    let profileId = document.documentID
+                    let userId = document["userId"]
+                    let fullName = document["fullName"]
+                    let address = document["address"]
+                    let birthday = document["birthday"]
+                    let bloodType = document["bloodType"]
+                    let illness = document["illness"]
+                    let allergies = document["allergies"]
+                    let connectionCode = document["connectionCode"]
+                    
+                    let profileTC = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
+                    
+                    DispatchQueue.main.async {
+                        self.trustedContactDetails = TrustedContactModel(id: profileId, userId: userId as! String, fullName: fullName as! String)
+                    }
+
+                }
+                
+            }
+        }
+        
+        
+        
+    } // end of getProfileById()
     
     
     // Add profile details for the first time after accound registration
@@ -75,7 +129,9 @@ class ProfileViewModel: ObservableObject {
         birthday: String,
         bloodType: String,
         illness: String,
-        allergies: String) {
+        allergies: String,
+        connectionCode: String
+    ) {
             
             // Check if user is authenticated, if yes, then get user id, otherwise exit
             guard let userId = AuthenticationService.getInstance.currentUser?.uid else {
@@ -93,6 +149,7 @@ class ProfileViewModel: ObservableObject {
                     "bloodType": bloodType,
                     "illness": illness,
                     "allergies": allergies,
+                    "connectionCode": connectionCode
                 ]) { error in
                     if error == nil {
                         self.getProfile() // Update app state with new data
