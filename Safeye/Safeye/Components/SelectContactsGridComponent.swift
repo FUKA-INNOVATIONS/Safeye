@@ -13,16 +13,15 @@ struct SelectContactGridComponent: View {
         GridItem(.fixed(70))
     ]
     
-        var body: some View {
-            ScrollView(.horizontal, showsIndicators: true) {
-                LazyHGrid(rows: layout) {
-                    ForEach(0..<10) {_ in
-                        SelectContactComponent()
-                    }
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: true) {
+            LazyHGrid(rows: layout) {
+                ForEach(0..<10) {_ in
+                    SelectContactComponent()
                 }
             }
-                
         }
+    }
 }
 
 struct SelectContactGridComponent_Previews: PreviewProvider {

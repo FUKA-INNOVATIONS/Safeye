@@ -12,12 +12,27 @@ struct ProfileView: View {
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
+
+    @ObservedObject var EventVM = EventViewModel()
     
+    @State private var showingAddSafePlace = false
+
+
     var body: some View {
         
         ZStack {
             VStack {
+                NavigationLink {
+                    CreateEventView()
+                } label: {
+                    Text("Create event")
+                }
+
                 Group{
+
+                    Spacer()
+                    NavigationLink("Tracking (TEMP)", destination: EventView())
+
                     Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
                         .font(.system(size: 25, weight: .bold))
                     
@@ -48,17 +63,28 @@ struct ProfileView: View {
                 Spacer()
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
-                    
+                    HStack{
                     //size with icons doesn't work properly, will figure this out later
                     ListViewComponent(item: "safeSpace", size: 40)
+                        Button(action: {
+                            showingAddSafePlace = true
+                            print("modal: ($showingAddSafePlace)")
+                        })
+                        { Image("icon-add") }
+                        Spacer(minLength: 20)
+                    }
                     Spacer()
                 }
+                
                 
             }
             .onAppear {
                 ProfileVM.getProfile()
             }
+
             AddContactView(isShowing: $showingAddContact, searchInput: "")
+            AddSafePlaceView(isShowing: $showingAddSafePlace)
+
         }
         
     }

@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct AvatarComponent: View {
+    let avatarURL = URL(string: "https://i.pravatar.cc/100")!
+    
     let size: CGFloat
     init (size: CGFloat) {
         self.size = size
     }
     
         var body: some View {
-            AsyncImage(url: URL(string: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png")) { phase in
+            AsyncImage(url: avatarURL) { phase in
                 if let image = phase.image {
                     image
                         .resizable()
