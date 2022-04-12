@@ -19,6 +19,7 @@ struct ProfileView: View {
             VStack {
                 Group{
                     Spacer()
+                    NavigationLink("Tracking (TEMP)", destination: EventView())
                     Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
                         .font(.system(size: 25, weight: .bold))
                     
