@@ -17,6 +17,8 @@ struct SettingsView: View {
     @State var fetchClicked = 0
     
     
+    
+    
     var body: some View {
         
         return VStack {
@@ -36,6 +38,15 @@ struct SettingsView: View {
                 })
             }
             
+            
+            BasicButtonComponent(label: "FetchPending") {
+                //PS.fetchPendingConnectionRequests()
+                AddContactVM.getPendingRequests()
+            }
+            
+            ForEach(AddContactVM.t) {t in
+                Text("\(t.connectionId)")
+            }
  
             
             Text("Trusted Contacts")
