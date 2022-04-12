@@ -12,12 +12,22 @@ struct ProfileView: View {
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
+
+    @ObservedObject var EventVM = EventViewModel()
+    
     @State private var showingAddSafePlace = false
+
 
     var body: some View {
         
         ZStack {
             VStack {
+                NavigationLink {
+                    CreateEventView()
+                } label: {
+                    Text("Create event")
+                }
+
                 Group{
                     Spacer()
                     NavigationLink("Tracking (TEMP)", destination: EventView())
