@@ -12,6 +12,10 @@ struct ContentView: View {
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AddContactVM: AddContactViewModel
+    @EnvironmentObject var ConnectioVM: ConnectionViewModel
+    @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var Add_ContactVM: AddContactViewModel
+    @EnvironmentObject var MapVM: MapViewModel
     
     @State private var showingCreateProfile = false
     

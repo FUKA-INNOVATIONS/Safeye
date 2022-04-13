@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventView: View {
     
-    @StateObject private var viewModel = EventViewModel()
+    @StateObject private var viewModel = EventViewModel.instance
     @State var panicMode: Bool = false
     
     var body: some View {

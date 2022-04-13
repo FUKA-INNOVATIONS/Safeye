@@ -7,14 +7,23 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 class ConnectionViewModel: ObservableObject {
-    private var connService = ConnectionService()
+    static let instance = ConnectionViewModel() ;  private init() {}
+    @Published var connService = ConnectionService.instance
     
     @Published var profileFound = false
     @Published var connectionFound = false
     
+    @Published var pendingREquests: [ConnectionModel] = []
     
+    func getPendingREquests()  {
+            DispatchQueue.main.async {
+                self.pendingREquests = self.connService.getPendingRequests()
+            }
+    }
+
 
     func addConnection(_ targetID: String) {
         let uid = AuthenticationService.getInstance.currentUser!.uid

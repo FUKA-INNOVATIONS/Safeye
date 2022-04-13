@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 class EventViewModel: ObservableObject {
-    let eventService = EventService()
-    let userID = AuthenticationService.getInstance.currentUser!.uid
+    static let instance = EventViewModel() ;  private init() {}
+    let eventService = EventService.instance
+    //let userID = AuthenticationService.getInstance.currentUser!.uid
     
     @Published var eventDetails: Event?
     @Published var eventExists = false

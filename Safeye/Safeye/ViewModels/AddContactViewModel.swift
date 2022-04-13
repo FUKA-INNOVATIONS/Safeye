@@ -8,9 +8,10 @@
 import SwiftUI
 
 class AddContactViewModel: ObservableObject {
+    static let instance = AddContactViewModel() ;  private init() {}
     let profileService = ProfileService.getInstance
-    let profileService2 = ProfileService()
-    @ObservedObject var ProfileVM = ProfileViewModel()
+    let profileService2 = ProfileService.instance
+    @ObservedObject var ProfileVM = ProfileViewModel.instance
     
     @Published var connectionDetails: ContactConnectionModel?
     @Published var profileFound = false
@@ -20,7 +21,6 @@ class AddContactViewModel: ObservableObject {
     @Published var pendingArray = []
     @Published var foundTrustedContacts = false
     @Published var trustedContactList: [String] = [String]()
-    //@Published var trustedContacts: Set<ProfileModel> = Set<ProfileModel>()
     @Published var trustedContacts: [ProfileModel] = [ProfileModel]()
     
     private var targetId: String = ""

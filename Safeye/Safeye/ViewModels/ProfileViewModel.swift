@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
+    static let instance = ProfileViewModel() ; private init() {} 
     let profileService = ProfileService.getInstance
     var profile: ProfileModel?
     var otherProfile: ProfileModel?
@@ -105,7 +106,7 @@ class ProfileViewModel: ObservableObject {
                     let allergies = document["allergies"]
                     let connectionCode = document["connectionCode"]
                     
-                    let profileTC = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
+                    _ = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
                     
                     DispatchQueue.main.async {
                         self.trustedContactDetails = TrustedContactModel(id: profileId, userId: userId as! String, fullName: fullName as! String)

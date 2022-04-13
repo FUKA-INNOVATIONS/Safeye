@@ -17,7 +17,7 @@ struct Location: Identifiable {
 
 struct MapView: View {
     
-    @StateObject private var viewModel = MapViewModel()
+    @EnvironmentObject var viewModel: MapViewModel
     
     @State private var draggedOffset = CGSize.zero
     @State private var listOpen = false

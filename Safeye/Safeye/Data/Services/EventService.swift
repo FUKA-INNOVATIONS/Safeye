@@ -11,6 +11,7 @@ import Firebase // Import firebase
 
 
 class EventService {
+    static let instance = EventService() ;  private init() {}
     // Get instance of Firestore database -> events colletion
     private var eventDB = Firestore.firestore().collection("events")
     private var eventDetails: Event?
@@ -100,7 +101,7 @@ class EventService {
     
     func unsubscribeContact() {}
     
-    // func getLocation() {}            
+    // func getLocation() {}
     
     func setLocation() {}
     

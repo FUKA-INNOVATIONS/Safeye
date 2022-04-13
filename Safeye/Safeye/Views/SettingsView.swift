@@ -10,13 +10,16 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AuthVM: AuthenticationViewModel
-    @ObservedObject var AddContactVM = AddContactViewModel()
-    var PS = ProfileService()
+    @EnvironmentObject var Add_ContactVM: AddContactViewModel
+    var PS = ProfileService.instance
     @State var tcList = []
     @State var contacts: [ProfileModel] = [ProfileModel]()
     @State var fetchClicked = 0
     
-    
+    //@ObservedObject var ConnVM = ConnectionViewModel
+
+
+        
     var body: some View {
         
         return VStack {
@@ -31,24 +34,30 @@ struct SettingsView: View {
             // TODO: don't know why this has to be fetched twice in order to show up
             if fetchClicked < 2 {
                 BasicButtonComponent(label: "Fetch contacts", action: {
-                    self.AddContactVM.fetchAllUsersContacts()
+                    self.Add_ContactVM.fetchAllUsersContacts()
                     fetchClicked += 1
                 })
             }
             
- 
+            NavigationLink("Playground") {
+                PlayGroundView()
+            }
+            
+            NavigationLink("Create event") {
+                CreateEventView()
+            }
+            
             
             Text("Trusted Contacts")
             
-            if AddContactVM.trustedContacts.count < 1 {
+            if Add_ContactVM.trustedContacts.count < 1 {
                 Text("You have no contacts")
             } else {
-                ForEach(AddContactVM.trustedContacts) {profile in
+                ForEach(Add_ContactVM.trustedContacts) {profile in
                     Text("\(profile.fullName)")
                     
                 }
             }
-            
             
             
             HStack{
@@ -65,8 +74,8 @@ struct SettingsView: View {
             
             
             HStack {
-                Text("Pending request: \(AddContactVM.pendingRequest ?? "None")")
-                Button(action: { AddContactVM.confirmConnectionRequest() }, label: {
+                Text("Pending request: \(Add_ContactVM.pendingRequest ?? "None")")
+                Button(action: { Add_ContactVM.confirmConnectionRequest() }, label: {
                     Text("Confirm") })
                 
             }
@@ -74,7 +83,7 @@ struct SettingsView: View {
             SettingsListViewComponent(settingsView: true)
         }
         .onAppear {
-            self.AddContactVM.getPendingConnectionRequests()
+            self.Add_ContactVM.getPendingConnectionRequests()
         }
         
         

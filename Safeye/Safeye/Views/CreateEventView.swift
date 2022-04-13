@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CreateEventView: View {
+    @EnvironmentObject var EventVM: EventViewModel
+    
+    @State var authUID = AuthenticationService.getInstance.currentUser!.uid 
     @State var startDate = Date()
     @State var endDate = Date()
     @State var eventType = ""
@@ -19,8 +22,7 @@ struct CreateEventView: View {
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
     
-    @ObservedObject var EventVM = EventViewModel()
-    @State var authUID = AuthenticationService.getInstance.currentUser!.uid
+
     
     var body: some View {
         VStack{

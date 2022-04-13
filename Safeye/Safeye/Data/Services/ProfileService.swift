@@ -22,6 +22,7 @@ import Firebase // Import firebase
 
 
 class ProfileService {
+    static let instance = ProfileService() ;  private init() {}
     static let getInstance = Firestore.firestore() // Get instance of Firestore database
     private var profileDB = Firestore.firestore().collection("profiles")
     
