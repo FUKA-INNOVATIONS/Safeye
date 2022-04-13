@@ -4,7 +4,6 @@
 //
 //  Created by FUKA on 1.4.2022.
 //  Edit by gintare on 10.4.2022.
-//  Refactored by FUKA
 
 import SwiftUI
 
@@ -23,7 +22,6 @@ class AddContactViewModel: ObservableObject {
     @Published var trustedContactList: [String] = [String]()
     //@Published var trustedContacts: Set<ProfileModel> = Set<ProfileModel>()
     @Published var trustedContacts: [ProfileModel] = [ProfileModel]()
-    @State var pendingRequests: [ConnectionModel]?
     
     private var targetId: String = ""
     
@@ -59,24 +57,6 @@ class AddContactViewModel: ObservableObject {
     } // end of findProfile()
     
     
-    func addConnection(_ targetID: String) {
-        let uid = AuthenticationService.getInstance.currentUser!.uid
-        var hasher = Hasher()
-        hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
-        hasher.combine(targetId)
-        let connectionId = String(hasher.finalize())
-        
-        let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: ["Owner": uid, "target": targetID], status: false)
-        
-        if profileService2.addConnection(newConn: newConn) {
-            print("New connection added")
-        } else {
-            print("Adding new connection failed")
-        }
-    }
-    
-    
-    
     // Add user as trusted contact and create a new entry in 'connections' collection
     func addTrustedContact() {
         var hasher = Hasher()
@@ -84,18 +64,13 @@ class AddContactViewModel: ObservableObject {
         hasher.combine(targetId)
         let connectionId = String(hasher.finalize())
         
-        let uid = AuthenticationService.getInstance.currentUser!.uid
-        let connectionUsers = ["owner": uid, "target": targetId]
-        
         // Save data in database
         profileService.collection("connections").addDocument(
-            
             data:[
                 "connectionId": connectionId,
-                //"ownerId": AuthenticationService.getInstance.currentUser!.uid,
-                //"targetId": targetId,
-                "status": false,
-                "connectionUsers": connectionUsers
+                "ownerId": AuthenticationService.getInstance.currentUser!.uid,
+                "targetId": targetId,
+                "status": false
             ]) { error in
                 if error == nil {
                     // TODO: If successful this should trigger a notification sent to target user (Sprint 3?)
@@ -108,20 +83,10 @@ class AddContactViewModel: ObservableObject {
             }
     } // end of addTrustedContact()
     
-    @State var t = [ConnectionModel]()
-    
-    func getPendingRequests() {
-        DispatchQueue.main.async {
-            self.t = self.profileService2.getPendingRequests()
-        }
-    }
-    
     // fetch all pending requests for logged in user
     func getPendingConnectionRequests() {
         self.pendingArray = []
-        
-        
-        
+
         profileService.collection("connections").whereField("status", isEqualTo: false).whereField("targetId", isEqualTo: AuthenticationService.getInstance.currentUser!.uid).getDocuments() { snapshot, error in
             if let error = error {
                 print("Error fetching connection requests \(error)")
@@ -167,10 +132,6 @@ class AddContactViewModel: ObservableObject {
     
     // TODO: unfinished
     // fetch all user's trusted contacts
-    
-    //let citiesRef = db.collection("cities")
-    //citiesRef.whereField("country", in: ["USA", "Japan"])
-    
     func fetchAllUsersContacts() {
         self.trustedContactList = []
         let userId = AuthenticationService.getInstance.currentUser?.uid
@@ -197,15 +158,28 @@ class AddContactViewModel: ObservableObject {
                     self.trustedContactList.append(tcId! as! String)
                     print("Trusted contact list: \(self.trustedContactList)")
                     
+                    
+                
+                    
+                    // self.trustedContacts =  self.profileService2.getProfiles(for: tcId as! String)
+                    
+                    /* DispatchQueue.main.async {
+                        self.trustedContacts = self.profileService2.getProfiles(for: tcId as! String)
+                    } */
+                    
                 }
                 
             }
             print("before calling fetchProfiles")
-            //self.profileService2.fetchProfiles(for: self.trustedContactList)
+            self.profileService2.fetchProfiles(for: self.trustedContactList)
             
             DispatchQueue.main.async {
                 self.trustedContacts = self.profileService2.getProfiles()!
             }
+            
+            // let x = self.profileService2.getProfiles()
+            // print("Finlay? : \(x!.count)")
+            
         }
         
         // Round 2: checks for those connections that the user sent and other users accepted
@@ -232,7 +206,7 @@ class AddContactViewModel: ObservableObject {
                 
             }
             print("before calling fetchProfiles")
-            //self.profileService2.fetchProfiles(for: self.trustedContactList)
+            self.profileService2.fetchProfiles(for: self.trustedContactList)
             
             DispatchQueue.main.async {
                 self.trustedContacts = self.profileService2.getProfiles()!

@@ -100,7 +100,7 @@ class EventService {
     
     func unsubscribeContact() {}
     
-    // func getLocation() {}
+    // func getLocation() {}            
     
     func setLocation() {}
     

@@ -18,7 +18,6 @@ class EventViewModel: ObservableObject {
     @Published var eventError: String = ""
     @Published var panicMode = false
     
-    ////////////////////////////////////////////////////////////////////////////////////////// David
     @Published var mode = "Tracking"
     
     // User presses panic mode
@@ -42,7 +41,7 @@ class EventViewModel: ObservableObject {
         print("Disabled tracking mode")
         
     }
-    ////////////////////////////////////////////////////////////////////////////////////////// David
+
     
     
     func createEvent(newEvent: Event) {
