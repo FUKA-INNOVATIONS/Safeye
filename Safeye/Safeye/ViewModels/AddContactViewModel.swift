@@ -59,6 +59,24 @@ class AddContactViewModel: ObservableObject {
     } // end of findProfile()
     
     
+    func addConnection(_ targetID: String) {
+        let uid = AuthenticationService.getInstance.currentUser!.uid
+        var hasher = Hasher()
+        hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
+        hasher.combine(targetId)
+        let connectionId = String(hasher.finalize())
+        
+        let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: ["Owner": uid, "target": targetID], status: false)
+        
+        if profileService2.addConnection(newConn: newConn) {
+            print("New connection added")
+        } else {
+            print("Adding new connection failed")
+        }
+    }
+    
+    
+    
     // Add user as trusted contact and create a new entry in 'connections' collection
     func addTrustedContact() {
         var hasher = Hasher()
@@ -93,11 +111,9 @@ class AddContactViewModel: ObservableObject {
     @State var t = [ConnectionModel]()
     
     func getPendingRequests() {
-        let r = self.profileService2.getPendingRequests()
         DispatchQueue.main.async {
             self.t = self.profileService2.getPendingRequests()
         }
-        print("QQQQQQ => \(t)")
     }
     
     // fetch all pending requests for logged in user
@@ -105,7 +121,7 @@ class AddContactViewModel: ObservableObject {
         self.pendingArray = []
         
         
-
+        
         profileService.collection("connections").whereField("status", isEqualTo: false).whereField("targetId", isEqualTo: AuthenticationService.getInstance.currentUser!.uid).getDocuments() { snapshot, error in
             if let error = error {
                 print("Error fetching connection requests \(error)")
@@ -185,7 +201,7 @@ class AddContactViewModel: ObservableObject {
                 
             }
             print("before calling fetchProfiles")
-            self.profileService2.fetchProfiles(for: self.trustedContactList)
+            //self.profileService2.fetchProfiles(for: self.trustedContactList)
             
             DispatchQueue.main.async {
                 self.trustedContacts = self.profileService2.getProfiles()!
@@ -216,7 +232,7 @@ class AddContactViewModel: ObservableObject {
                 
             }
             print("before calling fetchProfiles")
-            self.profileService2.fetchProfiles(for: self.trustedContactList)
+            //self.profileService2.fetchProfiles(for: self.trustedContactList)
             
             DispatchQueue.main.async {
                 self.trustedContacts = self.profileService2.getProfiles()!

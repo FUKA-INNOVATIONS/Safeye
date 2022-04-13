@@ -29,37 +29,9 @@ struct SettingsView: View {
                 AuthVM.signOut()
             }
             
-            
-            // TODO: don't know why this has to be fetched twice in order to show up
-            if fetchClicked < 2 {
-                BasicButtonComponent(label: "Fetch contacts", action: {
-                    self.AddContactVM.fetchAllUsersContacts()
-                    fetchClicked += 1
-                })
+            BasicButtonComponent(label: "ADD conn") {
+                AddContactVM.addConnection("asdas3434343dasd")
             }
-            
-            
-            BasicButtonComponent(label: "FetchPending") {
-                //PS.fetchPendingConnectionRequests()
-                AddContactVM.getPendingRequests()
-            }
-            
-            ForEach(AddContactVM.t) {t in
-                Text("\(t.connectionId)")
-            }
- 
-            
-            Text("Trusted Contacts")
-            
-            if AddContactVM.trustedContacts.count < 1 {
-                Text("You have no contacts")
-            } else {
-                ForEach(AddContactVM.trustedContacts) {profile in
-                    Text("\(profile.fullName)")
-                    
-                }
-            }
-            
             
             
             HStack{

@@ -5,12 +5,14 @@
 //  Created by FUKA on 1.4.2022.
 //  Edited by FUKa 8.4.2022.
 //  Edited by gintare 10.4.2022.
+// Edited by FUKA 13.4
+
 
 import Foundation
+import FirebaseFirestoreSwift
 
-
-struct ProfileModel: Identifiable, Hashable {
-    var id: String?
+struct ProfileModel: Identifiable, Hashable, Codable {
+    @DocumentID var id: String?
     var userId: String
     var fullName: String
     var address: String
