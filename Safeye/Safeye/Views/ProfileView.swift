@@ -19,6 +19,7 @@ struct ProfileView: View {
     
     @State var isImagePickerShowing = false
     @State var selectedImage: UIImage?
+    @State var retrievedImages = [UIImage]()
     
     
     var body: some View {
@@ -57,6 +58,25 @@ struct ProfileView: View {
                         } label: {
                             Text("Select a profile photo")
                         }
+                        
+                        // Upload button
+                        if selectedImage != nil {
+                            Button {
+                                // upload the image
+                                uploadPhoto()
+                            } label: {
+                                Text("Upload photo")
+                            }
+                        }
+                        Divider()
+                        HStack {
+                            ForEach(retrievedImages, id: \.self) {image in
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .frame(width: 70, height: 70)
+                            }
+                        }
+                        
                         // AvatarComponent(size: 80)
                     }
                     .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
