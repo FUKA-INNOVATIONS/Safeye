@@ -27,7 +27,7 @@ struct EventView: View {
                 
                 viewModel.activatePanicMode()
                 panicMode = true
-                
+                viewModel.sentNotification()
                 }) {
                     TrackingModeButtonComponent(panicmode: $panicMode)
             }

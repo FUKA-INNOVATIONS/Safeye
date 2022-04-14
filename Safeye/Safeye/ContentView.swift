@@ -13,6 +13,8 @@ struct ContentView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AddContactVM: AddContactViewModel
     
+    @StateObject private var notificationService = NotificationService()
+    
     @State private var showingCreateProfile = false
     
     
@@ -48,7 +50,26 @@ struct ContentView: View {
             }
             .onAppear {
                 ProfileVM.getProfile()
+                notificationService.requestAuthorization()
+                if notificationService.authorizationStatus == .authorized {
+                    notificationService.reloadLocalNotifications()
+                }
+                if notificationService.authorizationStatus == .notDetermined {
+                    notificationService.requestAuthorization()
+                }
             }
+//            .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
+//                switch authorizationStatus {
+//                case .notDetermined:
+//                    // request authorization
+//                    notificationManager.requestAuthorization()
+//                case .authorized:
+//                    // get local notification
+//                    notificationManager.reloadLocalNotifications()
+//                default:
+//                    break
+//                }
+//            }
         }
         .onAppear {
             AuthVM.signedIn = AuthVM.isSignedIn

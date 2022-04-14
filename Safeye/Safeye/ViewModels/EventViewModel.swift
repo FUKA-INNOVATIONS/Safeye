@@ -18,6 +18,8 @@ class EventViewModel: ObservableObject {
     @Published var eventError: String = ""
     @Published var panicMode = false
     @Published var mode = "Tracking"
+    
+    @StateObject private var notificationService = NotificationService()
 
         // User presses panic mode
         func activatePanicMode() {
@@ -33,6 +35,12 @@ class EventViewModel: ObservableObject {
             mode = "Tracking"
 
             // TODO Panic Mode functionality #41 -> disable panic mode
+        }
+        func sentNotification() {
+            notificationService.createLocalNotification(title: "Safeye: Pavlo", body: "Panic mode activated") { error in
+                print("error")
+        }
+            print("Notification sent")
         }
 
         // User Pressed to disable tracking mode
