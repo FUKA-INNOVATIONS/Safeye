@@ -16,8 +16,11 @@ struct ProfileView: View {
     @ObservedObject var EventVM = EventViewModel.shared
     
     @State private var showingAddSafePlace = false
-
-
+    
+    @State var isImagePickerShowing = false
+    @State var selectedImage: UIImage?
+    
+    
     var body: some View {
         
         ZStack {
@@ -27,12 +30,10 @@ struct ProfileView: View {
                 } label: {
                     Text("Create event")
                 }
-
+                
                 Group{
-
-                    Spacer()
                     NavigationLink("Tracking (TEMP)", destination: EventView())
-
+                    
                     Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
                         .font(.system(size: 25, weight: .bold))
                     
@@ -43,9 +44,25 @@ struct ProfileView: View {
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
-                    
-                    AvatarComponent(size: 80)
-                    Spacer()
+                    VStack {
+                        if selectedImage != nil {
+                            Image(uiImage: selectedImage!)
+                                .resizable()
+                                .frame(width: 70, height: 70)
+                        }
+                        
+                        Button {
+                            // show the image picker
+                            isImagePickerShowing = true
+                        } label: {
+                            Text("Select a profile photo")
+                        }
+                        // AvatarComponent(size: 80)
+                    }
+                    .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
+                        // Image picker
+                        ImagePicker(selectedImage: $selectedImage, isImagePickerShowing: $isImagePickerShowing)
+                    }
                 }
                 Group {
                     Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
@@ -64,8 +81,8 @@ struct ProfileView: View {
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
                     HStack{
-                    //size with icons doesn't work properly, will figure this out later
-                    ListViewComponent(item: "safeSpace", size: 40)
+                        //size with icons doesn't work properly, will figure this out later
+                        ListViewComponent(item: "safeSpace", size: 40)
                         Button(action: {
                             showingAddSafePlace = true
                             print("modal: ($showingAddSafePlace)")
@@ -81,10 +98,10 @@ struct ProfileView: View {
             .onAppear {
                 ProfileVM.getProfile()
             }
-
+            
             AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
-
+            
         }
         
     }
