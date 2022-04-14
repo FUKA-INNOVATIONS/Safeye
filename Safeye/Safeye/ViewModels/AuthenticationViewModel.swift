@@ -14,7 +14,7 @@
 import SwiftUI
 
 class AuthenticationViewModel: ObservableObject {
-    static let instance = AuthenticationViewModel() ;  private init() {}
+    static let shared = AuthenticationViewModel() ;  private init() {}
     let authService = AuthenticationService.getInstance
     
     @Published var signedIn = false

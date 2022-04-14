@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PlayGroundView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
-    @ObservedObject var connService = ConnectionService.instance
+    @EnvironmentObject var appState: Store
+    @EnvironmentObject var PlaygroundVM: PlaygroundViewModel
+    
     
     
     var body: some View {
@@ -21,14 +23,25 @@ struct PlayGroundView: View {
                 }
             }
             
-            Text("Hello playgroung")
+            BasicButtonComponent(label: "Update store via VM") {
+                //self.PlaygroundVM.changeText(text: "New text")
+                // self.appState.greeting = "ERERER"
+                self.PlaygroundVM.changeText("Good day")
+                
+            }
+            
+            ForEach(self.appState.pendingRequests) { req in
+                Text("Req: \(req.connectionId)")
+            }
+            
+            Text("Hello playground")
             
             
             VStack {
-                ForEach(self.connService.pendingConnectionRequests) { req in
+                /*ForEach(self.connService.pendingConnectionRequests) { req in
                     Text(req.connectionId)
                     
-                }
+                }*/
             }
             
         }

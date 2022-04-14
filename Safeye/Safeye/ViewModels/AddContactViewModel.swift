@@ -8,10 +8,10 @@
 import SwiftUI
 
 class AddContactViewModel: ObservableObject {
-    static let instance = AddContactViewModel() ;  private init() {}
-    let profileService = ProfileService.getInstance
-    let profileService2 = ProfileService.instance
-    @ObservedObject var ProfileVM = ProfileViewModel.instance
+    static let shared = AddContactViewModel() ;  private init() {}
+    let profileService = ProfileService.shared.getInstance
+    let profileService2 = ProfileService.shared
+    @ObservedObject var ProfileVM = ProfileViewModel.shared
     
     @Published var connectionDetails: ContactConnectionModel?
     @Published var profileFound = false

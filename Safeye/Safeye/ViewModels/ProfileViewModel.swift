@@ -10,8 +10,9 @@ import Foundation
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
-    static let instance = ProfileViewModel() ; private init() {} 
-    let profileService = ProfileService.getInstance
+    static let shared = ProfileViewModel() ; private init() {} 
+    let profileService = ProfileService.shared.getInstance
+    
     var profile: ProfileModel?
     var otherProfile: ProfileModel?
 
@@ -23,6 +24,10 @@ class ProfileViewModel: ObservableObject {
     
     var getTrustedContact: ProfileModel? {
         return trustedContacts
+    }
+    
+    func getPendingRequests() {
+        
     }
     
     /* var isProvileExisist: Bool {

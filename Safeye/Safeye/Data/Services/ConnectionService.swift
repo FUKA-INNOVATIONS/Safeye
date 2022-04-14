@@ -7,9 +7,13 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 class ConnectionService: ObservableObject {
-    static let instance = ConnectionService() ; private init() {}
+    static let shared = ConnectionService() ; private init() {}
+    
+    private let appStore = Store.shared
+    //@ObservedObject var appStore: Store
     
     private var connectionsDB = Firestore.firestore().collection("connections")
     private var profileDB = Firestore.firestore().collection("profiles")
@@ -53,6 +57,7 @@ class ConnectionService: ObservableObject {
                                 let convertedRequest = try request.data(as: ConnectionModel.self)
                                 //print(convertedRequest)
                                 self.pendingConnectionRequests.append(convertedRequest)
+                                self.appStore.pendingRequests.append(convertedRequest)
                             } catch {
                                 print(error)
                             }

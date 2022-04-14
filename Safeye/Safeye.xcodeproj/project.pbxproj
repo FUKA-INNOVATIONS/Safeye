@@ -73,6 +73,9 @@
 		5F553BB02805EAF6000518F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F553BAF2805EAF6000518F7 /* GoogleService-Info.plist */; };
 		5F553BB22806123B000518F7 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F553BB12806123B000518F7 /* ConnectionModel.swift */; };
 		5F5962022802CD7900C8F682 /* TackingModeButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */; };
+		5F5D0C662807EB6E00999B78 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5D0C652807EB6E00999B78 /* Store.swift */; };
+		5F5D0C6B2808068700999B78 /* PlaygroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5D0C6A2808068700999B78 /* PlaygroundViewModel.swift */; };
+		5F86F103280848C40089EAC6 /* SafePlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F86F102280848C40089EAC6 /* SafePlaceModel.swift */; };
 		5FA418982806976C00B6C6E9 /* ConnectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA418972806976C00B6C6E9 /* ConnectionViewModel.swift */; };
 		5FA4189A2806977E00B6C6E9 /* ConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA418992806977E00B6C6E9 /* ConnectionService.swift */; };
 		5FA4189C2807058100B6C6E9 /* PlayGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */; };
@@ -182,6 +185,9 @@
 		5F553BAF2805EAF6000518F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F553BB12806123B000518F7 /* ConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
 		5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TackingModeButtonComponent.swift; sourceTree = "<group>"; };
+		5F5D0C652807EB6E00999B78 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		5F5D0C6A2808068700999B78 /* PlaygroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundViewModel.swift; sourceTree = "<group>"; };
+		5F86F102280848C40089EAC6 /* SafePlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafePlaceModel.swift; sourceTree = "<group>"; };
 		5FA418972806976C00B6C6E9 /* ConnectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewModel.swift; sourceTree = "<group>"; };
 		5FA418992806977E00B6C6E9 /* ConnectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionService.swift; sourceTree = "<group>"; };
 		5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGroundView.swift; sourceTree = "<group>"; };
@@ -312,6 +318,7 @@
 		5F244A7F27F70AF500BFE1FB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5F5D0C652807EB6E00999B78 /* Store.swift */,
 				5F244A8027F70B0300BFE1FB /* Services */,
 				5F8B94F727F70A730067C6C9 /* Models */,
 				5F244A8127F70B1B00BFE1FB /* Repositories */,
@@ -445,6 +452,7 @@
 				5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */,
 				5FAB464E28047E44009C4D0E /* EventViewModel.swift */,
 				5FA418972806976C00B6C6E9 /* ConnectionViewModel.swift */,
+				5F5D0C6A2808068700999B78 /* PlaygroundViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -462,6 +470,7 @@
 				6AEA6A352803747900C36830 /* ConnectionRequestModel.swift */,
 				5FAB464A28045806009C4D0E /* EventStatus.swift */,
 				5F553BB12806123B000518F7 /* ConnectionModel.swift */,
+				5F86F102280848C40089EAC6 /* SafePlaceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -613,6 +622,7 @@
 				D5148A5327FF5C8800E98347 /* NavItem.swift in Sources */,
 				5F0EA30427F6F9E100FBD77B /* Persistence.swift in Sources */,
 				5F244AE727F7202A00BFE1FB /* TextComponent.swift in Sources */,
+				5F86F103280848C40089EAC6 /* SafePlaceModel.swift in Sources */,
 				5F244AEF27F721B100BFE1FB /* Location.swift in Sources */,
 				5F244ACD27F71B1E00BFE1FB /* ProfileRepository.swift in Sources */,
 				5F244A9027F70E9B00BFE1FB /* HomeView.swift in Sources */,
@@ -643,11 +653,13 @@
 				5F244AAF27F7183200BFE1FB /* AddContactViewModel.swift in Sources */,
 				5F244AD727F71C4000BFE1FB /* BasicButtonModifier.swift in Sources */,
 				5F244AA527F717AA00BFE1FB /* LoginViewModel.swift in Sources */,
+				5F5D0C662807EB6E00999B78 /* Store.swift in Sources */,
 				6ABCDD2427FF1B19009563E7 /* UserDetailsComponent.swift in Sources */,
 				6AEA6A362803747900C36830 /* ConnectionRequestModel.swift in Sources */,
 				5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */,
 				6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */,
 				5F0EA2FB27F6F9E000FBD77B /* SafeyeApp.swift in Sources */,
+				5F5D0C6B2808068700999B78 /* PlaygroundViewModel.swift in Sources */,
 				5F244AC127F71A4400BFE1FB /* ProfileModel.swift in Sources */,
 				6A29154E2803128E00988C2C /* EventView.swift in Sources */,
 				5F244A8C27F70E7300BFE1FB /* LoginView.swift in Sources */,

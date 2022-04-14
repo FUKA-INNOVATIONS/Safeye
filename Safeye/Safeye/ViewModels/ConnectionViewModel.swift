@@ -10,8 +10,9 @@ import Firebase
 import SwiftUI
 
 class ConnectionViewModel: ObservableObject {
-    static let instance = ConnectionViewModel() ;  private init() {}
-    @Published var connService = ConnectionService.instance
+    static let shared = ConnectionViewModel() ;  private init() {}
+    var connService = ConnectionService.shared
+    
     
     @Published var profileFound = false
     @Published var connectionFound = false

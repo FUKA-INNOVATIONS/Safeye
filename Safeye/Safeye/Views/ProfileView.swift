@@ -13,7 +13,7 @@ struct ProfileView: View {
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
 
-    @ObservedObject var EventVM = EventViewModel.instance
+    @ObservedObject var EventVM = EventViewModel.shared
     
     @State private var showingAddSafePlace = false
 

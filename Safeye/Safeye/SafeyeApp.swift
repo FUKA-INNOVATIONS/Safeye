@@ -10,14 +10,19 @@ import Firebase // Import Firebase
 
 @main
 struct SafeyeApp: App {
-    let persistenceController = PersistenceController.shared
-    @StateObject var AuthVM = AuthenticationViewModel.instance
-    @StateObject var ProfileVM = ProfileViewModel.instance
-    @StateObject var ConnectionVM = ConnectionViewModel.instance
-    @StateObject var EventVM = EventViewModel.instance
-    @StateObject var Add_ContactVM = AddContactViewModel.instance
+    //let persistenceController = PersistenceController.shared
+    
+    @StateObject var AuthVM = AuthenticationViewModel.shared
+    @StateObject var ProfileVM = ProfileViewModel.shared
+    @StateObject var ConnectionVM = ConnectionViewModel.shared
+    @StateObject var EventVM = EventViewModel.shared
+    @StateObject var Add_ContactVM = AddContactViewModel.shared
     @StateObject var MapVM = MapViewModel()
     
+    @StateObject var appStore = Store.shared
+    @StateObject var PlaygroundVM = PlaygroundViewModel.shared
+    
+
     init() {
         FirebaseApp.configure() // Initialize Firebase
         
@@ -50,6 +55,8 @@ struct SafeyeApp: App {
             .environmentObject(EventVM)
             .environmentObject(Add_ContactVM)
             .environmentObject(MapVM)
+            .environmentObject(appStore)
+            .environmentObject(PlaygroundVM)
             
         }
     }

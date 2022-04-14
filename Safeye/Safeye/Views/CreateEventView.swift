@@ -10,7 +10,7 @@ import SwiftUI
 struct CreateEventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     
-    @State var authUID = AuthenticationService.getInstance.currentUser!.uid 
+    @State var authUID = AuthenticationService.getInstance.currentUser?.uid
     @State var startDate = Date()
     @State var endDate = Date()
     @State var eventType = ""
@@ -52,7 +52,7 @@ struct CreateEventView: View {
             Spacer()
             
             let id = "qGcGgDF8K3FvJjplNYP4"
-            let updatedEvent = Event(id: id, ownerId: authUID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
+            let updatedEvent = Event(id: id, ownerId: authUID ?? "", status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
             BasicButtonComponent(label: "Save & activate", action: { EventVM.updateEvent( updatedEvent ) })
             Text("Saving will also enable the tracking mode")
                 .font(.system(size: 15))

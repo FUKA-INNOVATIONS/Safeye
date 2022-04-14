@@ -15,15 +15,9 @@ import Firebase // Import firebase
 // TODO: move connection related code to own service
 
 
-
-
-
-
-
-
 class ProfileService {
-    static let instance = ProfileService() ;  private init() {}
-    static let getInstance = Firestore.firestore() // Get instance of Firestore database
+    static let shared = ProfileService() ;  private init() {}
+    let getInstance = Firestore.firestore() // Get instance of Firestore database
     private var profileDB = Firestore.firestore().collection("profiles")
     
     var profiles: [ProfileModel] = [ProfileModel]()

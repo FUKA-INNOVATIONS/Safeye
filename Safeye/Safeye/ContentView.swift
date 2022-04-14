@@ -16,6 +16,7 @@ struct ContentView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var Add_ContactVM: AddContactViewModel
     @EnvironmentObject var MapVM: MapViewModel
+    @EnvironmentObject var appStore: Store
     
     @State private var showingCreateProfile = false
     
