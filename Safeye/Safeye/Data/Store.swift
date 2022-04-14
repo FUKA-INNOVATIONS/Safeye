@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+// Single source of truth for application state
+// Authentication is excluded
+
 class Store: ObservableObject {
     static let shared = Store() ; private init() {}
     
@@ -18,6 +21,10 @@ class Store: ObservableObject {
     @Published var settings = [SettingModel]()
     @Published var events = [Event]()
     @Published var event: Event?
+    @Published var panicMode = false
+    
+    @Published var errors = [String]()
+    @Published var notifications = [String]()
 
 }
 

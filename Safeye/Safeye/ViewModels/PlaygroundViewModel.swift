@@ -9,8 +9,13 @@ import Foundation
 
 class PlaygroundViewModel: ObservableObject {
     static let shared = PlaygroundViewModel() ; private init() {}
-    private let appstate = Store.shared
     private let connService = ConnectionService.shared
+    private let eventService = EventService.shared
+    
+    func getEvent(_ eventID: String) {
+        print("getEvent")
+        eventService.fetchDetails(eventID: eventID)
+    }
     
     func changeText(_ newText: String) {
         //self.appstate.sayHello(newText)

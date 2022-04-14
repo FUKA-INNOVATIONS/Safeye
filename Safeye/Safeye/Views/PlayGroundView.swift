@@ -35,6 +35,7 @@ struct PlayGroundView: View {
             }
             
             Text("Hello playground")
+            Text("Event")
             
             
             VStack {
@@ -46,10 +47,11 @@ struct PlayGroundView: View {
             
         }
         .task {
-            print("Map view")
+            print("Map view ")
         }
         .onAppear {
             self.ConnectionVM.getPendingREquests()
+            self.PlaygroundVM.getEvent("qGcGgDF8K3FvJjplNYP4")
         }
         
     }

@@ -11,9 +11,7 @@ import SwiftUI
 
 class ConnectionService: ObservableObject {
     static let shared = ConnectionService() ; private init() {}
-    
     private let appStore = Store.shared
-    //@ObservedObject var appStore: Store
     
     private var connectionsDB = Firestore.firestore().collection("connections")
     private var profileDB = Firestore.firestore().collection("profiles")
