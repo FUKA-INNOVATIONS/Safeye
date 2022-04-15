@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
-import Firebase // Import Firebase
+import Firebase
 
 @main
 struct SafeyeApp: App {
-    let persistenceController = PersistenceController.shared
-    @StateObject var AuthVM = AuthenticationViewModel()
-    @StateObject var ProfileVM = ProfileViewModel()
-    @StateObject var AddContactVM = AddContactViewModel()
+    @StateObject var appStore = Store.shared
     
+    @StateObject var AuthVM = AuthenticationViewModel.shared
+    @StateObject var ProfileVM = ProfileViewModel.shared
+    @StateObject var ConnectionVM = ConnectionViewModel.shared
+    @StateObject var EventVM = EventViewModel.shared
+    @StateObject var MapVM = MapViewModel()
+    
+    @StateObject var PlaygroundVM = PlaygroundViewModel.shared
+    
+
     init() {
         FirebaseApp.configure() // Initialize Firebase
         
@@ -23,27 +29,30 @@ struct SafeyeApp: App {
     var body: some Scene {
         return WindowGroup {
             
-          NavigationView {
-              
+            NavigationView {
+                
                 VStack {
-
+                    
                     if AuthVM.isSignedIn {
                         ContentView()
-                            .environmentObject(AuthVM)
-                            .environmentObject(ProfileVM)
-                            .environmentObject(AddContactVM)
-                    } else {
-                        // User is not signed in
-                        LoginView()
-                            .environmentObject(AuthVM)
-                    }
 
+                    } else {
+                        LoginView()
+                    }
+                    
                 }
                 .onAppear {
                     AuthVM.signedIn = AuthVM.isSignedIn
                 }
                 
-          }
+            }
+            .environmentObject(AuthVM)
+            .environmentObject(ProfileVM)
+            .environmentObject(ConnectionVM)
+            .environmentObject(EventVM)
+            .environmentObject(MapVM)
+            .environmentObject(appStore)
+            .environmentObject(PlaygroundVM)
             
         }
     }

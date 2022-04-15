@@ -9,8 +9,7 @@ import SwiftUI
 
 struct AddContactView: View {
     @Binding var isShowing: Bool
-    @State var searchInput: String
-    @EnvironmentObject var AddContactVM: AddContactViewModel
+    @State var searchInput: String    
         
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 500
@@ -23,6 +22,15 @@ struct AddContactView: View {
         let res = Double((curHeight - minHeight) / (maxHeight - minHeight))
         return max(0, min(1, res))
     }
+    
+    
+    
+    ///////////
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var appState: Store
+    @State var error = ""
+    
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -57,19 +65,30 @@ struct AddContactView: View {
                     //  Search for contact with a code
                     VStack {
                         SearchFieldComponent(searchInput: $searchInput)
-                        Button(action: { AddContactVM.findProfile(searchCode: searchInput) }, label: {Text("Search")})
+                        Button(action: {
+                            if searchInput == appState.profile?.connectionCode {
+                                print("You can not add your self as trusted contact")
+                                error = "You can not add your self as trusted contact"
+                                return
+                            }
+                            
+                            ProfileVM.getProfileByConnectionCode(withCode: searchInput)
+                        }, label: {Text("Search")})
                     }
 
                     Spacer()
                     //  If searched code matches an existing profile, display avatar, full name and 'add' button
-                    if AddContactVM.profileFound {
+                    if appState.profileSearch != nil {
                         AvatarComponent(size: 100)
-                        Text("\(AddContactVM.trustedContactDetails?.fullName ?? "No name")")
-                        BasicButtonComponent(label: "Add", action: { AddContactVM.addTrustedContact()
+                        Text("\(appState.profileSearch?.fullName ?? "No name")")
+                        BasicButtonComponent(label: "Add", action: {
+                            // AddContactVM.addTrustedContact()
+                            ConnectionVM.addConnection(searchInput)
                             searchInput = ""
                         })
                     } else {
                         Text("Nothing to display.")
+                        Text(self.error)
                     }
                     Spacer()
                 }

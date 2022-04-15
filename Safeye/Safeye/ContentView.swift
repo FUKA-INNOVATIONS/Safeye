@@ -11,23 +11,25 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
-    @EnvironmentObject var AddContactVM: AddContactViewModel
+    @EnvironmentObject var ConnectioVM: ConnectionViewModel
+    @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var MapVM: MapViewModel
+    @EnvironmentObject var appState: Store
     
     @StateObject private var notificationService = NotificationService()
     
     @State private var showingCreateProfile = false
     
+    @State var goMapView = false
+    
     
     var body: some View {
-       /* DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-            profileViewModel.getProfile()
-        } */
-        
+
         return Section {
             
             VStack {
-                
-                if !ProfileVM.profileExists {
+                //TODO: BUG : after registration, create profile is not displayed, it is diaplyed on next app start
+                if appState.profile == nil {
                     // User has no profile, create new one
                     // Is displayed the first time a user joins the app
                     Text("In order to be safe, you must create a profile")
@@ -40,16 +42,12 @@ struct ContentView: View {
                 } else {
                     // User has profile -> show the app
                     NavItem()
-                        .environmentObject(ProfileVM)
-                        .environmentObject(AuthVM)
-                        .environmentObject(AddContactVM)
-                    
                 }
                 
                 
             }
             .onAppear {
-                ProfileVM.getProfile()
+                ProfileVM.getProfileForCurrentUser()
             }
             .onAppear(perform: notificationService.reloadAuthorizationStatus)
             .onChange(of: notificationService.authorizationStatus) { authorizationStatus in
@@ -72,6 +70,12 @@ struct ContentView: View {
 //                    break
 //                }
 //            }
+            .background(
+                NavigationLink(destination: MapView(), isActive: $goMapView) {
+                    EmptyView()
+                }
+                    .hidden()
+            )
         }
         .onAppear {
             AuthVM.signedIn = AuthVM.isSignedIn

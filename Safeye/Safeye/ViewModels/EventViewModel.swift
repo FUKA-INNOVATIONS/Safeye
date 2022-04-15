@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 class EventViewModel: ObservableObject {
-    let eventService = EventService()
-    let userID = AuthenticationService.getInstance.currentUser!.uid
+    static let shared = EventViewModel() ;  private init() {}
+    let eventService = EventService.shared
+    //let userID = AuthenticationService.getInstance.currentUser!.uid
     
     @Published var eventDetails: Event?
     @Published var eventExists = false
@@ -49,6 +50,31 @@ class EventViewModel: ObservableObject {
         print("Disabled tracking mode")
         
     }
+    
+    @Published var mode = "Tracking"
+    
+    // User presses panic mode
+    func activatePanicMode() {
+        print("Panic Mode activated")
+        mode = "Panic"
+        
+        // TODO Panic Mode functionality #41 -> activate panic mode
+    }
+    
+    // User pressed the safe button -> disabling panic mode
+    func disablePanicMode() {
+        print("Disabled panic mode")
+        mode = "Tracking"
+        
+        // TODO Panic Mode functionality #41 -> disable panic mode
+    }
+    
+    // User Pressed to disable tracking mode
+    func disableTrackingMode() {
+        print("Disabled tracking mode")
+        
+    }
+
     
     
     func createEvent(newEvent: Event) {

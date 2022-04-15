@@ -7,12 +7,14 @@
 
 
 import Foundation
-import Firebase // Import firebase
+import Firebase
 
 
 class EventService {
-    // Get instance of Firestore database -> events colletion
+    static let shared = EventService() ;  private init() {}
     private var eventDB = Firestore.firestore().collection("events")
+    private let appStore = Store.shared
+    
     private var eventDetails: Event?
     @Published var eventErrors: String = ""
     
@@ -21,11 +23,7 @@ class EventService {
         self.fetchDetails(eventID: eventID)
         return self.eventDetails ?? nil
     }
-    
-    /* enum ReturnType {
-     case event(Event)
-     case error(Bool)
-     } */
+
     
     
     func createEvent(_ event: Event) -> Bool {
@@ -47,7 +45,7 @@ class EventService {
     
     
     
-    private func fetchDetails(eventID: String) {
+    func fetchDetails(eventID: String) {
         let eventRef = eventDB.document(eventID)
         
         eventRef.getDocument { document, error in
@@ -57,7 +55,8 @@ class EventService {
             else {
                 if let document = document {
                     do {
-                        self.eventDetails = try document.data(as: Event.self)
+                        self.eventDetails = try document.data(as: Event.self) //TODO: Remove
+                        self.appStore.event = try document.data(as: Event.self)
                         print("Fetched event: \(String(describing: self.eventDetails))")
                     }
                     catch {
