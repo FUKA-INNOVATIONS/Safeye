@@ -95,6 +95,7 @@
 		6AD96E4427FD49E600063439 /* AvatarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD96E4327FD49E600063439 /* AvatarComponent.swift */; };
 		6AE0A8602801BB8800661B1F /* SearchFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */; };
 		6AEA6A362803747900C36830 /* ConnectionRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA6A352803747900C36830 /* ConnectionRequestModel.swift */; };
+		7516A3A428075D4100162C43 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7516A3A328075D4100162C43 /* NotificationService.swift */; };
 		D5148A5327FF5C8800E98347 /* NavItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5148A5227FF5C8800E98347 /* NavItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -204,6 +205,7 @@
 		6AD96E4327FD49E600063439 /* AvatarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarComponent.swift; sourceTree = "<group>"; };
 		6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldComponent.swift; sourceTree = "<group>"; };
 		6AEA6A352803747900C36830 /* ConnectionRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRequestModel.swift; sourceTree = "<group>"; };
+		7516A3A328075D4100162C43 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		D5148A5227FF5C8800E98347 /* NavItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,9 +214,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F553BAC280585C8000518F7 /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				5F553BA8280585C8000518F7 /* FirebaseAuth in Frameworks */,
-				5F553BAA280585C8000518F7 /* FirebaseFirestore in Frameworks */,
+				7516A3A02807336700162C43 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				7516A39C2807336700162C43 /* FirebaseAuth in Frameworks */,
+				7516A39E2807336700162C43 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +329,7 @@
 				5F244AB827F7198B00BFE1FB /* EventService.swift */,
 				5F244ABA27F719A500BFE1FB /* ProfileService.swift */,
 				5F244ABC27F719D600BFE1FB /* SettingService.swift */,
+				7516A3A328075D4100162C43 /* NotificationService.swift */,
 				5FA418992806977E00B6C6E9 /* ConnectionService.swift */,
 			);
 			path = Services;
@@ -483,9 +486,9 @@
 			);
 			name = Safeye;
 			packageProductDependencies = (
-				5F553BA7280585C8000518F7 /* FirebaseAuth */,
-				5F553BA9280585C8000518F7 /* FirebaseFirestore */,
-				5F553BAB280585C8000518F7 /* FirebaseFirestoreSwift-Beta */,
+				7516A39B2807336700162C43 /* FirebaseAuth */,
+				7516A39D2807336700162C43 /* FirebaseFirestore */,
+				7516A39F2807336700162C43 /* FirebaseFirestoreSwift-Beta */,
 			);
 			productName = Safeye;
 			productReference = 5F0EA2F727F6F9E000FBD77B /* Safeye.app */;
@@ -560,7 +563,7 @@
 			);
 			mainGroup = 5F0EA2EE27F6F9E000FBD77B;
 			packageReferences = (
-				5F553BA6280585C8000518F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7516A39A2807336700162C43 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5F0EA2F827F6F9E000FBD77B /* Products */;
 			projectDirPath = "";
@@ -630,6 +633,7 @@
 				5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
 				6A2CFC312801C11A0046395D /* CurtainModifier.swift in Sources */,
+				7516A3A428075D4100162C43 /* NotificationService.swift in Sources */,
 				5F23EE0A2801B54800623B0C /* SettingsListViewComponent.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
 				5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */,
@@ -1013,7 +1017,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5F553BA6280585C8000518F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		7516A39A2807336700162C43 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -1024,19 +1028,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5F553BA7280585C8000518F7 /* FirebaseAuth */ = {
+		7516A39B2807336700162C43 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5F553BA6280585C8000518F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 7516A39A2807336700162C43 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		5F553BA9280585C8000518F7 /* FirebaseFirestore */ = {
+		7516A39D2807336700162C43 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5F553BA6280585C8000518F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 7516A39A2807336700162C43 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		5F553BAB280585C8000518F7 /* FirebaseFirestoreSwift-Beta */ = {
+		7516A39F2807336700162C43 /* FirebaseFirestoreSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5F553BA6280585C8000518F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 7516A39A2807336700162C43 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseFirestoreSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */

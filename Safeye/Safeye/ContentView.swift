@@ -16,16 +16,15 @@ struct ContentView: View {
     @EnvironmentObject var MapVM: MapViewModel
     @EnvironmentObject var appState: Store
     
+    @StateObject private var notificationService = NotificationService()
+    
     @State private var showingCreateProfile = false
     
     @State var goMapView = false
     
     
     var body: some View {
-        /* DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.goMapView = true
-         } */
-        
+
         return Section {
             
             VStack {
@@ -50,6 +49,27 @@ struct ContentView: View {
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
             }
+            .onAppear(perform: notificationService.reloadAuthorizationStatus)
+            .onChange(of: notificationService.authorizationStatus) { authorizationStatus in
+                if notificationService.authorizationStatus == .authorized {
+                    notificationService.reloadLocalNotifications()
+                }
+                if notificationService.authorizationStatus == .notDetermined {
+                    notificationService.requestAuthorization()
+                }
+            }
+//            .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
+//                switch authorizationStatus {
+//                case .notDetermined:
+//                    // request authorization
+//                    notificationManager.requestAuthorization()
+//                case .authorized:
+//                    // get local notification
+//                    notificationManager.reloadLocalNotifications()
+//                default:
+//                    break
+//                }
+//            }
             .background(
                 NavigationLink(destination: MapView(), isActive: $goMapView) {
                     EmptyView()
