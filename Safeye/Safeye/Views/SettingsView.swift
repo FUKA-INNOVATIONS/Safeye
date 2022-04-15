@@ -10,13 +10,11 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AuthVM: AuthenticationViewModel
-    @EnvironmentObject var Add_ContactVM: AddContactViewModel
-    var PS = ProfileService.shared.getInstance
     @State var tcList = []
     @State var contacts: [ProfileModel] = [ProfileModel]()
     @State var fetchClicked = 0
     
-    //@ObservedObject var ConnVM = ConnectionViewModel
+    @EnvironmentObject var appState: Store
 
 
         
@@ -25,16 +23,12 @@ struct SettingsView: View {
         return VStack {
             
             BasicButtonComponent(label: "Sign out") { // Sign out button
-                ProfileVM.profileExists = false
-                ProfileVM.profileDetails = nil
                 AuthVM.signOut()
             }
-            
             
             // TODO: don't know why this has to be fetched twice in order to show up
             if fetchClicked < 2 {
                 BasicButtonComponent(label: "Fetch contacts", action: {
-                    self.Add_ContactVM.fetchAllUsersContacts()
                     fetchClicked += 1
                 })
             }
@@ -48,42 +42,21 @@ struct SettingsView: View {
             }
             
             
-            Text("Trusted Contacts")
-            
-            if Add_ContactVM.trustedContacts.count < 1 {
-                Text("You have no contacts")
-            } else {
-                ForEach(Add_ContactVM.trustedContacts) {profile in
-                    Text("\(profile.fullName)")
-                    
-                }
-            }
-            
-            
             HStack{
-                Text("Connection code: \(ProfileVM.profileDetails?.connectionCode ?? "No code")")
+                Text("Connection code: \(appState.profile?.connectionCode ?? "No code")")
                 Button(action: {
                     let pasteboard = UIPasteboard.general
-                    pasteboard.string = ProfileVM.profileDetails?.connectionCode
+                    pasteboard.string = appState.profile?.connectionCode
                     print("Copied")
                 }, label: {Text("Copy")})
                 
             }.padding()
             
             
-            
-            
-            HStack {
-                Text("Pending request: \(Add_ContactVM.pendingRequest ?? "None")")
-                Button(action: { Add_ContactVM.confirmConnectionRequest() }, label: {
-                    Text("Confirm") })
-                
-            }
-            
             SettingsListViewComponent(settingsView: true)
         }
         .onAppear {
-            // self.Add_ContactVM.getPendingConnectionRequests()
+            
         }
         
         

@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ProfileEditView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
-    
     @EnvironmentObject var AuthVM: AuthenticationViewModel
+    @EnvironmentObject var appState: Store
+    
     
     @State private var showEmptyFieldAlert = false
-
+    
     @Environment(\.dismiss) var dismiss
     
     @State private var fullName = ""
@@ -26,29 +27,23 @@ struct ProfileEditView: View {
     
     @State private var bloodTypes = ["A", "A+", "B"]
     
-    /* init() {
-     print("ProfileEditView init")
-     profileViewModel.getProfile()
-     } */
-    
     
     var body: some View {
         
         // Profile exists and user has all profile details, prefell all fields
-        if ProfileVM.profileExists {
+        if appState.profile != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                self.fullName = ProfileVM.profileDetails!.fullName
-                self.address = ProfileVM.profileDetails!.address
-                self.birthday = ProfileVM.profileDetails!.birthday
-                self.bloodType = ProfileVM.profileDetails!.bloodType
-                self.illness = ProfileVM.profileDetails!.illness
-                self.allergies = ProfileVM.profileDetails!.allergies
+                self.fullName = self.appState.profile!.fullName
+                self.address = self.appState.profile!.address
+                self.birthday = self.appState.profile!.birthday
+                self.bloodType = self.appState.profile!.bloodType
+                self.illness = self.appState.profile!.illness
+                self.allergies = self.appState.profile!.allergies
             }
-            
         }
         
         return VStack() {
-            if ProfileVM.profileExists {
+            if self.appState.profile != nil {
                 Text("Please fill the fileds you want to update")
                 
             } else {
@@ -89,7 +84,7 @@ struct ProfileEditView: View {
             BasicButtonComponent(label: "Save & go back") { // Button to save profile details
                 print("Save profile details pressed")
                 
-                if !ProfileVM.profileExists { // User has no profile, create new one
+                if self.appState.profile == nil { // User has no profile, create new one
                     print("User has no PROFILE, add new profile")
                     
                     // User has filled all form fields
@@ -98,13 +93,9 @@ struct ProfileEditView: View {
                         return
                     }
                     
-                    // Hash the code needed to search for the user
-                    var hasher = Hasher()
-                    hasher.combine(AuthVM.authService.currentUser!.uid)
-                    let connectionHash = String(hasher.finalize())
                     
-                    // Insert profile data into the database
-                    ProfileVM.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash)
+                    // Insert new profile data into the database
+                    ProfileVM.createProfile(fullName, address, birthday, bloodType, illness, allergies)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
                     dismiss()
@@ -120,7 +111,7 @@ struct ProfileEditView: View {
                     }
                     
                     // Update profile data in the database
-                    ProfileVM.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
+                    ProfileVM.updateProfile(fullName, address, birthday, bloodType, illness, allergies)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
                     dismiss()

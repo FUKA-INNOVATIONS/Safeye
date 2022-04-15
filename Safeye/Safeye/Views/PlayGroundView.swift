@@ -9,33 +9,30 @@ import SwiftUI
 
 struct PlayGroundView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
-    @EnvironmentObject var appState: Store
     @EnvironmentObject var PlaygroundVM: PlaygroundViewModel
-    
+    @EnvironmentObject var appState: Store
     
     
     var body: some View {
-        VStack {
-            BasicButtonComponent(label: "Fetch requests") {
-                DispatchQueue.main.async {
-                    self.ConnectionVM.getPendingREquests()
-                    print("Count: \(self.ConnectionVM.pendingREquests.count)")
-                }
-            }
-            
-            BasicButtonComponent(label: "Update store via VM") {
-                //self.PlaygroundVM.changeText(text: "New text")
-                // self.appState.greeting = "ERERER"
-                self.PlaygroundVM.changeText("Good day")
+        
+        return VStack {
+            BasicButtonComponent(label: "Fetch connection profiles") {
                 
             }
             
-            ForEach(self.appState.pendingRequests) { req in
+            
+            /* ForEach(self.appState.pendingRequests) { req in
                 Text("Req: \(req.connectionId)")
+            } */
+            
+            ForEach(self.appState.connectionPofiles) { profile in
+                Text("Full name: \(profile.fullName)")
             }
             
+            
+            
             Text("Hello playground")
-            Text("Event")
+            Text("Event: \(self.appState.event?.otherInfo ?? "No info" )")
             
             
             VStack {
@@ -50,8 +47,14 @@ struct PlayGroundView: View {
             print("Map view ")
         }
         .onAppear {
-            self.ConnectionVM.getPendingREquests()
-            self.PlaygroundVM.getEvent("qGcGgDF8K3FvJjplNYP4")
+            
+            let userID1 = "LJIziY424tfW1ZEwAzBwvhicaMb2"
+            let userID2 = "td8IykGIgAgjbwgN8Po3zilnNOj2"
+            self.ConnectionVM.getConnectionProfiles(for: [userID1, userID2])
+            
+            
+            //self.ConnectionVM.getPendingREquests()
+            //self.PlaygroundVM.getEvent("qGcGgDF8K3FvJjplNYP4")
         }
         
     }

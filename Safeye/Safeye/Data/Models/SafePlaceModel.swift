@@ -2,7 +2,7 @@
 //  SafePlaceModel.swift
 //  Safeye
 //
-//  Created by Koulu on 14.4.2022.
+//  Created by FUKA on 14.4.2022.
 //
 
 import Foundation

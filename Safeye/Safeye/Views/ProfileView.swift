@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var appState: Store
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
@@ -33,7 +34,7 @@ struct ProfileView: View {
                     Spacer()
                     NavigationLink("Tracking (TEMP)", destination: EventView())
 
-                    Text("\(ProfileVM.profileDetails?.fullName ?? "No name")")
+                    Text("\(appState.profile?.fullName ?? "No name")")
                         .font(.system(size: 25, weight: .bold))
                     
                     // Show edit profile view in a Modal
@@ -79,7 +80,8 @@ struct ProfileView: View {
                 
             }
             .onAppear {
-                ProfileVM.getProfile()
+                ProfileVM.getProfileForCurrentUser()
+                print("PPPPPPPPPPPP: \(appState.profile)")
             }
 
             AddContactView(isShowing: $showingAddContact, searchInput: "")

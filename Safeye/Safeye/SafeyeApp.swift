@@ -6,20 +6,18 @@
 //
 
 import SwiftUI
-import Firebase // Import Firebase
+import Firebase
 
 @main
 struct SafeyeApp: App {
-    //let persistenceController = PersistenceController.shared
+    @StateObject var appStore = Store.shared
     
     @StateObject var AuthVM = AuthenticationViewModel.shared
     @StateObject var ProfileVM = ProfileViewModel.shared
     @StateObject var ConnectionVM = ConnectionViewModel.shared
     @StateObject var EventVM = EventViewModel.shared
-    @StateObject var Add_ContactVM = AddContactViewModel.shared
     @StateObject var MapVM = MapViewModel()
     
-    @StateObject var appStore = Store.shared
     @StateObject var PlaygroundVM = PlaygroundViewModel.shared
     
 
@@ -40,7 +38,6 @@ struct SafeyeApp: App {
 
                     } else {
                         LoginView()
-                           // .environmentObject(AuthVM)
                     }
                     
                 }
@@ -53,7 +50,6 @@ struct SafeyeApp: App {
             .environmentObject(ProfileVM)
             .environmentObject(ConnectionVM)
             .environmentObject(EventVM)
-            .environmentObject(Add_ContactVM)
             .environmentObject(MapVM)
             .environmentObject(appStore)
             .environmentObject(PlaygroundVM)

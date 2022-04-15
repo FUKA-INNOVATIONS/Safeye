@@ -11,12 +11,10 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
-    @EnvironmentObject var AddContactVM: AddContactViewModel
     @EnvironmentObject var ConnectioVM: ConnectionViewModel
     @EnvironmentObject var EventVM: EventViewModel
-    @EnvironmentObject var Add_ContactVM: AddContactViewModel
     @EnvironmentObject var MapVM: MapViewModel
-    @EnvironmentObject var appStore: Store
+    @EnvironmentObject var appState: Store
     
     @State private var showingCreateProfile = false
     
@@ -31,8 +29,8 @@ struct ContentView: View {
         return Section {
             
             VStack {
-                
-                if !ProfileVM.profileExists {
+                //TODO: BUG : after registration, create profile is not displayed, it is diaplyed on next app start
+                if appState.profile == nil {
                     // User has no profile, create new one
                     // Is displayed the first time a user joins the app
                     Text("In order to be safe, you must create a profile")
@@ -45,16 +43,12 @@ struct ContentView: View {
                 } else {
                     // User has profile -> show the app
                     NavItem()
-                        .environmentObject(ProfileVM)
-                        .environmentObject(AuthVM)
-                        .environmentObject(AddContactVM)
-                    
                 }
                 
                 
             }
             .onAppear {
-                ProfileVM.getProfile()
+                ProfileVM.getProfileForCurrentUser()
             }
             .background(
                 NavigationLink(destination: MapView(), isActive: $goMapView) {

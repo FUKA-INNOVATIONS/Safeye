@@ -9,7 +9,7 @@ import SwiftUI
 
 class AddContactViewModel: ObservableObject {
     static let shared = AddContactViewModel() ;  private init() {}
-    let profileService = ProfileService.shared.getInstance
+    let profileService = ProfileService.shared
     let profileService2 = ProfileService.shared
     @ObservedObject var ProfileVM = ProfileViewModel.shared
     
@@ -25,7 +25,7 @@ class AddContactViewModel: ObservableObject {
     
     private var targetId: String = ""
     
-    func findProfile(searchCode: String?) {
+    /*func findProfile(searchCode: String?) {
         
         //TODO: user shouldn't be able to find themselves or add themselves!!!
         
@@ -54,37 +54,13 @@ class AddContactViewModel: ObservableObject {
                 }
             }
         }
-    } // end of findProfile()
+    }*/ // end of findProfile()
     
     
-    // Add user as trusted contact and create a new entry in 'connections' collection
-    func addTrustedContact() {
-        var hasher = Hasher()
-        hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
-        hasher.combine(targetId)
-        let connectionId = String(hasher.finalize())
-        
-        // Save data in database
-        profileService.collection("connections").addDocument(
-            data:[
-                "connectionId": connectionId,
-                "ownerId": AuthenticationService.getInstance.currentUser!.uid,
-                "targetId": targetId,
-                "status": false
-            ]) { error in
-                if error == nil {
-                    // TODO: If successful this should trigger a notification sent to target user (Sprint 3?)
-                    print("Connection created with ID: \(connectionId)")
-                    self.profileFound = false
-                } else {
-                    // Connection wasn't created
-                    print("Failed to add trusted contact")
-                }
-            }
-    } // end of addTrustedContact()
+
     
     // fetch all pending requests for logged in user
-    func getPendingConnectionRequests() {
+    /*func getPendingConnectionRequests() {
         self.pendingArray = []
 
         profileService.collection("connections").whereField("status", isEqualTo: false).whereField("targetId", isEqualTo: AuthenticationService.getInstance.currentUser!.uid).getDocuments() { snapshot, error in
@@ -110,10 +86,10 @@ class AddContactViewModel: ObservableObject {
                 print(self.pendingArray)
             }
         }
-    } // end of getPendingConnectionRequests()
+    }*/ // end of getPendingConnectionRequests()
     
     // confirm pending requests
-    func confirmConnectionRequest() {
+    /*func confirmConnectionRequest() {
         if pendingRequest == nil {
             print("There is nothing to confirm")
         } else {
@@ -127,12 +103,12 @@ class AddContactViewModel: ObservableObject {
                 }
             }
         }
-    }
+    }*/
     
     
     // TODO: unfinished
     // fetch all user's trusted contacts
-    func fetchAllUsersContacts() {
+    /*func fetchAllUsersContacts() {
         self.trustedContactList = []
         let userId = AuthenticationService.getInstance.currentUser?.uid
         
@@ -214,5 +190,5 @@ class AddContactViewModel: ObservableObject {
             
         }
         
-    }
+    }*/
 }

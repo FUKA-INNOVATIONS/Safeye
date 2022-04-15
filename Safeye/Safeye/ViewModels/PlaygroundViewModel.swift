@@ -17,10 +17,6 @@ class PlaygroundViewModel: ObservableObject {
         eventService.fetchDetails(eventID: eventID)
     }
     
-    func changeText(_ newText: String) {
-        //self.appstate.sayHello(newText)
-    }
-    
     func fetchConn() {
         self.connService.fetchPendingConnectionRequests()
     }

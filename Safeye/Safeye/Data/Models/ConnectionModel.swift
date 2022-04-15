@@ -2,7 +2,7 @@
 //  ConnectionModel.swift
 //  Safeye
 //
-//  Created by Koulu on 12.4.2022.
+//  Created by FUKA on 12.4.2022.
 //
 
 import Foundation
