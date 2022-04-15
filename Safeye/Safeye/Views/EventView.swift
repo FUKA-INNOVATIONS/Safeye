@@ -13,7 +13,7 @@ struct EventView: View {
     @State var panicMode: Bool = false
     
     var body: some View {
-    
+        
         VStack {
             
             Text("Current Status: \(viewModel.mode)")
@@ -28,8 +28,8 @@ struct EventView: View {
                 viewModel.activatePanicMode()
                 panicMode = true
                 viewModel.sentNotification()
-                }) {
-                    TrackingModeButtonComponent(panicmode: $panicMode)
+            }) {
+                TrackingModeButtonComponent(panicmode: $panicMode)
             }
             :
             // User is in panic mode presses are you safe button
@@ -38,12 +38,12 @@ struct EventView: View {
                 viewModel.disablePanicMode()
                 panicMode = false
                 
-                }) {
-                    TrackingModeButtonComponent(panicmode: $panicMode)
-                }
+            }) {
+                TrackingModeButtonComponent(panicmode: $panicMode)
+            }
             //PanicButtonComponent()
             Spacer()
-        
+            
             //Send value of tracking: true to map view
             NavigationLink("View Map", destination: MapView())
                 .padding()
@@ -51,7 +51,7 @@ struct EventView: View {
             // Replace with button?
             NavigationLink("Disable Tracking", destination: ContentView())
                 .disabled(true)
-        
+            
             Spacer()
             
         }
@@ -63,6 +63,6 @@ struct EventView: View {
 struct TrackingModeView_Previews: PreviewProvider {
     static var previews: some View {
         EventView()
-.previewInterfaceOrientation(.portraitUpsideDown)
+            .previewInterfaceOrientation(.portraitUpsideDown)
     }
 }

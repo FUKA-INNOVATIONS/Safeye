@@ -19,9 +19,9 @@ struct ContentView: View {
     
     
     var body: some View {
-        /*DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-         profileViewModel.getProfile()
-         }*/
+       /* DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+            profileViewModel.getProfile()
+        } */
         
         return Section {
             
@@ -50,7 +50,9 @@ struct ContentView: View {
             }
             .onAppear {
                 ProfileVM.getProfile()
-                notificationService.requestAuthorization()
+            }
+            .onAppear(perform: notificationService.reloadAuthorizationStatus)
+            .onChange(of: notificationService.authorizationStatus) { authorizationStatus in
                 if notificationService.authorizationStatus == .authorized {
                     notificationService.reloadLocalNotifications()
                 }

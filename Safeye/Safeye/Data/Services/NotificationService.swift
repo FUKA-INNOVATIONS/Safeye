@@ -11,7 +11,7 @@ import UserNotifications
 final class NotificationService: ObservableObject {
     @Published private(set) var notifications: [UNNotificationRequest] = []
     @Published private(set) var authorizationStatus: UNAuthorizationStatus?
-        
+    
     func reloadAuthorizationStatus() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
@@ -22,7 +22,7 @@ final class NotificationService: ObservableObject {
     
     func requestAuthorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isGranted, _ in
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.authorizationStatus = isGranted ? .authorized : .denied
             }
         }
