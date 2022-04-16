@@ -22,39 +22,24 @@ struct ProfileView: View {
         
         ZStack {
             VStack {
-                NavigationLink {
-                    CreateEventView()
-                } label: {
-                    Text("Create event")
-                }
 
                 Group{
-
+                    AvatarComponent(size: 80)
                     Spacer()
-                    NavigationLink("Tracking (TEMP)", destination: EventView())
 
-                    Text("\(appState.profile?.fullName ?? "No name")")
-                        .font(.system(size: 25, weight: .bold))
-                    
-                    // Show edit profile view in a Modal
-                    BasicButtonComponent(label: "Edit profile details") {
-                        showingEditProfile = true
+                    HStack {
+                        Text("\(appState.profile?.fullName ?? "No name")")
+                            .font(.system(size: 25, weight: .bold))
+                        
+                        Button { showingEditProfile = true } label: { Image(systemName: "pencil.circle.fill") }
                     }
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
-                    
-                    BasicButtonComponent(label: "Create event") {
-                        showingCreateEvent = true
-                    }
-                    .sheet(isPresented: $showingCreateEvent) {
-                        CreateEventView()
-                    }
-                    
-                    
-                    AvatarComponent(size: 80)
+    
                     Spacer()
                 }
+                
                 Group {
                     Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
                     HStack{
@@ -67,8 +52,17 @@ struct ProfileView: View {
                     }
                     Spacer()
                 }
-                UserDetailsComponent()
+                
+                VStack {
+                    Button("Create new event", action: { showingCreateEvent = true } )
+                    .sheet(isPresented: $showingCreateEvent) {
+                        CreateEventView()
+                    }
+                    UserDetailsComponent()
+                }
+                
                 Spacer()
+                
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
                     HStack{
