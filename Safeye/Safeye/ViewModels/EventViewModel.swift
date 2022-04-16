@@ -11,7 +11,7 @@ import SwiftUI
 class EventViewModel: ObservableObject {
     static let shared = EventViewModel() ;  private init() {}
     let eventService = EventService.shared
-    @State var authUID = AuthenticationService.getInstance.currentUser!.uid
+    var authUID = AuthenticationService.getInstance.currentUser?.uid ?? ""
     private var appState = Store.shared
     private var connService = ConnectionService.shared
     

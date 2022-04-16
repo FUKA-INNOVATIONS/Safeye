@@ -25,8 +25,6 @@ struct ProfileView: View {
 
                 Group{
                     AvatarComponent(size: 80)
-                    //Spacer()
-
                     HStack {
                         Text("\(appState.profile?.fullName ?? "No name")")
                             .font(.system(size: 25, weight: .bold))
@@ -36,11 +34,13 @@ struct ProfileView: View {
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
-    
-                    
+                    Spacer()
                 }
                 
+                Spacer()
+                
                 Group {
+                    Spacer()
                     Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
                     HStack{
                         ListViewComponent(item: "avatar", size: 50)
@@ -50,7 +50,7 @@ struct ProfileView: View {
                         { Image("icon-add") }
                         Spacer(minLength: 20)
                     }
-                    //Spacer()
+                    Spacer()
                 }
                 
                 VStack {
@@ -64,8 +64,6 @@ struct ProfileView: View {
                     }
                 }
                 
-                //Spacer()
-                
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
                     HStack{
@@ -78,7 +76,6 @@ struct ProfileView: View {
                         { Image("icon-add") }
                         Spacer(minLength: 20)
                     }
-                    //Spacer()
                 }
                 
                 

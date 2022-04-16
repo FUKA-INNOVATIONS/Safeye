@@ -39,8 +39,9 @@ class Store: ObservableObject {
     @Published var eventSelctedContacts = ([ProfileModel])()
     @Published var currentEventTrustedContacts = [ProfileModel]()
     
-    //@Published var currentUser: UserModel?
-    //@Published var isSignedIn = false
+    @Published var currentUserID = ""
+    @Published var currentUserEmail = ""
+    @Published var isSignedIn = false
     @Published var lang = "EN" // Save app settings in persistant storage
 
 }

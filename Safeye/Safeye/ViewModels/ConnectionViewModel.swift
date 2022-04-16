@@ -15,7 +15,7 @@ class ConnectionViewModel: ObservableObject {
     private var profileService = ProfileService.shared
     private var appState = Store.shared
     
-    let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+    var currentUserID = AuthenticationService.getInstance.currentUser?.uid ?? ""
     
     
     @Published var profileFound = false

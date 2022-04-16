@@ -16,6 +16,7 @@ import SwiftUI
 class AuthenticationViewModel: ObservableObject {
     static let shared = AuthenticationViewModel() ;  private init() {}
     let authService = AuthenticationService.getInstance
+    var appState = Store.shared
     
     @Published var signedIn = false
     @Published var signinError = false
@@ -52,6 +53,8 @@ class AuthenticationViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self?.signinError = false
                 self?.signedIn = true
+                self?.appState.currentUserID = result!.user.uid
+                self?.appState.currentUserEmail = result!.user.email!
             }
         }
     }
@@ -64,6 +67,7 @@ class AuthenticationViewModel: ObservableObject {
             // Account creation Success
             DispatchQueue.main.async {
                 self?.signedIn = true
+                
             }
         }
     }
@@ -71,6 +75,8 @@ class AuthenticationViewModel: ObservableObject {
     func signOut() { // Logout user
         try? authService.signOut()
         self.signedIn = false
+        self.appState.currentUserID = ""
+        self.appState.currentUserEmail = ""
     }
     
 }
