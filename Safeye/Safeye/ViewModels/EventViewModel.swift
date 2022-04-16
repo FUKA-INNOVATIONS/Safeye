@@ -13,6 +13,7 @@ class EventViewModel: ObservableObject {
     let eventService = EventService.shared
     @State var authUID = AuthenticationService.getInstance.currentUser!.uid
     private var appState = Store.shared
+    private var connService = ConnectionService.shared
     
     @Published var eventDetails: Event?
     @Published var eventExists = false
@@ -31,8 +32,6 @@ class EventViewModel: ObservableObject {
         self.getEventCurrentUser()
         print("Panic Mode activated")
         mode = "Panic"
-        
-        // TODO Panic Mode functionality #41 -> activate panic mode
     }
     
     // User pressed the safe button -> disabling panic mode
@@ -45,7 +44,6 @@ class EventViewModel: ObservableObject {
         print("Disabled panic mode")
         mode = "Tracking"
         
-        // TODO Panic Mode functionality #41 -> disable panic mode
     }
     // Send notification about panic mode
     func sentNotification() {
@@ -105,6 +103,11 @@ class EventViewModel: ObservableObject {
     
     func resetEventSelectedContacts() {
         self.appState.eventSelctedContacts.removeAll()
+    }
+    
+    func getCurrentEventTrustedContacts() {
+        print(self.appState.eventCurrentUser!.trustedContacts)
+        self.connService.fetchConnectionProfiles(self.appState.eventCurrentUser!.trustedContacts, eventCase: true)
     }
     
 

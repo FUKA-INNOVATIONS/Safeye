@@ -100,8 +100,9 @@ class ConnectionService: ObservableObject {
         }
     }
     
-    func fetchConnectionProfiles(_ userIDS: [String]) {
-        self.appStore.connectionPofiles.removeAll()
+    func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
+        eventCase ? self.appStore.currentEventTrustedContacts.removeAll() : self.appStore.connectionPofiles.removeAll()
+        
         self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -111,7 +112,11 @@ class ConnectionService: ObservableObject {
                     DispatchQueue.main.async {
                         do {
                             let convertedProfile = try profile.data(as: ProfileModel.self)
-                            self.appStore.connectionPofiles.append(convertedProfile)
+                            if eventCase {
+                                self.appStore.currentEventTrustedContacts.append(convertedProfile)
+                            } else {
+                                self.appStore.connectionPofiles.append(convertedProfile)
+                            }
                         } catch {
                             print("Error while converting connection profiles: \(error)")
                         }

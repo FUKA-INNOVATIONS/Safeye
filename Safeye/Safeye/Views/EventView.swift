@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventView: View {
-    @EnvironmentObject var viewModel: EventViewModel
+    @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
     
     @State var panicMode: Bool = false // replace with appState
@@ -17,18 +17,39 @@ struct EventView: View {
         
         VStack {
             
-            Text("Current Status: \(viewModel.mode)")
+            Text("Current Status: \(EventVM.mode)")
                 .font(.largeTitle)
+            Spacer()
+            
+            Form {
+                Section(header: Text("Trusted contacts")) {
+                    ForEach(appState.currentEventTrustedContacts) { profile in
+                        HStack {
+                            Text("\(profile.fullName)")
+                            Spacer()
+                            Image(systemName: "eye.fill")
+                        }
+                    }
+                }
+                
+                Section(header: Text("Event details")) {
+                    Text("EventType: \(appState.eventCurrentUser!.eventType)")
+                    Text("More info: \(appState.eventCurrentUser!.otherInfo)")
+                }
+                
+            }
+            
+            
             
             Spacer()
-            viewModel.mode == "Tracking" ?
+            EventVM.mode == "Tracking" ?
             // User is currently in tracking mode, presses panic button for help
             Button(action: {
                 // Actions after panic button Has been pressed
                 
-                viewModel.activatePanicMode()
+                EventVM.activatePanicMode()
                 panicMode = true
-                viewModel.sentNotification()
+                EventVM.sentNotification()
             }) {
                 TrackingModeButtonComponent(panicmode: $panicMode)
             }
@@ -36,7 +57,7 @@ struct EventView: View {
             // User is in panic mode presses are you safe button
             Button(action: {
                 
-                viewModel.disablePanicMode()
+                EventVM.disablePanicMode()
                 panicMode = false
                 
             }) {
@@ -56,9 +77,13 @@ struct EventView: View {
             Spacer()
             
         }
-        .navigationBarHidden(true)
+        //.navigationBarHidden(true)
+        .onAppear {
+            EventVM.getCurrentEventTrustedContacts()
+        }
         
     }
+    
 }
 
 struct TrackingModeView_Previews: PreviewProvider {

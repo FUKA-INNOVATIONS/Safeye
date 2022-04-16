@@ -31,12 +31,13 @@ class Store: ObservableObject {
     @Published var event: Event?
     @Published var eventCurrentUser: Event?
     @Published var panicMode = false
+   
     
     @Published var errors = [String]()
     @Published var notifications = [String]()
     
     @Published var eventSelctedContacts = ([ProfileModel])()
-    //@Published var eventSelctedContactsID = [String]()
+    @Published var currentEventTrustedContacts = [ProfileModel]()
     
     //@Published var currentUser: UserModel?
     //@Published var isSignedIn = false
