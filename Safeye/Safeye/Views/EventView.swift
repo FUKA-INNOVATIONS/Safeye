@@ -11,49 +11,54 @@ struct EventView: View {
     
     @StateObject private var viewModel = EventViewModel.shared
     @State var panicMode: Bool = false
+    @State private var buttonIsPressed = false
+//    @State private var text: String = ""
     
     var body: some View {
         
-        VStack {
-            
-            Text("Current Status: \(viewModel.mode)")
-                .font(.largeTitle)
-            
-            Spacer()
-            viewModel.mode == "Tracking" ?
-            // User is currently in tracking mode, presses panic button for help
-            Button(action: {
-                // Actions after panic button Has been pressed
+        ZStack {
+            VStack {
                 
-                viewModel.activatePanicMode()
-                panicMode = true
-                viewModel.sentNotification()
-            }) {
-                TrackingModeButtonComponent(panicmode: $panicMode)
+                Text("Current Status: \(viewModel.mode)")
+                    .font(.largeTitle)
+                 
+                Spacer()
+                viewModel.mode == "Tracking" ?
+                // User is currently in tracking mode, presses panic button for help
+                Button(action: {
+                    // Actions after panic button Has been pressed
+                    buttonIsPressed = true
+                    alertBoxComponent(buttonIsPressed: $buttonIsPressed)
+                    viewModel.activatePanicMode()
+                    panicMode = true
+                    viewModel.sentNotification()
+                }) {
+                    TrackingModeButtonComponent(panicmode: $panicMode)
+                }
+                :
+                
+                // User is in panic mode presses are you safe button
+                Button(action: {
+                    viewModel.disablePanicMode()
+                    panicMode = false
+                    buttonIsPressed = false
+                }){
+                    TrackingModeButtonComponent(panicmode: $panicMode)
+                }
+                //PanicButtonComponent()
+                Spacer()
+                
+                //Send value of tracking: true to map view
+                NavigationLink("View Map", destination: MapView())
+                    .padding()
+                
+                // Replace with button?
+                NavigationLink("Disable Tracking", destination: ContentView())
+                    .disabled(true)
+                
+                Spacer()
+                
             }
-            :
-            // User is in panic mode presses are you safe button
-            Button(action: {
-                
-                viewModel.disablePanicMode()
-                panicMode = false
-                
-            }) {
-                TrackingModeButtonComponent(panicmode: $panicMode)
-            }
-            //PanicButtonComponent()
-            Spacer()
-            
-            //Send value of tracking: true to map view
-            NavigationLink("View Map", destination: MapView())
-                .padding()
-            
-            // Replace with button?
-            NavigationLink("Disable Tracking", destination: ContentView())
-                .disabled(true)
-            
-            Spacer()
-            
         }
         .navigationBarHidden(true)
         

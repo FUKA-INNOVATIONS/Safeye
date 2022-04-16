@@ -40,7 +40,7 @@ class EventViewModel: ObservableObject {
     // Send notification about panic mode
     func sentNotification() {
         notificationService.createLocalNotification(title: "Safeye: Pavlo", body: "Panic mode activated") { error in
-            print("error")
+            print(error)
         }
         print("Notification sent")
     }

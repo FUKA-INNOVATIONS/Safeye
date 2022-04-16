@@ -64,9 +64,6 @@
 		5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */; };
 		5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */; };
 		5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */; };
-		5F553BA8280585C8000518F7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5F553BA7280585C8000518F7 /* FirebaseAuth */; };
-		5F553BAA280585C8000518F7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5F553BA9280585C8000518F7 /* FirebaseFirestore */; };
-		5F553BAC280585C8000518F7 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 5F553BAB280585C8000518F7 /* FirebaseFirestoreSwift-Beta */; };
 		5F553BB02805EAF6000518F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F553BAF2805EAF6000518F7 /* GoogleService-Info.plist */; };
 		5F553BB22806123B000518F7 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F553BB12806123B000518F7 /* ConnectionModel.swift */; };
 		5F5962022802CD7900C8F682 /* TackingModeButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */; };
@@ -96,6 +93,10 @@
 		6AE0A8602801BB8800661B1F /* SearchFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */; };
 		6AEA6A362803747900C36830 /* ConnectionRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA6A352803747900C36830 /* ConnectionRequestModel.swift */; };
 		7516A3A428075D4100162C43 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7516A3A328075D4100162C43 /* NotificationService.swift */; };
+		75994EF328098D4B003244C6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39B2807336700162C43 /* FirebaseAuth */; };
+		75994EF428098D4B003244C6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39D2807336700162C43 /* FirebaseFirestore */; };
+		75994EF528098D4B003244C6 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39F2807336700162C43 /* FirebaseFirestoreSwift-Beta */; };
+		75994EF72809B8EB003244C6 /* alertBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75994EF62809B8EB003244C6 /* alertBoxComponent.swift */; };
 		D5148A5327FF5C8800E98347 /* NavItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5148A5227FF5C8800E98347 /* NavItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -206,6 +207,7 @@
 		6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldComponent.swift; sourceTree = "<group>"; };
 		6AEA6A352803747900C36830 /* ConnectionRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRequestModel.swift; sourceTree = "<group>"; };
 		7516A3A328075D4100162C43 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		75994EF62809B8EB003244C6 /* alertBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertBoxComponent.swift; sourceTree = "<group>"; };
 		D5148A5227FF5C8800E98347 /* NavItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,9 +216,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7516A3A02807336700162C43 /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				7516A39C2807336700162C43 /* FirebaseAuth in Frameworks */,
-				7516A39E2807336700162C43 /* FirebaseFirestore in Frameworks */,
+				75994EF528098D4B003244C6 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				75994EF328098D4B003244C6 /* FirebaseAuth in Frameworks */,
+				75994EF428098D4B003244C6 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +387,7 @@
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
 				5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */,
+				75994EF62809B8EB003244C6 /* alertBoxComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
 				6A2CFC312801C11A0046395D /* CurtainModifier.swift in Sources */,
 				7516A3A428075D4100162C43 /* NotificationService.swift in Sources */,
+				75994EF72809B8EB003244C6 /* alertBoxComponent.swift in Sources */,
 				5F23EE0A2801B54800623B0C /* SettingsListViewComponent.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
 				5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */,
