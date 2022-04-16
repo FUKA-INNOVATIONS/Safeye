@@ -11,12 +11,15 @@ struct EventView: View {
     
     @StateObject private var viewModel = EventViewModel.shared
     @State var panicMode: Bool = false
-    @State private var buttonIsPressed = false
+//    @State private var buttonIsPressed = false
 //    @State private var text: String = ""
+    @State private var isPresented: Bool = false
+        @State private var text: String = ""
+    @State private var items = (1...5).map { _ in "($0)" }
     
     var body: some View {
         
-        ZStack {
+        ZStack(alignment: .center) {
             VStack {
                 
                 Text("Current Status: \(viewModel.mode)")
@@ -27,8 +30,8 @@ struct EventView: View {
                 // User is currently in tracking mode, presses panic button for help
                 Button(action: {
                     // Actions after panic button Has been pressed
-                    buttonIsPressed = true
-                    alertBoxComponent(buttonIsPressed: $buttonIsPressed)
+                    isPresented = true
+                   
                     viewModel.activatePanicMode()
                     panicMode = true
                     viewModel.sentNotification()
@@ -41,7 +44,6 @@ struct EventView: View {
                 Button(action: {
                     viewModel.disablePanicMode()
                     panicMode = false
-                    buttonIsPressed = false
                 }){
                     TrackingModeButtonComponent(panicmode: $panicMode)
                 }
@@ -59,7 +61,9 @@ struct EventView: View {
                 Spacer()
                 
             }
+            alertBoxComponent(text: $text)
         }
+        
         .navigationBarHidden(true)
         
     }

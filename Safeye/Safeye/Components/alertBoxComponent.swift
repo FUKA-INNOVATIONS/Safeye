@@ -4,13 +4,15 @@
 //
 //  Created by Pavlo Leinonen on 15.4.2022.
 //
-
+import UIKit
 import SwiftUI
 
 struct alertBoxComponent: View {
-    
-    @Binding var buttonIsPressed: Bool
+    @EnvironmentObject var appState: Store
+    //    @Binding var buttonIsPressed: Bool
     var title: String = "Please confirm"
+    let screenSize = UIScreen.main.bounds
+    @Binding var text:String
     
     var onComfirm: () -> Void = { } //TODO activating mode after pressing
     var onCancel: () -> Void = { }
@@ -18,15 +20,16 @@ struct alertBoxComponent: View {
     var body: some View {
         VStack {
             Text(title)
+            Spacer()
             HStack {
                 Button("Confirm") {
-                    buttonIsPressed = false
-                    self.onComfirm()
+                    // buttonIsPressed = false
+                    // self.onComfirm()
                 }
-                .fixedSize(horizontal: true, vertical: true)
+                Spacer()
                 Button("Cancel") {
-                    buttonIsPressed = false
-                    self.onCancel()
+                    // buttonIsPressed = false
+                    // self.onCancel()
                 }
             }
         }
@@ -37,14 +40,14 @@ struct alertBoxComponent: View {
         .background(Color(red: 255, green: 255, blue: 255))
         .clipShape(RoundedRectangle(cornerRadius: 20.0,
                                     style: .continuous))
-        .offset(y: buttonIsPressed ? 0 : 300)
-//        .animation(.easeInOut, value: buttonIsPressed)
+        .offset(y: appState.panicMode ? 0 : screenSize.height)
+        .animation(.easeInOut, value: appState.panicMode)
         .shadow(color: Color(red: 0, green: 0, blue: 0), radius: 4, x: -1, y: -1)
     }
 }
 
 struct alertBoxComponent_Previews: PreviewProvider {
     static var previews: some View {
-        alertBoxComponent(buttonIsPressed: .constant(true))
+        alertBoxComponent(text: .constant(""))
     }
 }
