@@ -58,7 +58,9 @@ struct ProfileView: View {
                     .sheet(isPresented: $showingCreateEvent) {
                         CreateEventView()
                     }
-                    UserDetailsComponent()
+                    Form {
+                        UserDetailsComponent()
+                    }
                 }
                 
                 Spacer()
