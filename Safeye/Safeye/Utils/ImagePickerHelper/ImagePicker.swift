@@ -42,9 +42,7 @@ class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationContro
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        // run code when the user has selected an image
-        print("Image selected")
-        
+        // run code when the user has selected an image        
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             DispatchQueue.main.async {
                 self.parent.selectedPhoto = image

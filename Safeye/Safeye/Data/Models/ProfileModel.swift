@@ -21,4 +21,5 @@ struct ProfileModel: Identifiable, Hashable, Codable {
     var illness: String     // TODO: change to [String]
     var allergies: String   // TODO: change to [String]
     var connectionCode: String
+    var avatar: String
 }

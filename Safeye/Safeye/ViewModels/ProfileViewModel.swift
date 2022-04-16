@@ -70,10 +70,11 @@ class ProfileViewModel: ObservableObject {
                     let illness = document["illness"]
                     let allergies = document["allergies"]
                     let connectionCode = document["connectionCode"]
+                    let avatar = document["avatar"]
                     
                     // Create new Profile object and update @Published object in main thread
                     DispatchQueue.main.async {
-                        self.profileDetails = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
+                        self.profileDetails = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String, avatar: avatar as! String)
                     }
                 }
             }
@@ -110,8 +111,10 @@ class ProfileViewModel: ObservableObject {
                     let illness = document["illness"]
                     let allergies = document["allergies"]
                     let connectionCode = document["connectionCode"]
+                    let avatar = document["avatar"]
+
                     
-                    _ = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
+                    _ = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String, avatar: avatar as! String)
                     
                     DispatchQueue.main.async {
                         self.trustedContactDetails = TrustedContactModel(id: profileId, userId: userId as! String, fullName: fullName as! String)
@@ -136,7 +139,8 @@ class ProfileViewModel: ObservableObject {
         bloodType: String,
         illness: String,
         allergies: String,
-        connectionCode: String
+        connectionCode: String,
+        avatar: String
     ) {
             
             // Check if user is authenticated, if yes, then get user id, otherwise exit
@@ -155,7 +159,8 @@ class ProfileViewModel: ObservableObject {
                     "bloodType": bloodType,
                     "illness": illness,
                     "allergies": allergies,
-                    "connectionCode": connectionCode
+                    "connectionCode": connectionCode,
+                    "avatar": avatar
                 ]) { error in
                     if error == nil {
                         self.getProfile() // Update app state with new data
@@ -167,7 +172,7 @@ class ProfileViewModel: ObservableObject {
         } // end of addDetails()
     
     
-    func upateDetails(fullName: String, address: String, birthday: String, bloodType: String, illness: String, allergies: String) {
+    func upateDetails(fullName: String, address: String, birthday: String, bloodType: String, illness: String, allergies: String, avatar: String) {
         let profileId = profileDetails?.id ?? ""
         
         
@@ -179,7 +184,8 @@ class ProfileViewModel: ObservableObject {
                 "birthday"  : birthday,
                 "bloodType" : bloodType,
                 "illness"   : illness,
-                "allergies" : allergies
+                "allergies" : allergies,
+                "avatar" : avatar
             ], merge: true) { error in
                 // Check for errors
                 

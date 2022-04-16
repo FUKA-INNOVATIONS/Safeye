@@ -54,8 +54,9 @@ class ProfileService {
                         let illness = document["illness"]
                         let allergies = document["allergies"]
                         let connectionCode = document["connectionCode"]
+                        let avatar = document["avatar"]
                     
-                        let temProfile = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String)
+                        let temProfile = ProfileModel(id: profileId, userId: userId as! String, fullName: fullName as! String, address: address as! String, birthday: birthday as! String, bloodType: bloodType as! String, illness: illness as! String, allergies: allergies as! String, connectionCode: connectionCode as! String, avatar: avatar as! String)
                         
                         // self.profiles.insert(temProfile)
                         self.profiles.append(temProfile)

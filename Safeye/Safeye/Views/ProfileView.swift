@@ -52,12 +52,16 @@ struct ProfileView: View {
                             Image(uiImage: selectedPhoto!)
                                 .resizable()
                                 .frame(width: 70, height: 70)
+                        } else if FileVM.fetchedPhoto != nil {
+                                Image(uiImage: FileVM.fetchedPhoto!)
+                                    .resizable()
+                                    .frame(width: 70, height: 70)
+                            
                         }
                         
                         Button {
                             // show the image picker
                             isImagePickerShowing = true
-                            print("Photo selected")
 
                         } label: {
                             Text("Select a profile photo")
@@ -68,18 +72,11 @@ struct ProfileView: View {
                             Button {
                                 // upload the image
                                 FileVM.uploadPhoto(selectedPhoto: selectedPhoto)
-                                print("Photo upload")
-
                             } label: {
                                 Text("Upload photo")
                             }
                         }
-                        Divider()
-                        if FileVM.fetchedPhoto != nil {
-                            Image(uiImage: FileVM.fetchedPhoto!)
-                                .resizable()
-                                .frame(width: 70, height: 70)
-                        }
+                        
                         
 //                        HStack {
 //                            ForEach(retrievedImages, id: \.self) {image in

@@ -12,6 +12,8 @@ struct ProfileEditView: View {
     
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     
+    @EnvironmentObject var FileVM: FileViewModel
+    
     @State private var showEmptyFieldAlert = false
 
     @Environment(\.dismiss) var dismiss
@@ -23,9 +25,13 @@ struct ProfileEditView: View {
     @State private var illness = ""
     @State private var allergies = ""
     @State private var connectionCode = ""
-    
+    @State private var avatar = ""
+
     @State private var bloodTypes = ["A", "A+", "B"]
     
+    @State var isImagePickerShowing = false
+    @State var selectedPhoto: UIImage?
+    @State var retrievedImages = [UIImage]()
     /* init() {
      print("ProfileEditView init")
      profileViewModel.getProfile()
@@ -43,6 +49,7 @@ struct ProfileEditView: View {
                 self.bloodType = ProfileVM.profileDetails!.bloodType
                 self.illness = ProfileVM.profileDetails!.illness
                 self.allergies = ProfileVM.profileDetails!.allergies
+                self.avatar = ProfileVM.profileDetails!.avatar
             }
             
         }
@@ -53,6 +60,42 @@ struct ProfileEditView: View {
                 
             } else {
                 Text("Please fill all fields to create new profile")
+            }
+            
+            VStack {
+                if selectedPhoto != nil {
+                    Image(uiImage: selectedPhoto!)
+                        .resizable()
+                        .frame(width: 70, height: 70)
+                } else if FileVM.fetchedPhoto != nil {
+                        Image(uiImage: FileVM.fetchedPhoto!)
+                            .resizable()
+                            .frame(width: 70, height: 70)
+                    
+                }
+                
+                Button {
+                    // show the image picker
+                    isImagePickerShowing = true
+
+                } label: {
+                    Text("Select a profile photo")
+                }
+                
+                // Upload button
+                if selectedPhoto != nil {
+                    Button {
+                        // upload the image
+                        FileVM.uploadPhoto(selectedPhoto: selectedPhoto)
+                        self.avatar = FileVM.avatarUrl
+                    } label: {
+                        Text("Upload photo")
+                    }
+                }
+            }
+            .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
+                // Image picker
+                ImagePicker(selectedPhoto: $selectedPhoto, isImagePickerShowing: $isImagePickerShowing)
             }
             
             HStack{
@@ -104,7 +147,7 @@ struct ProfileEditView: View {
                     let connectionHash = String(hasher.finalize())
                     
                     // Insert profile data into the database
-                    ProfileVM.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash)
+                    ProfileVM.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash, avatar: avatar)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
                     dismiss()
@@ -120,7 +163,7 @@ struct ProfileEditView: View {
                     }
                     
                     // Update profile data in the database
-                    ProfileVM.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies)
+                    ProfileVM.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, avatar: avatar)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
                     dismiss()
