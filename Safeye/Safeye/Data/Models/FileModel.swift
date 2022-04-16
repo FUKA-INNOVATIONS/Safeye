@@ -6,4 +6,7 @@
 //
 
 import SwiftUI
-import FirebaseFirestoreSwift
+
+struct FileModel {
+    var selectedPhoto: [UIImage]
+}

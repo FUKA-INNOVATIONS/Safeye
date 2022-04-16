@@ -9,7 +9,8 @@ import SwiftUI
 import UIKit
 
 struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var selectedImage: UIImage?
+    @Binding var selectedPhoto: UIImage?
+    @EnvironmentObject var FileVM: FileViewModel
     @Binding var isImagePickerShowing: Bool
     
     func makeUIViewController(context: Context) -> some UIViewController {
@@ -46,7 +47,7 @@ class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationContro
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             DispatchQueue.main.async {
-                self.parent.selectedImage = image
+                self.parent.selectedPhoto = image
             }
         }
         //Dismiss the picker

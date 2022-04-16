@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
-    
+    @EnvironmentObject var FileVM: FileViewModel
+
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
 
@@ -18,8 +19,9 @@ struct ProfileView: View {
     @State private var showingAddSafePlace = false
     
     @State var isImagePickerShowing = false
-    @State var selectedImage: UIImage?
+    @State var selectedPhoto: UIImage?
     @State var retrievedImages = [UIImage]()
+    //@State var fetchedPhoto: UIImage?
     
     
     var body: some View {
@@ -46,8 +48,8 @@ struct ProfileView: View {
                         ProfileEditView()
                     }
                     VStack {
-                        if selectedImage != nil {
-                            Image(uiImage: selectedImage!)
+                        if selectedPhoto != nil {
+                            Image(uiImage: selectedPhoto!)
                                 .resizable()
                                 .frame(width: 70, height: 70)
                         }
@@ -55,33 +57,44 @@ struct ProfileView: View {
                         Button {
                             // show the image picker
                             isImagePickerShowing = true
+                            print("Photo selected")
+
                         } label: {
                             Text("Select a profile photo")
                         }
                         
                         // Upload button
-                        if selectedImage != nil {
+                        if selectedPhoto != nil {
                             Button {
                                 // upload the image
-                                uploadPhoto()
+                                FileVM.uploadPhoto(selectedPhoto: selectedPhoto)
+                                print("Photo upload")
+
                             } label: {
                                 Text("Upload photo")
                             }
                         }
                         Divider()
-                        HStack {
-                            ForEach(retrievedImages, id: \.self) {image in
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .frame(width: 70, height: 70)
-                            }
+                        if FileVM.fetchedPhoto != nil {
+                            Image(uiImage: FileVM.fetchedPhoto!)
+                                .resizable()
+                                .frame(width: 70, height: 70)
                         }
+                        
+//                        HStack {
+//                            ForEach(retrievedImages, id: \.self) {image in
+//                                Image(uiImage: image)
+//                                    .resizable()
+//                                    .frame(width: 70, height: 70)
+//                            }
+//                        }
+                        
                         
                         // AvatarComponent(size: 80)
                     }
                     .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
                         // Image picker
-                        ImagePicker(selectedImage: $selectedImage, isImagePickerShowing: $isImagePickerShowing)
+                        ImagePicker(selectedPhoto: $selectedPhoto, isImagePickerShowing: $isImagePickerShowing)
                     }
                 }
                 Group {
@@ -117,6 +130,7 @@ struct ProfileView: View {
             }
             .onAppear {
                 ProfileVM.getProfile()
+                FileVM.fetchPhotos()
             }
             
             AddContactView(isShowing: $showingAddContact, searchInput: "")

@@ -17,6 +17,8 @@ struct ContentView: View {
     @EnvironmentObject var Add_ContactVM: AddContactViewModel
     @EnvironmentObject var MapVM: MapViewModel
     @EnvironmentObject var appStore: Store
+    @EnvironmentObject var FileVM: FileViewModel
+
     
     @State private var showingCreateProfile = false
     
@@ -48,6 +50,7 @@ struct ContentView: View {
                         .environmentObject(ProfileVM)
                         .environmentObject(AuthVM)
                         .environmentObject(AddContactVM)
+                        .environmentObject(FileVM)
                     
                 }
                 
