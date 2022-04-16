@@ -126,7 +126,7 @@ class EventService {
     
     // func getLocation() {}
     
-    func setLocation() {}
+    // func setLocation() {} // Use edit event
     
 }
 

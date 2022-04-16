@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
-    @EnvironmentObject var ConnVM: ConnectionViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
-
-    
     @State private var showingAddSafePlace = false
+    @State private var showingCreateEvent = false
 
 
     var body: some View {
@@ -44,6 +43,14 @@ struct ProfileView: View {
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
+                    
+                    BasicButtonComponent(label: "Create event") {
+                        showingCreateEvent = true
+                    }
+                    .sheet(isPresented: $showingCreateEvent) {
+                        CreateEventView()
+                    }
+                    
                     
                     AvatarComponent(size: 80)
                     Spacer()
@@ -86,7 +93,8 @@ struct ProfileView: View {
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
         .onAppear {
-            ConnVM.getConnections()
+            ConnectionVM.getConnections()
+            ConnectionVM.getConnectionProfiles()
         }
     }
 }

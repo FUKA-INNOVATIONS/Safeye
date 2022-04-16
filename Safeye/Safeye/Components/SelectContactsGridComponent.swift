@@ -13,8 +13,8 @@ struct SelectContactGridComponent: View {
     @State var selectedContacts = [String]()
     
     let layout = [
-        GridItem(.fixed(70)),
-        GridItem(.fixed(70))
+        GridItem(.fixed(100)),
+        GridItem(.fixed(100))
     ]
     
     var body: some View {

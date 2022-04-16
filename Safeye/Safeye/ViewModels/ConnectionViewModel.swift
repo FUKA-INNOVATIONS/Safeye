@@ -34,14 +34,14 @@ class ConnectionViewModel: ObservableObject {
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if !userID.value.isEmpty, userID.value != currentUserID { connectionIDS.append(String(userID.value)) }
-                print("111111: \(userID.value)")
+                //print("111111: \(userID.value)")
                 /*if userID.value != currentUserID {
                     print("DDDDDDd: \(userID)")
                     if !userID.value.isEmpty { connectionIDS.append(String(userID.value)) }
                 } */
             }
         }
-        print("IDIDIDID: \(connectionIDS)")
+        print("getConnectionProfiles ->Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
         if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS) }
     }
     

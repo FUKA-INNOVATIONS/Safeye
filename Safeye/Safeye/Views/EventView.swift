@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct EventView: View {
+    @EnvironmentObject var viewModel: EventViewModel
+    @EnvironmentObject var appState: Store
     
-    @StateObject private var viewModel = EventViewModel.shared
-    @State var panicMode: Bool = false
+    @State var panicMode: Bool = false // replace with appState
     
     var body: some View {
         

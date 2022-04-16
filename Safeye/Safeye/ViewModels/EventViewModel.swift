@@ -25,6 +25,10 @@ class EventViewModel: ObservableObject {
     
     // User presses panic mode
     func activatePanicMode() {
+        self.appState.panicMode = true
+        self.appState.eventCurrentUser?.status = EventStatus.PANIC
+        self.eventService.updateEvent(self.appState.eventCurrentUser!)
+        self.getEventCurrentUser()
         print("Panic Mode activated")
         mode = "Panic"
         
@@ -33,6 +37,11 @@ class EventViewModel: ObservableObject {
     
     // User pressed the safe button -> disabling panic mode
     func disablePanicMode() {
+        self.appState.panicMode = false
+        self.appState.eventCurrentUser?.status = EventStatus.STARTED
+        self.eventService.updateEvent(self.appState.eventCurrentUser!)
+        self.getEventCurrentUser()
+        
         print("Disabled panic mode")
         mode = "Tracking"
         
@@ -92,6 +101,10 @@ class EventViewModel: ObservableObject {
     func getEventCurrentUser() {
         let currentUserId = AuthenticationService.getInstance.currentUser!.uid
         self.eventService.fetchEventForCurrentUser(userID: currentUserId)
+    }
+    
+    func resetEventSelectedContacts() {
+        self.appState.eventSelctedContacts.removeAll()
     }
     
 

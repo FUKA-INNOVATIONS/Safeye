@@ -31,11 +31,12 @@ struct CreateEventView: View {
                     SelectContactGridComponent()
                 }
                 
-                Section {
-                    Text("Selected contacts: \(appState.eventSelctedContacts.count)")
-                }
                 ForEach(appState.eventSelctedContacts) { selectedContact in
-                    Text("Hello \(selectedContact.fullName)")
+                    HStack {
+                        Text("\(selectedContact.fullName)")
+                        Spacer()
+                        Image(systemName: "person.fill.checkmark")
+                    }
                 }
                 
                 Section(header: Text("Estimated event date and time")) {
@@ -48,6 +49,7 @@ struct CreateEventView: View {
                             Text($0).tag($0)
                         }
                     }
+                    .pickerStyle(.inline)
                 }
                 /*Section(header: Text("Location*")) {
                     TextField("Describe location plan for the event", text: $locationDetails)
@@ -58,17 +60,16 @@ struct CreateEventView: View {
                 
             }.navigationBarTitle("Add event information", displayMode: .inline)
             Spacer()
-
+            
+            
+            
             BasicButtonComponent(label: "Save & activate", action: {
-                if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType) { /*goEventView = true*/ }
-                
-            })
-            .background(
-                NavigationLink(destination: PlayGroundView(), isActive: $goEventView) {
-                    EmptyView()
+                if eventType.isEmpty { print("You must select event type") ; return }
+                if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType) {
+                    goEventView.toggle()
+                    NavigationLink("", destination: EventView(), isActive: $goEventView)
                 }
-                .hidden()
-            )
+            })
             
             //let id = "qGcGgDF8K3FvJjplNYP4"
             //let updatedEvent = Event(id: id, ownerId: authUID ?? "", status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
@@ -80,6 +81,7 @@ struct CreateEventView: View {
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         .onAppear {
+            EventVM.resetEventSelectedContacts()
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
             EventVM.getEventCurrentUser()
