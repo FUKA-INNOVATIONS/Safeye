@@ -6,115 +6,151 @@
 //
 
 import SwiftUI
+import CoreLocation
+import MapKit
 
 struct AddSafePlaceView: View {
-    @Binding var isShowing: Bool
+    
     var isFound: Bool = true
     
+    @ObservedObject var mapData = AddSafePlaceViewModel()
+    
+    @Environment(\.dismiss) var dismiss
+    
+    @State var locationManager = CLLocationManager()
     @State var name = ""
-    @State var street = ""
-    @State var city = ""
-    @State var zip = ""
-
     
-    @State private var curHeight: CGFloat = 500
-    let minHeight: CGFloat = 500
-    let maxHeight: CGFloat = 600
     
-    let startOpacity: Double = 0.4
-    let endOpacity: Double = 0.9
-    
-    var dragPercentage: Double {
-        let res = Double((curHeight - minHeight) / (maxHeight - minHeight))
-        return max(0, min(1, res))
-    }
     var body: some View {
         
-        ZStack(alignment: .bottom) {
-            if isShowing {
-                Color.black
-                    .opacity(startOpacity + (endOpacity - startOpacity) * dragPercentage)
-                    .ignoresSafeArea()
-                    .onTapGesture { isShowing = false}
-                
-                mainView
-                    .transition(.move(edge: .bottom))
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        .ignoresSafeArea()
-    }
-    
-        var mainView: some View {
-            VStack {
-                ZStack {
-                    Capsule()
-                        .frame(width: 40, height: 6)
-                }
-                .frame(height: 40)
-                .frame(maxWidth: .infinity)
-                .background(Color.white.opacity(0.00001))
-                .gesture(dragGesture)
-        VStack {
-            VStack{
-                TextField("Name", text: $name).padding()
-                TextField("Street", text: $street).padding()
-                TextField("City", text: $city).padding()
-                TextField("Zip", text: $zip).padding()
-                    
-            }
-            .textFieldStyle(.roundedBorder)
         
-            NavigationLink(destination: MapView()) {
-                               Text("Choose From Map?")
-            }
-
-            BasicButtonComponent(label: "Add", action: { print("Added")})
+        
+        ZStack {
+            //Map View...
+            SecondMapView()
+            //using it as enviorment object so it can be used as a sub view...
+                .environmentObject(mapData)
+                .ignoresSafeArea(.all, edges: .all)
             
-            Spacer()
-              
-                }
-        .frame(maxHeight: .infinity)
-            .padding(.bottom, 35)
-            }
-           
-                .frame(height: curHeight)
-                .frame(maxWidth: .infinity)
-                .background(
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 30)
-                        Rectangle()
-                            .frame(height: curHeight / 2)
+            
+            VStack{
+                
+                VStack(spacing: 0) {
+                    HStack{
+                        
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.black)
+                        TextField("Search", text: $mapData.searchTxt)
+                            .colorScheme(.light)
                     }
-                        .foregroundColor(.white)
-                )
-                .onDisappear { curHeight = minHeight}
-            
-        }
-    
-    @State private var prevDragTransition = CGSize.zero
-
-    var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onChanged { val in
-                let dragAmount = val.translation.height - prevDragTransition.height
-                if curHeight > maxHeight || curHeight < minHeight {
-                    curHeight -= dragAmount / 6
-                } else {
-                    curHeight -= dragAmount
+                    .padding(.vertical,10)
+                    .padding(.horizontal)
+                    .background(Color.white)
                 }
                 
-                prevDragTransition = val.translation
+                // Dispalying Results...
+                
+                if !mapData.places.isEmpty && mapData.searchTxt
+                    != ""{
+                    ScrollView{
+                        VStack(spacing: 15){
+                            ForEach(mapData.places){place in
+                                Text(place.place.name ?? "")
+                                    .foregroundColor(.mint)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.leading)
+                                    .onTapGesture {
+                                        mapData.selectPlace(place: place)
+                                    }
+                                
+                                Divider()
+                            }
+                        }
+                        .padding(.top)
+                    }
+                    .background(Color.white)
+                }
+                
+                Spacer()
+                
             }
-            .onEnded { val in
-                prevDragTransition = .zero
+            
+            .padding()
+            
+            
+            
+            VStack{
+                Spacer()
+                Button(action: mapData.focusLocation, label: {
+                    Image(systemName: "location.fill")
+                        .font(.title2)
+                        .padding(10)
+                        .background(Color.primary)
+                        .clipShape(Circle())
+                })
+                Button(action: mapData.updateMapType, label: {
+                    Image(systemName: mapData.mapType ==
+                            .standard ? "network" : "map")
+                        .font(.title2)
+                        .padding(10)
+                        .background(Color.primary)
+                        .clipShape(Circle())
+                })
+                
             }
-    }
-    }
+            
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding()
+            
+            VStack{
+                Spacer()
 
-
-struct AddSafePlaceView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddSafePlaceView(isShowing: .constant(true))
+                BasicButtonComponent(label: "Cancel", action: {  self.dismiss()
+                
+                })
+                    .padding()
+            }
+        }
+        
+        
+        .onAppear(perform: {
+            
+            // Setting Delegate...
+            locationManager.delegate = mapData
+            locationManager.requestWhenInUseAuthorization()
+        })
+        .alert(isPresented: $mapData.permissionDenied, content: {
+            Alert(title: Text("Permission Denied"), message:
+                    Text("Please Enable Permission From Settings"),
+                  dismissButton: .default(Text("Go To Settings"),
+                                          action:{
+                //Redirect user to settings...
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }))
+        })
+        .onChange(of: mapData.searchTxt, perform: { value in
+            // searching places...
+            
+            let delay = 0.3
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay)
+            {
+                
+                if value == mapData.searchTxt{
+                    // search...
+                    self.mapData.searchQuery()
+                }
+            }
+        })
+        
+        
+        
     }
+    
+    struct AddSafePlaceView_Previews: PreviewProvider {
+        static var previews: some View {
+            AddSafePlaceView()
+        }
+    }
+    
 }

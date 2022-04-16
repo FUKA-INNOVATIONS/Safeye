@@ -85,8 +85,8 @@ struct ProfileView: View {
             }
 
             AddContactView(isShowing: $showingAddContact, searchInput: "")
-            AddSafePlaceView(isShowing: $showingAddSafePlace)
-
+                .sheet(isPresented: $showingAddSafePlace) {
+                    AddSafePlaceView()
         }
         
     }
@@ -96,4 +96,5 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
     }
+}
 }

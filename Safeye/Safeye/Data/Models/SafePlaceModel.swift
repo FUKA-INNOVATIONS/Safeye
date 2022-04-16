@@ -7,7 +7,11 @@
 
 import Foundation
 import FirebaseFirestoreSwift
+import MapKit
+import SwiftUI
 
-class SafePlaceModel {
-    @DocumentID var id: String?
+struct SafePlaceModel : Identifiable {
+   @DocumentID var id: String?
+    var place: CLPlacemark
+    
 }
