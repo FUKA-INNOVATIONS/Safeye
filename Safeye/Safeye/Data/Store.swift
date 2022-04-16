@@ -22,16 +22,21 @@ class Store: ObservableObject {
     @Published var profile: ProfileModel? = nil
     @Published var profileSearch: ProfileModel?
     @Published var pendingRequests = [ConnectionModel]()
+    @Published var connections = [ConnectionModel]()
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
     @Published var safePlaces = [SafePlaceModel]()
     @Published var settings = [SettingModel]()
     @Published var events = [Event]()
     @Published var event: Event?
+    @Published var eventCurrentUser: Event?
     @Published var panicMode = false
     
     @Published var errors = [String]()
     @Published var notifications = [String]()
+    
+    @Published var eventSelctedContacts = ([ProfileModel])()
+    //@Published var eventSelctedContactsID = [String]()
     
     //@Published var currentUser: UserModel?
     //@Published var isSignedIn = false

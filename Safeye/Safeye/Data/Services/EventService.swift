@@ -45,6 +45,31 @@ class EventService {
     
     
     
+    func fetchEventForCurrentUser(userID: String) {
+        self.eventDB.whereField("ownerId", isEqualTo: userID).getDocuments { event, error in
+            
+            if let error = error { print("Error in fetchEventForCurrentUser: \(error)") ; return }
+            else {
+                if event!.isEmpty { print("Current user has no event"); return }
+                if let event = event {
+                    for event in event.documents {
+                        print("Event of current user: \(event)")
+                        DispatchQueue.main.async {
+                            do {
+                                let convertedEvent = try event.data(as: Event.self)
+                                self.appStore.eventCurrentUser = convertedEvent
+                            } catch {
+                                print("Error fetchEventForCurrentUser 2: \(error)")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
     func fetchDetails(eventID: String) {
         let eventRef = eventDB.document(eventID)
         

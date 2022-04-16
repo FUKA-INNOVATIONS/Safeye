@@ -18,7 +18,7 @@ class PlaygroundViewModel: ObservableObject {
     }
     
     func fetchConn() {
-        self.connService.fetchPendingConnectionRequests()
+        //self.connService.fetchPendingConnectionRequests()
     }
     
 }

@@ -11,7 +11,8 @@ import SwiftUI
 class EventViewModel: ObservableObject {
     static let shared = EventViewModel() ;  private init() {}
     let eventService = EventService.shared
-    //let userID = AuthenticationService.getInstance.currentUser!.uid
+    @State var authUID = AuthenticationService.getInstance.currentUser!.uid
+    private var appState = Store.shared
     
     @Published var eventDetails: Event?
     @Published var eventExists = false
@@ -52,14 +53,27 @@ class EventViewModel: ObservableObject {
     }
     
     
-    func createEvent(newEvent: Event) {
-        print("Hello from create event")
+    func createEvent(_ startDate: Date, _ endDate: Date, otherInfo: String, eventType: String ) -> Bool {
         
-        // Save event in database, returns true if succeeded
-        let didCreateEvenet = eventService.createEvent(newEvent)
+        if self.appState.eventSelctedContacts.isEmpty { print("You must select atlest 1 contact") ; return false }
         
-        didCreateEvenet ? print("EventVM -> New event succeeded") : print("EventVM -> New event failed")
+        let selectedContactIDS = appState.eventSelctedContacts.map { $0.userId }
         
+        // TODO: MAX 5 contacts : firbase way to
+        
+        self.getEventCurrentUser()
+        if self.appState.eventCurrentUser != nil {  print("Current user has an event so new event was not created") ; return false }
+        
+        print("SELECTED IDS: \(selectedContactIDS)")
+        
+       @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
+        
+        let newEvent = Event(ownerId: authUID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates)
+        
+        let didCreateEvent = eventService.createEvent(newEvent)
+        didCreateEvent ? print("EventVM -> New event succeeded") : print("EventVM -> New event failed")
+        return didCreateEvent
+        //return false
     } // end of createEvent()
     
     
@@ -75,14 +89,21 @@ class EventViewModel: ObservableObject {
         self.eventService.updateEvent(event)
     }
     
-    func editEvent() {}
+    func getEventCurrentUser() {
+        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
+        self.eventService.fetchEventForCurrentUser(userID: currentUserId)
+    }
     
-    func deleteEvent() {}
+
     
     func changeStatus(_ eventID: String,_ newStatus: EventStatus) {
         if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.panicMode = true  } }
         eventService.changeStatus(eventID, newStatus)
     }
+    
+    func editEvent() {}
+    
+    func deleteEvent() {}
     
     func subscribeContact() {}
     

@@ -16,11 +16,39 @@ class ConnectionService: ObservableObject {
     private var profileDB = Firestore.firestore().collection("profiles")
     
     
-    func fetchPendingConnectionRequests () {
-        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
-        print("Current id: => \(currentUserId)")
+    
+    func fetchConnections (_ userID: String) {
         
-        self.connectionsDB.whereField("connectionUsers.target", isEqualTo: currentUserId)
+        self.connectionsDB.whereField("connectionUsers.owner", isEqualTo: userID)
+            .whereField("status", isEqualTo: true).getDocuments() { connections, error in
+                if let error = error {
+                    print("Error fetching connections \(error)")
+                    return
+                }
+                else {
+                    if connections!.isEmpty { print("There are no connections"); return }
+                    if let connection = connections {
+                        self.appStore.connections.removeAll()
+                        print("rere: \(connection.metadata.hasPendingWrites)")
+                        print("User connections: => \(connection.count)")
+                        for connection in connection.documents {
+                            DispatchQueue.main.async {
+                                do {
+                                    let convertedConection = try connection.data(as: ConnectionModel.self)
+                                    self.appStore.connections.append(convertedConection)
+                                } catch {
+                                    print("Error while fetching connections: \(error)")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    }
+    
+    func fetchPendingConnectionRequests (_ userID: String) {
+        
+        self.connectionsDB.whereField("connectionUsers.target", isEqualTo: userID)
             .whereField("status", isEqualTo: false).getDocuments() { requests, error in
                 
                 
@@ -47,7 +75,6 @@ class ConnectionService: ObservableObject {
                     }
                 }
             }
-        print("Store -> pending requests: \(self.appStore.pendingRequests.count)")
     }
     
     func confirmConnectionRequest(requestID: String) {
@@ -74,13 +101,13 @@ class ConnectionService: ObservableObject {
     }
     
     func fetchConnectionProfiles(_ userIDS: [String]) {
+        self.appStore.connectionPofiles.removeAll()
         self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
                 for profile in profiles!.documents {
                     print("\(profile.documentID) => \(profile.data())")
-                    self.appStore.connectionPofiles.removeAll()
                     DispatchQueue.main.async {
                         do {
                             let convertedProfile = try profile.data(as: ProfileModel.self)

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SelectContactGridComponent: View {
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var appStore: Store
+    @State var selectedContacts = [String]()
+    
     let layout = [
         GridItem(.fixed(70)),
         GridItem(.fixed(70))
@@ -16,10 +20,13 @@ struct SelectContactGridComponent: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: true) {
             LazyHGrid(rows: layout) {
-                ForEach(0..<10) {_ in
-                    SelectContactComponent()
+                ForEach(appStore.connectionPofiles) { profile in
+                    SelectContactComponent(profileDetails: profile)
                 }
             }
+        }
+        .onAppear {
+            
         }
     }
 }

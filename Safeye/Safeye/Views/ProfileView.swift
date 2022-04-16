@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var ConnVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
 
-    @ObservedObject var EventVM = EventViewModel.shared
     
     @State private var showingAddSafePlace = false
 
@@ -81,14 +81,13 @@ struct ProfileView: View {
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
-                print("PPPPPPPPPPPP: \(appState.profile)")
             }
-
             AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
-
         }
-        
+        .onAppear {
+            ConnVM.getConnections()
+        }
     }
 }
 

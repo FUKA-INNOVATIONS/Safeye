@@ -28,12 +28,13 @@ class ProfileViewModel: ObservableObject {
         self.profileService.fetchProfileByConnectionCode(connCode: connectionCode)
     }
     
+
     func getProfileForCurrentUser() {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else {
             print("Fetching current user's profile: No signed in user found")
             return
         }
-        self.profileService.fetchProfileByID(profileID: currentUserID)
+        self.profileService.fetchProfileByUserID(userID: currentUserID)
     }
     
     func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String) {
