@@ -15,20 +15,27 @@ struct UserDetailsComponent: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
-                Image("icon-add")
-                Text("Address: \(appState.profile?.address ?? "Homeless")")
+                Image(systemName: "house.circle.fill")
+                    .font(.system(size: 30))
+                Text("\(appState.profile?.address ?? "Homeless")")
+                    .padding()
             }
             HStack{
-                Image("icon-add")
+                Image(systemName: "person.badge.clock.fill")
+                    .font(.system(size: 30))
                 Text("Born: \(appState.profile?.birthday ?? "Still in mama's stomach")")
+                    .padding()
             }
+     
             HStack{
-                Image("icon-add")
+                Image(systemName: "stethoscope.circle.fill")
+                    .font(.system(size: 30))
                 VStack(alignment: .leading){
                     Text("Blood type: \(appState.profile?.bloodType ?? "Water engine")")
                     Text("Illness: \(appState.profile?.illness ?? "Are you serious")")
                     Text("Allergies: \(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
                 }
+                .padding()
             }
         }
     }

@@ -25,7 +25,7 @@ struct ProfileView: View {
 
                 Group{
                     AvatarComponent(size: 80)
-                    Spacer()
+                    //Spacer()
 
                     HStack {
                         Text("\(appState.profile?.fullName ?? "No name")")
@@ -37,7 +37,7 @@ struct ProfileView: View {
                         ProfileEditView()
                     }
     
-                    Spacer()
+                    
                 }
                 
                 Group {
@@ -50,7 +50,7 @@ struct ProfileView: View {
                         { Image("icon-add") }
                         Spacer(minLength: 20)
                     }
-                    Spacer()
+                    //Spacer()
                 }
                 
                 VStack {
@@ -58,12 +58,13 @@ struct ProfileView: View {
                     .sheet(isPresented: $showingCreateEvent) {
                         CreateEventView()
                     }
+                    
                     Form {
                         UserDetailsComponent()
                     }
                 }
                 
-                Spacer()
+                //Spacer()
                 
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
@@ -77,7 +78,7 @@ struct ProfileView: View {
                         { Image("icon-add") }
                         Spacer(minLength: 20)
                     }
-                    Spacer()
+                    //Spacer()
                 }
                 
                 
