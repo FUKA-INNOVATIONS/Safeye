@@ -22,19 +22,29 @@ class Store: ObservableObject {
     @Published var profile: ProfileModel? = nil
     @Published var profileSearch: ProfileModel?
     @Published var pendingRequests = [ConnectionModel]()
+    @Published var connections = [ConnectionModel]()
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
     @Published var safePlaces = [SafePlaceModel]()
     @Published var settings = [SettingModel]()
-    @Published var events = [Event]()
+    @Published var eventsOfCurrentUser = [Event]()
+    @Published var eventsOfTrustedContacts = [Event]()
     @Published var event: Event?
+    @Published var eventTrustedContactsProfiles = [ProfileModel]()
+    //@Published var eventCurrentUser: Event?
     @Published var panicMode = false
+   
     
     @Published var errors = [String]()
     @Published var notifications = [String]()
     
-    //@Published var currentUser: UserModel?
-    //@Published var isSignedIn = false
+    @Published var eventSelctedContacts = ([ProfileModel])()
+    @Published var currentEventTrustedContacts = [ProfileModel]()
+    @Published var eventsPanic = [Event]()
+    
+    @Published var currentUserID = ""
+    @Published var currentUserEmail = ""
+    @Published var isSignedIn = false
     @Published var lang = "EN" // Save app settings in persistant storage
 
 }

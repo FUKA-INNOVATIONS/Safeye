@@ -9,20 +9,21 @@ import SwiftUI
 
 struct CreateEventView: View {
     @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var appState: Store
     
     @State var authUID = AuthenticationService.getInstance.currentUser?.uid
     @State var startDate = Date()
     @State var endDate = Date()
     @State var eventType = ""
-    @State var locationDetails: String = ""
+    //@State var locationDetails: String = ""
     @State var otherInfo: String = ""
-    @State var selectedContacts: Array = ["Contact 1", "Contact 2"]
-    @State var selectedContacts2: [String] = [String]()
-    @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
     
-
+    @State var goEventView = false
+    @Environment(\.dismiss) var dismiss
+    
     
     var body: some View {
         VStack{
@@ -30,6 +31,15 @@ struct CreateEventView: View {
                 Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
                     SelectContactGridComponent()
                 }
+                
+                ForEach(appState.eventSelctedContacts) { selectedContact in
+                    HStack {
+                        Text("\(selectedContact.fullName)")
+                        Spacer()
+                        Image(systemName: "person.fill.checkmark")
+                    }
+                }
+                
                 Section(header: Text("Estimated event date and time")) {
                     DatePicker("Start*", selection: $startDate)
                     DatePicker("End", selection: $endDate)
@@ -40,10 +50,11 @@ struct CreateEventView: View {
                             Text($0).tag($0)
                         }
                     }
+                    .pickerStyle(.inline)
                 }
-                Section(header: Text("Location*")) {
+                /*Section(header: Text("Location*")) {
                     TextField("Describe location plan for the event", text: $locationDetails)
-                }
+                }*/
                 Section(header: Text("Other valuable details")) {
                     TextField("Anything else?", text: $otherInfo)
                 }
@@ -51,13 +62,30 @@ struct CreateEventView: View {
             }.navigationBarTitle("Add event information", displayMode: .inline)
             Spacer()
             
-            let id = "qGcGgDF8K3FvJjplNYP4"
-            let updatedEvent = Event(id: id, ownerId: authUID ?? "", status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
-            BasicButtonComponent(label: "Save & activate", action: { EventVM.updateEvent( updatedEvent ) })
+            
+            
+            BasicButtonComponent(label: "Save & activate", action: {
+                if eventType.isEmpty { print("You must select event type") ; return }
+                if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType) {
+                    //goEventView.toggle()
+                    //NavigationLink("", destination: EventView(), isActive: $goEventView)
+                    dismiss()
+                }
+            })
+            
+            //let id = "qGcGgDF8K3FvJjplNYP4"
+            //let updatedEvent = Event(id: id, ownerId: authUID ?? "", status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
+            // BasicButtonComponent(label: "Save & activate", action: { EventVM.updateEvent( updatedEvent ) })
+            
             Text("Saving will also enable the tracking mode")
                 .font(.system(size: 15))
                 .foregroundColor(.blue)
                 .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .onAppear {
+            EventVM.resetEventSelectedContacts()
+            ConnectionVM.getConnections()
+            ConnectionVM.getConnectionProfiles()
         }
         
     }

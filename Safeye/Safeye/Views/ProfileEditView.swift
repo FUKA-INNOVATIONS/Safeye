@@ -65,7 +65,7 @@ struct ProfileEditView: View {
                     
                     // Select blood type
                     Section { // Sections can have header and footer
-                        Picker("Tip percentage", selection: $bloodType) {
+                        Picker("Blood type", selection: $bloodType) {
                             ForEach(bloodTypes, id: \.self) {
                                 Text($0)
                             }

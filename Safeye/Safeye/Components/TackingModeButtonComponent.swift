@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct TrackingModeButtonComponent: View {
+    @EnvironmentObject var appState: Store
     
-    @Binding var panicmode: Bool
+    //var panicmode: Bool
     
      var body: some View {
          
-         panicmode ?
-            Text("Are you Safe?")
+         appState.event!.status == .PANIC ?
+            Text("Safe")
              .foregroundColor(Color.white)
              .frame(width: 150, height: 150)
              .font(.system(size: 35))
@@ -22,13 +23,14 @@ struct TrackingModeButtonComponent: View {
              .clipShape(Circle())
          
          :
-            Text("Panic")
+            Text("SOS!")
              .foregroundColor(Color.black)
              .frame(width: 250, height: 250)
              .font(.system(size: 55))
              .background(Color.red)
              .clipShape(Circle())
          }
+        
         
  }
 

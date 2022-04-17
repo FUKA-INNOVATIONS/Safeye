@@ -25,9 +25,9 @@ class ProfileService {
     private var profiles: [ProfileModel] = [ProfileModel]()
     private var profileDetails: ProfileModel?
     
-    func fetchProfileByID(profileID: String) {
-        print("IDIDID: \(profileID)")
-        profileDB.whereField("userId", isEqualTo: profileID).getDocuments()  { profile, error in
+    func fetchProfileByUserID(userID: String) {
+        print("IDIDID: \(userID)")
+        profileDB.whereField("userId", isEqualTo: userID).getDocuments()  { profile, error in
             if let error = error as NSError? {
                 print("profileService: Error fetching single profile: \(error.localizedDescription)")
             }
@@ -63,8 +63,8 @@ class ProfileService {
                 for profile in profiles!.documents {
                     DispatchQueue.main.async {
                         do {
-                            // self.connectionProfileFound = true
-                            print("TTTTTTT: \(profile)")
+                            //self.connectionProfileFound = true
+                            print("fetchProfileByConnectionCode: \(profile)")
                             self.appState.profileSearch = try profile.data(as: ProfileModel.self)
                         }
                         catch {
@@ -103,6 +103,27 @@ class ProfileService {
                     //self.getProfile()
                 }
             }
+    }
+    
+    func fetchEventTrustedContactsProfiles(_ userIDS: [String]) {
+        self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
+            if let error = error {
+                print("ProfileService: Error getting profiles of trusted contacts: \(error)")
+            } else {
+                self.appState.eventTrustedContactsProfiles.removeAll()
+                for profile in profiles!.documents {
+                    print("TC profile: \(profile.documentID) => \(profile.data())")
+                    DispatchQueue.main.async {
+                        do {
+                            let convertedProfile = try profile.data(as: ProfileModel.self)
+                            self.appState.eventTrustedContactsProfiles.append(convertedProfile)
+                        } catch {
+                            print("Error while converting event TC profiles: \(error)")
+                        }
+                    }
+                }
+            }
+        }
     }
     
     

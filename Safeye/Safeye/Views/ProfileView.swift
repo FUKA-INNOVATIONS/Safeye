@@ -9,46 +9,36 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
-
-    @ObservedObject var EventVM = EventViewModel.shared
-    
     @State private var showingAddSafePlace = false
-
 
     var body: some View {
         
         ZStack {
             VStack {
-                NavigationLink {
-                    CreateEventView()
-                } label: {
-                    Text("Create event")
-                }
 
                 Group{
-
-                    Spacer()
-                    NavigationLink("Tracking (TEMP)", destination: EventView())
-
-                    Text("\(appState.profile?.fullName ?? "No name")")
-                        .font(.system(size: 25, weight: .bold))
-                    
-                    // Show edit profile view in a Modal
-                    BasicButtonComponent(label: "Edit profile details") {
-                        showingEditProfile = true
+                    AvatarComponent(size: 80)
+                    HStack {
+                        Text("\(appState.profile?.fullName ?? "No name")")
+                            .font(.system(size: 25, weight: .bold))
+                        
+                        Button { showingEditProfile = true } label: { Image(systemName: "pencil.circle.fill") }
                     }
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
-                    
-                    AvatarComponent(size: 80)
                     Spacer()
                 }
+                
+                Spacer()
+                
                 Group {
+                    Spacer()
                     Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
                     HStack{
                         ListViewComponent(item: "avatar", size: 50)
@@ -60,8 +50,18 @@ struct ProfileView: View {
                     }
                     Spacer()
                 }
-                UserDetailsComponent()
-                Spacer()
+                
+                VStack {
+                    /* Button("Create new event", action: { showingCreateEvent = true } )
+                    .sheet(isPresented: $showingCreateEvent) {
+                        CreateEventView()
+                    } */
+                    
+                    Form {
+                        UserDetailsComponent()
+                    }
+                }
+                
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
                     HStack{
@@ -74,19 +74,19 @@ struct ProfileView: View {
                         { Image("icon-add") }
                         Spacer(minLength: 20)
                     }
-                    Spacer()
                 }
                 
                 
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
-                print("PPPPPPPPPPPP: \(appState.profile)")
             }
-
             AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
-
+        }
+        .onAppear {
+            ConnectionVM.getConnections()
+            ConnectionVM.getConnectionProfiles()
         }
         
     }

@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
-    @EnvironmentObject var ConnectioVM: ConnectionViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var MapVM: MapViewModel
     @EnvironmentObject var appState: Store
@@ -79,6 +79,8 @@ struct ContentView: View {
         }
         .onAppear {
             AuthVM.signedIn = AuthVM.isSignedIn
+            ConnectionVM.getConnections()
+            ConnectionVM.getConnectionProfiles()
         }
         
     }

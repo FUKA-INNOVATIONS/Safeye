@@ -20,14 +20,19 @@ struct PlayGroundView: View {
                 
             }
             
+            ForEach(self.appState.connectionPofiles) { profile in
+                Text("Connection profile : \(profile.fullName)")
+            }
+            
+            
             
             /* ForEach(self.appState.pendingRequests) { req in
                 Text("Req: \(req.connectionId)")
             } */
             
-            ForEach(self.appState.connectionPofiles) { profile in
+            /* ForEach(self.appState.connectionPofiles) { profile in
                 Text("Full name: \(profile.fullName)")
-            }
+            } */
             
             
             
@@ -48,9 +53,15 @@ struct PlayGroundView: View {
         }
         .onAppear {
             
-            let userID1 = "LJIziY424tfW1ZEwAzBwvhicaMb2"
-            let userID2 = "td8IykGIgAgjbwgN8Po3zilnNOj2"
-            self.ConnectionVM.getConnectionProfiles(for: [userID1, userID2])
+            self.ConnectionVM.getConnections()
+            self.ConnectionVM.getConnectionProfiles()
+            print("Connections: \(appState.connections.count)")
+            print("Profiles: \(appState.connectionPofiles.count)")
+            
+            
+            //let userID1 = "LJIziY424tfW1ZEwAzBwvhicaMb2"
+            //let userID2 = "td8IykGIgAgjbwgN8Po3zilnNOj2"
+            //self.ConnectionVM.getConnectionProfiles(for: [userID1, userID2])
             
             
             //self.ConnectionVM.getPendingREquests()
