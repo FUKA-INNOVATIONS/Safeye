@@ -18,7 +18,7 @@ struct EventView: View {
         
         VStack {
             
-            Text("Current Status: \(appState.event?.status.rawValue ?? "")")
+            Text("\(appState.event?.status.rawValue ?? "")")
                 .font(.largeTitle)
             Spacer()
             
@@ -26,7 +26,7 @@ struct EventView: View {
                 Section(header: Text("Trusted contacts")) {
                     ForEach(appState.eventTrustedContactsProfiles) { profile in
                         HStack {
-                            Text("\(profile.fullName)")
+                            Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
                             Spacer()
                             Image(systemName: "eye.fill")
                         }
@@ -42,52 +42,24 @@ struct EventView: View {
             
             if EventVM.isOwner(of: appState.event?.ownerId ?? "") {
                 appState.event!.status == .STARTED ?
-                Button(action: {
-                    // Actions after panic button Has been pressed
-                    
+                Button(action: { // Actions after panic button Has been pressed
                     EventVM.activatePanicMode()
-                    //panicMode = true
-                    EventVM.sentNotification()
+                    //EventVM.sentNotification()
                 }) {
-                    TrackingModeButtonComponent(panicmode: $panicMode)
+                    TrackingModeButtonComponent()
                 }
-                :
-                // User is in panic mode presses are you safe button
+                : // User is in panic mode presses safe button
                 Button(action: {
-                    
                     EventVM.disablePanicMode()
-                    //panicMode = false
-                    
                 }) {
-                    TrackingModeButtonComponent(panicmode: $panicMode)
+                    TrackingModeButtonComponent()
                 }
             }
             
             
             
             Spacer()
-            /*EventVM.mode == "Tracking" ?
-            // User is currently in tracking mode, presses panic button for help
-            Button(action: {
-                // Actions after panic button Has been pressed
-                
-                EventVM.activatePanicMode()
-                panicMode = true
-                EventVM.sentNotification()
-            }) {
-                TrackingModeButtonComponent(panicmode: $panicMode)
-            }
-            :
-            // User is in panic mode presses are you safe button
-            Button(action: {
-                
-                EventVM.disablePanicMode()
-                panicMode = false
-                
-            }) {
-                TrackingModeButtonComponent(panicmode: $panicMode)
-            }*/
-            //PanicButtonComponent()
+
             Spacer()
             
             //Send value of tracking: true to map view

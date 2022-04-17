@@ -25,8 +25,14 @@ struct EventListView: View {
                                 HStack {
                                     Text("\(event.eventType.capitalizingFirstLetter())")
                                         .foregroundStyle(.red)
-                                    Spacer()
                                     Text("\(event.startTime.formatted(.dateTime))")
+                                        .font(.caption)
+                                        
+                                    Spacer()
+                                    HStack {
+                                        Text("\(event.trustedContacts.count)")
+                                        Image(systemName: "eye")
+                                    }
                                 }
                             }
                     }
@@ -41,9 +47,13 @@ struct EventListView: View {
                              HStack {
                                  Text("\(event.eventType.capitalizingFirstLetter())")
                                      .foregroundStyle(.green)
-                                 Text("2.3.2022")
-                                 //Spacer()
-                                 //Image(systemName: "eye")
+                                 Text("\(event.startTime.formatted(.dateTime))")
+                                     .font(.caption)
+                                 Spacer()
+                                 HStack {
+                                     Text("\(event.trustedContacts.count)")
+                                     Image(systemName: "eye")
+                                 }
                              }
                          }
 

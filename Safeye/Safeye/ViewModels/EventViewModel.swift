@@ -30,7 +30,7 @@ class EventViewModel: ObservableObject {
         self.appState.panicMode = true
         self.appState.event?.status = EventStatus.PANIC
         self.eventService.updateEvent(self.appState.event!)
-        self.getEventsOfCurrentUser()
+        //self.getEventsOfCurrentUser()
         print("Panic Mode activated")
     }
     
@@ -39,7 +39,7 @@ class EventViewModel: ObservableObject {
         self.appState.panicMode = false
         self.appState.event?.status = EventStatus.STARTED
         self.eventService.updateEvent(self.appState.event!)
-        self.getEventsOfCurrentUser()
+        //self.getEventsOfCurrentUser()
         print("Disabled panic mode")
         
     }
@@ -59,6 +59,15 @@ class EventViewModel: ObservableObject {
     
     func isOwner(of eventID: String) -> Bool {
         return eventID == AuthenticationService.getInstance.currentUser!.uid
+    }
+    
+    func isEventTrustedContact() -> Bool {
+        let selfFound = self.appState.event!.trustedContacts.filter { $0 == AuthenticationService.getInstance.currentUser!.uid }
+        if selfFound.count > 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     

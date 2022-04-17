@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct TrackingModeButtonComponent: View {
+    @EnvironmentObject var appState: Store
     
-    @Binding var panicmode: Bool
+    //var panicmode: Bool
     
      var body: some View {
          
-         panicmode ?
+         appState.event!.status == .PANIC ?
             Text("Are you Safe?")
              .foregroundColor(Color.white)
              .frame(width: 150, height: 150)

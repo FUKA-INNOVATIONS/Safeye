@@ -23,6 +23,10 @@ class EventService {
         self.fetchDetails(eventID)
         return self.eventDetails ?? nil
     } */
+    
+    /* func updateEvent(_ event: Event) {
+        self.editEvent(event)
+    } */ // end of updateEvent
 
     
     
@@ -39,9 +43,7 @@ class EventService {
     } // end of createEvent
     
     
-    func updateEvent(_ event: Event) {
-        self.editEvent(event)
-    } // end of updateEvent
+    
     
     
     
@@ -119,13 +121,15 @@ class EventService {
     
     
     
-    private func editEvent(_ event: Event) {
+    func updateEvent(_ event: Event) {
         let eventRef = eventDB.document(event.id!)
-        do {
-            try eventRef.setData(from: event)
-        }
-        catch {
-            print(error)
+        DispatchQueue.main.async {
+            do {
+                try eventRef.setData(from: event)
+            }
+            catch {
+                print(error)
+            }
         }
     } // end of editEcent
     
