@@ -16,7 +16,7 @@ struct NavItem: View {
     var body: some View {
         TabView {
             
-            MapView()
+            EventListView()
                 .tabItem(){
                     Image(systemName: "house")
                     Text("Home")

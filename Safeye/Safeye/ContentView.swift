@@ -79,7 +79,7 @@ struct ContentView: View {
         }
         .onAppear {
             AuthVM.signedIn = AuthVM.isSignedIn
-            EventVM.getEventCurrentUser()
+            EventVM.getEventsOfCurrentUser()
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
         }

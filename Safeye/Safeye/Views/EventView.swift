@@ -10,6 +10,7 @@ import SwiftUI
 struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
+    @State var eventID: String
     
     @State var panicMode: Bool = false // replace with appState
     
@@ -17,13 +18,13 @@ struct EventView: View {
         
         VStack {
             
-            Text("Current Status: \(EventVM.mode)")
+            Text("Current Status: \(appState.event?.status.rawValue ?? "")")
                 .font(.largeTitle)
             Spacer()
             
             Form {
                 Section(header: Text("Trusted contacts")) {
-                    ForEach(appState.currentEventTrustedContacts) { profile in
+                    ForEach(appState.eventTrustedContactsProfiles) { profile in
                         HStack {
                             Text("\(profile.fullName)")
                             Spacer()
@@ -33,16 +34,39 @@ struct EventView: View {
                 }
                 
                 Section(header: Text("Event details")) {
-                    Text("EventType: \(appState.eventCurrentUser!.eventType)")
-                    Text("More info: \(appState.eventCurrentUser!.otherInfo)")
+                    Text("EventType: \(appState.event?.eventType ?? "")")
+                    Text("Other info: \(appState.event?.otherInfo ?? "")")
                 }
                 
+            }
+            
+            if EventVM.isOwner(of: appState.event?.ownerId ?? "") {
+                appState.event!.status == .STARTED ?
+                Button(action: {
+                    // Actions after panic button Has been pressed
+                    
+                    EventVM.activatePanicMode()
+                    //panicMode = true
+                    EventVM.sentNotification()
+                }) {
+                    TrackingModeButtonComponent(panicmode: $panicMode)
+                }
+                :
+                // User is in panic mode presses are you safe button
+                Button(action: {
+                    
+                    EventVM.disablePanicMode()
+                    //panicMode = false
+                    
+                }) {
+                    TrackingModeButtonComponent(panicmode: $panicMode)
+                }
             }
             
             
             
             Spacer()
-            EventVM.mode == "Tracking" ?
+            /*EventVM.mode == "Tracking" ?
             // User is currently in tracking mode, presses panic button for help
             Button(action: {
                 // Actions after panic button Has been pressed
@@ -62,33 +86,34 @@ struct EventView: View {
                 
             }) {
                 TrackingModeButtonComponent(panicmode: $panicMode)
-            }
+            }*/
             //PanicButtonComponent()
             Spacer()
             
             //Send value of tracking: true to map view
-            NavigationLink("View Map", destination: MapView())
-                .padding()
+            /* NavigationLink("View Map", destination: MapView())
+                .padding() */
             
             // Replace with button?
-            NavigationLink("Disable Tracking", destination: ContentView())
-                .disabled(true)
+            /*NavigationLink("Disable Tracking", destination: ContentView())
+                .disabled(true)*/
             
             Spacer()
             
         }
         //.navigationBarHidden(true)
         .onAppear {
-            EventVM.getCurrentEventTrustedContacts()
+            EventVM.getDetails(for: eventID)
+            EventVM.getEventTrustedContactsProfiles(eventID: eventID)
         }
         
     }
     
 }
 
-struct TrackingModeView_Previews: PreviewProvider {
+/*struct TrackingModeView_Previews: PreviewProvider {
     static var previews: some View {
         EventView()
             .previewInterfaceOrientation(.portraitUpsideDown)
     }
-}
+}*/

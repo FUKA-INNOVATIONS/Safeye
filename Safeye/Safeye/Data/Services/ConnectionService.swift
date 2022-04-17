@@ -11,7 +11,7 @@ import SwiftUI
 
 class ConnectionService: ObservableObject {
     static let shared = ConnectionService() ; private init() {}
-    private var appStore = Store.shared
+    private var appState = Store.shared
     private var connectionsDB = Firestore.firestore().collection("connections")
     private var profileDB = Firestore.firestore().collection("profiles")
     
@@ -28,14 +28,14 @@ class ConnectionService: ObservableObject {
                 else {
                     if connections!.isEmpty { print("There are no connections"); return }
                     if let connection = connections {
-                        self.appStore.connections.removeAll()
+                        self.appState.connections.removeAll()
                         print("rere: \(connection.metadata.hasPendingWrites)")
                         print("User connections: => \(connection.count)")
                         for connection in connection.documents {
                             DispatchQueue.main.async {
                                 do {
                                     let convertedConection = try connection.data(as: ConnectionModel.self)
-                                    self.appStore.connections.append(convertedConection)
+                                    self.appState.connections.append(convertedConection)
                                 } catch {
                                     print("Error while fetching connections: \(error)")
                                 }
@@ -59,14 +59,14 @@ class ConnectionService: ObservableObject {
                 else {
                     if requests!.isEmpty { print("There are no pending connection requests"); return }
                     if let requests = requests {
-                        self.appStore.pendingRequests.removeAll()
+                        self.appState.pendingRequests.removeAll()
                         print("rere: \(requests.metadata.hasPendingWrites)")
                         print("Pending connections: => \(requests.count)")
                         for request in requests.documents {
                             DispatchQueue.main.async {
                                 do {
                                     let convertedRequest = try request.data(as: ConnectionModel.self)
-                                    self.appStore.pendingRequests.append(convertedRequest)
+                                    self.appState.pendingRequests.append(convertedRequest)
                                 } catch {
                                     print("Error while fetching pending requests: \(error)")
                                 }
@@ -101,7 +101,7 @@ class ConnectionService: ObservableObject {
     }
     
     func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
-        eventCase ? self.appStore.currentEventTrustedContacts.removeAll() : self.appStore.connectionPofiles.removeAll()
+        eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
         
         self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
             if let error = error {
@@ -113,9 +113,9 @@ class ConnectionService: ObservableObject {
                         do {
                             let convertedProfile = try profile.data(as: ProfileModel.self)
                             if eventCase {
-                                self.appStore.currentEventTrustedContacts.append(convertedProfile)
+                                self.appState.currentEventTrustedContacts.append(convertedProfile)
                             } else {
-                                self.appStore.connectionPofiles.append(convertedProfile)
+                                self.appState.connectionPofiles.append(convertedProfile)
                             }
                         } catch {
                             print("Error while converting connection profiles: \(error)")

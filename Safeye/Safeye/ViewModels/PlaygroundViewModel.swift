@@ -14,7 +14,7 @@ class PlaygroundViewModel: ObservableObject {
     
     func getEvent(_ eventID: String) {
         print("getEvent")
-        eventService.fetchDetails(eventID: eventID)
+        eventService.fetchDetails(eventID)
     }
     
     func fetchConn() {

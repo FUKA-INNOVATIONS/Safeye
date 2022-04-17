@@ -66,8 +66,8 @@ struct CreateEventView: View {
             BasicButtonComponent(label: "Save & activate", action: {
                 if eventType.isEmpty { print("You must select event type") ; return }
                 if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType) {
-                    goEventView.toggle()
-                    NavigationLink("", destination: EventView(), isActive: $goEventView)
+                    //goEventView.toggle()
+                    //NavigationLink("", destination: EventView(), isActive: $goEventView)
                 }
             })
             
@@ -84,7 +84,7 @@ struct CreateEventView: View {
             EventVM.resetEventSelectedContacts()
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
-            EventVM.getEventCurrentUser()
+            EventVM.getEventsOfCurrentUser()
             
         }
         

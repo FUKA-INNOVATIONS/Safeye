@@ -8,45 +8,53 @@
 import SwiftUI
 
 struct EventListView: View {
-    //@State var event: Event
+    @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var appState: Store
     
     var body: some View {
         VStack {
-             Form {
-                 Section(header: Text("Your events")) {
-                         HStack {
-                             Text("Fuad Kalhori")
-                             Text("2.3.2022")
-                             Spacer()
-                             Image(systemName: "minus.circle.fill")
-                             Image(systemName: "eye")
-                         }
-                         
-                         HStack {
-                             Text("Fuad Kalhori")
-                             Text("2.3.2022")
-                             Spacer()
-                             Image(systemName: "minus.circle.fill")
-                             Image(systemName: "eye")
-                         }
-                 }
+            Text("\(EventVM.getEventsCount()) events")
+            NavigationLink("Create new event") { CreateEventView() }
+            Form {
+                Section(header: Text("Events")) {
+                    ForEach(appState.eventsOfCurrentUser) { event in
+                            NavigationLink {
+                                EventView(eventID: event.id!)
+                            } label: {
+                                Image(systemName: "minus.circle.fill")
+                                HStack {
+                                    Text("\(event.eventType.capitalizingFirstLetter())")
+                                        .foregroundStyle(.red)
+                                    Spacer()
+                                    Text("\(event.startTime.formatted(.dateTime))")
+                                }
+                            }
+                    }
+                }
                  
                  Section(header: Text("Your friend's events")) {
-                     HStack {
-                         Text("Fuad Kalhori")
-                         Text("2.3.2022")
-                         Spacer()
-                         Image(systemName: "eye")
+                     
+                     ForEach(appState.eventsOfTrustedContacts) { event in
+                         NavigationLink {
+                             EventView(eventID: event.id!)
+                         } label: {
+                             HStack {
+                                 Text("\(event.eventType.capitalizingFirstLetter())")
+                                     .foregroundStyle(.green)
+                                 Text("2.3.2022")
+                                 //Spacer()
+                                 //Image(systemName: "eye")
+                             }
+                         }
+
                      }
                      
-                     HStack {
-                         Text("Fuad Kalhori")
-                         Text("2.3.2022")
-                         Spacer()
-                         Image(systemName: "eye")
-                     }
                  }
             }
+        }
+        .onAppear {
+            //EventVM.getEventsOfCurrentUser()
+            EventVM.getEventsOfTrustedContacts()
         }
     }
 }

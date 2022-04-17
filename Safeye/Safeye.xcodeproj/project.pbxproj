@@ -79,6 +79,8 @@
 		5FE0B092280BD30D00CFED16 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39D2807336700162C43 /* FirebaseFirestore */; };
 		5FE0B093280BD30D00CFED16 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39F2807336700162C43 /* FirebaseFirestoreSwift-Beta */; };
 		5FE0B095280BD3C900CFED16 /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B094280BD3C900CFED16 /* EventListView.swift */; };
+		5FE0B098280BF2FF00CFED16 /* CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */; };
+		5FE0B09A280C18A200CFED16 /* eventStatusColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */; };
 		6A29154E2803128E00988C2C /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A29154D2803128E00988C2C /* EventView.swift */; };
 		6A2CFC2B280182F40046395D /* MapCurtainComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */; };
 		6A2CFC2D2801B9280046395D /* CurtainTCListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */; };
@@ -190,6 +192,8 @@
 		5FAB464A28045806009C4D0E /* EventStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatus.swift; sourceTree = "<group>"; };
 		5FAB464E28047E44009C4D0E /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		5FE0B094280BD3C900CFED16 /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
+		5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitalizeFirstLetter.swift; sourceTree = "<group>"; };
+		5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventStatusColorModifier.swift; sourceTree = "<group>"; };
 		6A29154D2803128E00988C2C /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCurtainComponent.swift; sourceTree = "<group>"; };
 		6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurtainTCListComponent.swift; sourceTree = "<group>"; };
@@ -362,6 +366,7 @@
 				6A2CFC302801C11A0046395D /* CurtainModifier.swift */,
 				6A2CFC322801C8B80046395D /* TCListModifier.swift */,
 				6A2CFC342801CAA10046395D /* TCItemModifier.swift */,
+				5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 		5F244AE827F7213E00BFE1FB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5FE0B096280BF2DB00CFED16 /* Extensions */,
 				5F20CC9928009C04001E9AED /* NavigationHelper */,
 				5F244AE927F7215500BFE1FB /* Device */,
 			);
@@ -470,6 +476,14 @@
 				5F86F102280848C40089EAC6 /* SafePlaceModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5FE0B096280BF2DB00CFED16 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -636,6 +650,7 @@
 				6A2CFC2B280182F40046395D /* MapCurtainComponent.swift in Sources */,
 				5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */,
 				5F0EA2FD27F6F9E000FBD77B /* ContentView.swift in Sources */,
+				5FE0B09A280C18A200CFED16 /* eventStatusColorModifier.swift in Sources */,
 				6A2CFC312801C11A0046395D /* CurtainModifier.swift in Sources */,
 				7516A3A428075D4100162C43 /* NotificationService.swift in Sources */,
 				5F23EE0A2801B54800623B0C /* SettingsListViewComponent.swift in Sources */,
@@ -664,6 +679,7 @@
 				6ABCDD2A280000EE009563E7 /* SelectContactsGridComponent.swift in Sources */,
 				5F244ABD27F719D600BFE1FB /* SettingService.swift in Sources */,
 				5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */,
+				5FE0B098280BF2FF00CFED16 /* CapitalizeFirstLetter.swift in Sources */,
 				6A2CFC352801CAA10046395D /* TCItemModifier.swift in Sources */,
 				5F244ABF27F71A3500BFE1FB /* UserModel.swift in Sources */,
 				5F244A9427F70EEA00BFE1FB /* CreateEventView.swift in Sources */,

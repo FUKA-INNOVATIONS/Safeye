@@ -105,6 +105,27 @@ class ProfileService {
             }
     }
     
+    func fetchEventTrustedContactsProfiles(_ userIDS: [String]) {
+        self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
+            if let error = error {
+                print("ProfileService: Error getting profiles of trusted contacts: \(error)")
+            } else {
+                self.appState.eventTrustedContactsProfiles.removeAll()
+                for profile in profiles!.documents {
+                    print("\(profile.documentID) => \(profile.data())")
+                    DispatchQueue.main.async {
+                        do {
+                            let convertedProfile = try profile.data(as: ProfileModel.self)
+                            self.appState.eventTrustedContactsProfiles.append(convertedProfile)
+                        } catch {
+                            print("Error while converting event TC profiles: \(error)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
     
     

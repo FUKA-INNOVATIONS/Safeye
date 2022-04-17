@@ -13,16 +13,16 @@ import Firebase
 class EventService {
     static let shared = EventService() ;  private init() {}
     private var eventDB = Firestore.firestore().collection("events")
-    private let appStore = Store.shared
+    private let appState = Store.shared
     
     private var eventDetails: Event?
     @Published var eventErrors: String = ""
     
     
-    func getEvent(_ eventID: String) -> Event? {
-        self.fetchDetails(eventID: eventID)
+    /*func getEvent(_ eventID: String) -> Event? {
+        self.fetchDetails(eventID)
         return self.eventDetails ?? nil
-    }
+    } */
 
     
     
@@ -45,9 +45,8 @@ class EventService {
     
     
     
-    func fetchEventForCurrentUser(userID: String) {
+    func fetchEventsForCurrentUser(userID: String) {
         self.eventDB.whereField("ownerId", isEqualTo: userID).getDocuments { event, error in
-            
             if let error = error { print("Error in fetchEventForCurrentUser: \(error)") ; return }
             else {
                 if event!.isEmpty { print("Current user has no event"); return }
@@ -57,7 +56,7 @@ class EventService {
                         DispatchQueue.main.async {
                             do {
                                 let convertedEvent = try event.data(as: Event.self)
-                                self.appStore.eventCurrentUser = convertedEvent
+                                self.appState.eventsOfCurrentUser.append(convertedEvent)
                             } catch {
                                 print("Error fetchEventForCurrentUser 2: \(error)")
                             }
@@ -69,8 +68,33 @@ class EventService {
     }
     
     
+    func fetchEventsOfTrustedContacts(userID: String) {
+        self.eventDB.whereField("trustedContacts", arrayContains: userID)
+            .getDocuments { event, error in
+            
+            if let error = error { print("Error in fetchEventsOfTrustedContacts: \(error)") ; return }
+            else {
+                if event!.isEmpty { print("fetchEventsOfTrustedContacts: Current user's trusted contacts have no events"); return }
+                if let event = event {
+                    for event in event.documents {
+                        print("Events of current trusted contacts: \(event)")
+                        DispatchQueue.main.async {
+                            do {
+                                let convertedEvent = try event.data(as: Event.self)
+                                self.appState.eventsOfTrustedContacts.append(convertedEvent)
+                            } catch {
+                                print("EventService: Error fetchEventsOfTrustedContacts: \(error)")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
-    func fetchDetails(eventID: String) {
+    
+    
+    func fetchDetails(_ eventID: String) {
         let eventRef = eventDB.document(eventID)
         
         eventRef.getDocument { document, error in
@@ -79,19 +103,19 @@ class EventService {
             }
             else {
                 if let document = document {
-                    do {
-                        self.eventDetails = try document.data(as: Event.self) //TODO: Remove
-                        self.appStore.event = try document.data(as: Event.self)
-                        print("Fetched event: \(String(describing: self.eventDetails))")
-                    }
-                    catch {
-                        print(error)
+                    DispatchQueue.main.async {
+                        do {
+                            self.appState.event = try document.data(as: Event.self)
+                            print("Fetched event: \(String(describing: self.appState.event))")
+                        }
+                        catch {
+                            print(error)
+                        }
                     }
                 }
             }
         }
     } // end of getDetails
-    
     
     
     

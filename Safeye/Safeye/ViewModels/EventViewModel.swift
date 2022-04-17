@@ -13,6 +13,7 @@ class EventViewModel: ObservableObject {
     let eventService = EventService.shared
     private var appState = Store.shared
     private var connService = ConnectionService.shared
+    private var profileService = ProfileService.shared
     
     
     @Published var eventDetails: Event?
@@ -27,22 +28,19 @@ class EventViewModel: ObservableObject {
     // User presses panic mode
     func activatePanicMode() {
         self.appState.panicMode = true
-        self.appState.eventCurrentUser?.status = EventStatus.PANIC
-        self.eventService.updateEvent(self.appState.eventCurrentUser!)
-        self.getEventCurrentUser()
+        self.appState.event?.status = EventStatus.PANIC
+        self.eventService.updateEvent(self.appState.event!)
+        self.getEventsOfCurrentUser()
         print("Panic Mode activated")
-        mode = "Panic"
     }
     
     // User pressed the safe button -> disabling panic mode
     func disablePanicMode() {
         self.appState.panicMode = false
-        self.appState.eventCurrentUser?.status = EventStatus.STARTED
-        self.eventService.updateEvent(self.appState.eventCurrentUser!)
-        self.getEventCurrentUser()
-        
+        self.appState.event?.status = EventStatus.STARTED
+        self.eventService.updateEvent(self.appState.event!)
+        self.getEventsOfCurrentUser()
         print("Disabled panic mode")
-        mode = "Tracking"
         
     }
     // Send notification about panic mode
@@ -59,6 +57,10 @@ class EventViewModel: ObservableObject {
         
     }
     
+    func isOwner(of eventID: String) -> Bool {
+        return eventID == AuthenticationService.getInstance.currentUser!.uid
+    }
+    
     
     func createEvent(_ startDate: Date, _ endDate: Date, otherInfo: String, eventType: String ) -> Bool {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
@@ -69,8 +71,8 @@ class EventViewModel: ObservableObject {
         
         // TODO: MAX 5 contacts : firbase way to
         
-        self.getEventCurrentUser()
-        if self.appState.eventCurrentUser != nil {  print("Current user has an event so new event was not created") ; return false }
+        self.getEventsOfCurrentUser()
+        //if self.appState.eventCurrentUser != nil {  print("Current user has an event so new event was not created") ; return false }
         
         print("SELECTED IDS: \(selectedContactIDS)")
         
@@ -86,30 +88,60 @@ class EventViewModel: ObservableObject {
     
     
     
-    // Get details for a specific event
-    func getDetails(for eventID: String) {
+    
+    func getDetails(for eventID: String) { // Get details for a specific evens, result in appState.event
         DispatchQueue.main.async {
-            self.eventDetails =  self.eventService.getEvent(eventID)
+            self.eventService.fetchDetails(eventID)
         }
     }
+    
+    func getEventsOfCurrentUser() {
+        // Fetch all events of authenticated user, result in appState.eventsOfCurrentUser
+        self.appState.eventsOfCurrentUser.removeAll()
+        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
+        self.eventService.fetchEventsForCurrentUser(userID: currentUserId)
+    }
+    
+    func getEventsOfTrustedContacts() {
+        // Fetch all events of authenticated user, result in appState.eventsOfTrustedContacts
+        self.appState.eventsOfTrustedContacts.removeAll()
+        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
+        self.eventService.fetchEventsOfTrustedContacts(userID: currentUserId)
+    }
+    
+    func getEventTrustedContactsProfiles(eventID: String) {
+        // Get trusted contacts of an event, result in appState.eventTrustedContactsProfiles
+        self.profileService.fetchEventTrustedContactsProfiles(self.appState.event?.trustedContacts ?? [""])
+    }
+    
+    func getEventsCount() -> Int {
+        return self.appState.eventsOfCurrentUser.count + self.appState.eventsOfTrustedContacts.count
+    }
+    
+    
+    
     
     func updateEvent(_ event: Event) {
         self.eventService.updateEvent(event)
     }
     
-    func getEventCurrentUser() {
+    
+    /* func getEventCurrentUser() { // TODO: Delete
         let currentUserId = AuthenticationService.getInstance.currentUser!.uid
-        self.eventService.fetchEventForCurrentUser(userID: currentUserId)
-    }
+        self.eventService.fetchEventsForCurrentUser(userID: currentUserId)
+    } */
+    
     
     func resetEventSelectedContacts() {
         self.appState.eventSelctedContacts.removeAll()
     }
     
-    func getCurrentEventTrustedContacts() {
+    /*func getCurrentEventTrustedContacts() {
         print(self.appState.eventCurrentUser!.trustedContacts)
         self.connService.fetchConnectionProfiles(self.appState.eventCurrentUser!.trustedContacts, eventCase: true)
-    }
+    } */
+    
+    
     
 
     

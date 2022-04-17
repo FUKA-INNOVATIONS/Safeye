@@ -31,13 +31,13 @@ struct SettingsView: View {
                 PlayGroundView()
             }
             
-            NavigationLink("\(appState.eventCurrentUser == nil ? "Create event" : "You have an event")") {
+            /* NavigationLink("\(appState.eventCurrentUser == nil ? "Create event" : "You have an event")") {
                 if appState.eventCurrentUser == nil {
                     CreateEventView()
                 } else {
                     EventView()
                 }
-            }
+            } */
             
             
             HStack{
@@ -54,7 +54,7 @@ struct SettingsView: View {
             SettingsListViewComponent(settingsView: true)
         }
         .onAppear {
-            EventVM.getEventCurrentUser()
+            EventVM.getEventsOfCurrentUser()
         }
         
         

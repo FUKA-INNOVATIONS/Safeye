@@ -27,9 +27,11 @@ class Store: ObservableObject {
     @Published var connectionPofiles = [ProfileModel]()
     @Published var safePlaces = [SafePlaceModel]()
     @Published var settings = [SettingModel]()
-    @Published var events = [Event]()
+    @Published var eventsOfCurrentUser = [Event]()
+    @Published var eventsOfTrustedContacts = [Event]()
     @Published var event: Event?
-    @Published var eventCurrentUser: Event?
+    @Published var eventTrustedContactsProfiles = [ProfileModel]()
+    //@Published var eventCurrentUser: Event?
     @Published var panicMode = false
    
     
