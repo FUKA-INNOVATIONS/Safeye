@@ -15,37 +15,30 @@ class ConnectionViewModel: ObservableObject {
     private var profileService = ProfileService.shared
     private var appState = Store.shared
     
-    var currentUserID = AuthenticationService.getInstance.currentUser?.uid ?? ""
     
     
-    @Published var profileFound = false
-    @Published var connectionFound = false
-    
-    @Published var pendingREquests: [ConnectionModel] = []
-    
+
     func getPendingRequests()  {
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
         self.connService.fetchPendingConnectionRequests(currentUserID)
     }
     
     func getConnectionProfiles() {
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
         self.appState.connectionPofiles.removeAll()
         self.getConnections()
         var connectionIDS = [String]()
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if !userID.value.isEmpty, userID.value != currentUserID { connectionIDS.append(String(userID.value)) }
-                //print("111111: \(userID.value)")
-                /*if userID.value != currentUserID {
-                    print("DDDDDDd: \(userID)")
-                    if !userID.value.isEmpty { connectionIDS.append(String(userID.value)) }
-                } */
             }
         }
-        print("getConnectionProfiles ->Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
+        print("getConnectionProfiles -> Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
         if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS) }
     }
     
     func getConnections() {
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
         self.connService.fetchConnections(currentUserID)
     }
 
