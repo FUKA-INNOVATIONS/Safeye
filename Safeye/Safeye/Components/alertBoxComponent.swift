@@ -8,14 +8,18 @@ import UIKit
 import SwiftUI
 
 struct alertBoxComponent: View {
+    
+    @StateObject private var viewModel = EventViewModel.shared
+    
     @EnvironmentObject var appState: Store
     @Binding var buttonIsPressed: Bool
     @Binding var text:String
-
+    @Binding var panicMode: Bool
+    
     var title: String = "Please confirm"
     let screenSize = UIScreen.main.bounds
     
-    var onComfirm: () -> Void = { } //TODO activating mode after pressing
+    var onComfirm: (Void) -> Void = { _ in }
     var onCancel: () -> Void = { }
     
     var body: some View {
@@ -25,8 +29,10 @@ struct alertBoxComponent: View {
             HStack {
                 Button("Confirm") {
                     buttonIsPressed = false
-                    self.onComfirm()
+                    self.onComfirm(viewModel.activatePanicMode())
+                    panicMode = true
                 }
+                
                 Spacer()
                 Button("Cancel") {
                     buttonIsPressed = false
@@ -49,6 +55,6 @@ struct alertBoxComponent: View {
 
 struct alertBoxComponent_Previews: PreviewProvider {
     static var previews: some View {
-        alertBoxComponent(buttonIsPressed: .constant(true),text: .constant(""))
+        alertBoxComponent(buttonIsPressed: .constant(true),text: .constant(""), panicMode: .constant(false))
     }
 }

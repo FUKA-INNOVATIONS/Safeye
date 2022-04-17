@@ -13,7 +13,6 @@ struct EventView: View {
     @State var panicMode: Bool = false
     @State private var isPresented: Bool = false
     @State private var text: String = ""
-    @State private var items = (1...5).map { _ in "($0)" }
     
     var body: some View {
         
@@ -30,9 +29,9 @@ struct EventView: View {
                     // Actions after panic button Has been pressed
                     self.isPresented = true
                     
-                    viewModel.activatePanicMode()
-                    panicMode = true
-                    viewModel.sentNotification()
+//                    viewModel.activatePanicMode()
+//                    panicMode = true
+                    
                 }) {
                     TrackingModeButtonComponent(panicmode: $panicMode)
                 }
@@ -59,7 +58,7 @@ struct EventView: View {
                 Spacer()
                 
             }
-            alertBoxComponent(buttonIsPressed: $isPresented,text: $text)
+            alertBoxComponent(buttonIsPressed: $isPresented,text: $text, panicMode: $panicMode)
         }
         
         .navigationBarHidden(true)

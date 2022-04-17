@@ -26,7 +26,7 @@ class EventViewModel: ObservableObject {
     func activatePanicMode() {
         print("Panic Mode activated")
         mode = "Panic"
-        
+        sentNotification()
         // TODO Panic Mode functionality #41 -> activate panic mode
     }
     
