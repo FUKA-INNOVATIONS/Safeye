@@ -18,6 +18,7 @@ struct Location: Identifiable {
 struct MapView: View {
         
     @EnvironmentObject var viewModel: MapViewModel
+    @EnvironmentObject var appState: Store
     
     @State private var draggedOffset = CGSize.zero
     @State private var listOpen = false
@@ -127,6 +128,9 @@ struct MapView: View {
                         
                     }
                 )
+        }
+        .onAppear {
+            print("MapView -> EVENT STATE: \(appState.event?.status.rawValue ?? "")")
         }
         
     }

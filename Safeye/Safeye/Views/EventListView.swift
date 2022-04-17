@@ -16,28 +16,39 @@ struct EventListView: View {
         VStack {
             Text("\(EventVM.getEventsCount()) events")
             Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
-            .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
+                .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
             Form {
                 Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
                     ForEach(appState.eventsOfCurrentUser) { event in
                         let color = event.status == .PANIC ? Color.red : Color.green
-                            NavigationLink {
-                                EventView(eventID: event.id!)
-                            } label: {
-                                Image(systemName: "minus.circle.fill")
+                        
+                        Group {
+                            NavigationLink { EventView(eventID: event.id!) } label: {
                                 HStack {
                                     Text("\(event.eventType.capitalizingFirstLetter())")
                                         .foregroundStyle(color)
+                                    Spacer()
                                     Text("\(event.startTime.formatted(.dateTime))")
                                         .font(.caption)
-                                        
-                                    Spacer()
-                                    HStack {
-                                        Text("\(event.trustedContacts.count)")
-                                        Image(systemName: "eye")
-                                    }
                                 }
                             }
+                            
+                            HStack {
+                                Image(systemName: "minus.circle.fill")
+                                Spacer()
+                                Text("\(event.status.rawValue)")
+                                Spacer()
+                                HStack {
+                                    Text("\(event.trustedContacts.count)")
+                                    Image(systemName: "eye")
+                                }
+                            }
+                            
+                            
+                        }
+                        
+                        Spacer(minLength: 30)
+                        
                     }
                 }
                  

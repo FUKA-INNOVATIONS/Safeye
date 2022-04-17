@@ -104,10 +104,12 @@ class EventService {
                 self.eventErrors = "eventService: Error getting event: \(error.localizedDescription)"
             }
             else {
-                if let document = document {
+                if let event = document {
                     DispatchQueue.main.async {
                         do {
-                            self.appState.event = try document.data(as: Event.self)
+                            let convertedEvent =  try event.data(as: Event.self)
+                            self.appState.event = convertedEvent
+                            if convertedEvent.status == .PANIC { self.appState.eventsPanic.append(convertedEvent) }
                             print("Fetched event: \(String(describing: self.appState.event))")
                         }
                         catch {
@@ -117,6 +119,7 @@ class EventService {
                 }
             }
         }
+        // return listener
     } // end of getDetails
     
     
@@ -146,7 +149,18 @@ class EventService {
         }
     } // end of changeStatus
     
-    func deleteEvent() {}
+    func deleteEvent(_ eventID: String) {
+        eventDB.document(eventID).delete() { error in
+            if let error = error {
+                print("Error deleting event: \(error)")
+            } else {
+                print("Event successfully deleted!")
+            }
+        }
+    }
+    
+    
+    
     
     func subscribeContact() {}
     

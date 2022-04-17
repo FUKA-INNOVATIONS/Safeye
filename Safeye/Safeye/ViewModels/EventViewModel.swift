@@ -98,10 +98,10 @@ class EventViewModel: ObservableObject {
     
     
     
-    func getDetails(for eventID: String) { // Get details for a specific evens, result in appState.event
-        DispatchQueue.main.async {
-            self.eventService.fetchDetails(eventID)
-        }
+    func getDetails(for eventID: String) { // Get details for a specific evens, result in appState.even
+        self.eventService.fetchDetails(eventID)
+            //let eventListener = self.eventService.fetchDetails(eventID)
+            //return eventListener
     }
     
     func getEventsOfCurrentUser() {
@@ -157,8 +157,6 @@ class EventViewModel: ObservableObject {
         self.connService.fetchConnectionProfiles(self.appState.eventCurrentUser!.trustedContacts, eventCase: true)
     } */
     
-    
-    
 
     
     func changeStatus(_ eventID: String,_ newStatus: EventStatus) {
@@ -166,17 +164,17 @@ class EventViewModel: ObservableObject {
         eventService.changeStatus(eventID, newStatus)
     }
     
-    func editEvent() {}
     
-    func deleteEvent() {}
+    func deleteEvent(_ eventID: String) {
+        self.eventService.deleteEvent(eventID)
+        DispatchQueue.main.async {
+            self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID }
+        }
+    }
     
     func subscribeContact() {}
     
     func unsubscribeContact() {}
-    
-    // func getLocation() {}
-    
-    func setLocation() {}
     
     func startListening() {}
     

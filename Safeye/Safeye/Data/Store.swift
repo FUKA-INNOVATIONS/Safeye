@@ -40,6 +40,7 @@ class Store: ObservableObject {
     
     @Published var eventSelctedContacts = ([ProfileModel])()
     @Published var currentEventTrustedContacts = [ProfileModel]()
+    @Published var eventsPanic = [Event]()
     
     @Published var currentUserID = ""
     @Published var currentUserEmail = ""

@@ -35,7 +35,9 @@ struct EventView: View {
                 }
                 
                 Section(header: Text("Event details")) {
-                    Text("EventType: \(appState.event?.eventType ?? "")")
+                    Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
+                    Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
+                    Text("Envent type: \(appState.event?.eventType ?? "")")
                     Text("Other info: \(appState.event?.otherInfo ?? "")")
                 }
                 
@@ -78,6 +80,7 @@ struct EventView: View {
         .onAppear {
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
+            // let eventListener = EventVM.getDetails(for: eventID)
         }
         
     }
