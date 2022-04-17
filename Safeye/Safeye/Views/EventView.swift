@@ -26,7 +26,8 @@ struct EventView: View {
                 Section(header: Text("Trusted contacts")) {
                     ForEach(appState.eventTrustedContactsProfiles) { profile in
                         HStack {
-                            Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
+                            //Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
+                            Text("\(profile.fullName)")
                             Spacer()
                             Image(systemName: "eye.fill")
                         }
@@ -75,8 +76,8 @@ struct EventView: View {
         }
         //.navigationBarHidden(true)
         .onAppear {
-            EventVM.getDetails(for: eventID)
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
+            EventVM.getDetails(for: eventID)
         }
         
     }

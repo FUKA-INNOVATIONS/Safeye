@@ -15,8 +15,6 @@ struct ProfileView: View {
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
     @State private var showingAddSafePlace = false
-    @State private var showingCreateEvent = false
-
 
     var body: some View {
         
@@ -54,10 +52,10 @@ struct ProfileView: View {
                 }
                 
                 VStack {
-                    Button("Create new event", action: { showingCreateEvent = true } )
+                    /* Button("Create new event", action: { showingCreateEvent = true } )
                     .sheet(isPresented: $showingCreateEvent) {
                         CreateEventView()
-                    }
+                    } */
                     
                     Form {
                         UserDetailsComponent()
@@ -90,6 +88,7 @@ struct ProfileView: View {
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
         }
+        
     }
 }
 

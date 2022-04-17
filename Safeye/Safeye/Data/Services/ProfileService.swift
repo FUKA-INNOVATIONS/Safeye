@@ -112,7 +112,7 @@ class ProfileService {
             } else {
                 self.appState.eventTrustedContactsProfiles.removeAll()
                 for profile in profiles!.documents {
-                    print("\(profile.documentID) => \(profile.data())")
+                    print("TC profile: \(profile.documentID) => \(profile.data())")
                     DispatchQueue.main.async {
                         do {
                             let convertedProfile = try profile.data(as: ProfileModel.self)

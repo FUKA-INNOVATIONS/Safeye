@@ -22,6 +22,7 @@ struct CreateEventView: View {
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
     
     @State var goEventView = false
+    @Environment(\.dismiss) var dismiss
     
     
     var body: some View {
@@ -68,6 +69,7 @@ struct CreateEventView: View {
                 if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType) {
                     //goEventView.toggle()
                     //NavigationLink("", destination: EventView(), isActive: $goEventView)
+                    dismiss()
                 }
             })
             
@@ -84,8 +86,6 @@ struct CreateEventView: View {
             EventVM.resetEventSelectedContacts()
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
-            EventVM.getEventsOfCurrentUser()
-            
         }
         
     }

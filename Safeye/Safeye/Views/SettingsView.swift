@@ -54,7 +54,7 @@ struct SettingsView: View {
             SettingsListViewComponent(settingsView: true)
         }
         .onAppear {
-            EventVM.getEventsOfCurrentUser()
+            //EventVM.getEventsOfCurrentUser()
         }
         
         

@@ -63,7 +63,7 @@ class EventViewModel: ObservableObject {
     
     func isEventTrustedContact() -> Bool {
         let selfFound = self.appState.event!.trustedContacts.filter { $0 == AuthenticationService.getInstance.currentUser!.uid }
-        if selfFound.count > 0 {
+        if !selfFound.isEmpty {
             return true
         } else {
             return false
@@ -116,6 +116,13 @@ class EventViewModel: ObservableObject {
         self.appState.eventsOfTrustedContacts.removeAll()
         let currentUserId = AuthenticationService.getInstance.currentUser!.uid
         self.eventService.fetchEventsOfTrustedContacts(userID: currentUserId)
+    }
+    
+    func getEventsAll() {
+        DispatchQueue.main.async {
+            self.getEventsOfTrustedContacts()
+            self.getEventsOfCurrentUser()
+        }
     }
     
     func getEventTrustedContactsProfiles(eventID: String) {
