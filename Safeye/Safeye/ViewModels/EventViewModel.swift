@@ -57,13 +57,14 @@ class EventViewModel: ObservableObject {
         
     }
     
-    func isOwner(of eventID: String) -> Bool {
-        return eventID == AuthenticationService.getInstance.currentUser!.uid
+    func isEventOwner() -> Bool {
+        return self.appState.event?.ownerId == AuthenticationService.getInstance.currentUser!.uid
     }
     
-    func isEventTrustedContact() -> Bool {
+    func isEventTrustedContact() -> Bool {//Not working properly, checks if user is one of trusted contacts of an event
         let selfFound = self.appState.event!.trustedContacts.filter { $0 == AuthenticationService.getInstance.currentUser!.uid }
         if !selfFound.isEmpty {
+            print("ISISI: \(selfFound)")
             return true
         } else {
             return false
@@ -168,7 +169,8 @@ class EventViewModel: ObservableObject {
     func deleteEvent(_ eventID: String) {
         self.eventService.deleteEvent(eventID)
         DispatchQueue.main.async {
-            self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID }
+            //self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID }
+            
         }
     }
     

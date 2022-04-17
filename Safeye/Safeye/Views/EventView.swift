@@ -10,9 +10,9 @@ import SwiftUI
 struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
-    @State var eventID: String
     
-    @State var panicMode: Bool = false // replace with appState
+    @State var goBack = false
+    var eventID: String
     
     var body: some View {
         
@@ -20,7 +20,14 @@ struct EventView: View {
             
             Text("\(appState.event?.status.rawValue ?? "")")
                 .font(.largeTitle)
-            Spacer()
+                .toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
+                    EventVM.deleteEvent(eventID)
+                    goBack = true
+                } }
+                .background(
+                    NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
+                )
+            
             
             Form {
                 Section(header: Text("Trusted contacts")) {
@@ -43,7 +50,7 @@ struct EventView: View {
                 
             }
             
-            if EventVM.isOwner(of: appState.event?.ownerId ?? "") {
+            if EventVM.isEventOwner() {
                 appState.event!.status == .STARTED ?
                 Button(action: { // Actions after panic button Has been pressed
                     EventVM.activatePanicMode()
@@ -62,16 +69,16 @@ struct EventView: View {
             
             
             Spacer()
-
+            
             Spacer()
             
             //Send value of tracking: true to map view
             /* NavigationLink("View Map", destination: MapView())
-                .padding() */
+             .padding() */
             
             // Replace with button?
             /*NavigationLink("Disable Tracking", destination: ContentView())
-                .disabled(true)*/
+             .disabled(true)*/
             
             Spacer()
             
@@ -88,8 +95,8 @@ struct EventView: View {
 }
 
 /*struct TrackingModeView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventView()
-            .previewInterfaceOrientation(.portraitUpsideDown)
-    }
-}*/
+ static var previews: some View {
+ EventView()
+ .previewInterfaceOrientation(.portraitUpsideDown)
+ }
+ }*/
