@@ -28,7 +28,7 @@ class Store: ObservableObject {
     @Published var settings = [SettingModel]()
     @Published var events = [Event]()
     @Published var event: Event?
-    @Published var panicMode = true
+    @Published var panicMode = false
     
     @Published var errors = [String]()
     @Published var notifications = [String]()
