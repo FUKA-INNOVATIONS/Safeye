@@ -85,9 +85,9 @@ struct ProfileEditView: View {
                 // Upload button
                 if selectedPhoto != nil {
                     Button {
-                        // upload the image
-                        FileVM.uploadPhoto(selectedPhoto: selectedPhoto)
-                        self.avatar = FileVM.avatarUrl
+//                        // upload the image
+//                        FileVM.uploadPhoto(selectedPhoto: selectedPhoto)
+                        //self.avatar = FileVM.avatarUrl
                     } label: {
                         Text("Upload photo")
                     }
@@ -146,8 +146,13 @@ struct ProfileEditView: View {
                     hasher.combine(AuthVM.authService.currentUser!.uid)
                     let connectionHash = String(hasher.finalize())
                     
+                    // upload the image
+                    FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: nil)
+                    self.avatar = FileVM.avatarUrl
+                    
                     // Insert profile data into the database
                     ProfileVM.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash, avatar: avatar)
+                    
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
                     dismiss()
@@ -161,6 +166,11 @@ struct ProfileEditView: View {
                         self.showEmptyFieldAlert = true // Show alert box
                         return
                     }
+                    
+                    // upload the image
+                    let avatarUrlFetched = ProfileVM.profileDetails!.avatar
+                    FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatarUrlFetched)
+                    self.avatar = avatarUrlFetched
                     
                     // Update profile data in the database
                     ProfileVM.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, avatar: avatar)

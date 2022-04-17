@@ -48,46 +48,11 @@ struct ProfileView: View {
                         ProfileEditView()
                     }
                     VStack {
-                        if selectedPhoto != nil {
-                            Image(uiImage: selectedPhoto!)
-                                .resizable()
-                                .frame(width: 70, height: 70)
-                        } else if FileVM.fetchedPhoto != nil {
+                        if FileVM.fetchedPhoto != nil {
                                 Image(uiImage: FileVM.fetchedPhoto!)
                                     .resizable()
                                     .frame(width: 70, height: 70)
-                            
                         }
-                        
-                        Button {
-                            // show the image picker
-                            isImagePickerShowing = true
-
-                        } label: {
-                            Text("Select a profile photo")
-                        }
-                        
-                        // Upload button
-                        if selectedPhoto != nil {
-                            Button {
-                                // upload the image
-                                FileVM.uploadPhoto(selectedPhoto: selectedPhoto)
-                            } label: {
-                                Text("Upload photo")
-                            }
-                        }
-                        
-                        
-//                        HStack {
-//                            ForEach(retrievedImages, id: \.self) {image in
-//                                Image(uiImage: image)
-//                                    .resizable()
-//                                    .frame(width: 70, height: 70)
-//                            }
-//                        }
-                        
-                        
-                        // AvatarComponent(size: 80)
                     }
                     .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
                         // Image picker

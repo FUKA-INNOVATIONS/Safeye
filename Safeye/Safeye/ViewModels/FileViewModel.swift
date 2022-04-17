@@ -15,12 +15,15 @@ class FileViewModel: ObservableObject {
     @Published var avatarExists = false
     // @Published var retrievedImages = [UIImage?]()
     @Published var fetchedPhoto: UIImage?
-    @Published var avatarUrl: String = ""
-    
-    // TODO: this uploads a photo to avatars folder. Need to associate it with user profile. Maybe put the refrence in user profile
+    @Published var avatarUrl: String = "avatars/\(UUID().uuidString).jpg"
+    private let appStore = Store.shared
+
     // upload a photo
-    func uploadPhoto(selectedPhoto: UIImage?) {
-        self.avatarUrl = fileService.putPhoto(selectedPhoto)
+    func uploadPhoto(selectedPhoto: UIImage?, avatarUrlFetched: String?) {
+        if avatarUrlFetched != nil {
+            self.avatarUrl = avatarUrlFetched!
+        } 
+        self.avatarUrl = fileService.putPhoto(selectedPhoto, avatarUrl)
     }
     
     // fetch photos

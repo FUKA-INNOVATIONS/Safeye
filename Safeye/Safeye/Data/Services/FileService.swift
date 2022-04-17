@@ -12,7 +12,7 @@ import FirebaseFirestore
 class FileService {
     static let shared = FileService() ; private init() {}
     private let storageRef = Storage.storage().reference()
-    private let path = "avatars/\(UUID().uuidString).jpg"
+    @State private var path = "avatars/\(UUID().uuidString).jpg"
     private let fileDB = Firestore.firestore()
     
     private let appStore = Store.shared
@@ -26,12 +26,12 @@ class FileService {
         return fetchedPhoto
     }
     
-    func putPhoto(_ selectedPhoto: UIImage?) -> String {
-        uploadPhoto(selectedPhoto)
+    func putPhoto(_ selectedPhoto: UIImage?, _ avatarUrl: String?) -> String {
+        uploadPhoto(selectedPhoto, avatarUrl)
         return self.path
     }
     
-    func uploadPhoto(_ selectedPhoto: UIImage?) {
+    func uploadPhoto(_ selectedPhoto: UIImage?, _ avatarUrl: String?) {
         // Make sure that selected image property isn't nil
         guard selectedPhoto != nil else {
             return
@@ -48,7 +48,9 @@ class FileService {
         }
         // Specify the file path and name
         // let path = "avatars/\(UUID().uuidString).jpg"
-        let fileRef = storageRef.child(path)
+        self.path = avatarUrl!
+        let fileRef = storageRef.child(avatarUrl!)
+        
         // Upload data
         fileRef.putData(imageData!, metadata: nil) { metadata, error in
             // checks for errors
