@@ -20,9 +20,8 @@ struct ProfileView: View {
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
-    @State var retrievedImages = [UIImage]()
-    //@State var fetchedPhoto: UIImage?
-    
+    @State var fetchedPhoto: UIImage?
+    @State var contacts: [ProfileModel] = [ProfileModel]()
     
     var body: some View {
         
@@ -49,14 +48,10 @@ struct ProfileView: View {
                     }
                     VStack {
                         if FileVM.fetchedPhoto != nil {
-                                Image(uiImage: FileVM.fetchedPhoto!)
-                                    .resizable()
-                                    .frame(width: 70, height: 70)
+                            ProfileImageComponent(size: 100, avatarImage: FileVM.fetchedPhoto!)
+                        } else {
+                            ProfileImageComponent(size: 70, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
                         }
-                    }
-                    .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
-                        // Image picker
-                        ImagePicker(selectedPhoto: $selectedPhoto, isImagePickerShowing: $isImagePickerShowing)
                     }
                 }
                 Group {
@@ -70,6 +65,7 @@ struct ProfileView: View {
                         Spacer(minLength: 20)
                     }
                     Spacer()
+                    
                 }
                 UserDetailsComponent()
                 Spacer()
@@ -92,7 +88,8 @@ struct ProfileView: View {
             }
             .onAppear {
                 ProfileVM.getProfile()
-                FileVM.fetchPhotos()
+                FileVM.fetchPhoto(avatarUrlFetched: ProfileVM.profileDetails?.avatar)
+                fetchedPhoto = FileVM.fetchedPhoto
             }
             
             AddContactView(isShowing: $showingAddContact, searchInput: "")

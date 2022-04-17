@@ -15,22 +15,18 @@ class FileViewModel: ObservableObject {
     @Published var avatarExists = false
     // @Published var retrievedImages = [UIImage?]()
     @Published var fetchedPhoto: UIImage?
-    @Published var avatarUrl: String = "avatars/\(UUID().uuidString).jpg"
+    @Published var avatarUrl: String = ""
     private let appStore = Store.shared
 
     // upload a photo
-    func uploadPhoto(selectedPhoto: UIImage?, avatarUrlFetched: String?) {
-        if avatarUrlFetched != nil {
-            self.avatarUrl = avatarUrlFetched!
-        } 
-        self.avatarUrl = fileService.putPhoto(selectedPhoto, avatarUrl)
+    func uploadPhoto(selectedPhoto: UIImage?, avatarUrlFetched: String) {
+            self.avatarUrl = avatarUrlFetched
+            self.avatarUrl = fileService.putPhoto(selectedPhoto, avatarUrl)
     }
     
     // fetch photos
-    // fetched all photos in avatar folder
-    // TODO: this should pass userId and retrieve only users avatar
-    func fetchPhotos() {
-        self.fetchedPhoto = fileService.getPhotos()
+    func fetchPhoto(avatarUrlFetched: String?) {
+        self.fetchedPhoto = fileService.getPhoto(avatarUrlFetched: avatarUrlFetched)
     }
     
 }

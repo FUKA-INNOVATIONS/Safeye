@@ -31,7 +31,6 @@ struct ProfileEditView: View {
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
-    @State var retrievedImages = [UIImage]()
     /* init() {
      print("ProfileEditView init")
      profileViewModel.getProfile()
@@ -62,36 +61,20 @@ struct ProfileEditView: View {
                 Text("Please fill all fields to create new profile")
             }
             
-            VStack {
+            HStack {
                 if selectedPhoto != nil {
-                    Image(uiImage: selectedPhoto!)
-                        .resizable()
-                        .frame(width: 70, height: 70)
+                    ProfileImageComponent(size: 60, avatarImage: selectedPhoto!)
                 } else if FileVM.fetchedPhoto != nil {
-                        Image(uiImage: FileVM.fetchedPhoto!)
-                            .resizable()
-                            .frame(width: 70, height: 70)
-                    
+                    ProfileImageComponent(size: 60, avatarImage: FileVM.fetchedPhoto!)
+                } else {
+                    ProfileImageComponent(size: 40, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
                 }
-                
                 Button {
-                    // show the image picker
                     isImagePickerShowing = true
-
                 } label: {
-                    Text("Select a profile photo")
+                    Text("Select profile photo")
                 }
-                
-                // Upload button
-                if selectedPhoto != nil {
-                    Button {
-//                        // upload the image
-//                        FileVM.uploadPhoto(selectedPhoto: selectedPhoto)
-                        //self.avatar = FileVM.avatarUrl
-                    } label: {
-                        Text("Upload photo")
-                    }
-                }
+
             }
             .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
                 // Image picker
@@ -136,7 +119,7 @@ struct ProfileEditView: View {
                     print("User has no PROFILE, add new profile")
                     
                     // User has filled all form fields
-                    if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 {
+                    if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 || selectedPhoto == nil {
                         self.showEmptyFieldAlert = true // Show alert box
                         return
                     }
@@ -147,8 +130,8 @@ struct ProfileEditView: View {
                     let connectionHash = String(hasher.finalize())
                     
                     // upload the image
-                    FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: nil)
-                    self.avatar = FileVM.avatarUrl
+                    self.avatar = "avatars/\(UUID().uuidString).jpg"
+                    FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: self.avatar)
                     
                     // Insert profile data into the database
                     ProfileVM.addDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash, avatar: avatar)
@@ -176,6 +159,7 @@ struct ProfileEditView: View {
                     ProfileVM.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, avatar: avatar)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
+                    selectedPhoto = nil
                     dismiss()
                 }
             }

@@ -8,6 +8,5 @@
 import SwiftUI
 
 struct FileModel {
-    var selectedPhoto: [UIImage]?
-    var avatarUrl: String?
+    var avatarPhoto: UIImage?
 }

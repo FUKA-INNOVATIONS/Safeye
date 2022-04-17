@@ -25,9 +25,6 @@ class Store: ObservableObject {
     
     @Published var errors = [String]()
     @Published var notifications = [String]()
-    
-    @Published var selectedPhoto = [FileModel]()
-
 }
 
 

@@ -16,6 +16,7 @@ struct AvatarComponent: View {
     }
     
         var body: some View {
+            
             AsyncImage(url: avatarURL) { phase in
                 if let image = phase.image {
                     image
