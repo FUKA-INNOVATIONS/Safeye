@@ -26,9 +26,10 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @StateObject private var notificationService = NotificationService()
     
-    // Lines 29-74 location manager for tracking and panuc mode
+    // Lines 30-77 location manager for tracking and panic mode
     var locationManager: CLLocationManager?
     
+    // First checks loction permissions are allowed and created locationManager
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
@@ -45,13 +46,14 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    // Request always in use authorization so it can run in background
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
 
         switch locationManager.authorizationStatus {
             
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
         case .restricted:
             print("Your location is restricted")
         case .denied:
@@ -63,6 +65,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    // Reruns authorization check if permissions are changed
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
