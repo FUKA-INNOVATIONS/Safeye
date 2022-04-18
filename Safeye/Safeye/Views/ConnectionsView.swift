@@ -10,7 +10,7 @@ import SwiftUI
 struct ConnectionsView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
-    
+    @State var showingConnectionProfile = false
     
     var body: some View {
         VStack {
@@ -19,27 +19,27 @@ struct ConnectionsView: View {
                 
                 Section("Connections") {
                     ForEach(appState.connections) { connection in
-                        // let _ = self.appState.connectionPofiles.filter { $0.userId == connection.connectionUsers[1] }
+                        //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
+                        Button { ConnectionVM.deleteConnection(connection.id!) } label: { Image(systemName: "trash").foregroundColor(.red) }
                         HStack {
                             Image(systemName: "trash")
                             Text("Full name")
                             Spacer()
                             Text("profile")
-                            Image(systemName: "eye")
+                            Button { showingConnectionProfile = true } label: { Image(systemName: "eye") }
                         }
+                        .sheet(isPresented: $showingConnectionProfile) {
+                            //ProfileView(profileID: connection.id!)
+                        }
+                        //.background( NavigationLink(destination: ProfileView(profileID: connection.id!), isActive: $goConnectionProfile) { EmptyView() }.hidden() )
                     }
                     
                 }
                 
                 Section("Received requests") {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
-                        HStack {
-                            Button {
-                                ConnectionVM.confirmConnectionRequest(confirmedRequest: request)
-                            } label: {
-                                Text("Tap")
-                            }
-
+                        HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)} label: {Text("")}
+                            
                             Text("Full name")
                             Spacer()
                             Group {
@@ -58,7 +58,7 @@ struct ConnectionsView: View {
                             Spacer()
                             Group {
                                 Text("cancel")
-                                Image(systemName: "hand.raised.slash.fill")
+                                Button { ConnectionVM.deleteConnection(request.id!) } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
                             }
                             .foregroundColor(.red)
                         }
@@ -66,12 +66,12 @@ struct ConnectionsView: View {
                 }
                 
             }
-
+            
         }
         .onAppear {
             ConnectionVM.getConnections()
-            ConnectionVM.getConnectionProfiles()
             ConnectionVM.getPendingRequests()
+            ConnectionVM.getConnectionProfiles()
         }
     }
 }

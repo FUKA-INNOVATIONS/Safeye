@@ -13,8 +13,22 @@ class ConnectionViewModel: ObservableObject {
     static let shared = ConnectionViewModel() ;  private init() {}
     private var connService = ConnectionService.shared
     private var profileService = ProfileService.shared
-    private var appState = Store.shared
+    @ObservedObject var appState = Store.shared
     
+    func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> String { // to filter specific connection profile from appState
+        let trustedContactProfileId = connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+        //print("filterConnectionProfileFromAppState \(trustedContactProfileId)")
+        let connectionProfile = self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
+        //print("filterConnectionProfileFromAppState \(connectionProfile.fullName)")
+        return connectionProfile.fullName
+    }
+    
+    func deleteConnection(_ connectionID: String) {
+        DispatchQueue.main.async {
+            self.connService.deleteConnection(connectionID)
+            self.appState.pendingConnectionRequestsOwner = self.appState.pendingConnectionRequestsOwner.filter { $0.id != connectionID }
+        }
+    }
     
     func confirmConnectionRequest(confirmedRequest: ConnectionModel) {
         var confirmedRequest = confirmedRequest ; confirmedRequest.status = true

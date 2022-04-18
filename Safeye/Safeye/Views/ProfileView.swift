@@ -15,12 +15,12 @@ struct ProfileView: View {
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
     @State private var showingAddSafePlace = false
-
+    
     var body: some View {
         
         ZStack {
             VStack {
-
+                
                 Group{
                     AvatarComponent(size: 80)
                     HStack {
@@ -53,9 +53,9 @@ struct ProfileView: View {
                 
                 VStack {
                     /* Button("Create new event", action: { showingCreateEvent = true } )
-                    .sheet(isPresented: $showingCreateEvent) {
-                        CreateEventView()
-                    } */
+                     .sheet(isPresented: $showingCreateEvent) {
+                     CreateEventView()
+                     } */
                     
                     Form {
                         UserDetailsComponent()
@@ -65,8 +65,8 @@ struct ProfileView: View {
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
                     HStack{
-                    //size with icons doesn't work properly, will figure this out later
-                    ListViewComponent(item: "safeSpace", size: 40)
+                        //size with icons doesn't work properly, will figure this out later
+                        ListViewComponent(item: "safeSpace", size: 40)
                         Button(action: {
                             showingAddSafePlace = true
                             print("modal: ($showingAddSafePlace)")
@@ -92,8 +92,8 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
+/*struct ProfileView_Previews: PreviewProvider {
+ static var previews: some View {
+ ProfileView()
+ }
+ }*/

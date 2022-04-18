@@ -96,6 +96,16 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    func deleteConnection(_ connectionID: String) {
+        connectionsDB.document(connectionID).delete() { error in
+            if let error = error {
+                print("Error deleting event: \(error)")
+            } else {
+                print("Event successfully deleted!")
+            }
+        }
+    }
+    
     
     // Add user as trusted contact and create a new entry in 'connections' collection
     func addConnection(newConn: ConnectionModel) -> Bool { // TODO: FIX > check for existing connection, add only if not exist
