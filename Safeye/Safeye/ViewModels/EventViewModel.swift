@@ -83,8 +83,6 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.eventService.updateEvent(self.appState.event!)
         //self.getEventsOfCurrentUser()
         locationManager?.distanceFilter = 1
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.pausesLocationUpdatesAutomatically = false
         print("Panic Mode activated")
     }
     
@@ -95,8 +93,6 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.eventService.updateEvent(self.appState.event!)
         //self.getEventsOfCurrentUser()
         locationManager?.distanceFilter = 100
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.pausesLocationUpdatesAutomatically = false
         print("Disabled panic mode")
         
     }
