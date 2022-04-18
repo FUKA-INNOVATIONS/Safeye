@@ -87,6 +87,7 @@ struct EventView: View {
         .onAppear {
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
+            EventVM.checkIfLocationServicesIsEnabled()
             // let eventListener = EventVM.getDetails(for: eventID)
         }
         

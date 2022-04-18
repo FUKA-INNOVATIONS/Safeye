@@ -64,7 +64,6 @@
 		5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */; };
 		5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */; };
 		5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */; };
-		5F553BB02805EAF6000518F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F553BAF2805EAF6000518F7 /* GoogleService-Info.plist */; };
 		5F553BB22806123B000518F7 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F553BB12806123B000518F7 /* ConnectionModel.swift */; };
 		5F5962022802CD7900C8F682 /* TackingModeButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */; };
 		5F5D0C662807EB6E00999B78 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5D0C652807EB6E00999B78 /* Store.swift */; };
@@ -89,6 +88,7 @@
 		6A2CFC332801C8B80046395D /* TCListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC322801C8B80046395D /* TCListModifier.swift */; };
 		6A2CFC352801CAA10046395D /* TCItemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC342801CAA10046395D /* TCItemModifier.swift */; };
 		6A3A881928031E460049DC7F /* ContactConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A881828031E460049DC7F /* ContactConnectionModel.swift */; };
+		6A55867D280D5C840076B3CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A55867C280D5C840076B3CE /* GoogleService-Info.plist */; };
 		6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */; };
 		6ABCDD2227FF096F009563E7 /* ListViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */; };
 		6ABCDD2427FF1B19009563E7 /* UserDetailsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */; };
@@ -180,7 +180,6 @@
 		5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secureInputFieldModifier.swift; sourceTree = "<group>"; };
 		5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputFieldComponent.swift; sourceTree = "<group>"; };
 		5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
-		5F553BAF2805EAF6000518F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F553BB12806123B000518F7 /* ConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
 		5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TackingModeButtonComponent.swift; sourceTree = "<group>"; };
 		5F5D0C652807EB6E00999B78 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -202,6 +201,8 @@
 		6A2CFC322801C8B80046395D /* TCListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCListModifier.swift; sourceTree = "<group>"; };
 		6A2CFC342801CAA10046395D /* TCItemModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCItemModifier.swift; sourceTree = "<group>"; };
 		6A3A881828031E460049DC7F /* ContactConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactConnectionModel.swift; sourceTree = "<group>"; };
+		6A55867C280D5C840076B3CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../FirebaseImportant/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A55867E280D66260076B3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItemComponent.swift; sourceTree = "<group>"; };
 		6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewComponent.swift; sourceTree = "<group>"; };
 		6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsComponent.swift; sourceTree = "<group>"; };
@@ -266,7 +267,8 @@
 		5F0EA2F927F6F9E000FBD77B /* Safeye */ = {
 			isa = PBXGroup;
 			children = (
-				5F553BAF2805EAF6000518F7 /* GoogleService-Info.plist */,
+				6A55867E280D66260076B3CE /* Info.plist */,
+				6A55867C280D5C840076B3CE /* GoogleService-Info.plist */,
 				5F244AE827F7213E00BFE1FB /* Utils */,
 				5F8B94F527F70A570067C6C9 /* Views */,
 				5F244A8327F70B3300BFE1FB /* Components */,
@@ -599,8 +601,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F0EA30227F6F9E100FBD77B /* Preview Assets.xcassets in Resources */,
-				5F553BB02805EAF6000518F7 /* GoogleService-Info.plist in Resources */,
 				5F0EA2FF27F6F9E100FBD77B /* Assets.xcassets in Resources */,
+				6A55867D280D5C840076B3CE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,6 +872,7 @@
 				DEVELOPMENT_TEAM = X9LKA75DEX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Safeye/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to allow trusted contacts to find you in an emergency";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -900,6 +903,7 @@
 				DEVELOPMENT_TEAM = X9LKA75DEX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Safeye/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to allow trusted contacts to find you in an emergency";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
