@@ -15,6 +15,7 @@ struct ContentView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var MapVM: MapViewModel
     @EnvironmentObject var appState: Store
+    @EnvironmentObject var FileVM: FileViewModel
     
     @StateObject private var notificationService = NotificationService()
     

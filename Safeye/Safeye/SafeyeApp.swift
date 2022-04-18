@@ -17,6 +17,7 @@ struct SafeyeApp: App {
     @StateObject var ConnectionVM = ConnectionViewModel.shared
     @StateObject var EventVM = EventViewModel.shared
     @StateObject var MapVM = MapViewModel()
+    @StateObject var FileVM = FileViewModel.shared
     
     @StateObject var PlaygroundVM = PlaygroundViewModel.shared
     
@@ -53,7 +54,7 @@ struct SafeyeApp: App {
             .environmentObject(MapVM)
             .environmentObject(appStore)
             .environmentObject(PlaygroundVM)
-            
+            .environmentObject(FileVM)
         }
     }
 }
