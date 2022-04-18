@@ -375,23 +375,23 @@
 			isa = PBXGroup;
 			children = (
 				6AD96E4327FD49E600063439 /* AvatarComponent.swift */,
-				5F23EE092801B54800623B0C /* SettingsListViewComponent.swift */,
 				5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */,
+				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
+				6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */,
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */,
+				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
 				D5148A5227FF5C8800E98347 /* NavItem.swift */,
 				6ABCDD2527FFEC7B009563E7 /* SafeSpaceComponent.swift */,
+				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
 				6ABCDD2727FFF8F9009563E7 /* SelectContactComponent.swift */,
 				6ABCDD29280000EE009563E7 /* SelectContactsGridComponent.swift */,
 				6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */,
-				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
-				6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */,
-				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
-				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
+				5F23EE092801B54800623B0C /* SettingsListViewComponent.swift */,
+				5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
-				5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
