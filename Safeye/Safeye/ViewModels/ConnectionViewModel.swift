@@ -16,7 +16,10 @@ class ConnectionViewModel: ObservableObject {
     private var appState = Store.shared
     
     
-    
+    func confirmConnectionRequest(confirmedRequest: ConnectionModel) {
+        var confirmedRequest = confirmedRequest ; confirmedRequest.status = true
+        self.connService.confirmConnectionRequest(confirmedRequest)
+    }
 
     func getPendingRequests()  {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
@@ -26,11 +29,11 @@ class ConnectionViewModel: ObservableObject {
     func getConnectionProfiles() {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
         self.appState.connectionPofiles.removeAll()
-        self.getConnections()
+        // self.getConnections()
         var connectionIDS = [String]()
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
-                if !userID.value.isEmpty, userID.value != currentUserID { connectionIDS.append(String(userID.value)) }
+                if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
             }
         }
         print("getConnectionProfiles -> Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
@@ -54,7 +57,7 @@ class ConnectionViewModel: ObservableObject {
         
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
-                if userID.value == targetProfileID {
+                if userID == targetProfileID {
                     print("You already have this connection as trusted conntact")
                     return
                 }
@@ -68,7 +71,7 @@ class ConnectionViewModel: ObservableObject {
         hasher.combine(targetProfileID)
         let connectionId = String(hasher.finalize())
         
-        let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: ["owner": uid, "target": targetProfileID], status: false)
+        let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [uid, targetProfileID], status: false)
         
         // returns a boolean, was added or not?
         if connService.addConnection(newConn: newConn) {

@@ -21,7 +21,7 @@ struct SelectContactComponent: View {
                 .padding(.bottom)
                 .frame(width: 120, height: 20, alignment: .center)
             Button("\(selected ? "remove" : "add")") {
-                if selected { appState.eventSelctedContacts =  appState.eventSelctedContacts.filter { $0.id != profileDetails.id } } else { appState.eventSelctedContacts.append(profileDetails) }
+                if selected { appState.eventSelctedContacts =  appState.eventSelctedContacts.filter { $0.id != profileDetails.id } } else { appState.eventSelctedContacts.append(profileDetails) }
                 selected.toggle()
             }
             .foregroundColor(Color.white)

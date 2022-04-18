@@ -131,7 +131,7 @@ class EventService {
                 try eventRef.setData(from: event)
             }
             catch {
-                print(error)
+                print("Error in updateEvent \(error)")
             }
         }
     } // end of editEcent

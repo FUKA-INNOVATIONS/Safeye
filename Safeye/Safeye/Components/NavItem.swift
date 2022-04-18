@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct NavItem: View {
-    init() {
-        
-        UITabBar.appearance().backgroundColor = UIColor.white
+    init() { //UITabBar.appearance().backgroundColor = UIColor.white
         
     }
     var body: some View {
@@ -28,10 +26,10 @@ struct NavItem: View {
                     Text("Profile")
                 }
             
-            MapView()
+            ConnectionsView()
                 .tabItem(){
-                    Image(systemName: "map.fill")
-                    Text("Map")
+                    Image(systemName: "person.3.sequence.fill")
+                    Text("Connections")
                 }
             
             SettingsView()
