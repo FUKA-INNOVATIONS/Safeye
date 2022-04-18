@@ -46,10 +46,15 @@ struct ProfileView: View {
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
+                    
+                    // Display profile photo
                     VStack {
+                        // if user already has a profile photo, display that
                         if FileVM.fetchedPhoto != nil {
                             ProfileImageComponent(size: 100, avatarImage: FileVM.fetchedPhoto!)
                         } else {
+                            // if they don't have it, display placeholder image
+                            // this technically shouldn't be needed because we are forcing them to upload an image. However, at the moment the fetching is a bit buggy and sometimes it shows this placeholder.
                             ProfileImageComponent(size: 70, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
                         }
                     }

@@ -12,14 +12,11 @@ import FirebaseFirestore
 class FileService {
     static let shared = FileService() ; private init() {}
     private let storageRef = Storage.storage().reference()
-    @State private var path = "avatars/\(UUID().uuidString).jpg"
     private let fileDB = Firestore.firestore()
-    
     private let appStore = Store.shared
-    // private var fetchedPhotos: [UIImage?] = []
-    
     private var fetchedPhoto: UIImage?
-    
+
+    @State private var path = "avatars/\(UUID().uuidString).jpg"
     
     func getPhoto(avatarUrlFetched: String?) -> UIImage? {
         fetchPhoto(avatarUrlFetched: avatarUrlFetched)
@@ -37,17 +34,14 @@ class FileService {
             return
         }
         
-        // Create storage reference
-        // let storageRef = Storage.storage().reference()
-        
         // Turn image into data
+        // TODO: check if compression could be even lower
         let imageData = selectedPhoto!.jpegData(compressionQuality: 0.05)
-        // check that we were able to convert it to data
+        // check that we were able to convert image to data
         guard imageData != nil else {
             return
         }
         // Specify the file path and name
-        // let path = "avatars/\(UUID().uuidString).jpg"
         self.path = avatarUrl!
         let fileRef = storageRef.child(avatarUrl!)
         
@@ -60,47 +54,31 @@ class FileService {
                 }
             }
         }
-        
-        
     }
-    
-    
-    
-    
-    
     
     func fetchPhoto(avatarUrlFetched: String?)  {
         // Get the data from the database
-        // let db = Firestore.firestore(
         fileDB.collection("avatars").getDocuments { snapshot, error in
             if error == nil && snapshot != nil {
-                //var paths = [String]()
                 var path: String = ""
                 
                 for doc in snapshot!.documents {
-                    // extract the file path and add to array
-                    // paths.append(doc["url"] as! String)
+                    // extract the file path
                     path = doc["url"] as! String
                 }
-                // loop through each file path and fetch the date from storage
-                //for path in paths {
-                
-                // get a reference to storage
+                // fetch the data from storage
                 let storageRef = Storage.storage().reference()
                 let fileRef = storageRef.child(avatarUrlFetched ?? "")
-                // specify the path
                 fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
                     if error == nil && data != nil {
-                        // Create a UIImage and put it into the array for display
+                        // Create a UIImage and assign it to fetchedPhoto for display
                         if let image = UIImage(data: data!) {
                             DispatchQueue.main.async {
-                                //self.fetchedImages.append(image)
                                 self.fetchedPhoto = image
                             }
                         }
                     }
                 }
-                //}
             }
         }
     }

@@ -61,12 +61,12 @@ struct ProfileEditView: View {
                 Text("Please fill all fields to create new profile")
             }
             
-            HStack {
-                if selectedPhoto != nil {
+            HStack { // Display profile photo
+                if selectedPhoto != nil { // if user has picked a new photo, show that one
                     ProfileImageComponent(size: 60, avatarImage: selectedPhoto!)
-                } else if FileVM.fetchedPhoto != nil {
+                } else if FileVM.fetchedPhoto != nil { // if user hasn't selected a new photo, fetch one from DB if they have it
                     ProfileImageComponent(size: 60, avatarImage: FileVM.fetchedPhoto!)
-                } else {
+                } else { // otherwise show placeholder image
                     ProfileImageComponent(size: 40, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
                 }
                 Button {
@@ -78,7 +78,7 @@ struct ProfileEditView: View {
             }
             .sheet(isPresented: $isImagePickerShowing, onDismiss: nil) {
                 // Image picker
-                ImagePicker(selectedPhoto: $selectedPhoto, isImagePickerShowing: $isImagePickerShowing)
+                ImagePicker(selectedPhoto: $selectedPhoto, isImagePickerShowing: $isImagePickerShowing)  // this opens ImagePicker helper
             }
             
             HStack{
@@ -119,6 +119,7 @@ struct ProfileEditView: View {
                     print("User has no PROFILE, add new profile")
                     
                     // User has filled all form fields
+                    // TODO: show different alert when no photo is selected
                     if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 || selectedPhoto == nil {
                         self.showEmptyFieldAlert = true // Show alert box
                         return
@@ -129,8 +130,9 @@ struct ProfileEditView: View {
                     hasher.combine(AuthVM.authService.currentUser!.uid)
                     let connectionHash = String(hasher.finalize())
                     
-                    // upload the image
+                    // set avatar path/name to a random string that will be stored in profile
                     self.avatar = "avatars/\(UUID().uuidString).jpg"
+                    // upload the image
                     FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: self.avatar)
                     
                     // Insert profile data into the database
@@ -138,6 +140,8 @@ struct ProfileEditView: View {
                     
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
+                    FileVM.fetchedPhoto = selectedPhoto
+                    selectedPhoto = nil
                     dismiss()
                     
                     
@@ -150,8 +154,9 @@ struct ProfileEditView: View {
                         return
                     }
                     
-                    // upload the image
+                    // set avatar path/name to current avatar path fetched from user's profile
                     let avatarUrlFetched = ProfileVM.profileDetails!.avatar
+                    // upload the image
                     FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatarUrlFetched)
                     self.avatar = avatarUrlFetched
                     
@@ -159,6 +164,7 @@ struct ProfileEditView: View {
                     ProfileVM.upateDetails(fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, avatar: avatar)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
+                    FileVM.fetchedPhoto = selectedPhoto
                     selectedPhoto = nil
                     dismiss()
                 }
