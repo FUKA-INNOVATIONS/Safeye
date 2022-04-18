@@ -98,7 +98,7 @@ struct ProfileView: View {
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
-                FileVM.fetchPhoto(avatarUrlFetched: ProfileVM.profileDetails?.avatar)
+                FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
                 fetchedPhoto = FileVM.fetchedPhoto
             }
             AddContactView(isShowing: $showingAddContact, searchInput: "")

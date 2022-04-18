@@ -148,7 +148,7 @@ struct ProfileEditView: View {
                     }
                     
                     // set avatar path/name to current avatar path fetched from user's profile
-                    let avatarUrlFetched = ProfileVM.profileDetails!.avatar
+                    let avatarUrlFetched = appState.profile!.avatar
                     // upload the image
                     FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatarUrlFetched)
                     self.avatar = avatarUrlFetched

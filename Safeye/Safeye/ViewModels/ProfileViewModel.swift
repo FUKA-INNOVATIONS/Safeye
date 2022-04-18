@@ -15,7 +15,7 @@ class ProfileViewModel: ObservableObject {
     var AuthVM = AuthenticationViewModel.shared
     var appState = Store.shared
     
-    func updateProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String, avatar: String) {
+    func updateProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String, _ avatar: String) {
         guard let profileID = self.appState.profile?.id else {
             print("updateProfile -> profile id not found in app state")
             return
@@ -37,7 +37,7 @@ class ProfileViewModel: ObservableObject {
         self.profileService.fetchProfileByUserID(userID: currentUserID)
     }
     
-    func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String, avatar: String) {
+    func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String, _ avatar: String) {
         
         let currentUserID = AuthVM.authService.currentUser!.uid
         
