@@ -75,6 +75,7 @@
 		5FA4189C2807058100B6C6E9 /* PlayGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */; };
 		5FAB464B28045806009C4D0E /* EventStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAB464A28045806009C4D0E /* EventStatus.swift */; };
 		5FAB464F28047E44009C4D0E /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAB464E28047E44009C4D0E /* EventViewModel.swift */; };
+		5FBC1A6F280D5E6C0015CC26 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */; };
 		5FE0B091280BD30D00CFED16 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39B2807336700162C43 /* FirebaseAuth */; };
 		5FE0B092280BD30D00CFED16 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39D2807336700162C43 /* FirebaseFirestore */; };
 		5FE0B093280BD30D00CFED16 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39F2807336700162C43 /* FirebaseFirestoreSwift-Beta */; };
@@ -191,6 +192,7 @@
 		5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGroundView.swift; sourceTree = "<group>"; };
 		5FAB464A28045806009C4D0E /* EventStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatus.swift; sourceTree = "<group>"; };
 		5FAB464E28047E44009C4D0E /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
 		5FE0B094280BD3C900CFED16 /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitalizeFirstLetter.swift; sourceTree = "<group>"; };
 		5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventStatusColorModifier.swift; sourceTree = "<group>"; };
@@ -375,23 +377,23 @@
 			isa = PBXGroup;
 			children = (
 				6AD96E4327FD49E600063439 /* AvatarComponent.swift */,
-				5F23EE092801B54800623B0C /* SettingsListViewComponent.swift */,
 				5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */,
+				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
+				6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */,
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */,
+				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
 				D5148A5227FF5C8800E98347 /* NavItem.swift */,
 				6ABCDD2527FFEC7B009563E7 /* SafeSpaceComponent.swift */,
+				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
 				6ABCDD2727FFF8F9009563E7 /* SelectContactComponent.swift */,
 				6ABCDD29280000EE009563E7 /* SelectContactsGridComponent.swift */,
 				6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */,
-				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
-				6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */,
-				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
-				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
+				5F23EE092801B54800623B0C /* SettingsListViewComponent.swift */,
+				5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */,
 				5F244AE627F7202A00BFE1FB /* TextComponent.swift */,
 				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
-				5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -440,6 +442,7 @@
 				5F244A8D27F70E8700BFE1FB /* RegisterView.swift */,
 				5F244A9E27F711B900BFE1FB /* SettingsView.swift */,
 				5FE0B094280BD3C900CFED16 /* EventListView.swift */,
+				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				5F553BB22806123B000518F7 /* ConnectionModel.swift in Sources */,
 				5F244AE327F71FEE00BFE1FB /* BasicButtonComponent.swift in Sources */,
 				5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */,
+				5FBC1A6F280D5E6C0015CC26 /* ConnectionsView.swift in Sources */,
 				5F244A9227F70EC600BFE1FB /* ProfileView.swift in Sources */,
 				5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */,
 				5F244ACF27F71B3500BFE1FB /* EventRepository.swift in Sources */,

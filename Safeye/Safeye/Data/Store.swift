@@ -21,8 +21,9 @@ class Store: ObservableObject {
     
     @Published var profile: ProfileModel? = nil
     @Published var profileSearch: ProfileModel?
-    @Published var pendingRequests = [ConnectionModel]()
-    @Published var connections = [ConnectionModel]()
+    @Published var pendingConnectionRequestsOwner = [ConnectionModel]()
+    @Published var pendingConnectionRequestsTarget = [ConnectionModel]()
+    @Published var connections = [ConnectionModel]() // Trusted contacts, status = true
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
     @Published var safePlaces = [SafePlaceModel]()

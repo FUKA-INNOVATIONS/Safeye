@@ -18,8 +18,9 @@ class ConnectionService: ObservableObject {
     
     
     func fetchConnections (_ userID: String) {
+        print("fetchConnections -> userID: \(userID)")
         
-        self.connectionsDB.whereField("connectionUsers.owner", isEqualTo: userID)
+        self.connectionsDB.whereField("connectionUsers", arrayContains: userID)
             .whereField("status", isEqualTo: true).getDocuments() { connections, error in
                 if let error = error {
                     print("Error fetching connections \(error)")
@@ -27,17 +28,17 @@ class ConnectionService: ObservableObject {
                 }
                 else {
                     if connections!.isEmpty { print("There are no connections"); return }
-                    if let connection = connections {
+                    if let connections = connections {
                         self.appState.connections.removeAll()
-                        print("rere: \(connection.metadata.hasPendingWrites)")
-                        print("User connections: => \(connection.count)")
-                        for connection in connection.documents {
+                        print("fetchConnections metaData PendingWrites: \(connections.metadata.hasPendingWrites)")
+                        print("fetchConnections > User connections: => \(connections.count)")
+                        for connection in connections.documents {
                             DispatchQueue.main.async {
                                 do {
                                     let convertedConection = try connection.data(as: ConnectionModel.self)
                                     self.appState.connections.append(convertedConection)
                                 } catch {
-                                    print("Error while fetching connections: \(error)")
+                                    print("fetchConnections > Error while fetching connections: \(error)")
                                 }
                             }
                         }
@@ -46,9 +47,9 @@ class ConnectionService: ObservableObject {
             }
     }
     
-    func fetchPendingConnectionRequests (_ userID: String) {
+    func fetchPendingConnectionRequests (_ userID: String) { // type: received= target / sent = owner
         
-        self.connectionsDB.whereField("connectionUsers.target", isEqualTo: userID)
+        self.connectionsDB.whereField("connectionUsers", arrayContains: userID)
             .whereField("status", isEqualTo: false).getDocuments() { requests, error in
                 
                 
@@ -57,16 +58,22 @@ class ConnectionService: ObservableObject {
                     return
                 }
                 else {
-                    if requests!.isEmpty { print("There are no pending connection requests"); return }
+                    //if requests!.isEmpty { print("There are no pending connection requests"); return }
                     if let requests = requests {
-                        self.appState.pendingRequests.removeAll()
-                        print("rere: \(requests.metadata.hasPendingWrites)")
-                        print("Pending connections: => \(requests.count)")
+                       
+                        self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
+                        self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
+                        
+                        print("fetchPendingConnectionRequests: => \(requests.count)")
+                        
                         for request in requests.documents {
                             DispatchQueue.main.async {
                                 do {
                                     let convertedRequest = try request.data(as: ConnectionModel.self)
-                                    self.appState.pendingRequests.append(convertedRequest)
+                                    //convertedRequest.id = request.documentID
+                                    print("fetchPendingConnectionRequests \(convertedRequest)")
+                                    if convertedRequest.connectionUsers[0] == userID { self.appState.pendingConnectionRequestsOwner.append(convertedRequest) } else {
+                                        self.appState.pendingConnectionRequestsTarget.append(convertedRequest) }
                                 } catch {
                                     print("Error while fetching pending requests: \(error)")
                                 }
@@ -77,12 +84,24 @@ class ConnectionService: ObservableObject {
             }
     }
     
-    func confirmConnectionRequest(requestID: String) {
-        connectionsDB.document(requestID).setData(["status": true], merge: true) { error in
-            if error == nil {
-                print("Request confirmed")
+    func confirmConnectionRequest(_ connectionRequest: ConnectionModel) {
+        let connectionRef = connectionsDB.document(connectionRequest.id!)
+        DispatchQueue.main.async {
+            do {
+                try connectionRef.setData(from: connectionRequest)
+            }
+            catch {
+                print(error)
+            }
+        }
+    }
+    
+    func deleteConnection(_ connectionID: String) {
+        connectionsDB.document(connectionID).delete() { error in
+            if let error = error {
+                print("Error deleting event: \(error)")
             } else {
-                print("Error confirming connection request")
+                print("Event successfully deleted!")
             }
         }
     }
