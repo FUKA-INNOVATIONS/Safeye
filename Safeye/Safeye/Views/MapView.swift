@@ -132,7 +132,6 @@ struct MapView: View {
         .onAppear {
             print("MapView -> EVENT STATE: \(appState.event?.status.rawValue ?? "")")
         }
-        
     }
 }
 

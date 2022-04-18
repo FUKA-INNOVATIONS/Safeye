@@ -7,9 +7,10 @@
 
 import Foundation
 import SwiftUI
+import MapKit
 
-class EventViewModel: ObservableObject {
-    static let shared = EventViewModel() ;  private init() {}
+class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    static let shared = EventViewModel() ;  private override init() {}
     let eventService = EventService.shared
     private var appState = Store.shared
     private var connService = ConnectionService.shared
@@ -25,12 +26,66 @@ class EventViewModel: ObservableObject {
     
     @StateObject private var notificationService = NotificationService()
     
+    // Lines 30-77 location manager for tracking and panic mode
+    var locationManager: CLLocationManager?
+    
+    // First checks loction permissions are allowed and created locationManager
+    func checkIfLocationServicesIsEnabled() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager = CLLocationManager()
+            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager?.delegate = self
+            locationManager?.startUpdatingLocation()
+            locationManager?.distanceFilter = 100
+            locationManager?.allowsBackgroundLocationUpdates = true
+            locationManager?.pausesLocationUpdatesAutomatically = false
+            
+            
+        } else {
+            print("Show Alert saying location not active")
+        }
+    }
+    
+    // Request always in use authorization so it can run in background
+    private func checkLocationAuthorization() {
+        guard let locationManager = locationManager else { return }
+
+        switch locationManager.authorizationStatus {
+            
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+        case .restricted:
+            print("Your location is restricted")
+        case .denied:
+            print("You have denied this permission")
+        case .authorizedAlways, .authorizedWhenInUse:
+            break
+        @unknown default:
+            break
+        }
+    }
+    
+    // Reruns authorization check if permissions are changed
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkLocationAuthorization()
+    }
+    
+    // Runs when a there is a location change specified by the distance filter
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let userLoc = locations.last else { return }
+        if self.appState.event != nil {
+            self.appState.event?.coordinates = ["latitude": userLoc.coordinate.latitude, "longitude": userLoc.coordinate.longitude]
+            self.eventService.updateEvent(self.appState.event!)
+        }
+    }
+    
     // User presses panic mode
     func activatePanicMode() {
         self.appState.panicMode = true
         self.appState.event?.status = EventStatus.PANIC
         self.eventService.updateEvent(self.appState.event!)
         //self.getEventsOfCurrentUser()
+        locationManager?.distanceFilter = 1
         print("Panic Mode activated")
     }
     
@@ -40,6 +95,7 @@ class EventViewModel: ObservableObject {
         self.appState.event?.status = EventStatus.STARTED
         self.eventService.updateEvent(self.appState.event!)
         //self.getEventsOfCurrentUser()
+        locationManager?.distanceFilter = 100
         print("Disabled panic mode")
         
     }
@@ -55,6 +111,7 @@ class EventViewModel: ObservableObject {
     func disableTrackingMode() {
         print("Disabled tracking mode")
         
+        // TODO Stop updated location for locationManager
     }
     
     func isEventOwner() -> Bool {
