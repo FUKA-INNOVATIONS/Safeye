@@ -92,11 +92,11 @@ class ProfileService {
     
     
     
-    func updateProfile(_ profileID: String, _ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String) {
+    func updateProfile(_ profileID: String, _ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String, _ avatar: String) {
         profileDB.document(profileID).setData(
-            ["fullName"  : fullName, "address"   : address,"birthday"  : birthday,"bloodType" : bloodType,"illness"   : illness,"allergies" : allergies], merge: true) { error in
+            ["fullName" : fullName, "address" : address, "birthday" : birthday, "bloodType" : bloodType, "illness" : illness, "allergies" : allergies, "avatar" : avatar], merge: true) { error in
                 
-                //TODO:  Check for error
+                //TODO:  Check for error, change it > pass whole object to update
                 
                 if error == nil {
                     // Get the new data and updtae app state

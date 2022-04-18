@@ -11,10 +11,16 @@ struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
+    @EnvironmentObject var FileVM: FileViewModel
+    @EnvironmentObject var EventVM: EventViewModel
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
     @State private var showingAddSafePlace = false
+    
+    @State var isImagePickerShowing = false
+    @State var selectedPhoto: UIImage?
+    @State var fetchedPhoto: UIImage?
     
     var body: some View {
         
@@ -22,7 +28,19 @@ struct ProfileView: View {
             VStack {
                 
                 Group{
-                    AvatarComponent(size: 80)
+                    // AvatarComponent(size: 80)
+                    
+                    // Display profile photo
+                    VStack {
+                        // if user already has a profile photo, display that
+                        if FileVM.fetchedPhoto != nil {
+                            ProfileImageComponent(size: 100, avatarImage: FileVM.fetchedPhoto!)
+                        } else {
+                            // if they don't have it, display placeholder image
+                            // this technically shouldn't be needed because we are forcing them to upload an image. However, at the moment the fetching is a bit buggy and sometimes it shows this placeholder.
+                            ProfileImageComponent(size: 70, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
+                        }
+                    }
                     HStack {
                         Text("\(appState.profile?.fullName ?? "No name")")
                             .font(.system(size: 25, weight: .bold))
@@ -34,6 +52,8 @@ struct ProfileView: View {
                     }
                     Spacer()
                 }
+                
+                
                 
                 Spacer()
                 
@@ -80,6 +100,8 @@ struct ProfileView: View {
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
+                FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
+                fetchedPhoto = FileVM.fetchedPhoto
             }
             AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
