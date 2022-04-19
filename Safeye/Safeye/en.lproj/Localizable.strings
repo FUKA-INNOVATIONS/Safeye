@@ -1,0 +1,85 @@
+/* 
+  Localizable.strings
+  Safeye
+
+  Created by Pavlo Leinonen on 19.4.2022.
+  
+*/
+
+// Sign in
+
+"signInTitle" = "Sign in";
+"emailTitle" = "Your email address";
+"emailPlaceholder" = "Email address";
+"passwordTitle" = "Your password";
+"passwordPlaceholder" = "Password";
+"signInButton" = "Sign in";
+"createNewAcc" = "Create a new account"; // "Or sign up instead"
+
+// Create new account
+
+"createNewTitle" = "Create new account"; // "Sign up"
+"emailTitle" = "Your email address";
+"emailPlaceholder" = "Email address";
+"passwordTitle" = "Your password";
+"passwordPlaceholder" = "Password";
+"signUpButton" = "Create account";  // "Sign up" "Register"
+"backToSignIn" = "Sign in";
+// Alert in case wrong input
+"loginAlertTitle" = "Login failed";
+"okBtn" = "OK";
+
+
+// Create profile
+
+"textProfile" = "In order to be safe, you must create a profile";
+"createProfileBtn" = "Create a profile";
+
+"textProfileBlanc" = "Please fill all fields to create new profile";
+"fullNameTitle" = "Your full name";
+"fullNamePlaceholder" = "Full name";
+"addressTitle" = "Your address";
+"addressPlaceholder" = "Address";
+"birthdayTitle" = "Your birthday";
+"birthdayPlaceholder" = "Birthday";
+"bloodTypeTitle" = "Choose your blood type";
+"illnessTitle" = "Your illness";
+"illnessPlaceholder" = "Ilness";
+"allergiesTitle" = "Your allergies";
+"allergiesPlaceholder" = "Allergies";
+"saveBtn" = "Save & go back";
+// Alert in case wrong input
+"fieldAlertTitle" = "Fill all fields";
+"fieldAlertText" = "Please fill all fields";
+"okBtn" = "OK";
+
+
+// Settings
+
+"signOut" = "Sign out";
+"connection" = "Connection code";
+"copyBtn" = "Copy"; // might be an icon
+
+// Home
+
+"eventsNumber" = "events";
+"createNewEventBtn" = "Create new event";
+"yourEventsTitle" = "YOUR EVENTS";
+"yourFriendsEventsTitle" = "YOUR FRIEND´S EVENTS";
+
+// Create event view
+
+"selectContactsTitle" = "SELECT CONTACTS FOR THE EVENT";
+"createEventInfoText" = "These contacts will be able to see events details";
+"dateAndTime" = "ESTIAMTED EVENT DATE AND TIME";
+"startTime" = "Start";
+"endTime" = "End";
+"eventType" = "EVENT TYPE";
+// Event types
+"selectEventType" = "Select event type";
+"barNight" = "Bar night";
+"nightClub" = "Night club";
+"dinner" = "Dinner";
+"houseParty" = "House party";
+"firstDate" = "First date";
+"otherType" = "Other";
