@@ -18,12 +18,12 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var fileService = FileService.shared
     
     
-    @Published var eventDetails: Event?
-    @Published var eventExists = false
-    @Published var didCreateEvent = false
-    @Published var eventError: String = ""
-    @Published var panicMode = false
-    @Published var mode = "Tracking"
+    //@Published var eventDetails: Event?
+    //@Published var eventExists = false
+    //@Published var didCreateEvent = false
+    //@Published var eventError: String = ""
+    //@Published var panicMode = false
+    //@Published var mode = "Tracking"
     
     @StateObject private var notificationService = NotificationService()
     
@@ -222,17 +222,14 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     
     func changeStatus(_ eventID: String,_ newStatus: EventStatus) {
-        if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.panicMode = true  } }
+        if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.appState.panicMode = true  } }
         eventService.changeStatus(eventID, newStatus)
     }
     
     
     func deleteEvent(_ eventID: String) {
         self.eventService.deleteEvent(eventID)
-        DispatchQueue.main.async {
-            //self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID }
-            
-        }
+        DispatchQueue.main.async { self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID } }
     }
     
     func subscribeContact() {}

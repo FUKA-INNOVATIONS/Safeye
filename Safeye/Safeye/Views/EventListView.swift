@@ -35,6 +35,8 @@ struct EventListView: View {
                             
                             HStack {
                                 Image(systemName: "minus.circle.fill")
+                                    .foregroundColor(.red)
+                                    .onTapGesture { EventVM.deleteEvent(event.id!) }
                                 Spacer()
                                 Text("\(event.status.rawValue)")
                                 Spacer()
