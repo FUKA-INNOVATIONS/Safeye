@@ -15,6 +15,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var appState = Store.shared
     private var connService = ConnectionService.shared
     private var profileService = ProfileService.shared
+    private var fileService = FileService.shared
     
     
     @Published var eventDetails: Event?
@@ -129,7 +130,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
-    func createEvent(_ startDate: Date, _ endDate: Date, otherInfo: String, eventType: String ) -> Bool {
+    func createEvent(_ startDate: Date, _ endDate: Date, otherInfo: String, eventType: String, eventFolderPath: String ) -> Bool {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
         
         if self.appState.eventSelctedContacts.isEmpty { print("You must select atlest 1 contact") ; return false }
@@ -143,9 +144,12 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         print("SELECTED IDS: \(selectedContactIDS)")
         
+        // create event folder
+        fileService.putEventFolder(eventFolderPath: eventFolderPath)
+        
        @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
         
-        let newEvent = Event(ownerId: currentUserID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates)
+        let newEvent = Event(ownerId: currentUserID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates, eventFolderPath: eventFolderPath)
         
         let didCreateEvent = eventService.createEvent(newEvent)
         didCreateEvent ? print("EventVM -> New event succeeded") : print("EventVM -> New event failed")

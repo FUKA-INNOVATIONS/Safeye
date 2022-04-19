@@ -16,7 +16,18 @@
      private let appStore = Store.shared
      private var fetchedPhoto: UIImage?
 
+     private var eventFileName = "\(UUID().uuidString)"
+
      @State private var path = "avatars/\(UUID().uuidString).jpg"
+     
+     
+     // TODO: upload a file to event folder
+     // TODO: retrieve files from event folder
+     
+     // creates a new event folder once new event is created
+     func putEventFolder(eventFolderPath: String) {
+         createEventFolder(eventFolderPath: eventFolderPath)
+     }
 
      func getPhoto(avatarUrlFetched: String?) -> UIImage? {
          fetchPhoto(avatarUrlFetched: avatarUrlFetched)
@@ -79,6 +90,29 @@
                          }
                      }
                  }
+             }
+         }
+     }
+     
+     func createEventFolder(eventFolderPath: String) {
+
+         // in order to create a folder, some file needs to be uploaded
+         // atm the file is a small icon unrelated to event, later we can change that to something else
+         
+         let imageData = UIImage(imageLiteralResourceName: "icon-search").jpegData(compressionQuality: 0.00001)
+         
+         // check that we were able to convert image to data
+         guard imageData != nil else {
+             return
+         }
+         // Specify the file path and name
+         let fileRef = storageRef.child(eventFolderPath + eventFileName)
+
+         // Upload data
+         fileRef.putData(imageData!, metadata: nil) { metadata, error in
+             // checks for errors
+             if error == nil && metadata != nil {
+                 print("event folder created in path \(eventFolderPath)")
              }
          }
      }
