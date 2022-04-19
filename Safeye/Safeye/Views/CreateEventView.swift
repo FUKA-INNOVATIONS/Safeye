@@ -18,6 +18,7 @@ struct CreateEventView: View {
     @State var eventType = ""
     //@State var locationDetails: String = ""
     @State var otherInfo: String = ""
+    @State var eventFolderPath = ""
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
     
@@ -66,7 +67,10 @@ struct CreateEventView: View {
             
             BasicButtonComponent(label: "Save & activate", action: {
                 if eventType.isEmpty { print("You must select event type") ; return }
-                if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType) {
+                
+                // set a random path for event folder and pass it to EventVM to createEvent()
+                eventFolderPath = "events/\(UUID().uuidString)/"
+                if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType, eventFolderPath: eventFolderPath) {
                     //goEventView.toggle()
                     //NavigationLink("", destination: EventView(), isActive: $goEventView)
                     dismiss()
