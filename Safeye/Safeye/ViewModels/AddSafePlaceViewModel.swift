@@ -94,6 +94,7 @@ class AddSafePlaceViewModel: NSObject, ObservableObject, CLLocationManagerDelega
         mapView.setRegion(region, animated: true)
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
     }
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
         // checking permission

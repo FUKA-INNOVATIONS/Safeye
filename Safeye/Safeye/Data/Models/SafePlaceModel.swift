@@ -8,10 +8,8 @@
 import Foundation
 import FirebaseFirestoreSwift
 import MapKit
-import SwiftUI
 
 struct SafePlaceModel : Identifiable {
-   @DocumentID var id: String?
+    @DocumentID var id: String?
     var place: CLPlacemark
-    
 }

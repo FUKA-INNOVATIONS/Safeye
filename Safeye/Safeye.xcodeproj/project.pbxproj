@@ -98,6 +98,7 @@
 		D5F1B6432809EAB80036F05F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39D2807336700162C43 /* FirebaseFirestore */; };
 		D5F1B6442809EAB80036F05F /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 7516A39F2807336700162C43 /* FirebaseFirestoreSwift-Beta */; };
 		D5F1B646280B08650036F05F /* SecondMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1B645280B08650036F05F /* SecondMapView.swift */; };
+		D5F2FFD2280B56EB00496D89 /* SafePlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F2FFD1280B56EB00496D89 /* SafePlaceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +210,7 @@
 		7516A3A328075D4100162C43 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		D5148A5227FF5C8800E98347 /* NavItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavItem.swift; sourceTree = "<group>"; };
 		D5F1B645280B08650036F05F /* SecondMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMapView.swift; sourceTree = "<group>"; };
+		D5F2FFD1280B56EB00496D89 /* SafePlaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafePlaceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +335,7 @@
 				5F244ABC27F719D600BFE1FB /* SettingService.swift */,
 				7516A3A328075D4100162C43 /* NotificationService.swift */,
 				5FA418992806977E00B6C6E9 /* ConnectionService.swift */,
+				D5F2FFD1280B56EB00496D89 /* SafePlaceService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				6ABCDD2227FF096F009563E7 /* ListViewComponent.swift in Sources */,
 				5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */,
 				5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */,
+				D5F2FFD2280B56EB00496D89 /* SafePlaceService.swift in Sources */,
 				6A2CFC2B280182F40046395D /* MapCurtainComponent.swift in Sources */,
 				5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */,
 				D5F1B646280B08650036F05F /* SecondMapView.swift in Sources */,
