@@ -11,7 +11,7 @@
 import SwiftUI
 
 struct InputFieldComponent: View {
-    let title: String
+    let title: LocalizedStringKey
     @Binding var inputText: String
     
     // This is the parent

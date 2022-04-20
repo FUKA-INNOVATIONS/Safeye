@@ -12,12 +12,14 @@ struct RegisterView: View {
     @State var password = ""
     @ObservedObject var viewModel: AuthenticationViewModel
     
+    @StateObject private var translationManager = TranslationService()
+    
     var body: some View {
         VStack {
-            InputFieldComponent(title: "Email address", inputText: $email)
-            SecureInputFieldComponent(title: "Password", secureText: $password)
+            InputFieldComponent(title: translationManager.createEmailTitle, inputText: $email)
+            SecureInputFieldComponent(title: translationManager.createPasswordTitle, secureText: $password)
             
-            BasicButtonComponent(label: "Create account") {
+            BasicButtonComponent(label: translationManager.signUpButton) {
                 // Email and password not provided
                 guard !email.isEmpty, !password.isEmpty else {
                     return
@@ -29,7 +31,7 @@ struct RegisterView: View {
             }
             
         }
-        .navigationTitle("Create new account")
+        .navigationTitle(translationManager.createNewAcc)
     }
 }
 
