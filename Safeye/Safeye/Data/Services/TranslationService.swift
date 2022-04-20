@@ -47,9 +47,9 @@ final class TranslationService: ObservableObject {
     let birthdayTitle:LocalizedStringKey = "birthdayTitle"
     let birthdayPlaceholder:LocalizedStringKey = "birthdayPlaceholder"
     let bloodTypeTitle:LocalizedStringKey = "bloodTypeTitle"
-    let illnessTitle:LocalizedStringKey = "illnessTitle"
+    let createIllnessTitle:LocalizedStringKey = "illnessTitle"
     let illnessPlaceholder:LocalizedStringKey = "illnessPlaceholder"
-    let allergiesTitle:LocalizedStringKey = "allergiesTitle"
+    let createAllergiesTitle:LocalizedStringKey = "allergiesTitle"
     let allergiesPlaceholder:LocalizedStringKey = "allergiesPlaceholder"
     let saveBtn:LocalizedStringKey = "saveBtn"
     // Alert in case wrong input
@@ -57,26 +57,44 @@ final class TranslationService: ObservableObject {
     let fieldAlertText:LocalizedStringKey = "fieldAlertText"
     let okFieldAlertBtn:LocalizedStringKey = "okBtn"
     
-    // Settings
+    // SETTINGS
     
     let signOut:LocalizedStringKey = "signOut"
     let connection:LocalizedStringKey = "connection"
     let copyBtn:LocalizedStringKey = "copyBtn"
     
-    // Home
-    
+    // HOME
     let eventsNumber:LocalizedStringKey = "eventsNumber"
     let createNewEventBtn:LocalizedStringKey = "createNewEventBtn"
     let yourEventsTitle:LocalizedStringKey = "yourEventsTitle"
     let yourFriendsEventsTitle:LocalizedStringKey = "yourFriendsEventsTitle"
+    let eventInfoTitle:LocalizedStringKey = "eventInfoTitle"
+    
+    // Tracking mode view
+    let safeStatusTitle:LocalizedStringKey = "safeStatusTitle"
+    let panicStatusTitle:LocalizedStringKey = "panicStatusTitle"
+    let startedStatusTitle:LocalizedStringKey = "startedStatusTitle"
+    let deleteBtn:LocalizedStringKey = "deleteBtn"
+    let trustedContactsTrack:LocalizedStringKey = "trustedContactsTrack"
+    let eventdDetailsTrack:LocalizedStringKey = "eventdDetailsTrack"
+    let startTrack:LocalizedStringKey = "startTrack"
+    let endTrack:LocalizedStringKey = "endTrack"
+    let eventTypeTrack:LocalizedStringKey = "eventTypeTrack"
+    let otherTrack:LocalizedStringKey = "otherTrack"
+    //Tracking mode copmponent
+    let sosBtn:LocalizedStringKey = "sosBtn"
+    let safeBtn:LocalizedStringKey = "safeBtn"
+
+
     
     // Create event view
-
     let selectContactsTitle:LocalizedStringKey = "selectContactsTitle"
     let createEventInfoText:LocalizedStringKey = "createEventInfoText"
     let dateAndTime:LocalizedStringKey = "dateAndTime"
     let startTime:LocalizedStringKey = "startTime"
     let endTime:LocalizedStringKey = "endTime"
+    let addContactBtn:LocalizedStringKey = "addContactBtn"
+    let removeContactBtn:LocalizedStringKey = "removeContactBtn"
     // Event types
     let eventType:LocalizedStringKey = "eventType"
     let selectEventType:LocalizedStringKey = "selectEventType"
@@ -86,7 +104,37 @@ final class TranslationService: ObservableObject {
     let houseParty:LocalizedStringKey = "houseParty"
     let firstDate:LocalizedStringKey = "firstDate"
     let otherType:LocalizedStringKey = "otherType"
+    let otherDetailTitle:LocalizedStringKey = "otherDetailTitle"
+    let detailPlaceholder:LocalizedStringKey = "detailPlaceholder"
+    let saveActivateBtn:LocalizedStringKey = "saveActivateBtn"
+    let savingEventInfo:LocalizedStringKey = "savingEventInfo"
     
+    // PROFILE
     
-   
+    let trustedContactsTitle:LocalizedStringKey = "trustedContactsTitle"
+    let bornTitle:LocalizedStringKey = "bornTitle"
+    let bloodTitle:LocalizedStringKey = "bloodTitle"
+    let illnessTitle:LocalizedStringKey = "illnessTitle"
+    let allergiesTitle:LocalizedStringKey = "allergiesTitle"
+    let safeSpaceTitle:LocalizedStringKey = "safeSpaceTitle"
+    // Add TC
+    let codeInput:LocalizedStringKey = "doceInput"
+    let searchBtn:LocalizedStringKey = "searchBtn"
+    let addBtn:LocalizedStringKey = "addBtn"
+    let nothingTitle:LocalizedStringKey = "nothingTitle"
+    // Add safe space
+    let chooseMapBtn:LocalizedStringKey = "chooseMapBtn"
+    let addSafeBtn:LocalizedStringKey = "addBtn"
+    let nameSafe:LocalizedStringKey = "nameSafe"
+    let streetSafe:LocalizedStringKey = "streetSafe"
+    let citySafe:LocalizedStringKey = "citySafe"
+    let zipSafe:LocalizedStringKey = "zipSafe"
+    
+    // CONNECTIONS
+
+    let connectionsTitle:LocalizedStringKey = "connectionsTitle"
+    let receivedReqTitle:LocalizedStringKey = "receivedReqTitle"
+    let sentReqTitle:LocalizedStringKey = "sentReqTitle"
+    let acceptBtn:LocalizedStringKey = "acceptBtn"
+    let profileBtn:LocalizedStringKey = "profileBtn"
 }

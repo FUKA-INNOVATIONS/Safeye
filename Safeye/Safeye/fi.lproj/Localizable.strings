@@ -18,7 +18,7 @@
 
 // Create new account
 
-"createNewTitle" = "Create new account"; // "Sign up"
+"createNewTitle" = "Luo uusi tili"; // "Sign up"
 "emailTitle" = "Your email address";
 "emailPlaceholder" = "Email address";
 "passwordTitle" = "Your password";
