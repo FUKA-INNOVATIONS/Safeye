@@ -31,6 +31,10 @@ struct SettingsView: View {
                 PlayGroundView()
             }
             
+            NavigationLink("Go To Map") {
+                MapView()
+            }
+            
             /* NavigationLink("\(appState.eventCurrentUser == nil ? "Create event" : "You have an event")") {
                 if appState.eventCurrentUser == nil {
                     CreateEventView()

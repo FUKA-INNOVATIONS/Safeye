@@ -19,6 +19,8 @@ struct MapView: View {
         
     @EnvironmentObject var viewModel: MapViewModel
     @EnvironmentObject var appState: Store
+    @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var ProfileVM: ProfileViewModel
     
     @State private var draggedOffset = CGSize.zero
     @State private var listOpen = false
@@ -63,10 +65,11 @@ struct MapView: View {
             .accentColor(Color(.systemPurple))
             .onAppear {
                 viewModel.checkIfLocationServicesIsEnabled()
+                
             }
             MapCurtainComponent()
                 .cornerRadius(20)
-                .offset(y: self.draggedOffset.height + 470)
+                .offset(y: self.draggedOffset.height + 530)
                 .gesture(DragGesture()
                     .onChanged { value in
                         // Whilst the drag out list is being dragged
@@ -131,6 +134,7 @@ struct MapView: View {
         }
         .onAppear {
             print("MapView -> EVENT STATE: \(appState.event?.status.rawValue ?? "")")
+            
         }
     }
 }
