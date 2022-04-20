@@ -9,6 +9,7 @@
 
 import Foundation
 import Firebase // Import firebase
+import CoreLocation
 
 
 // TODO: Database is in test mode, set rules and change to production mode
@@ -103,6 +104,14 @@ class ProfileService {
                     //self.getProfile()
                 }
             }
+    }
+    
+    func updateUserHomeLocationCoordinates(_ profileID: String, _ homeCoordinates: [Double]) {
+        profileDB.document(profileID).updateData(["homeCoordinates": homeCoordinates]) { error in
+            
+            if error == nil {}
+            
+        }
     }
     
     func fetchEventTrustedContactsProfiles(_ userIDS: [String]) {

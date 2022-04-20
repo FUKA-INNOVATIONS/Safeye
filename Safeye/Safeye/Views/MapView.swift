@@ -68,13 +68,6 @@ struct MapView: View {
                 ConnectionVM.getConnections()
                 ConnectionVM.getConnectionProfiles()
             }
-            VStack{
-            ForEach(appState.connectionPofiles) { connectionProfile in
-                Text(connectionProfile.fullName)
-                Spacer()
-                Text(connectionProfile.illness)
-            }
-            }
             MapCurtainComponent()
                 .cornerRadius(20)
                 .offset(y: self.draggedOffset.height + 530)
