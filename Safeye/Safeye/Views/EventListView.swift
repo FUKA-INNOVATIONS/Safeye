@@ -22,60 +22,49 @@ struct EventListView: View {
                     ForEach(appState.eventsOfCurrentUser) { event in
                         let color = event.status == .PANIC ? Color.red : Color.green
                         
-                        Group {
+                        List {
                             NavigationLink { EventView(eventID: event.id!) } label: {
                                 HStack {
                                     Text("\(event.eventType.capitalizingFirstLetter())")
                                         .foregroundStyle(color)
                                     Spacer()
-                                    Text("\(event.startTime.formatted(.dateTime))")
+                                    Text(event.startTime, style: .date)
                                         .font(.caption)
+                                    Spacer()
+                                    Text("\(event.trustedContacts.count)")
+                                    Image(systemName: "eye")
                                 }
+                                .frame(height: 60)
                             }
-                            
+                        }
+                    }
+                    .onDelete(perform: EventVM.deleteEvent)
+                }
+                
+                Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
+                    ForEach(appState.eventsOfTrustedContacts) { event in
+                        let color = event.status == .PANIC ? Color.red : Color.green
+                        NavigationLink {
+                            EventView(eventID: event.id!)
+                        } label: {
                             HStack {
-                                Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(.red)
-                                    .onTapGesture { EventVM.deleteEvent(event.id!) }
+                                Text("\(event.eventType.capitalizingFirstLetter())")
+                                    .foregroundStyle(color)
                                 Spacer()
-                                Text("\(event.status.rawValue)")
+                                Text(event.startTime, style: .date)
+                                    .font(.caption)
                                 Spacer()
                                 HStack {
                                     Text("\(event.trustedContacts.count)")
                                     Image(systemName: "eye")
                                 }
                             }
-                            
-                            
+                            .frame(height: 60)
                         }
                         
-                        Spacer(minLength: 30)
-                        
                     }
+                    
                 }
-                 
-                 Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
-                     ForEach(appState.eventsOfTrustedContacts) { event in
-                         let color = event.status == .PANIC ? Color.red : Color.green
-                         NavigationLink {
-                             EventView(eventID: event.id!)
-                         } label: {
-                             HStack {
-                                 Text("\(event.eventType.capitalizingFirstLetter())")
-                                     .foregroundStyle(color)
-                                 Text("\(event.startTime.formatted(.dateTime))")
-                                     .font(.caption)
-                                 Spacer()
-                                 HStack {
-                                     Text("\(event.trustedContacts.count)")
-                                     Image(systemName: "eye")
-                                 }
-                             }
-                         }
-
-                     }
-                     
-                 }
             }
         }
         .onAppear {
@@ -90,3 +79,22 @@ struct EventListView_Previews: PreviewProvider {
         EventListView()
     }
 }
+
+
+
+/**
+ 
+ 
+ .toolbar {
+     ToolbarItem(placement: .navigationBarTrailing) {
+         EditButton()
+     }
+     ToolbarItem {
+         Button(action: { showingCreateEvent = true }) {
+             Label("Create new event", systemImage: "plus")
+         }
+     }
+ }
+ 
+ 
+ */

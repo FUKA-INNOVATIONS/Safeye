@@ -189,7 +189,9 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func getEventTrustedContactsProfiles(eventID: String) {
         // Get trusted contacts of an event, result in appState.eventTrustedContactsProfiles
-        self.profileService.fetchEventTrustedContactsProfiles(self.appState.event?.trustedContacts ?? [""])
+        DispatchQueue.main.async {
+            self.profileService.fetchEventTrustedContactsProfiles(self.appState.event?.trustedContacts ?? [""])
+        }
     }
     
     func getEventsCount() -> Int {
@@ -227,9 +229,12 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
-    func deleteEvent(_ eventID: String) {
+    func deleteEvent(offsets: IndexSet) {
+        let eventID = offsets.map { self.appState.eventsOfCurrentUser[$0] }[0].id!
         self.eventService.deleteEvent(eventID)
-        DispatchQueue.main.async { self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID } }
+        withAnimation {
+            DispatchQueue.main.async { self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID } }
+        }
     }
     
     func subscribeContact() {}
