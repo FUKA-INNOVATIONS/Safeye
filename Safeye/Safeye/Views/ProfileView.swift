@@ -102,7 +102,7 @@ struct ProfileView: View {
                 ProfileVM.getProfileForCurrentUser()
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
                 fetchedPhoto = FileVM.fetchedPhoto
-                ProfileVM.updateUserHomeCoordinates()
+                //ProfileVM.updateUserHomeCoordinates()
             }
             AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
