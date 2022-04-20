@@ -20,7 +20,7 @@ struct MapView: View {
     @EnvironmentObject var viewModel: MapViewModel
     @EnvironmentObject var appState: Store
     @EnvironmentObject var EventVM: EventViewModel
-    @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
     
     @State private var draggedOffset = CGSize.zero
     @State private var listOpen = false
@@ -65,7 +65,15 @@ struct MapView: View {
             .accentColor(Color(.systemPurple))
             .onAppear {
                 viewModel.checkIfLocationServicesIsEnabled()
-                
+                ConnectionVM.getConnections()
+                ConnectionVM.getConnectionProfiles()
+            }
+            VStack{
+            ForEach(appState.connectionPofiles) { connectionProfile in
+                Text(connectionProfile.fullName)
+                Spacer()
+                Text(connectionProfile.illness)
+            }
             }
             MapCurtainComponent()
                 .cornerRadius(20)
