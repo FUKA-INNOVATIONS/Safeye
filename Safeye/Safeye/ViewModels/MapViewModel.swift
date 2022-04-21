@@ -7,6 +7,7 @@
 
 import MapKit
 import Foundation
+import SwiftUI
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //static let instance = MapViewModel() ; private init() {}
@@ -30,7 +31,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
-
+        
         switch locationManager.authorizationStatus {
             
         case .notDetermined:
@@ -49,4 +50,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
+    
+//    func getTrustedContactHomeLocations(_ trustedContacts: ProfileModel) {
+//        ForEach(trustedContacts) { trustedContact in
+//
+//            print(trustedContact)
+//
+//        }
+//    }
 }

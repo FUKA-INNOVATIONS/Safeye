@@ -31,6 +31,7 @@ struct MapView: View {
      TODO fetch the home locations of users trusted contacts and their own created
      safe spaces to use
      */
+    
     let locations = [
         Location(name: "SafeSpace 1", coordinate: CLLocationCoordinate2D(latitude: 60.170011, longitude: 24.937062), own: true),
         Location(name: "SafeSpace 2", coordinate: CLLocationCoordinate2D(latitude: 60.167650, longitude: 24.962106), own: false),
@@ -67,6 +68,7 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
                 ConnectionVM.getConnections()
                 ConnectionVM.getConnectionProfiles()
+                // viewModel.getTrustedContactHomeLocations(appState.connectionPofiles)
             }
             MapCurtainComponent()
                 .cornerRadius(20)

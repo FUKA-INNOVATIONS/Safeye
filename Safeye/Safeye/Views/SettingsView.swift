@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct SettingsView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var MapVM: MapViewModel
     @State var tcList = []
     @State var contacts: [ProfileModel] = [ProfileModel]()
     @State var fetchClicked = 0
@@ -43,7 +45,13 @@ struct SettingsView: View {
                 }
             } */
             
-            
+            // Button to update users home coordinates
+            // TODO add popup info box when pressed
+            if CLLocationManager().authorizationStatus.rawValue == 4 {
+                Button("Update Home Coordinates") {
+                    ProfileVM.updateUserHomeCoordinates()
+                }
+            }
             HStack{
                 Text("Connection code: \(appState.profile?.connectionCode ?? "No code")")
                 Button(action: {
