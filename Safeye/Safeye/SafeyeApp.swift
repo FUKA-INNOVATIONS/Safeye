@@ -17,6 +17,8 @@ struct SafeyeApp: App {
     @StateObject var ConnectionVM = ConnectionViewModel.shared
     @StateObject var EventVM = EventViewModel.shared
     @StateObject var MapVM = MapViewModel()
+    var translationManager = TranslationService.shared
+
     
     @StateObject var PlaygroundVM = PlaygroundViewModel.shared
     

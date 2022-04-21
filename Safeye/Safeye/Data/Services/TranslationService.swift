@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 
-final class TranslationService: ObservableObject {
+final class TranslationService {
+    static let shared = TranslationService() ; private init() { }
     
     // Sign in
     

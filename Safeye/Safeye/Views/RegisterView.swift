@@ -12,7 +12,7 @@ struct RegisterView: View {
     @State var password = ""
     @ObservedObject var viewModel: AuthenticationViewModel
     
-    @StateObject private var translationManager = TranslationService()
+    var translationManager = TranslationService.shared
     
     var body: some View {
         VStack {

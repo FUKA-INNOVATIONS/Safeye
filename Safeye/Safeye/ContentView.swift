@@ -17,8 +17,8 @@ struct ContentView: View {
     @EnvironmentObject var appState: Store
     
     @StateObject private var notificationService = NotificationService()
-    @StateObject private var translationManager = TranslationService()
-    
+    var translationManager = TranslationService.shared
+
     @State private var showingCreateProfile = false
     
     @State var goMapView = false
