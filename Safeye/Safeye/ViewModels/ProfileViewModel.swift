@@ -55,7 +55,7 @@ class ProfileViewModel: NSObject, ObservableObject {
         var hasher = Hasher() ; hasher.combine(currentUserID)
         let connectionHash = String(hasher.finalize())
         
-        let newProfile = ProfileModel(userId: currentUserID, fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash, avatar: avatar)
+        let newProfile = ProfileModel(userId: currentUserID, fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash, avatar: avatar, homeLocation:[0,0])
         
         self.profileService.createProfile(newProfile: newProfile)
         

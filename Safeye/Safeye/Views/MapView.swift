@@ -8,12 +8,12 @@
 import MapKit
 import SwiftUI
 
-struct Location: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
-    let own: Bool
-}
+//struct Location: Identifiable {
+//    let id = UUID()
+//    let name: String
+//    let coordinate: CLLocationCoordinate2D
+//    let own: Bool
+//}
 
 struct MapView: View {
         
@@ -46,7 +46,7 @@ struct MapView: View {
     var body: some View {
         
         ZStack {
-            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: locations) { location in
+            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: appState.safeSpacesMap) { location in
                 MapAnnotation(coordinate: location.coordinate) {
                     // TODO create own component for how safe spaces are displayed
                     if location.own == true {
@@ -68,7 +68,7 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
                 ConnectionVM.getConnections()
                 ConnectionVM.getConnectionProfiles()
-                // viewModel.getTrustedContactHomeLocations(appState.connectionPofiles)
+                viewModel.assignSafeSpaces()
             }
             MapCurtainComponent()
                 .cornerRadius(20)
