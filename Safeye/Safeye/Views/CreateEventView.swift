@@ -26,6 +26,9 @@ struct CreateEventView: View {
     @State var goEventView = false
     @Environment(\.dismiss) var dismiss
     
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var cities: FetchedResults<City>
+    
     
     var body: some View {
         VStack{
@@ -57,9 +60,10 @@ struct CreateEventView: View {
                 
                 
                 Section(header: Text("Location")) {
+                    Button("Load citites") { saveCitiesInDevice() }
                     Picker(selection: $cityOfEvent, label: Text("Select a city or area")) {
-                        ForEach(appState.citiesFinland, id: \.self) {
-                            Text($0).tag($0)
+                        ForEach(cities, id: \.id) {
+                            Text($0.name ?? "no")
                         }
                     }
                     .pickerStyle(.wheel)
@@ -102,6 +106,27 @@ struct CreateEventView: View {
             ConnectionVM.getConnectionProfiles()
         }
         
+    }
+    
+    func saveCitiesInDevice() {
+        // save all cities in device momeory
+        for city in appState.citiesFinland {
+            let c = City(context: moc)
+            c.id = UUID()
+            c.name = city
+            c.country = "Finland"
+        }
+        
+        // save all cities in device persistant storage if data has changed
+        if moc.hasChanges {
+            do {
+                try moc.save()
+                print("CoreData: Cities saved")
+            } catch {
+                print("CoreData: Error while saving citites into device \(error.localizedDescription)")
+            }
+        } else { print("CoreData: Cities not saved in device beause of no changes") }
+        //print("CoreData: : \(cities.count)")
     }
     
 }

@@ -26,8 +26,6 @@ struct ContentView: View {
     
     @State var goMapView = false
     
-    @State var countryName = "finland"
-    
     
     var body: some View {
 
@@ -88,30 +86,32 @@ struct ContentView: View {
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
             
-            // fetch citites of Finland and save it in appState
-            CityVM.getCities(of: countryName)
             
-            // save all cities in device momeory
-            for city in appState.citiesFinland {
-                let c = City(context: moc)
-                c.id = UUID()
-                c.name = city
-                c.country = countryName
-            }
             
-            // save all cities in device persistant storage if data has changed
-            if moc.hasChanges {
-                do {
-                    try moc.save()
-                    print("Cities saved")
-                } catch {
-                    print("Error while saving citites into device \(error.localizedDescription)")
-                }
-            } else { print("Cities not saved in device beause of no changes") }
-            
+//            // save all cities in device momeory
+//            for city in appState.citiesFinland {
+//                let c = City(context: moc)
+//                c.id = UUID()
+//                c.name = city
+//                c.country = "Finland"
+//            }
+//
+//            // save all cities in device persistant storage if data has changed
+//            if moc.hasChanges {
+//                do {
+//                    try moc.save()
+//                    print("CoreData: Cities saved")
+//                } catch {
+//                    print("CoreData: Error while saving citites into device \(error.localizedDescription)")
+//                }
+//            } else { print("CoreData: Cities not saved in device beause of no changes") }
+//            print("CoreData: : \(cities.count)")
         }
         
+        
+        
     }
+    
     
 }
 

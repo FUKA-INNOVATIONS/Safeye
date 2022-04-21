@@ -25,5 +25,30 @@ class SafeyeController: ObservableObject {
             self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         }
     }
+    
+    
+    
+    func saveCitiesInDevice(appState: Store) {
+        // save all cities in device momeory
+        for city in appState.citiesFinland {
+            let c = City(context: container.viewContext)
+            c.id = UUID()
+            c.name = city
+            c.country = "Finland"
+        }
+        
+        // save all cities in device persistant storage if data has changed
+        if container.viewContext.hasChanges {
+            do {
+                try container.viewContext.save()
+                print("SafeyeController: Cities saved")
+            } catch {
+                print("SafeyeController: Error while saving citites into device \(error.localizedDescription)")
+            }
+        } else { print("SafeyeController: Cities not saved in device beause of no changes") }
+        //print("CoreData: : \(cities.count)")
+    }
+    
+    
 }
 
