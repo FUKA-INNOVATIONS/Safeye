@@ -3,7 +3,7 @@
 //  Safeye
 //
 //  Created by dfallow on 10.4.2022.
-//
+//  Edited by FUKA
 
 import SwiftUI
 
@@ -11,7 +11,7 @@ struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
     
-    @State var goBack = false
+    //@State var goBack = false
     var eventID: String
     
     var body: some View {
@@ -20,13 +20,13 @@ struct EventView: View {
             
             Text("\(appState.event?.status.rawValue ?? "")")
                 .font(.largeTitle)
-                .toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
+                /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
                     EventVM.deleteEvent(eventID)
                     goBack = true
                 } }
                 .background(
                     NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
-                )
+                )*/
             
             
             Form {
@@ -42,6 +42,7 @@ struct EventView: View {
                 }
                 
                 Section(header: Text("Event details")) {
+                    Text("Envent type: \(appState.event?.city ?? "")")
                     Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
                     Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
                     Text("Envent type: \(appState.event?.eventType ?? "")")
@@ -87,7 +88,7 @@ struct EventView: View {
         .onAppear {
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
-            EventVM.checkIfLocationServicesIsEnabled()
+            //EventVM.checkIfLocationServicesIsEnabled() // This creates ui isssue, user is sent back to eventListView
             // let eventListener = EventVM.getDetails(for: eventID)
         }
         

@@ -17,11 +17,16 @@ struct ContentView: View {
     @EnvironmentObject var appState: Store
     @EnvironmentObject var FileVM: FileViewModel
     
+    @EnvironmentObject var CityVM: CityViewModel
+    @Environment(\.managedObjectContext) var moc
+    
     @StateObject private var notificationService = NotificationService()
     
     @State private var showingCreateProfile = false
     
     @State var goMapView = false
+    
+    @State var countryName = "finland"
     
     
     var body: some View {
@@ -82,6 +87,28 @@ struct ContentView: View {
             AuthVM.signedIn = AuthVM.isSignedIn
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
+            
+            // fetch citites of Finland and save it in appState
+            CityVM.getCities(of: countryName)
+            
+            // save all cities in device momeory
+            for city in appState.citiesFinland {
+                let c = City(context: moc)
+                c.id = UUID()
+                c.name = city
+                c.country = countryName
+            }
+            
+            // save all cities in device persistant storage if data has changed
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                    print("Cities saved")
+                } catch {
+                    print("Error while saving citites into device \(error.localizedDescription)")
+                }
+            } else { print("Cities not saved in device beause of no changes") }
+            
         }
         
     }

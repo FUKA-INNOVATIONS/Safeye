@@ -21,6 +21,7 @@ struct CreateEventView: View {
     @State var eventFolderPath = ""
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
+    @State private var cityOfEvent = ""
     
     @State var goEventView = false
     @Environment(\.dismiss) var dismiss
@@ -53,9 +54,18 @@ struct CreateEventView: View {
                     }
                     .pickerStyle(.inline)
                 }
-                /*Section(header: Text("Location*")) {
-                    TextField("Describe location plan for the event", text: $locationDetails)
-                }*/
+                
+                
+                Section(header: Text("Location")) {
+                    Picker(selection: $cityOfEvent, label: Text("Select a city or area")) {
+                        ForEach(appState.citiesFinland, id: \.self) {
+                            Text($0).tag($0)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                }
+                
+                
                 Section(header: Text("Other valuable details")) {
                     TextField("Anything else?", text: $otherInfo)
                 }
@@ -66,11 +76,11 @@ struct CreateEventView: View {
             
             
             BasicButtonComponent(label: "Save & activate", action: {
-                if eventType.isEmpty { print("You must select event type") ; return }
+                if eventType.isEmpty || cityOfEvent.isEmpty { print("Fill all fields") ; return }
                 
                 // set a random path for event folder and pass it to EventVM to createEvent()
                 eventFolderPath = "events/\(UUID().uuidString)/"
-                if EventVM.createEvent(startDate, endDate, otherInfo: otherInfo, eventType: eventType, eventFolderPath: eventFolderPath) {
+                if EventVM.createEvent(startDate, endDate, otherInfo, eventType, cityOfEvent, eventFolderPath) {
                     //goEventView.toggle()
                     //NavigationLink("", destination: EventView(), isActive: $goEventView)
                     dismiss()
