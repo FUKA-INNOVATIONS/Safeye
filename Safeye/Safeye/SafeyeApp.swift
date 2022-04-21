@@ -26,7 +26,6 @@ struct SafeyeApp: App {
 
     init() {
         FirebaseApp.configure() // Initialize Firebase
-        
     }
     
     var body: some Scene {
@@ -46,6 +45,8 @@ struct SafeyeApp: App {
                 }
                 .onAppear {
                     AuthVM.signedIn = AuthVM.isSignedIn
+                    // fetch citites of Finland and save it in appState
+                    CityVM.getCities(of: "Finland")
                 }
                 
             }
