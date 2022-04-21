@@ -27,6 +27,7 @@ struct ProfileEditView: View {
     
     @State private var bloodTypes = ["A", "A+", "B"]
     
+    var translationManager = TranslationService.shared
     
     var body: some View {
         
@@ -44,44 +45,44 @@ struct ProfileEditView: View {
         
         return VStack() {
             if self.appState.profile != nil {
-                Text("Please fill the fileds you want to update")
+                Text(translationManager.textProfileUpdate)
                 
             } else {
-                Text("Please fill all fields to create new profile")
+                Text(translationManager.textProfileBlanc)
             }
             
             HStack{
-                InputFieldComponent(title: "Full name", inputText: $fullName)
+                InputFieldComponent(title: translationManager.fullNameTitle, inputText: $fullName)
             }
             
             HStack{
-                InputFieldComponent(title: "Address", inputText: $address)
+                InputFieldComponent(title: translationManager.addressTitle, inputText: $address)
             }
             HStack{
-                InputFieldComponent(title: "Birthday", inputText: $birthday)
+                InputFieldComponent(title: translationManager.birthdayTitle, inputText: $birthday)
             }
             HStack{
                 VStack(alignment: .leading){
                     
                     // Select blood type
                     Section { // Sections can have header and footer
-                        Picker("Blood type", selection: $bloodType) {
+                        Picker(translationManager.bloodTypeTitle, selection: $bloodType) {
                             ForEach(bloodTypes, id: \.self) {
                                 Text($0)
                             }
                         }
                         .pickerStyle(.segmented)
                     } header: {
-                        Text("Blood type")
+                        Text(translationManager.bloodTitle)
                     }
                     
-                    InputFieldComponent(title: "Illness", inputText: $illness)
-                    InputFieldComponent(title: "Allergies", inputText: $allergies)
+                    InputFieldComponent(title: translationManager.illnessTitle, inputText: $illness)
+                    InputFieldComponent(title: translationManager.allergiesTitle, inputText: $allergies)
                 }
             }
             
             
-            BasicButtonComponent(label: "Save & go back") { // Button to save profile details
+            BasicButtonComponent(label: translationManager.saveBtn) { // Button to save profile details
                 print("Save profile details pressed")
                 
                 if self.appState.profile == nil { // User has no profile, create new one
@@ -119,8 +120,8 @@ struct ProfileEditView: View {
             }
             .alert(isPresented: $showEmptyFieldAlert) { // Alert user about emptu fields
                 Alert(
-                    title: Text("Fill all fields"),
-                    message: Text("Please fill all fields")
+                    title: Text(translationManager.fieldAlertTitle),
+                    message: Text(translationManager.fieldAlertText)
                 )
             }
             

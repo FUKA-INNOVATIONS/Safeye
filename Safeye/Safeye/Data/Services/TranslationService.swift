@@ -40,6 +40,7 @@ final class TranslationService {
     let textProfile:LocalizedStringKey = "textProfile"
     let createProfileBtn:LocalizedStringKey = "createProfileBtn"
     
+    let textProfileUpdate:LocalizedStringKey = "textProfileUpdate"
     let textProfileBlanc:LocalizedStringKey = "textProfileBlanc"
     let fullNameTitle:LocalizedStringKey = "fullNameTitle"
     let fullNamePlaceholder:LocalizedStringKey = "fullNamePlaceholder"
@@ -63,6 +64,8 @@ final class TranslationService {
     let signOut:LocalizedStringKey = "signOut"
     let connection:LocalizedStringKey = "connection"
     let copyBtn:LocalizedStringKey = "copyBtn"
+    let noCode:LocalizedStringKey = "No code"
+
     
     // HOME
     let eventsNumber:LocalizedStringKey = "eventsNumber"
@@ -104,10 +107,12 @@ final class TranslationService {
     let dinner:LocalizedStringKey = "dinner"
     let houseParty:LocalizedStringKey = "houseParty"
     let firstDate:LocalizedStringKey = "firstDate"
+    
     let otherType:LocalizedStringKey = "otherType"
     let otherDetailTitle:LocalizedStringKey = "otherDetailTitle"
     let detailPlaceholder:LocalizedStringKey = "detailPlaceholder"
     let saveActivateBtn:LocalizedStringKey = "saveActivateBtn"
+    let addEventInfo:LocalizedStringKey = "addEventInfo"
     let savingEventInfo:LocalizedStringKey = "savingEventInfo"
     
     // PROFILE
@@ -119,7 +124,7 @@ final class TranslationService {
     let allergiesTitle:LocalizedStringKey = "allergiesTitle"
     let safeSpaceTitle:LocalizedStringKey = "safeSpaceTitle"
     // Add TC
-    let codeInput:LocalizedStringKey = "doceInput"
+    let codeInput:LocalizedStringKey = "codeInput"
     let searchBtn:LocalizedStringKey = "searchBtn"
     let addBtn:LocalizedStringKey = "addBtn"
     let nothingTitle:LocalizedStringKey = "nothingTitle"
@@ -138,6 +143,7 @@ final class TranslationService {
     let sentReqTitle:LocalizedStringKey = "sentReqTitle"
     let acceptBtn:LocalizedStringKey = "acceptBtn"
     let profileBtn:LocalizedStringKey = "profileBtn"
+    let cancelReq:LocalizedStringKey = "cancelReq"
     
     // NAVITEM
 

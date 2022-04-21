@@ -31,6 +31,8 @@ struct AddContactView: View {
     @EnvironmentObject var appState: Store
     @State var error = ""
     
+    var translationManager = TranslationService.shared
+
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -73,7 +75,7 @@ struct AddContactView: View {
                             }
                             
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
-                        }, label: {Text("Search")})
+                        }, label: {Text(translationManager.searchBtn)})
                     }
 
                     Spacer()
@@ -81,7 +83,7 @@ struct AddContactView: View {
                     if appState.profileSearch != nil {
                         AvatarComponent(size: 100)
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
-                        BasicButtonComponent(label: "Add", action: {
+                        BasicButtonComponent(label: translationManager.addBtn, action: {
                             // AddContactVM.addTrustedContact()
                             if appState.profileSearch != nil {
                                 ConnectionVM.addConnection()
@@ -90,7 +92,7 @@ struct AddContactView: View {
                             appState.profileSearch = nil
                         })
                     } else {
-                        Text("Nothing to display.")
+                        Text(translationManager.nothingTitle)
                         Text(self.error)
                     }
                     Spacer()

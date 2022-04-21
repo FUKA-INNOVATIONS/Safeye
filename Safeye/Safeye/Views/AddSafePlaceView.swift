@@ -15,7 +15,8 @@ struct AddSafePlaceView: View {
     @State var street = ""
     @State var city = ""
     @State var zip = ""
-
+    
+    var translationManager = TranslationService.shared
     
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 500
@@ -57,19 +58,19 @@ struct AddSafePlaceView: View {
                 .gesture(dragGesture)
         VStack {
             VStack{
-                TextField("Name", text: $name).padding()
-                TextField("Street", text: $street).padding()
-                TextField("City", text: $city).padding()
-                TextField("Zip", text: $zip).padding()
+                TextField(translationManager.nameSafe, text: $name).padding()
+                TextField(translationManager.streetSafe, text: $street).padding()
+                TextField(translationManager.citySafe, text: $city).padding()
+                TextField(translationManager.zipSafe, text: $zip).padding()
                     
             }
             .textFieldStyle(.roundedBorder)
         
             NavigationLink(destination: MapView()) {
-                               Text("Choose From Map?")
+                Text(translationManager.chooseMapBtn)
             }
 
-            BasicButtonComponent(label: "Add", action: { print("Added")})
+            BasicButtonComponent(label: translationManager.addBtn, action: { print("Added")})
             
             Spacer()
               

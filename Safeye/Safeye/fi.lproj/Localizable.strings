@@ -32,9 +32,11 @@
 
 // Create profile
 
+
 "textProfile" = "Turvallisuuden vuoksi sinun on luotava profiili";
 "createProfileBtn" = "Luo profiili";
 
+"textProfileUpdate" = "Täytä kentät, jotka haluat päivittää";
 "textProfileBlanc" = "Täytä kaikki kentät luodaksesi uuden profiilin";
 "fullNameTitle" = "Etunimi ja sukunimi";
 "fullNamePlaceholder" = "Full name";
@@ -59,13 +61,15 @@
 "signOut" = "Kirjaudu ulos";
 "connection" = "Yhteyskoodi";
 "copyBtn" = "Kopio"; // might be an icon
+"nocode" = "Ei koodia";
+
 
 // HOME
 
 "eventsNumber" = "tapahtumat";
 "createNewEventBtn" = "Luo uusi tapahtuma";
 "yourEventsTitle" = "SINUN TAPAHTUMAT";
-"yourFriendsEventsTitle" = "YSTÄVÄSI TAPAHTUMAT";
+"yourFriendsEventsTitle" = "YSTÄVIESI TAPAHTUMAT";
 "eventInfoTitle" = "Aloitettu";
 
 // Tracking mode view
@@ -102,9 +106,11 @@
 "houseParty" = "Kotibileet";
 "firstDate" = "Treffi";
 "otherType" = "Muu";
+
 "otherDetailTitle" = "MUUT TIEDOT";
 "detailPlaceholder" = "Mitään muuta?";
 "saveActivateBtn" = "Tallenna & aktivoi";
+"addEventInfo" = "Lisää tapahtuman tiedot";
 "savingEventInfo" = "Tallentaminen ottaa myös seurantatilan käyttöön";
 
 // PROFILE

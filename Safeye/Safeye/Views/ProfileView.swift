@@ -16,6 +16,8 @@ struct ProfileView: View {
     @State private var showingAddContact = false
     @State private var showingAddSafePlace = false
     
+    var translationManager = TranslationService.shared
+    
     var body: some View {
         
         ZStack {
@@ -39,7 +41,7 @@ struct ProfileView: View {
                 
                 Group {
                     Spacer()
-                    Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
+                    Text(translationManager.trustedContactsTitle).font(.system(size: 18, weight: .semibold))
                     HStack{
                         ListViewComponent(item: "avatar", size: 50)
                         Button(action: {
@@ -63,13 +65,13 @@ struct ProfileView: View {
                 }
                 
                 Group {
-                    Text("My safe spaces").font(.system(size: 18, weight: .semibold))
+                    Text(translationManager.safeSpaceTitle).font(.system(size: 18, weight: .semibold))
                     HStack{
                         //size with icons doesn't work properly, will figure this out later
                         ListViewComponent(item: "safeSpace", size: 40)
                         Button(action: {
                             showingAddSafePlace = true
-                            print("modal: ($showingAddSafePlace)")
+                            print("modal: \($showingAddSafePlace)")
                         })
                         { Image("icon-add") }
                         Spacer(minLength: 20)

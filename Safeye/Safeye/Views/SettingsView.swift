@@ -16,6 +16,7 @@ struct SettingsView: View {
     @State var fetchClicked = 0
     
     @EnvironmentObject var appState: Store
+    var translationManager = TranslationService.shared
 
 
         
@@ -23,7 +24,7 @@ struct SettingsView: View {
         
         return VStack {
             
-            BasicButtonComponent(label: "Sign out") { // Sign out button
+            BasicButtonComponent(label: translationManager.signOut) { // Sign out button
                 AuthVM.signOut()
             }
             
@@ -41,12 +42,13 @@ struct SettingsView: View {
             
             
             HStack{
+                // TODO problem with interpolation
                 Text("Connection code: \(appState.profile?.connectionCode ?? "No code")")
                 Button(action: {
                     let pasteboard = UIPasteboard.general
                     pasteboard.string = appState.profile?.connectionCode
                     print("Copied")
-                }, label: {Text("Copy")})
+                }, label: {Text(translationManager.copyBtn)})
                 
             }.padding()
             

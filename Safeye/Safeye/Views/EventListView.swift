@@ -12,13 +12,15 @@ struct EventListView: View {
     @EnvironmentObject var appState: Store
     @State var showingCreateEvent = false
     
+    var translationManager = TranslationService.shared
+    
     var body: some View {
         VStack {
-            Text("\(EventVM.getEventsCount()) events")
-            Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
+            Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
+            Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn) }
                 .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
             Form {
-                Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
+                Section(header: Text(" \(Text(translationManager.yourEventsTitle)) (\(appState.eventsOfCurrentUser.count)) ")) {
                     ForEach(appState.eventsOfCurrentUser) { event in
                         let color = event.status == .PANIC ? Color.red : Color.green
                         
@@ -52,7 +54,7 @@ struct EventListView: View {
                     }
                 }
                  
-                 Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
+                Section(header: Text(" \(Text(translationManager.yourFriendsEventsTitle)) (\(appState.eventsOfTrustedContacts.count)) ")) {
                      ForEach(appState.eventsOfTrustedContacts) { event in
                          let color = event.status == .PANIC ? Color.red : Color.green
                          NavigationLink {

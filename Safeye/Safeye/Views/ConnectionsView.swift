@@ -12,12 +12,14 @@ struct ConnectionsView: View {
     @EnvironmentObject var appState: Store
     @State var showingConnectionProfile = false
     
+    var translationManager = TranslationService.shared
+
     var body: some View {
         VStack {
             
             Form {
                 
-                Section("Connections") {
+                Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
                         //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
                         Button { ConnectionVM.deleteConnection(connection.id!) } label: { Image(systemName: "trash").foregroundColor(.red) }
@@ -25,7 +27,7 @@ struct ConnectionsView: View {
                             Image(systemName: "trash")
                             Text("Full name")
                             Spacer()
-                            Text("profile")
+                            Text(translationManager.profileBtn)
                             Button { showingConnectionProfile = true } label: { Image(systemName: "eye") }
                         }
                         .sheet(isPresented: $showingConnectionProfile) {
@@ -36,14 +38,14 @@ struct ConnectionsView: View {
                     
                 }
                 
-                Section("Received requests") {
+                Section(translationManager.receivedReqTitle) {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
                         HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)} label: {Text("")}
                             
                             Text("Full name")
                             Spacer()
                             Group {
-                                Text("accept")
+                                Text(translationManager.acceptBtn)
                                 Image(systemName: "hand.thumbsup.fill")
                             }
                             .foregroundColor(.green)
@@ -51,13 +53,13 @@ struct ConnectionsView: View {
                     }
                 }
                 
-                Section("Sent requests") {
+                Section(translationManager.sentReqTitle) {
                     ForEach(appState.pendingConnectionRequestsOwner) { request in
                         HStack {
                             Text("Full name")
                             Spacer()
                             Group {
-                                Text("cancel")
+                                Text(translationManager.cancelReq)
                                 Button { ConnectionVM.deleteConnection(request.id!) } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
                             }
                             .foregroundColor(.red)

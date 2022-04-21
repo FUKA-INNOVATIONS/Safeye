@@ -11,6 +11,9 @@ struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
     
+    var translationManager = TranslationService.shared
+
+    
     @State var goBack = false
     var eventID: String
     
@@ -20,6 +23,7 @@ struct EventView: View {
             
             Text("\(appState.event?.status.rawValue ?? "")")
                 .font(.largeTitle)
+            // TODO interpolation problem with delete button
                 .toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
                     EventVM.deleteEvent(eventID)
                     goBack = true
@@ -30,7 +34,7 @@ struct EventView: View {
             
             
             Form {
-                Section(header: Text("Trusted contacts")) {
+                Section(header: Text(translationManager.trustedContactsTrack)) {
                     ForEach(appState.eventTrustedContactsProfiles) { profile in
                         HStack {
                             //Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
@@ -41,11 +45,11 @@ struct EventView: View {
                     }
                 }
                 
-                Section(header: Text("Event details")) {
-                    Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
-                    Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
-                    Text("Envent type: \(appState.event?.eventType ?? "")")
-                    Text("Other info: \(appState.event?.otherInfo ?? "")")
+                Section(header: Text(translationManager.eventdDetailsTrack)) {
+                    Text("\(Text(translationManager.startTrack))  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
+                    Text("\(Text(translationManager.endTrack)) \(appState.event?.endTime.formatted(.dateTime) ?? "")")
+                    Text("\(Text(translationManager.eventTypeTrack)) \(appState.event?.eventType ?? "")")
+                    Text("\(Text(translationManager.otherTrack)) \(appState.event?.otherInfo ?? "")")
                 }
                 
             }

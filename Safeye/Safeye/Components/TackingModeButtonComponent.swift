@@ -10,12 +10,15 @@ import SwiftUI
 struct TrackingModeButtonComponent: View {
     @EnvironmentObject var appState: Store
     
+    var translationManager = TranslationService.shared
+
+    
     //var panicmode: Bool
     
      var body: some View {
          
          appState.event!.status == .PANIC ?
-            Text("Safe")
+         Text(translationManager.safeBtn)
              .foregroundColor(Color.white)
              .frame(width: 150, height: 150)
              .font(.system(size: 35))
@@ -23,7 +26,7 @@ struct TrackingModeButtonComponent: View {
              .clipShape(Circle())
          
          :
-            Text("SOS!")
+         Text(translationManager.sosBtn)
              .foregroundColor(Color.black)
              .frame(width: 250, height: 250)
              .font(.system(size: 55))
