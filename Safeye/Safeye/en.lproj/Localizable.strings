@@ -73,8 +73,8 @@
 "panicStatusTitle" = "Panic";
 "startedStatusTitle" = "Started";
 "deleteBtn" = "Delete";
-"trustedContactsTrack" = "Born";
-"eventdDetailsTrack" = "Born";
+"trustedContactsTrack" = "TRUSTED CONTACTS";
+"eventdDetailsTrack" = "EVENT DETAILS";
 "startTrack" = "Starting from:";
 "endTrack" = "Ending at:";
 "eventTypeTrack" = "Event type:";
@@ -88,7 +88,7 @@
 // Create event view
 "selectContactsTitle" = "SELECT CONTACTS FOR THE EVENT";
 "createEventInfoText" = "These contacts will be able to see events details";
-"dateAndTime" = "ESTIAMTED EVENT DATE AND TIME";
+"dateAndTime" = "ESTIMATED EVENT DATE AND TIME";
 "startTime" = "Start";
 "endTime" = "End";
 "eventType" = "EVENT TYPE";
@@ -136,3 +136,9 @@
 "sentReqTitle" = "SENT REQUESTS";
 "acceptBtn" = "accept";
 "profileBtn" = "profile";
+
+// NAVITEM
+"homeNav" = "Home";
+"profileNav" = "Profile";
+"connectNav" = "Connections";
+"settingsNav" = "Setting";

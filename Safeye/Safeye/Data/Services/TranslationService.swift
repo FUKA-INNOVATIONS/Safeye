@@ -138,4 +138,12 @@ final class TranslationService {
     let sentReqTitle:LocalizedStringKey = "sentReqTitle"
     let acceptBtn:LocalizedStringKey = "acceptBtn"
     let profileBtn:LocalizedStringKey = "profileBtn"
+    
+    // NAVITEM
+
+    let homeNav:LocalizedStringKey = "homeNav"
+    let profileNav:LocalizedStringKey = "profileNav"
+    let connectNav:LocalizedStringKey = "connectNav"
+    let settingsNav:LocalizedStringKey = "settingsNav"
+    
 }

@@ -32,53 +32,53 @@
 
 // Create profile
 
-"textProfile" = "In order to be safe, you must create a profile";
-"createProfileBtn" = "Create a profile";
+"textProfile" = "Turvallisuuden vuoksi sinun on luotava profiili";
+"createProfileBtn" = "Luo profiili";
 
-"textProfileBlanc" = "Please fill all fields to create new profile";
-"fullNameTitle" = "Your full name";
+"textProfileBlanc" = "Täytä kaikki kentät luodaksesi uuden profiilin";
+"fullNameTitle" = "Etunimi ja sukunimi";
 "fullNamePlaceholder" = "Full name";
-"addressTitle" = "Your address";
+"addressTitle" = "Osoitteesi";
 "addressPlaceholder" = "Address";
-"birthdayTitle" = "Your birthday";
+"birthdayTitle" = "Sinun syntymäpäiväsi";
 "birthdayPlaceholder" = "Birthday";
-"bloodTypeTitle" = "Choose your blood type";
-"illnessTitle" = "Your illness";
+"bloodTypeTitle" = "Valitse veriryhmäsi";
+"illnessTitle" = "Sinun sairautesi";
 "illnessPlaceholder" = "Ilness";
-"allergiesTitle" = "Your allergies";
+"allergiesTitle" = "Sinun allergiasi";
 "allergiesPlaceholder" = "Allergies";
-"saveBtn" = "Save & go back";
+"saveBtn" = "Tallenna ja palaa takaisin";
 // Alert in case wrong input
-"fieldAlertTitle" = "Fill all fields";
-"fieldAlertText" = "Please fill all fields";
-"okBtn" = "OK";
+"fieldAlertTitle" = "Täytä kaikki kentät";
+"fieldAlertText" = "Täytä kaikki kentät jatkaaksesi";
+"okBtn" = "okei";
 
 
 // SETTINGS
 
-"signOut" = "Sign out";
-"connection" = "Connection code";
-"copyBtn" = "Copy"; // might be an icon
+"signOut" = "Kirjaudu ulos";
+"connection" = "Yhteyskoodi";
+"copyBtn" = "Kopio"; // might be an icon
 
 // HOME
 
-"eventsNumber" = "events";
-"createNewEventBtn" = "Create new event";
-"yourEventsTitle" = "YOUR EVENTS";
-"yourFriendsEventsTitle" = "YOUR FRIEND´S EVENTS";
-"eventInfoTitle" = "Started";
+"eventsNumber" = "tapahtumat";
+"createNewEventBtn" = "Luo uusi tapahtuma";
+"yourEventsTitle" = "SINUN TAPAHTUMAT";
+"yourFriendsEventsTitle" = "YSTÄVÄSI TAPAHTUMAT";
+"eventInfoTitle" = "Aloitettu";
 
 // Tracking mode view
-"safeStatusTitle" = "Started";
-"panicStatusTitle" = "Panic";
-"startedStatusTitle" = "Started";
-"deleteBtn" = "Delete";
-"trustedContactsTrack" = "Born";
-"eventdDetailsTrack" = "Born";
-"startTrack" = "Starting from:";
-"endTrack" = "Ending at:";
-"eventTypeTrack" = "Event type:";
-"otherTrack" = "Other info:";
+"safeStatusTitle" = "Aloitettu";
+"panicStatusTitle" = "Paniikki";
+"startedStatusTitle" = "Aloitettu";
+"deleteBtn" = "Poista";
+"trustedContactsTrack" = "TRUSTED CONTACTS";
+"eventdDetailsTrack" = "TAPAHTUMAN TIEDOT";
+"startTrack" = "Alkaen:";
+"endTrack" = "Päättyy:";
+"eventTypeTrack" = "Tapahtumatyyppi:";
+"otherTrack" = "Muut tiedot:";
 //Tracking mode copmponent
 "sosBtn" = "SOS!";
 "safeBtn" = "Safe";
@@ -86,53 +86,59 @@
 
 
 // Create event view
-"selectContactsTitle" = "SELECT CONTACTS FOR THE EVENT";
-"createEventInfoText" = "These contacts will be able to see events details";
-"dateAndTime" = "ESTIAMTED EVENT DATE AND TIME";
-"startTime" = "Start";
-"endTime" = "End";
-"eventType" = "EVENT TYPE";
-"addContactBtn" = "add";
-"removeContactBtn" = "remove";
+"selectContactsTitle" = "VALITSE TAPAHTUMAN TRUSTED CONTACTS";
+"createEventInfoText" = "Nämä käyttäjät voivat nähdä tapahtumien tiedot";
+"dateAndTime" = "ARVIOITU TAPAHTUMAN PÄIVÄMÄÄRÄ JA AIKA";
+"startTime" = "Alkaa";
+"endTime" = "Päättyy";
+"eventType" = "TAPAHTUMATYYPPI";
+"addContactBtn" = "lisätä";
+"removeContactBtn" = "poista";
 // Event types
-"selectEventType" = "Select event type";
-"barNight" = "Bar night";
+"selectEventType" = "Valitse tapahtumatyyppi";
+"barNight" = "Baari-ilta";
 "nightClub" = "Night club";
-"dinner" = "Dinner";
-"houseParty" = "House party";
-"firstDate" = "First date";
-"otherType" = "Other";
-"otherDetailTitle" = "OTHER VALUABLE DETAILS";
-"detailPlaceholder" = "Anything else?";
-"saveActivateBtn" = "Save & activate";
-"savingEventInfo" = "Saving will also enable the tracking mode";
+"dinner" = "Illallinen";
+"houseParty" = "Kotibileet";
+"firstDate" = "Treffi";
+"otherType" = "Muu";
+"otherDetailTitle" = "MUUT TIEDOT";
+"detailPlaceholder" = "Mitään muuta?";
+"saveActivateBtn" = "Tallenna & aktivoi";
+"savingEventInfo" = "Tallentaminen ottaa myös seurantatilan käyttöön";
 
 // PROFILE
 
-"trustedContactsTitle" = "My trusted contacts";
-"bornTitle" = "Born:";
-"bloodTitle" = "Blood type";
-"illnessTitle" = "Illness";
-"allergiesTitle" = "Allergies";
-"safeSpaceTitle" = "My safe spaces";
+"trustedContactsTitle" = "Luotetut yhteyshenkilöni";
+"bornTitle" = "Syntynyt:";
+"bloodTitle" = "Veriryhmä";
+"illnessTitle" = "Sairaukset";
+"allergiesTitle" = "Allergiat";
+"safeSpaceTitle" = "Omat turvapaikat";
 // Add TC
-"codeInput" = "TC code..";
-"searchBtn" = "Search";
-"addBtn" = "Add";
-"nothingTitle" = "Nothing to display";
+"codeInput" = "TC koodi..";
+"searchBtn" = "Hae";
+"addBtn" = "Lisätä";
+"nothingTitle" = "Ei mitään esitettävää";
 // Add safe space
-"chooseMapBtn" = "Choose from map?";
-"addSafeBtn" = "Add";
-"nameSafe" = "Name";
-"streetSafe" = "Street";
-"citySafe" = "City";
-"zipSafe" = "Zip";
+"chooseMapBtn" = "Valitse kartalta";
+"addSafeBtn" = "Lisätä";
+"nameSafe" = "Nimi";
+"streetSafe" = "Osoite";
+"citySafe" = "Kaupunki";
+"zipSafe" = "Postinumero";
 
 
 // CONNECTIONS
 
-"connectionsTitle" = "CONNECTIONS";
-"receivedReqTitle" = "RECEIVED REQUESTS";
-"sentReqTitle" = "SENT REQUESTS";
-"acceptBtn" = "accept";
-"profileBtn" = "profile";
+"connectionsTitle" = "YHTEYDET";
+"receivedReqTitle" = "SAATUJA PYYNTÖJÄ";
+"sentReqTitle" = "LÄHETETTY PYYNTÖJÄ";
+"acceptBtn" = "hyväksy";
+"profileBtn" = "profiili";
+
+// NAVITEM
+"homeNav" = "Koti";
+"profileNav" = "Profiili";
+"connectNav" = "Yhteydet";
+"settingsNav" = "Asetukset";
