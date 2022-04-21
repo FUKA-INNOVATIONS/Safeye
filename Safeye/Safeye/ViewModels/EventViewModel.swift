@@ -130,7 +130,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
-    func createEvent(_ startDate: Date, _ endDate: Date, otherInfo: String, eventType: String, eventFolderPath: String ) -> Bool {
+    func createEvent(_ startDate: Date, _ endDate: Date, _ otherInfo: String, _ eventType: String, _ eventCity: String, _ eventFolderPath: String ) -> Bool {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
         
         if self.appState.eventSelctedContacts.isEmpty { print("You must select atlest 1 contact") ; return false }
@@ -149,7 +149,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
        @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
         
-        let newEvent = Event(ownerId: currentUserID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates, eventFolderPath: eventFolderPath)
+        let newEvent = Event(ownerId: currentUserID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates, eventFolderPath: eventFolderPath, city: eventCity)
         
         let didCreateEvent = eventService.createEvent(newEvent)
         didCreateEvent ? print("EventVM -> New event succeeded") : print("EventVM -> New event failed")

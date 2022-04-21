@@ -21,5 +21,6 @@ struct Event: Codable, Identifiable {
     var audioFiles: [URL]?
     var coordinates: [String : Double]
     var eventFolderPath: String
+    var city: String
     //var isOwner = false // TODO: check for ownership before adding to state
 }

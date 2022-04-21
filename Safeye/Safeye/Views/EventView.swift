@@ -42,6 +42,7 @@ struct EventView: View {
                 }
                 
                 Section(header: Text("Event details")) {
+                    Text("Envent type: \(appState.event?.city ?? "")")
                     Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
                     Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
                     Text("Envent type: \(appState.event?.eventType ?? "")")
