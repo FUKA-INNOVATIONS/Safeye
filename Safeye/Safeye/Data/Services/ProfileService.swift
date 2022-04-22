@@ -25,9 +25,9 @@ class ProfileService {
     private var profiles: [ProfileModel] = [ProfileModel]()
     private var profileDetails: ProfileModel?
     
-    func fetchProfileByID(profileID: String) {
-        print("IDIDID: \(profileID)")
-        profileDB.whereField("userId", isEqualTo: profileID).getDocuments()  { profile, error in
+    func fetchProfileByUserID(userID: String, panicProfile: Bool = false) {
+        print("IDIDID: \(userID)")
+        profileDB.whereField("userId", isEqualTo: userID).getDocuments()  { profile, error in
             if let error = error as NSError? {
                 print("profileService: Error fetching single profile: \(error.localizedDescription)")
             }
@@ -37,7 +37,11 @@ class ProfileService {
                     
                     DispatchQueue.main.async {
                         do {
-                            self.appState.profile = try profile.data(as: ProfileModel.self)
+                            if panicProfile {
+                                self.appState.panicPofiles.append(try profile.data(as: ProfileModel.self))
+                            } else {
+                                self.appState.profile = try profile.data(as: ProfileModel.self)
+                            }
                             print("Fetched profile: \(String(describing: profile.data()))")
                         }
                         catch {
@@ -63,8 +67,8 @@ class ProfileService {
                 for profile in profiles!.documents {
                     DispatchQueue.main.async {
                         do {
-                            // self.connectionProfileFound = true
-                            print("TTTTTTT: \(profile)")
+                            //self.connectionProfileFound = true
+                            print("fetchProfileByConnectionCode: \(profile)")
                             self.appState.profileSearch = try profile.data(as: ProfileModel.self)
                         }
                         catch {
@@ -92,17 +96,38 @@ class ProfileService {
     
     
     
-    func updateProfile(_ profileID: String, _ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String) {
+    func updateProfile(_ profileID: String, _ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String, _ avatar: String) {
         profileDB.document(profileID).setData(
-            ["fullName"  : fullName, "address"   : address,"birthday"  : birthday,"bloodType" : bloodType,"illness"   : illness,"allergies" : allergies], merge: true) { error in
+            ["fullName" : fullName, "address" : address, "birthday" : birthday, "bloodType" : bloodType, "illness" : illness, "allergies" : allergies, "avatar" : avatar], merge: true) { error in
                 
-                //TODO:  Check for error
+                //TODO:  Check for error, change it > pass whole object to update
                 
                 if error == nil {
                     // Get the new data and updtae app state
                     //self.getProfile()
                 }
             }
+    }
+    
+    func fetchEventTrustedContactsProfiles(_ userIDS: [String]) {
+        self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
+            if let error = error {
+                print("ProfileService: Error getting profiles of trusted contacts: \(error)")
+            } else {
+                self.appState.eventTrustedContactsProfiles.removeAll()
+                for profile in profiles!.documents {
+                    print("TC profile: \(profile.documentID) => \(profile.data())")
+                    DispatchQueue.main.async {
+                        do {
+                            let convertedProfile = try profile.data(as: ProfileModel.self)
+                            self.appState.eventTrustedContactsProfiles.append(convertedProfile)
+                        } catch {
+                            print("Error while converting event TC profiles: \(error)")
+                        }
+                    }
+                }
+            }
+        }
     }
     
     

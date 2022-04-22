@@ -14,11 +14,9 @@ class PlaygroundViewModel: ObservableObject {
     
     func getEvent(_ eventID: String) {
         print("getEvent")
-        eventService.fetchDetails(eventID: eventID)
     }
     
     func fetchConn() {
-        self.connService.fetchPendingConnectionRequests()
     }
     
 }

@@ -83,8 +83,11 @@ struct AddContactView: View {
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
                         BasicButtonComponent(label: "Add", action: {
                             // AddContactVM.addTrustedContact()
-                            ConnectionVM.addConnection(searchInput)
+                            if appState.profileSearch != nil {
+                                ConnectionVM.addConnection()
+                            }
                             searchInput = ""
+                            appState.profileSearch = nil
                         })
                     } else {
                         Text("Nothing to display.")

@@ -8,24 +8,16 @@
 import SwiftUI
 
 struct NavItem: View {
-    init() {
-        
-        UITabBar.appearance().backgroundColor = UIColor.gray
+    init() { //UITabBar.appearance().backgroundColor = UIColor.white
         
     }
     var body: some View {
         TabView {
             
-            SettingsView()
+            EventListView()
                 .tabItem(){
-                    Image(systemName: "slider.horizontal.3")
-                    Text("Setting")
-                }
-            
-            MapView()
-                .tabItem(){
-                    Image(systemName: "map.fill")
-                    Text("Map")
+                    Image(systemName: "house")
+                    Text("Home")
                 }
             
             ProfileView()
@@ -33,6 +25,20 @@ struct NavItem: View {
                     Image(systemName: "person.fill")
                     Text("Profile")
                 }
+            
+            ConnectionsView()
+                .tabItem(){
+                    Image(systemName: "person.3.sequence.fill")
+                    Text("Connections")
+                }
+            
+            SettingsView()
+                .tabItem(){
+                    Image(systemName: "slider.horizontal.3")
+                    Text("Setting")
+                }
+            
         }
+
     }
 }

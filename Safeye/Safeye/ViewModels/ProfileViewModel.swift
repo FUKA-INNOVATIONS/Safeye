@@ -15,12 +15,12 @@ class ProfileViewModel: ObservableObject {
     var AuthVM = AuthenticationViewModel.shared
     var appState = Store.shared
     
-    func updateProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String) {
+    func updateProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String, _ avatar: String) {
         guard let profileID = self.appState.profile?.id else {
             print("updateProfile -> profile id not found in app state")
             return
         }
-        self.profileService.updateProfile(profileID, fullName, address, birthday, bloodType, illness, allergies)
+        self.profileService.updateProfile(profileID, fullName, address, birthday, bloodType, illness, allergies, avatar)
         self.getProfileForCurrentUser() // update app state
     }
     
@@ -28,15 +28,16 @@ class ProfileViewModel: ObservableObject {
         self.profileService.fetchProfileByConnectionCode(connCode: connectionCode)
     }
     
+
     func getProfileForCurrentUser() {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else {
             print("Fetching current user's profile: No signed in user found")
             return
         }
-        self.profileService.fetchProfileByID(profileID: currentUserID)
+        self.profileService.fetchProfileByUserID(userID: currentUserID)
     }
     
-    func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String) {
+    func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String, _ avatar: String) {
         
         let currentUserID = AuthVM.authService.currentUser!.uid
         
@@ -44,7 +45,7 @@ class ProfileViewModel: ObservableObject {
         var hasher = Hasher() ; hasher.combine(currentUserID)
         let connectionHash = String(hasher.finalize())
         
-        let newProfile = ProfileModel(userId: currentUserID, fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash)
+        let newProfile = ProfileModel(userId: currentUserID, fullName: fullName, address: address, birthday: birthday, bloodType: bloodType, illness: illness, allergies: allergies, connectionCode: connectionHash, avatar: avatar)
         
         self.profileService.createProfile(newProfile: newProfile)
         

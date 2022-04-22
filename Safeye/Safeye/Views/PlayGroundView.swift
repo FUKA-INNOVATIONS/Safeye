@@ -11,36 +11,39 @@ struct PlayGroundView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var PlaygroundVM: PlaygroundViewModel
     @EnvironmentObject var appState: Store
+    @FetchRequest(sortDescriptors: []) var cities: FetchedResults<City>
+    @Environment(\.managedObjectContext) var moc
+    
+    @EnvironmentObject var EventVM: EventViewModel
+    
     
     
     var body: some View {
         
         return VStack {
-            BasicButtonComponent(label: "Fetch connection profiles") {
-                
-            }
-            
-            
-            /* ForEach(self.appState.pendingRequests) { req in
-                Text("Req: \(req.connectionId)")
-            } */
             
             ForEach(self.appState.connectionPofiles) { profile in
-                Text("Full name: \(profile.fullName)")
+                Text("Connection profile : \(profile.fullName)")
             }
             
+            
+            VStack {
+                Text("cities in appState: : \(appState.citiesFinland.count)")
+                Text("cities in device: : \(cities.count)")
+                Button("save device") { saveDevice() }
+                List(cities, id: \.id) { city in
+                    HStack {
+                        Text(city.name ?? "no city name")
+                        Spacer()
+                        //Button("delete") { moc.delete(city) ; try? moc.save() }
+                    }
+                }
+            }
             
             
             Text("Hello playground")
             Text("Event: \(self.appState.event?.otherInfo ?? "No info" )")
-            
-            
-            VStack {
-                /*ForEach(self.connService.pendingConnectionRequests) { req in
-                    Text(req.connectionId)
-                    
-                }*/
-            }
+
             
         }
         .task {
@@ -48,15 +51,36 @@ struct PlayGroundView: View {
         }
         .onAppear {
             
-            let userID1 = "LJIziY424tfW1ZEwAzBwvhicaMb2"
-            let userID2 = "td8IykGIgAgjbwgN8Po3zilnNOj2"
-            self.ConnectionVM.getConnectionProfiles(for: [userID1, userID2])
-            
-            
-            //self.ConnectionVM.getPendingREquests()
-            //self.PlaygroundVM.getEvent("qGcGgDF8K3FvJjplNYP4")
+            self.ConnectionVM.getConnections()
+            self.ConnectionVM.getConnectionProfiles()
+            print("Connections: \(appState.connections.count)")
+            print("Profiles: \(appState.connectionPofiles.count)")
         }
         
     }
+    
+    
+    func saveDevice() {
+        // save all cities in device momeory
+        for city in appState.citiesFinland {
+            let c = City(context: moc)
+            c.id = UUID()
+            c.name = city
+            c.country = "Finland"
+        }
+        
+        // save all cities in device persistant storage if data has changed
+        if moc.hasChanges {
+            do {
+                try moc.save()
+                print("CoreData: Cities saved")
+            } catch {
+                print("CoreData: Error while saving citites into device \(error.localizedDescription)")
+            }
+        } else { print("CoreData: Cities not saved in device beause of no changes") }
+        print("CoreData: : \(cities.count)")
+    }
+    
+    
 }
 

@@ -10,20 +10,22 @@ import Firebase
 
 @main
 struct SafeyeApp: App {
-    @StateObject var appStore = Store.shared
+    @StateObject private var appStore = Store.shared
+    @StateObject private var Safeyecontroller = SafeyeController()
     
-    @StateObject var AuthVM = AuthenticationViewModel.shared
-    @StateObject var ProfileVM = ProfileViewModel.shared
-    @StateObject var ConnectionVM = ConnectionViewModel.shared
-    @StateObject var EventVM = EventViewModel.shared
-    @StateObject var MapVM = MapViewModel()
+    @StateObject private var AuthVM = AuthenticationViewModel.shared
+    @StateObject private var ProfileVM = ProfileViewModel.shared
+    @StateObject private var ConnectionVM = ConnectionViewModel.shared
+    @StateObject private var EventVM = EventViewModel.shared
+    @StateObject private var MapVM = MapViewModel()
+    @StateObject private var FileVM = FileViewModel.shared
+    @StateObject private var CityVM = CityViewModel.shared
     
-    @StateObject var PlaygroundVM = PlaygroundViewModel.shared
+    @StateObject private var PlaygroundVM = PlaygroundViewModel.shared
     
 
     init() {
         FirebaseApp.configure() // Initialize Firebase
-        
     }
     
     var body: some Scene {
@@ -43,6 +45,8 @@ struct SafeyeApp: App {
                 }
                 .onAppear {
                     AuthVM.signedIn = AuthVM.isSignedIn
+                    // fetch citites of Finland and save it in appState
+                    CityVM.getCities(of: "Finland")
                 }
                 
             }
@@ -53,7 +57,9 @@ struct SafeyeApp: App {
             .environmentObject(MapVM)
             .environmentObject(appStore)
             .environmentObject(PlaygroundVM)
-            
+            .environmentObject(FileVM)
+            .environmentObject(CityVM)
+            .environment(\.managedObjectContext, Safeyecontroller.container.viewContext)
         }
     }
 }

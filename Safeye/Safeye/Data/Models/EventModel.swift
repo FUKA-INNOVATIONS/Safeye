@@ -9,7 +9,7 @@ import Foundation
 
 import FirebaseFirestoreSwift
 
-struct Event: Codable {
+struct Event: Codable, Identifiable {
     @DocumentID var id: String?
     var ownerId: String
     var status: EventStatus
@@ -20,7 +20,7 @@ struct Event: Codable {
     var trustedContacts: [String]
     var audioFiles: [URL]?
     var coordinates: [String : Double]
-    
-    
-    
+    var eventFolderPath: String
+    var city: String
+    //var isOwner = false // TODO: check for ownership before adding to state
 }

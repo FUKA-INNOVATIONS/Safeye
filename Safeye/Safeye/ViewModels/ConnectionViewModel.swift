@@ -11,34 +11,85 @@ import SwiftUI
 
 class ConnectionViewModel: ObservableObject {
     static let shared = ConnectionViewModel() ;  private init() {}
-    var connService = ConnectionService.shared
+    private var connService = ConnectionService.shared
+    private var profileService = ProfileService.shared
+    @ObservedObject var appState = Store.shared
     
+    func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> String { // to filter specific connection profile from appState
+        let trustedContactProfileId = connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+        //print("filterConnectionProfileFromAppState \(trustedContactProfileId)")
+        let connectionProfile = self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
+        //print("filterConnectionProfileFromAppState \(connectionProfile.fullName)")
+        return connectionProfile.fullName
+    }
     
-    @Published var profileFound = false
-    @Published var connectionFound = false
+    func deleteConnection(_ connectionID: String, _ type: String) {
+        self.connService.deleteConnection(connectionID)
+        DispatchQueue.main.async {
+            if type == "established" {
+                self.appState.connections = self.appState.connections.filter { $0.id != connectionID }
+            } else {
+                self.appState.pendingConnectionRequestsOwner = self.appState.pendingConnectionRequestsOwner.filter { $0.id != connectionID }
+            }
+        }
+    }
     
-    @Published var pendingREquests: [ConnectionModel] = []
-    
+    func confirmConnectionRequest(confirmedRequest: ConnectionModel) {
+        var confirmedRequest = confirmedRequest ; confirmedRequest.status = true
+        self.connService.confirmConnectionRequest(confirmedRequest)
+    }
+
     func getPendingRequests()  {
-        self.connService.fetchPendingConnectionRequests()
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+        self.connService.fetchPendingConnectionRequests(currentUserID)
     }
     
-    func getConnectionProfiles(for userIDS: [String]) {
-        self.connService.fetchConnectionProfiles(userIDS)
+    func getConnectionProfiles() {
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+        self.appState.connectionPofiles.removeAll()
+        // self.getConnections()
+        var connectionIDS = [String]()
+        for connection in self.appState.connections {
+            for userID in connection.connectionUsers {
+                if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
+            }
+        }
+        print("getConnectionProfiles -> Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
+        if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS) }
+    }
+    
+    func getConnections() {
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+        self.connService.fetchConnections(currentUserID)
     }
 
 
-    func addConnection(_ targetID: String) {
-        // TODO: Check, dows user already have addded connection ? request exists ?
+    func addConnection() {
+        // TODO: Check, if user already have addded connection ? request exists ?
         // TODO: If successful this should trigger a notification sent to target user (Sprint 3?) ???
+        
+        guard let targetProfileID = self.appState.profileSearch?.userId else {
+            print("addConnection -> Searched profile not found")
+            return
+        }
+        
+        for connection in self.appState.connections {
+            for userID in connection.connectionUsers {
+                if userID == targetProfileID {
+                    print("You already have this connection as trusted conntact")
+                    return
+                }
+            }
+        }
+        
         
         let uid = AuthenticationService.getInstance.currentUser!.uid
         var hasher = Hasher()
         hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
-        hasher.combine(targetID)
+        hasher.combine(targetProfileID)
         let connectionId = String(hasher.finalize())
         
-        let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: ["Owner": uid, "target": targetID], status: false)
+        let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [uid, targetProfileID], status: false)
         
         // returns a boolean, was added or not?
         if connService.addConnection(newConn: newConn) {

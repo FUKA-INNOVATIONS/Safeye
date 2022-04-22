@@ -9,46 +9,56 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
+    @EnvironmentObject var FileVM: FileViewModel
+    @EnvironmentObject var EventVM: EventViewModel
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
-
-    @ObservedObject var EventVM = EventViewModel.shared
-    
     @State private var showingAddSafePlace = false
-
-
+    
+    @State var isImagePickerShowing = false
+    @State var selectedPhoto: UIImage?
+    @State var fetchedPhoto: UIImage?
+    
     var body: some View {
         
-        ZStack {
+        return ZStack {
             VStack {
-                NavigationLink {
-                    CreateEventView()
-                } label: {
-                    Text("Create event")
-                }
-
+                
                 Group{
-
-                    Spacer()
-                    NavigationLink("Tracking (TEMP)", destination: EventView())
-
-                    Text("\(appState.profile?.fullName ?? "No name")")
-                        .font(.system(size: 25, weight: .bold))
+                    // AvatarComponent(size: 80)
                     
-                    // Show edit profile view in a Modal
-                    BasicButtonComponent(label: "Edit profile details") {
-                        showingEditProfile = true
+                    // Display profile photo
+                    VStack {
+                        // if user already has a profile photo, display that
+                        if FileVM.fetchedPhoto != nil {
+                            ProfileImageComponent(size: 100, avatarImage: FileVM.fetchedPhoto!)
+                        } else {
+                            // if they don't have it, display placeholder image
+                            // this technically shouldn't be needed because we are forcing them to upload an image. However, at the moment the fetching is a bit buggy and sometimes it shows this placeholder.
+                            ProfileImageComponent(size: 70, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
+                        }
+                    }
+                    HStack {
+                        Text("\(appState.profile?.fullName ?? "No name")")
+                            .font(.system(size: 25, weight: .bold))
+                        
+                        Button { showingEditProfile = true } label: { Image(systemName: "pencil.circle.fill") }
                     }
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
-                    
-                    AvatarComponent(size: 80)
                     Spacer()
                 }
+                
+                
+                
+                Spacer()
+                
                 Group {
+                    Spacer()
                     Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
                     HStack{
                         ListViewComponent(item: "avatar", size: 50)
@@ -60,13 +70,23 @@ struct ProfileView: View {
                     }
                     Spacer()
                 }
-                UserDetailsComponent()
-                Spacer()
+                
+                VStack {
+                    /* Button("Create new event", action: { showingCreateEvent = true } )
+                     .sheet(isPresented: $showingCreateEvent) {
+                     CreateEventView()
+                     } */
+                    
+                    Form {
+                        UserDetailsComponent()
+                    }
+                }
+                
                 Group {
                     Text("My safe spaces").font(.system(size: 18, weight: .semibold))
                     HStack{
-                    //size with icons doesn't work properly, will figure this out later
-                    ListViewComponent(item: "safeSpace", size: 40)
+                        //size with icons doesn't work properly, will figure this out later
+                        ListViewComponent(item: "safeSpace", size: 40)
                         Button(action: {
                             showingAddSafePlace = true
                             print("modal: ($showingAddSafePlace)")
@@ -74,26 +94,29 @@ struct ProfileView: View {
                         { Image("icon-add") }
                         Spacer(minLength: 20)
                     }
-                    Spacer()
                 }
                 
                 
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
-                print("PPPPPPPPPPPP: \(appState.profile)")
+                FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
+                fetchedPhoto = FileVM.fetchedPhoto
             }
-
             AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
-
+        }
+        .onAppear {
+            ConnectionVM.getConnections()
+            ConnectionVM.getConnectionProfiles()
+            EventVM.sendNotification()
         }
         
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
+/*struct ProfileView_Previews: PreviewProvider {
+ static var previews: some View {
+ ProfileView()
+ }
+ }*/
