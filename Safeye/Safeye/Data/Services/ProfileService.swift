@@ -107,7 +107,7 @@ class ProfileService {
     }
     
     func updateUserHomeLocationCoordinates(_ profileID: String, _ homeCoordinates: [Double]) {
-        profileDB.document(profileID).updateData(["homeCoordinates": homeCoordinates]) { error in
+        profileDB.document(profileID).updateData(["homeLatitude": homeCoordinates[0], "homeLongitude": homeCoordinates[1]]) { error in
             
             if error == nil {}
             

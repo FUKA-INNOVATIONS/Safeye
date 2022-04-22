@@ -68,7 +68,7 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
                 ConnectionVM.getConnections()
                 ConnectionVM.getConnectionProfiles()
-                viewModel.assignSafeSpaces()
+               // viewModel.assignSafeSpaces()
             }
             MapCurtainComponent()
                 .cornerRadius(20)
