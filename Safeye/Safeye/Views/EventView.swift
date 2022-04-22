@@ -20,54 +20,56 @@ struct EventView: View {
     
     var body: some View {
         
-        return VStack {
+        return ZStack {
             
-            Text("\(appState.event?.status.rawValue ?? "")")
-                .font(.largeTitle)
-                /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
-                    EventVM.deleteEvent(eventID)
-                    goBack = true
-                } }
-                .background(
-                    NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
-                )*/
-            
-            
-            Form {
-                Section(header: Text("Trusted contacts")) {
-                    ForEach(appState.eventTrustedContactsProfiles) { profile in
-                        HStack {
-                            //Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
-                            Text("\(profile.fullName)")
-                            Spacer()
-                            Image(systemName: "eye.fill")
+            VStack {
+                Text("\(appState.event?.status.rawValue ?? "")")
+                    .font(.largeTitle)
+                    /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
+                        EventVM.deleteEvent(eventID)
+                        goBack = true
+                    } }
+                    .background(
+                        NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
+                    )*/
+                
+                
+                Form {
+                    Section(header: Text("Trusted contacts")) {
+                        ForEach(appState.eventTrustedContactsProfiles) { profile in
+                            HStack {
+                                //Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
+                                Text("\(profile.fullName)")
+                                Spacer()
+                                Image(systemName: "eye.fill")
+                            }
                         }
                     }
+                    
+                    Section(header: Text("Event details")) {
+                        Text("Envent type: \(appState.event?.city ?? "")")
+                        Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
+                        Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
+                        Text("Envent type: \(appState.event?.eventType ?? "")")
+                        Text("Other info: \(appState.event?.otherInfo ?? "")")
+                    }
+                    
                 }
                 
-                Section(header: Text("Event details")) {
-                    Text("Envent type: \(appState.event?.city ?? "")")
-                    Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
-                    Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
-                    Text("Envent type: \(appState.event?.eventType ?? "")")
-                    Text("Other info: \(appState.event?.otherInfo ?? "")")
-                }
-                
-            }
-            
-            if EventVM.isEventOwner() {
-                appState.event!.status == .STARTED ?
-                Button(action: { // Actions after panic button Has been pressed
-                    EventVM.activatePanicMode()
-                    //EventVM.sentNotification()
-                }) {
-                    TrackingModeButtonComponent()
-                }
-                : // User is in panic mode presses safe button
-                Button(action: {
-                    EventVM.disablePanicMode()
-                }) {
-                    TrackingModeButtonComponent()
+                if EventVM.isEventOwner() {
+                    appState.event!.status == .STARTED ?
+                    Button(action: { // Actions after panic button Has been pressed
+                        EventVM.activatePanicMode()
+                        //EventVM.sentNotification()
+                    }) {
+                        TrackingModeButtonComponent()
+                    }
+                    : // User is in panic mode presses safe button
+                    Button(action: {
+                        EventVM.disablePanicMode()
+                    }) {
+                        TrackingModeButtonComponent()
+                    }
                 }
             }
             
@@ -75,9 +77,9 @@ struct EventView: View {
             
             
             
-            Spacer()
+            //Spacer()
             
-            Spacer()
+            //Spacer()
             
             //Send value of tracking: true to map view
             /* NavigationLink("View Map", destination: MapView())
@@ -87,7 +89,7 @@ struct EventView: View {
             /*NavigationLink("Disable Tracking", destination: ContentView())
              .disabled(true)*/
             
-            Spacer()
+            //Spacer()
           
             alertBoxComponent(buttonIsPressed: $isPresented,text: $text, panicMode: $panicMode)
         }
