@@ -8,9 +8,10 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
-class ProfileViewModel: ObservableObject {
-    static let shared = ProfileViewModel() ; private init() {}
+class ProfileViewModel: NSObject, ObservableObject {
+    static let shared = ProfileViewModel() ; private override init() {}
     let profileService = ProfileService.shared
     var AuthVM = AuthenticationViewModel.shared
     var appState = Store.shared
@@ -22,6 +23,15 @@ class ProfileViewModel: ObservableObject {
         }
         self.profileService.updateProfile(profileID, fullName, address, birthday, bloodType, illness, allergies, avatar)
         self.getProfileForCurrentUser() // update app state
+    }
+    
+    func updateUserHomeCoordinates() {
+        guard let profileID = self.appState.profile?.id else {
+            print("updateProfile -> profile id not found in app state")
+            return
+        }
+        let locationManager = CLLocationManager()
+        self.profileService.updateUserHomeLocationCoordinates(profileID, [locationManager.location!.coordinate.latitude, locationManager.location!.coordinate.longitude])
     }
     
     func  getProfileByConnectionCode(withCode connectionCode: String) {

@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct CurtainTCComponent: View {
+    var trustedContact: ProfileModel
+    
     var body: some View {
         HStack {
             AvatarComponent(size: 50)
             Spacer()
-            Text("Name Surname")
+            Text(trustedContact.fullName)
             Spacer()
             BasicButtonComponent(label: "Focus") {
                 
@@ -23,8 +25,8 @@ struct CurtainTCComponent: View {
     }
 }
 
-struct CurtainTCComponent_Previews: PreviewProvider {
-    static var previews: some View {
-        CurtainTCComponent()
-    }
-}
+//struct CurtainTCComponent_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CurtainTCComponent()
+//    }
+//}

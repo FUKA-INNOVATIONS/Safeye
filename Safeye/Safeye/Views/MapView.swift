@@ -8,17 +8,19 @@
 import MapKit
 import SwiftUI
 
-struct Location: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
-    let own: Bool
-}
+//struct Location: Identifiable {
+//    let id = UUID()
+//    let name: String
+//    let coordinate: CLLocationCoordinate2D
+//    let own: Bool
+//}
 
 struct MapView: View {
         
     @EnvironmentObject var viewModel: MapViewModel
     @EnvironmentObject var appState: Store
+    @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
     
     @State private var draggedOffset = CGSize.zero
     @State private var listOpen = false
@@ -29,6 +31,7 @@ struct MapView: View {
      TODO fetch the home locations of users trusted contacts and their own created
      safe spaces to use
      */
+    
     let locations = [
         Location(name: "SafeSpace 1", coordinate: CLLocationCoordinate2D(latitude: 60.170011, longitude: 24.937062), own: true),
         Location(name: "SafeSpace 2", coordinate: CLLocationCoordinate2D(latitude: 60.167650, longitude: 24.962106), own: false),
@@ -43,7 +46,7 @@ struct MapView: View {
     var body: some View {
         
         ZStack {
-            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: locations) { location in
+            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: appState.safeSpacesMap) { location in
                 MapAnnotation(coordinate: location.coordinate) {
                     // TODO create own component for how safe spaces are displayed
                     if location.own == true {
@@ -63,10 +66,13 @@ struct MapView: View {
             .accentColor(Color(.systemPurple))
             .onAppear {
                 viewModel.checkIfLocationServicesIsEnabled()
+                ConnectionVM.getConnections()
+                ConnectionVM.getConnectionProfiles()
+               // viewModel.assignSafeSpaces()
             }
             MapCurtainComponent()
                 .cornerRadius(20)
-                .offset(y: self.draggedOffset.height + 470)
+                .offset(y: self.draggedOffset.height + 530)
                 .gesture(DragGesture()
                     .onChanged { value in
                         // Whilst the drag out list is being dragged
@@ -131,6 +137,7 @@ struct MapView: View {
         }
         .onAppear {
             print("MapView -> EVENT STATE: \(appState.event?.status.rawValue ?? "")")
+            
         }
     }
 }

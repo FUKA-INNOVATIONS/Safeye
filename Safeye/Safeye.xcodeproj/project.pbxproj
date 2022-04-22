@@ -99,6 +99,7 @@
 		6A2CFC332801C8B80046395D /* TCListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC322801C8B80046395D /* TCListModifier.swift */; };
 		6A2CFC352801CAA10046395D /* TCItemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC342801CAA10046395D /* TCItemModifier.swift */; };
 		6A3A881928031E460049DC7F /* ContactConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A881828031E460049DC7F /* ContactConnectionModel.swift */; };
+		6A6B29A0280ECAE600036C38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6B299F280ECAE600036C38 /* GoogleService-Info.plist */; };
 		6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */; };
 		6ABCDD2227FF096F009563E7 /* ListViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */; };
 		6ABCDD2427FF1B19009563E7 /* UserDetailsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */; };
@@ -222,6 +223,7 @@
 		6A2CFC342801CAA10046395D /* TCItemModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCItemModifier.swift; sourceTree = "<group>"; };
 		6A3A881828031E460049DC7F /* ContactConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactConnectionModel.swift; sourceTree = "<group>"; };
 		6A55867E280D66260076B3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6A6B299F280ECAE600036C38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Documents/FirebaseImportant/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItemComponent.swift; sourceTree = "<group>"; };
 		6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewComponent.swift; sourceTree = "<group>"; };
 		6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsComponent.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 		5F0EA2F927F6F9E000FBD77B /* Safeye */ = {
 			isa = PBXGroup;
 			children = (
+				6A6B299F280ECAE600036C38 /* GoogleService-Info.plist */,
 				6A55867E280D66260076B3CE /* Info.plist */,
 				5FFDFB47280ED9A100AC7AAF /* GoogleService-Info.plist */,
 				5F244AE827F7213E00BFE1FB /* Utils */,
@@ -649,6 +652,7 @@
 				5F0EA30227F6F9E100FBD77B /* Preview Assets.xcassets in Resources */,
 				5FFDFB48280ED9A100AC7AAF /* GoogleService-Info.plist in Resources */,
 				5F0EA2FF27F6F9E100FBD77B /* Assets.xcassets in Resources */,
+				6A6B29A0280ECAE600036C38 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +932,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Safeye/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We want this";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to allow trusted contacts to find you in an emergency";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -959,6 +964,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Safeye/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We want this";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs your location to allow trusted contacts to find you in an emergency";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

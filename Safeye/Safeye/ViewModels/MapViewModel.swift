@@ -7,6 +7,14 @@
 
 import MapKit
 import Foundation
+import SwiftUI
+
+struct Location: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+    let own: Bool
+}
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //static let instance = MapViewModel() ; private init() {}
@@ -14,6 +22,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     // If the users does not allow location, map should center on Helsinki
     @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 60.170, longitude: 24.941), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     
+    var safeSpaces: [Location] = []
+    private var appState = Store.shared
     var locationManager: CLLocationManager?
     
     func checkIfLocationServicesIsEnabled() {
@@ -30,7 +40,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
-
+        
         switch locationManager.authorizationStatus {
             
         case .notDetermined:
@@ -49,4 +59,18 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
+    
+//    func assignSafeSpaces() {
+//        
+//        for trusted in self.appState.connectionPofiles {
+//            
+//            let name = trusted.fullName
+//            let latitude = trusted.homeLocation[0]
+//            let longitude = trusted.homeLocation[1]
+//            let safeSpace = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), own: false)
+//            
+//            appState.safeSpacesMap.append(safeSpace)
+//        }
+//        
+//    }
 }
