@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import MapKit
+import CoreLocation
 
 class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = EventViewModel() ;  private override init() {}
@@ -46,7 +46,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         switch locationManager.authorizationStatus {
             
         case .notDetermined:
-            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
         case .restricted:
             print("Your location is restricted")
         case .denied:

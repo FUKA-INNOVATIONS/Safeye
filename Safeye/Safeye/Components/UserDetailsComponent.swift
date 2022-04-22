@@ -19,6 +19,7 @@ struct UserDetailsComponent: View {
                     .font(.system(size: 30))
                 Text("\(appState.profile?.address ?? "Homeless")")
                     .padding()
+                Spacer()
             }
             HStack{
                 Image(systemName: "person.badge.clock.fill")

@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct CurtainTCListComponent: View {
+    
+    @EnvironmentObject var appState: Store
+    
         var body: some View {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack {
-                    ForEach(0..<5) {_ in
-                        CurtainTCComponent()
+                    ForEach(appState.connectionPofiles) { connectionProfile in
+                        CurtainTCComponent(trustedContact: connectionProfile)
                     }
                 }
             }

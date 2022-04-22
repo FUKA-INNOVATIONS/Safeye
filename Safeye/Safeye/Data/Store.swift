@@ -50,6 +50,8 @@ class Store: ObservableObject {
     @Published var isSignedIn = false
     @Published var lang = "EN" // Save app settings in persistant storage
     
+    @Published var safeSpacesMap = [Location]()
+
     @Published var appLoading = false
 
 }
