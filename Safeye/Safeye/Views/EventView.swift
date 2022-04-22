@@ -10,6 +10,10 @@ import SwiftUI
 struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
+
+    @State var panicMode: Bool = false
+    @State private var isPresented: Bool = false
+    @State private var text: String = ""
     
     //@State var goBack = false
     var eventID: String
@@ -84,7 +88,8 @@ struct EventView: View {
              .disabled(true)*/
             
             Spacer()
-            
+          
+            alertBoxComponent(buttonIsPressed: $isPresented,text: $text, panicMode: $panicMode)
         }
         //.navigationBarHidden(true)
         .onAppear {
@@ -93,7 +98,7 @@ struct EventView: View {
             //EventVM.checkIfLocationServicesIsEnabled() // This creates ui isssue, user is sent back to eventListView
             // let eventListener = EventVM.getDetails(for: eventID)
         }
-        
+
     }
     
 }
