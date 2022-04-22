@@ -13,7 +13,7 @@ import SwiftUI
 
 // Check for event statuses on app launch iex. if contact is in PANIC mode ?
 // Usually app state is initialized on app launch
-// Maybe we initialize the entire state and optionally add it to persistance store and then listen to the database for changes
+// If there is any sense, maybe we initialize the entire state and optionally add it to persistance store and then listen to the database for changes
 
 
 class Store: ObservableObject {
@@ -34,6 +34,7 @@ class Store: ObservableObject {
     @Published var eventTrustedContactsProfiles = [ProfileModel]()
     //@Published var eventCurrentUser: Event?
     @Published var panicMode = false
+    @Published var citiesFinland = [String]()
    
     
     @Published var errors = [String]()
@@ -49,6 +50,8 @@ class Store: ObservableObject {
     @Published var lang = "EN" // Save app settings in persistant storage
     
     @Published var safeSpacesMap = [Location]()
+
+    @Published var appLoading = false
 
 }
 

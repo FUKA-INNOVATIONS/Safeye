@@ -18,12 +18,12 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var fileService = FileService.shared
     
     
-    @Published var eventDetails: Event?
-    @Published var eventExists = false
-    @Published var didCreateEvent = false
-    @Published var eventError: String = ""
-    @Published var panicMode = false
-    @Published var mode = "Tracking"
+    //@Published var eventDetails: Event?
+    //@Published var eventExists = false
+    //@Published var didCreateEvent = false
+    //@Published var eventError: String = ""
+    //@Published var panicMode = false
+    //@Published var mode = "Tracking"
     
     @StateObject private var notificationService = NotificationService()
     
@@ -130,7 +130,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
-    func createEvent(_ startDate: Date, _ endDate: Date, otherInfo: String, eventType: String, eventFolderPath: String ) -> Bool {
+    func createEvent(_ startDate: Date, _ endDate: Date, _ otherInfo: String, _ eventType: String, _ eventCity: String, _ eventFolderPath: String ) -> Bool {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
         
         if self.appState.eventSelctedContacts.isEmpty { print("You must select atlest 1 contact") ; return false }
@@ -149,7 +149,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
        @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
         
-        let newEvent = Event(ownerId: currentUserID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates, eventFolderPath: eventFolderPath)
+        let newEvent = Event(ownerId: currentUserID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates, eventFolderPath: eventFolderPath, city: eventCity)
         
         let didCreateEvent = eventService.createEvent(newEvent)
         didCreateEvent ? print("EventVM -> New event succeeded") : print("EventVM -> New event failed")
@@ -189,7 +189,9 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func getEventTrustedContactsProfiles(eventID: String) {
         // Get trusted contacts of an event, result in appState.eventTrustedContactsProfiles
-        self.profileService.fetchEventTrustedContactsProfiles(self.appState.event?.trustedContacts ?? [""])
+        DispatchQueue.main.async {
+            self.profileService.fetchEventTrustedContactsProfiles(self.appState.event?.trustedContacts ?? [""])
+        }
     }
     
     func getEventsCount() -> Int {
@@ -222,16 +224,16 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     
     func changeStatus(_ eventID: String,_ newStatus: EventStatus) {
-        if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.panicMode = true  } }
+        if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.appState.panicMode = true  } }
         eventService.changeStatus(eventID, newStatus)
     }
     
     
-    func deleteEvent(_ eventID: String) {
+    func deleteEvent(offsets: IndexSet) {
+        let eventID = offsets.map { self.appState.eventsOfCurrentUser[$0] }[0].id!
         self.eventService.deleteEvent(eventID)
-        DispatchQueue.main.async {
-            //self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID }
-            
+        withAnimation {
+            DispatchQueue.main.async { self.appState.eventsOfCurrentUser = self.appState.eventsOfCurrentUser.filter { $0.id != eventID } }
         }
     }
     

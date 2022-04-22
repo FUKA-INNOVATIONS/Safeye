@@ -23,10 +23,14 @@ class ConnectionViewModel: ObservableObject {
         return connectionProfile.fullName
     }
     
-    func deleteConnection(_ connectionID: String) {
+    func deleteConnection(_ connectionID: String, _ type: String) {
+        self.connService.deleteConnection(connectionID)
         DispatchQueue.main.async {
-            self.connService.deleteConnection(connectionID)
-            self.appState.pendingConnectionRequestsOwner = self.appState.pendingConnectionRequestsOwner.filter { $0.id != connectionID }
+            if type == "established" {
+                self.appState.connections = self.appState.connections.filter { $0.id != connectionID }
+            } else {
+                self.appState.pendingConnectionRequestsOwner = self.appState.pendingConnectionRequestsOwner.filter { $0.id != connectionID }
+            }
         }
     }
     

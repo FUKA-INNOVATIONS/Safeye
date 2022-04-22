@@ -42,15 +42,12 @@ class EventService {
         
     } // end of createEvent
     
-    
-    
-    
-    
-    
+
     func fetchEventsForCurrentUser(userID: String) {
         self.eventDB.whereField("ownerId", isEqualTo: userID).getDocuments { event, error in
             if let error = error { print("Error in fetchEventForCurrentUser: \(error)") ; return }
             else {
+                self.appState.eventsOfCurrentUser.removeAll()
                 if event!.isEmpty { print("Current user has no event"); return }
                 if let event = event {
                     for event in event.documents {
@@ -76,6 +73,7 @@ class EventService {
             
             if let error = error { print("Error in fetchEventsOfTrustedContacts: \(error)") ; return }
             else {
+                self.appState.eventsOfTrustedContacts.removeAll()
                 if event!.isEmpty { print("fetchEventsOfTrustedContacts: Current user's trusted contacts have no events"); return }
                 if let event = event {
                     for event in event.documents {

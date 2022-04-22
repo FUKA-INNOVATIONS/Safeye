@@ -20,7 +20,7 @@ struct ConnectionsView: View {
                 Section("Connections") {
                     ForEach(appState.connections) { connection in
                         //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
-                        Button { ConnectionVM.deleteConnection(connection.id!) } label: { Image(systemName: "trash").foregroundColor(.red) }
+                        Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash").foregroundColor(.red) }
                         HStack {
                             Image(systemName: "trash")
                             Text("Full name")
@@ -58,7 +58,7 @@ struct ConnectionsView: View {
                             Spacer()
                             Group {
                                 Text("cancel")
-                                Button { ConnectionVM.deleteConnection(request.id!) } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
+                                Button { ConnectionVM.deleteConnection(request.id!, "sent") } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
                             }
                             .foregroundColor(.red)
                         }
