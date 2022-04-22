@@ -24,7 +24,7 @@ struct ProfileView: View {
     
     var body: some View {
         
-        ZStack {
+        return ZStack {
             VStack {
                 
                 Group{
@@ -109,6 +109,7 @@ struct ProfileView: View {
         .onAppear {
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
+            EventVM.sendNotification()
         }
         
     }

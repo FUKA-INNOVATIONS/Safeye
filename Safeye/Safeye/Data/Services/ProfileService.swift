@@ -25,7 +25,7 @@ class ProfileService {
     private var profiles: [ProfileModel] = [ProfileModel]()
     private var profileDetails: ProfileModel?
     
-    func fetchProfileByUserID(userID: String) {
+    func fetchProfileByUserID(userID: String, panicProfile: Bool = false) {
         print("IDIDID: \(userID)")
         profileDB.whereField("userId", isEqualTo: userID).getDocuments()  { profile, error in
             if let error = error as NSError? {
@@ -37,7 +37,11 @@ class ProfileService {
                     
                     DispatchQueue.main.async {
                         do {
-                            self.appState.profile = try profile.data(as: ProfileModel.self)
+                            if panicProfile {
+                                self.appState.panicPofiles.append(try profile.data(as: ProfileModel.self))
+                            } else {
+                                self.appState.profile = try profile.data(as: ProfileModel.self)
+                            }
                             print("Fetched profile: \(String(describing: profile.data()))")
                         }
                         catch {

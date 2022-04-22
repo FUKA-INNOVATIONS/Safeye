@@ -9,6 +9,7 @@ import Foundation
 import UserNotifications
 
 final class NotificationService: ObservableObject {
+    static let shared = NotificationService() ;  private init() {}
     @Published private(set) var notifications: [UNNotificationRequest] = []
     @Published private(set) var authorizationStatus: UNAuthorizationStatus?
     
@@ -42,6 +43,7 @@ final class NotificationService: ObservableObject {
         notificationContent.title = title
         notificationContent.sound = .defaultCritical
         notificationContent.body = body
+        notificationContent.subtitle = "This is emergency situation!"
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: notificationContent, trigger: trigger)

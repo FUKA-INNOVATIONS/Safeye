@@ -16,7 +16,7 @@ struct EventView: View {
     
     var body: some View {
         
-        VStack {
+        return VStack {
             
             Text("\(appState.event?.status.rawValue ?? "")")
                 .font(.largeTitle)
@@ -66,6 +66,8 @@ struct EventView: View {
                     TrackingModeButtonComponent()
                 }
             }
+            
+            
             
             
             

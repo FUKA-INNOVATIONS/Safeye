@@ -475,15 +475,15 @@
 			children = (
 				5F244AB027F7184B00BFE1FB /* AddSafePlaceViewModel.swift */,
 				5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */,
+				5FBAA9832811B5FF007961AE /* CityViewModel.swift */,
+				5FA418972806976C00B6C6E9 /* ConnectionViewModel.swift */,
+				5FAB464E28047E44009C4D0E /* EventViewModel.swift */,
+				5FBC1A76280DFD1C0015CC26 /* FileViewModel.swift */,
 				5F244AA827F717EF00BFE1FB /* HomeViewModel.swift */,
 				5F244AB427F7186E00BFE1FB /* MapViewModel.swift */,
+				5F5D0C6A2808068700999B78 /* PlaygroundViewModel.swift */,
 				5F244AAA27F7180400BFE1FB /* ProfileViewModel.swift */,
 				5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */,
-				5FAB464E28047E44009C4D0E /* EventViewModel.swift */,
-				5FA418972806976C00B6C6E9 /* ConnectionViewModel.swift */,
-				5F5D0C6A2808068700999B78 /* PlaygroundViewModel.swift */,
-				5FBC1A76280DFD1C0015CC26 /* FileViewModel.swift */,
-				5FBAA9832811B5FF007961AE /* CityViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
