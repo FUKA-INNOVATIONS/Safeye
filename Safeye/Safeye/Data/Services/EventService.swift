@@ -44,7 +44,7 @@ class EventService {
     
 
     func fetchEventsForCurrentUser(userID: String) {
-        self.eventDB.whereField("ownerId", isEqualTo: userID).getDocuments { event, error in
+        self.eventDB.whereField("ownerId", isEqualTo: userID).getDocuments() { event, error in
             if let error = error { print("Error in fetchEventForCurrentUser: \(error)") ; return }
             else {
                 self.appState.eventsOfCurrentUser.removeAll()
@@ -69,7 +69,7 @@ class EventService {
     
     func fetchEventsOfTrustedContacts(userID: String) {
         self.eventDB.whereField("trustedContacts", arrayContains: userID)
-            .getDocuments { event, error in
+            .getDocuments() { event, error in
             
             if let error = error { print("Error in fetchEventsOfTrustedContacts: \(error)") ; return }
             else {
@@ -82,6 +82,11 @@ class EventService {
                             do {
                                 let convertedEvent = try event.data(as: Event.self)
                                 self.appState.eventsOfTrustedContacts.append(convertedEvent)
+                                if convertedEvent.status == .PANIC {
+                                    self.appState.panicMode = true
+                                    self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }
+                                    self.appState.eventsPanic.append(convertedEvent)
+                                }
                             } catch {
                                 print("EventService: Error fetchEventsOfTrustedContacts: \(error)")
                             }
@@ -107,7 +112,15 @@ class EventService {
                         do {
                             let convertedEvent =  try event.data(as: Event.self)
                             self.appState.event = convertedEvent
-                            if convertedEvent.status == .PANIC { self.appState.eventsPanic.append(convertedEvent) }
+                            if convertedEvent.status == .PANIC {
+                                self.appState.panicMode = true
+                                for eventPanic in self.appState.eventsPanic {
+                                    if eventPanic.id != convertedEvent.id && eventPanic.ownerId != AuthenticationService.getInstance.currentUser!.uid {
+                                        //self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != eventPanic.id }
+                                        self.appState.eventsPanic.append(convertedEvent)
+                                    }
+                                }
+                            }
                             print("Fetched event: \(String(describing: self.appState.event))")
                         }
                         catch {

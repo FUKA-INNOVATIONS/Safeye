@@ -13,7 +13,9 @@ struct EventListView: View {
     @State var showingCreateEvent = false
     
     var body: some View {
-        VStack {
+        //EventVM.sendNotification()
+        
+        return VStack {
             Text("\(EventVM.getEventsCount()) events")
             Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
                 .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
@@ -70,6 +72,7 @@ struct EventListView: View {
         .onAppear {
             EventVM.getEventsOfCurrentUser()
             EventVM.getEventsOfTrustedContacts()
+            EventVM.sendNotification()
         }
     }
 }

@@ -62,11 +62,12 @@ struct SettingsView: View {
                 
             }.padding()
             
-            
             SettingsListViewComponent(settingsView: true)
         }
         .onAppear {
+            //EventVM.getEventsOfTrustedContacts() // to check for panic events
             //EventVM.getEventsOfCurrentUser()
+            EventVM.sendNotification()
         }
         
         

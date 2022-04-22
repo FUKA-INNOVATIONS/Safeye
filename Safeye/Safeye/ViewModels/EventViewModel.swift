@@ -3,7 +3,7 @@
 //  Safeye
 //
 //  Created by FUKA on 1.4.2022.
-//  Edited by FUKA on 11.4
+//  Edited by FUKA
 
 import Foundation
 import SwiftUI
@@ -12,20 +12,12 @@ import CoreLocation
 class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = EventViewModel() ;  private override init() {}
     let eventService = EventService.shared
-    private var appState = Store.shared
+    @ObservedObject private var appState = Store.shared
     private var connService = ConnectionService.shared
     private var profileService = ProfileService.shared
     private var fileService = FileService.shared
-    
-    
-    //@Published var eventDetails: Event?
-    //@Published var eventExists = false
-    //@Published var didCreateEvent = false
-    //@Published var eventError: String = ""
-    //@Published var panicMode = false
-    //@Published var mode = "Tracking"
-    
-    @StateObject private var notificationService = NotificationService()
+    private var notificationService = NotificationService.shared
+
     
     // Lines 30-77 location manager for tracking and panic mode
     var locationManager: CLLocationManager?
@@ -82,9 +74,11 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // User presses panic mode
     func activatePanicMode() {
-        self.appState.panicMode = true
-        self.appState.event?.status = EventStatus.PANIC
-        self.eventService.updateEvent(self.appState.event!)
+        DispatchQueue.main.async {
+            //self.appState.panicMode = true
+            self.appState.event?.status = EventStatus.PANIC
+            self.eventService.updateEvent(self.appState.event!)
+        }
         //self.getEventsOfCurrentUser()
         locationManager?.distanceFilter = 1
         print("Panic Mode activated")
@@ -92,20 +86,38 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // User pressed the safe button -> disabling panic mode
     func disablePanicMode() {
-        self.appState.panicMode = false
-        self.appState.event?.status = EventStatus.STARTED
-        self.eventService.updateEvent(self.appState.event!)
+        DispatchQueue.main.async {
+            self.appState.panicMode = false
+            self.appState.event?.status = EventStatus.STARTED
+            self.eventService.updateEvent(self.appState.event!)
+            
+            // Remove event from list of panic events
+//            self.appState.eventsPanic =  self.appState.eventsPanic.filter { $0.id != self.appState.event!.id }
+        }
         //self.getEventsOfCurrentUser()
         locationManager?.distanceFilter = 100
-        print("Disabled panic mode")
-        
+        // TODO: remove notification
     }
     // Send notification about panic mode
-    func sentNotification() {
-        notificationService.createLocalNotification(title: "Safeye: Pavlo", body: "Panic mode activated") { error in
-            print("error")
-        }
-        print("Notification sent")
+    func sendNotification() {
+        print("Panic events count: \(self.appState.eventsPanic.count)")
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications() // For removing all delivered notification
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests() // For removing all pending notifications which are not delivered yet but scheduled.
+//        if self.appState.panicMode {
+            for panicEvent in self.appState.eventsPanic {
+                profileService.fetchProfileByUserID(userID: panicEvent.ownerId, panicProfile: true) // fetch and set panic users profiles
+                if panicEvent.ownerId != AuthenticationService.getInstance.currentUser!.uid {
+                    for profile in self.appState.panicPofiles {
+                        notificationService.createLocalNotification(title: "\(profile.fullName) needs help!", body: "Check current location and listen to the environment!") { error in
+                            if error != nil {
+                                print("sendNotification > error")
+                                return
+                            }
+                        }
+                    }
+                }
+            }
+//        }
     }
     
     // User Pressed to disable tracking mode
@@ -168,20 +180,22 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func getEventsOfCurrentUser() {
         // Fetch all events of authenticated user, result in appState.eventsOfCurrentUser
-        self.appState.eventsOfCurrentUser.removeAll()
+        //DispatchQueue.main.async { self.appState.eventsOfCurrentUser.removeAll() }
         let currentUserId = AuthenticationService.getInstance.currentUser!.uid
         self.eventService.fetchEventsForCurrentUser(userID: currentUserId)
     }
     
     func getEventsOfTrustedContacts() {
         // Fetch all events of authenticated user, result in appState.eventsOfTrustedContacts
-        self.appState.eventsOfTrustedContacts.removeAll()
+        //DispatchQueue.main.async { self.appState.eventsOfTrustedContacts.removeAll() }
         let currentUserId = AuthenticationService.getInstance.currentUser!.uid
         self.eventService.fetchEventsOfTrustedContacts(userID: currentUserId)
     }
     
     func getEventsAll() {
         DispatchQueue.main.async {
+            self.appState.eventsOfCurrentUser.removeAll()
+            self.appState.eventsOfTrustedContacts.removeAll()
             self.getEventsOfTrustedContacts()
             self.getEventsOfCurrentUser()
         }

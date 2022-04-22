@@ -21,7 +21,7 @@ struct CreateEventView: View {
     @State var eventFolderPath = ""
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
-    @State private var cityOfEvent = ""
+    @State var cityOfEvent = ""
     
     @State var goEventView = false
     @Environment(\.dismiss) var dismiss
@@ -62,8 +62,8 @@ struct CreateEventView: View {
                 Section(header: Text("Location")) {
                     Button("Load citites") { saveCitiesInDevice() }
                     Picker(selection: $cityOfEvent, label: Text("Select a city or area")) {
-                        ForEach(cities, id: \.id) {
-                            Text($0.name ?? "no")
+                        ForEach(appState.citiesFinland, id: \.self) {
+                            Text($0)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -80,6 +80,7 @@ struct CreateEventView: View {
             
             
             BasicButtonComponent(label: "Save & activate", action: {
+                print("City: \(cityOfEvent)")
                 if eventType.isEmpty || cityOfEvent.isEmpty { print("Fill all fields") ; return }
                 
                 // set a random path for event folder and pass it to EventVM to createEvent()
