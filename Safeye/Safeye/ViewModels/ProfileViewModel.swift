@@ -37,6 +37,10 @@ class ProfileViewModel: ObservableObject {
         self.profileService.fetchProfileByUserID(userID: currentUserID)
     }
     
+    func getTrustedContactProfile(trustedContactID: String) {
+        self.profileService.fetchTrustedContactProfile(trustedContactID: trustedContactID)
+    }
+    
     func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String, _ avatar: String) {
         
         let currentUserID = AuthVM.authService.currentUser!.uid
