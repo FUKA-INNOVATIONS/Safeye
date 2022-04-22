@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ConnectionsView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
     @State var showingConnectionProfile = false
     
     var body: some View {
-        VStack {
-            
+        
+        return VStack {
             Form {
                 
                 Section("Connections") {
@@ -72,6 +73,7 @@ struct ConnectionsView: View {
             ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()
             ConnectionVM.getConnectionProfiles()
+            EventVM.sendNotification()
         }
     }
 }

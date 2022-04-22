@@ -71,12 +71,12 @@
          // Get the data from the database
          fileDB.collection("avatars").getDocuments { snapshot, error in
              if error == nil && snapshot != nil {
-                 var path: String = ""
+                 /*var path: String = ""
 
                  for doc in snapshot!.documents {
                      // extract the file path
                      path = doc["url"] as! String
-                 }
+                 }*/
                  // fetch the data from storage
                  let storageRef = Storage.storage().reference()
                  let fileRef = storageRef.child(avatarUrlFetched ?? "")

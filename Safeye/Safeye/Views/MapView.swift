@@ -19,6 +19,7 @@ struct MapView: View {
         
     @EnvironmentObject var viewModel: MapViewModel
     @EnvironmentObject var appState: Store
+    @EnvironmentObject var EventVM: EventViewModel
     
     @State private var draggedOffset = CGSize.zero
     @State private var listOpen = false
@@ -42,7 +43,7 @@ struct MapView: View {
     
     var body: some View {
         
-        ZStack {
+        return ZStack {
             Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: locations) { location in
                 MapAnnotation(coordinate: location.coordinate) {
                     // TODO create own component for how safe spaces are displayed
@@ -131,6 +132,7 @@ struct MapView: View {
         }
         .onAppear {
             print("MapView -> EVENT STATE: \(appState.event?.status.rawValue ?? "")")
+            EventVM.sendNotification()
         }
     }
 }

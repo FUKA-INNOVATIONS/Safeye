@@ -20,7 +20,7 @@ struct ContentView: View {
     @EnvironmentObject var CityVM: CityViewModel
     @Environment(\.managedObjectContext) var moc
     
-    @StateObject private var notificationService = NotificationService()
+    @StateObject private var notificationService = NotificationService.shared
     
     @State private var showingCreateProfile = false
     
@@ -28,7 +28,8 @@ struct ContentView: View {
     
     
     var body: some View {
-
+        
+        
         return Section {
             
             VStack {
@@ -84,9 +85,9 @@ struct ContentView: View {
         .onAppear {
             AuthVM.signedIn = AuthVM.isSignedIn
             ConnectionVM.getConnections()
-            ConnectionVM.getConnectionProfiles()
-            
-            
+            //ConnectionVM.getConnectionProfiles()
+            //EventVM.getEventsOfTrustedContacts() // to check for panic events
+            //EventVM.sendNotification()
             
 //            // save all cities in device momeory
 //            for city in appState.citiesFinland {

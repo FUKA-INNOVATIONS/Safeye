@@ -11,7 +11,7 @@ struct ProfileEditView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var appState: Store
-    
+    @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var FileVM: FileViewModel
     
     @State private var showEmptyFieldAlert = false
