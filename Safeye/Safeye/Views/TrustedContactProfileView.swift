@@ -26,11 +26,13 @@ struct TrustedContactProfileView: View {
                 Group{
                     // Display profile photo
                     VStack {
-                        Text(appState.trustedContactProfile?.fullName ?? "No name")
-                        if appState.trustecContactPhoto != nil {
-                            ProfileImageComponent(size: 100, avatarImage: appState.trustecContactPhoto!)
-                        } else {
-                            ProgressView()
+                        if appState.trustedContactProfile != nil {
+                            Text(appState.trustedContactProfile!.fullName)
+                            if appState.trustecContactPhoto != nil {
+                                ProfileImageComponent(size: 100, avatarImage: appState.trustecContactPhoto!)
+                            } else {
+                                ProgressView()
+                            }
                         }
                     }
                     Spacer()
@@ -44,8 +46,8 @@ struct TrustedContactProfileView: View {
                 }
             }
             .onAppear {
-                ProfileVM.getTrustedContactProfile(trustedContactID: profileID)
-                FileVM.fetchPhoto(avatarUrlFetched: appState.trustedContactProfile?.avatar, isTrustedContactPhoto: true)
+                //ProfileVM.getTrustedContactProfile(trustedContactID: profileID)
+                //FileVM.fetchPhoto(avatarUrlFetched: appState.trustedContactProfile?.avatar, isTrustedContactPhoto: true)
             }
         }
     }

@@ -130,27 +130,30 @@ class ProfileService {
     
     
     func fetchTrustedContactProfile(trustedContactID: String) {
-        profileDB.whereField("userId", isEqualTo: trustedContactID).getDocuments()  { profile, error in
-            if let error = error as NSError? {
-                print("profileService: Error fetching single profile: \(error.localizedDescription)")
-            }
-            else {
-
-                for profile in profile!.documents {
-
-                    DispatchQueue.main.async {
-                        do {
-                            self.appState.trustedContactProfile = try profile.data(as: ProfileModel.self)
-                            print("Fetched profile: \(String(describing: profile.data()))")
-                        }
-                        catch {
-                            print("Error on fetchProfileByID: \(error)")
-                        }
-                    }
-                }
-
-            }
-        }
+//        profileDB.whereField("userId", isEqualTo: trustedContactID).getDocuments()  { profile, error in
+//            if let error = error as NSError? {
+//                print("profileService: Error fetching single profile: \(error.localizedDescription)")
+//            }
+//            else {
+//
+//                for profile in profile!.documents {
+//
+//                    DispatchQueue.main.async {
+//                        do {
+//                            self.appState.trustedContactProfile = try profile.data(as: ProfileModel.self)
+//                            print("Fetched profile: \(String(describing: profile.data()))")
+//                        }
+//                        catch {
+//                            print("Error on fetchProfileByID: \(error)")
+//                        }
+//                    }
+//                }
+//
+//            }
+//        }
+        
+        self.appState.trustedContactProfile = self.appState.connectionProfilesWithAvatars.filter { $0.userId == trustedContactID}[0]
+        
     }
     
 } // end of ProfileService

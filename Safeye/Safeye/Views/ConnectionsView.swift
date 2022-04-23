@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ConnectionsView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     @State var showingConnectionProfile = false
     
@@ -18,19 +20,24 @@ struct ConnectionsView: View {
             Form {
                 
                 Section("Connections") {
-                    ForEach(appState.connections) { connection in
-                        //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
-                        Button { ConnectionVM.deleteConnection(connection.id!) } label: { Image(systemName: "trash").foregroundColor(.red) }
+                    ForEach(appState.connectionProfilesWithAvatars) { connection in
+                        // _ = ConnectionVM.filterConnectionProfileFromAppState(connection)
+                        Button { ConnectionVM.deleteConnection(connection.userId) } label: { Image(systemName: "trash").foregroundColor(.red) }
                         HStack {
                             Image(systemName: "trash")
-                            Text("Full name")
+                            Text(connection.fullName)
                             Spacer()
                             Text("profile")
-                            Button { showingConnectionProfile = true } label: { Image(systemName: "eye") }
+                            Button {
+                                showingConnectionProfile = true
+                                FileVM.fetchPhoto(avatarUrlFetched: connection.avatar, isTrustedContactPhoto: true)
+                                ProfileVM.getTrustedContactProfile(trustedContactID: connection.userId)
+
+                            } label: { Image(systemName: "eye") }
                         }
                         .sheet(isPresented: $showingConnectionProfile) {
                             //ProfileView(profileID: connection.id!)
-                            TrustedContactProfileView(profileID: connection.connectionUsers[0])
+                            TrustedContactProfileView(profileID: connection.userId)
                             
                         }
                         //.background( NavigationLink(destination: ProfileView(profileID: connection.id!), isActive: $goConnectionProfile) { EmptyView() }.hidden() )

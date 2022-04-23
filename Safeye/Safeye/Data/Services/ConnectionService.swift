@@ -120,7 +120,7 @@ class ConnectionService: ObservableObject {
     }
     
     func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
-        eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
+        eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionProfilesWithAvatars.removeAll()
         
         self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
             if let error = error {
@@ -133,12 +133,13 @@ class ConnectionService: ObservableObject {
                         do {
                             let convertedProfile = try profile.data(as: ProfileModel.self)
                             self.fileService.fetchPhoto(avatarUrlFetched: convertedProfile.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
-                            let contact = TrustedContactModel(id: convertedProfile.id, fullName: convertedProfile.fullName, avatarPhoto: self.appState.trustecContactPhoto)
-                            self.appState.connectionProfilesWithAvatars.append(contact)
+                            let contact = TrustedContactModel(id: convertedProfile.id, userId: convertedProfile.userId, fullName: convertedProfile.fullName, address: convertedProfile.address, birthday: convertedProfile.birthday, bloodType: convertedProfile.bloodType, illness: convertedProfile.illness, allergies: convertedProfile.allergies, connectionCode: convertedProfile.connectionCode, avatar: convertedProfile.avatar, avatarPhoto: self.appState.trustecContactPhoto)
                             if eventCase {
                                 self.appState.currentEventTrustedContacts.append(convertedProfile)
                             } else {
                                 self.appState.connectionPofiles.append(convertedProfile)
+                                self.appState.connectionProfilesWithAvatars.append(contact)
+
                             }
                         } catch {
                             print("Error while converting connection profiles: \(error)")
