@@ -13,6 +13,7 @@ struct ProfileView: View {
     @EnvironmentObject var appState: Store
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
@@ -83,7 +84,12 @@ struct ProfileView: View {
                 }
                 
                 Group {
-                    Text("My safe spaces").font(.system(size: 18, weight: .semibold))
+                    NavigationLink {
+                        MapView()
+                    } label: {
+                        Text("My safe spaces").font(.system(size: 18, weight: .semibold))//.foregroundColor(.black)
+                    }
+
                     HStack{
                         //size with icons doesn't work properly, will figure this out later
                         ListViewComponent(item: "safeSpace", size: 40)
@@ -112,6 +118,7 @@ struct ProfileView: View {
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
+            SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }
         
     }

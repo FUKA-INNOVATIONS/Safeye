@@ -20,6 +20,7 @@ struct SafeyeApp: App {
     @StateObject private var MapVM = MapViewModel()
     @StateObject private var FileVM = FileViewModel.shared
     @StateObject private var CityVM = CityViewModel.shared
+    @StateObject private var SafePlaceVM = SafePlaceViewModel.shared
     
     @StateObject private var PlaygroundVM = PlaygroundViewModel.shared
     
@@ -59,6 +60,7 @@ struct SafeyeApp: App {
             .environmentObject(PlaygroundVM)
             .environmentObject(FileVM)
             .environmentObject(CityVM)
+            .environmentObject(SafePlaceVM)
             .environment(\.managedObjectContext, Safeyecontroller.container.viewContext)
         }
     }
