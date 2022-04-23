@@ -14,7 +14,6 @@
      private let storageRef = Storage.storage().reference()
      private let fileDB = Firestore.firestore()
      private let appStore = Store.shared
-     private var fetchedPhoto: UIImage?
 
      private var eventFileName = "\(UUID().uuidString)"
 
@@ -29,10 +28,9 @@
          createEventFolder(eventFolderPath: eventFolderPath)
      }
 
-     func getPhoto(avatarUrlFetched: String?) -> UIImage? {
-         fetchPhoto(avatarUrlFetched: avatarUrlFetched)
-         return fetchedPhoto
-     }
+//     func getPhoto(avatarUrlFetched: String?) {
+//         fetchPhoto(avatarUrlFetched: avatarUrlFetched)
+//     }
 
      func putPhoto(_ selectedPhoto: UIImage?, _ avatarUrl: String?) -> String {
          uploadPhoto(selectedPhoto, avatarUrl)
@@ -61,13 +59,13 @@
              // checks for errors
              if error == nil && metadata != nil {
                  DispatchQueue.main.async {
-                     self.fetchedPhoto = selectedPhoto!
+                     self.appStore.userPhoto = selectedPhoto!
                  }
              }
          }
      }
 
-     func fetchPhoto(avatarUrlFetched: String?)  {
+     func fetchPhoto(avatarUrlFetched: String?, isSearchResultPhoto: Bool = false, isTrustedContactPhoto: Bool = false)  {
          // Get the data from the database
          fileDB.collection("avatars").getDocuments { snapshot, error in
              if error == nil && snapshot != nil {
@@ -85,8 +83,14 @@
                          // Create a UIImage and assign it to fetchedPhoto for display
                          if let image = UIImage(data: data!) {
                              DispatchQueue.main.async {
-                                 self.fetchedPhoto = image
-                             }
+                                 if isSearchResultPhoto {
+                                     self.appStore.searchResultPhoto = image
+                                 } else if isTrustedContactPhoto {
+                                     self.appStore.trustedContactPhoto = image
+                                 } else {
+                                     self.appStore.userPhoto = image
+                                 }
+                            }
                          }
                      }
                  }

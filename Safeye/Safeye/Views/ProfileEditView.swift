@@ -61,8 +61,8 @@ struct ProfileEditView: View {
             HStack { // Display profile photo
                 if selectedPhoto != nil { // if user has picked a new photo, show that one
                     ProfileImageComponent(size: 60, avatarImage: selectedPhoto!)
-                } else if FileVM.fetchedPhoto != nil { // if user hasn't selected a new photo, fetch one from DB if they have it
-                    ProfileImageComponent(size: 60, avatarImage: FileVM.fetchedPhoto!)
+                } else if appState.userPhoto != nil { // if user hasn't selected a new photo, fetch one from DB if they have it
+                    ProfileImageComponent(size: 60, avatarImage: appState.userPhoto!)
                 } else { // otherwise show placeholder image
                     ProfileImageComponent(size: 40, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
                 }
@@ -157,7 +157,7 @@ struct ProfileEditView: View {
                     ProfileVM.updateProfile(fullName, address, birthday, bloodType, illness, allergies, avatar)
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
-                    FileVM.fetchedPhoto = selectedPhoto
+                    appState.userPhoto = selectedPhoto
                     selectedPhoto = nil
                     dismiss()
                 }
