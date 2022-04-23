@@ -59,7 +59,7 @@ struct AddSafePlaceView: View {
         .ignoresSafeArea()
     }
     
-        var mainView: some View {
+var mainView: some View {
             VStack {
                 ZStack {
                     Capsule()

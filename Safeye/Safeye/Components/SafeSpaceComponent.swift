@@ -14,7 +14,8 @@ struct SafeSpaceComponent: View {
     }
     
         var body: some View {
-            Image("icon-house")
+            Image(systemName:"house.circle")
+                .font(.system(size: 40))
                 .frame(width: size, height: size, alignment: .center)
                 .scaledToFit()
                 .aspectRatio(contentMode: .fill)
