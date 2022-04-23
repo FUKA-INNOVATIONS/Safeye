@@ -10,10 +10,13 @@ import SwiftUI
 struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
+    
+    @StateObject var voiceRecognizer = VoiceRecognizer()
 
     @State var panicMode: Bool = false
     @State private var isPresented: Bool = false
     @State private var text: String = ""
+    @State private var showingRecordMessage: Bool = false
     
     //@State var goBack = false
     var eventID: String
@@ -56,6 +59,11 @@ struct EventView: View {
             }
             
             if EventVM.isEventOwner() {
+                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
+                .padding()
+                .sheet(isPresented: $showingRecordMessage) {
+                    RecordingView()
+                }
                 appState.event!.status == .STARTED ?
                 Button(action: { // Actions after panic button Has been pressed
                     EventVM.activatePanicMode()
