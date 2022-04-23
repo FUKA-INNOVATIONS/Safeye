@@ -21,7 +21,7 @@ class ConnectionService: ObservableObject {
         print("fetchConnections -> userID: \(userID)")
         DispatchQueue.main.async {
             self.connectionsDB.whereField("connectionUsers", arrayContains: userID)
-                .whereField("status", isEqualTo: true).getDocuments() { connections, error in
+                .whereField("status", isEqualTo: true).addSnapshotListener() { connections, error in
                     if let error = error {
                         print("Error fetching connections \(error)")
                         return
@@ -49,7 +49,7 @@ class ConnectionService: ObservableObject {
     func fetchPendingConnectionRequests (_ userID: String) { // type: received= target / sent = owner
         DispatchQueue.main.async {
             self.connectionsDB.whereField("connectionUsers", arrayContains: userID)
-                .whereField("status", isEqualTo: false).getDocuments() { requests, error in
+                .whereField("status", isEqualTo: false).addSnapshotListener() { requests, error in
                     
                     if let error = error {
                         print("Error fetching connection requests \(error)")
@@ -120,7 +120,7 @@ class ConnectionService: ObservableObject {
         DispatchQueue.main.async {
             eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
             
-            self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
+            self.profileDB.whereField("userId", in: userIDS).addSnapshotListener() { profiles, error in
                 if let error = error {
                     print("Error getting documents: \(error)")
                 } else {
