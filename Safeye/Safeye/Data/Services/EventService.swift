@@ -71,6 +71,8 @@ class EventService {
                             do {
                                 let convertedEvent = try event.data(as: Event.self)
                                 self.appState.eventsOfTrustedContacts.append(convertedEvent)
+                                // Remove event from panic list, for cases when panic mode is deactivated
+                                self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }
                                 if convertedEvent.status == .PANIC {
                                     self.appState.panicMode = true
                                     self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }

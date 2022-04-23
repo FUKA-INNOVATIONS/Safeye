@@ -11,24 +11,14 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
-    @EnvironmentObject var ConnectionVM: ConnectionViewModel
-    @EnvironmentObject var EventVM: EventViewModel
-    @EnvironmentObject var MapVM: MapViewModel
     @EnvironmentObject var appState: Store
-    @EnvironmentObject var FileVM: FileViewModel
-    
-    @EnvironmentObject var CityVM: CityViewModel
-    @Environment(\.managedObjectContext) var moc
-    
     @StateObject private var notificationService = NotificationService.shared
     
     @State private var showingCreateProfile = false
-    
     @State var goMapView = false
     
     
     var body: some View {
-        
         
         return Section {
             
@@ -46,7 +36,12 @@ struct ContentView: View {
                     }
                 } else {
                     // User has profile -> show the app
-                    NavItem()
+                    VStack {
+                        // Show alert on every view when someone in panic mode
+                        if !appState.eventsPanic.isEmpty { AlertPanicComponent() }
+                        NavItem()
+                    }
+                   
                 }
                 
                 
@@ -83,42 +78,8 @@ struct ContentView: View {
             )
         }
         .onAppear {
+            print("content view appeared")
             AuthVM.signedIn = AuthVM.isSignedIn
-            ConnectionVM.getConnections()
-            //ConnectionVM.getConnectionProfiles()
-            //EventVM.getEventsOfTrustedContacts() // to check for panic events
-            //EventVM.sendNotification()
-            
-//            // save all cities in device momeory
-//            for city in appState.citiesFinland {
-//                let c = City(context: moc)
-//                c.id = UUID()
-//                c.name = city
-//                c.country = "Finland"
-//            }
-//
-//            // save all cities in device persistant storage if data has changed
-//            if moc.hasChanges {
-//                do {
-//                    try moc.save()
-//                    print("CoreData: Cities saved")
-//                } catch {
-//                    print("CoreData: Error while saving citites into device \(error.localizedDescription)")
-//                }
-//            } else { print("CoreData: Cities not saved in device beause of no changes") }
-//            print("CoreData: : \(cities.count)")
         }
-        
-        
-        
     }
-    
-    
 }
-
-
-/* struct ContentView_Previews: PreviewProvider {
- static var previews: some View {
- ContentView()
- }
- } */

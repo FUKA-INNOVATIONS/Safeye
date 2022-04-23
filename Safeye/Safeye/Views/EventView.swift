@@ -11,9 +11,6 @@ struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
 
-    @State var panicMode: Bool = false
-    @State private var isPresented: Bool = false
-    @State private var text: String = ""
     
     //@State var goBack = false
     var eventID: String
@@ -71,7 +68,7 @@ struct EventView: View {
                         TrackingModeButtonComponent()
                     }
                 }
-            }
+            } // end of ZStack
             
             
             
@@ -91,23 +88,14 @@ struct EventView: View {
             
             //Spacer()
           
-            alertBoxComponent(buttonIsPressed: $isPresented,text: $text, panicMode: $panicMode)
         }
         //.navigationBarHidden(true)
         .onAppear {
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
             //EventVM.checkIfLocationServicesIsEnabled() // This creates ui isssue, user is sent back to eventListView
-            // let eventListener = EventVM.getDetails(for: eventID)
         }
 
     }
     
 }
-
-/*struct TrackingModeView_Previews: PreviewProvider {
- static var previews: some View {
- EventView()
- .previewInterfaceOrientation(.portraitUpsideDown)
- }
- }*/
