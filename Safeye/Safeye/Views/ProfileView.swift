@@ -13,6 +13,7 @@ struct ProfileView: View {
     @EnvironmentObject var appState: Store
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
@@ -112,6 +113,7 @@ struct ProfileView: View {
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
+            SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }
         
     }

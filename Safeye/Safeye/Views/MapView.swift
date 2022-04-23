@@ -21,6 +21,7 @@ struct MapView: View {
     @EnvironmentObject var appState: Store
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var SafePlacesVM: SafePlaceViewModel
     
     @State private var draggedOffset = CGSize.zero
     @State private var listOpen = false
@@ -32,12 +33,12 @@ struct MapView: View {
      safe spaces to use
      */
     
-    let locations = [
-        Location(name: "SafeSpace 1", coordinate: CLLocationCoordinate2D(latitude: 60.170011, longitude: 24.937062), own: true),
-        Location(name: "SafeSpace 2", coordinate: CLLocationCoordinate2D(latitude: 60.167650, longitude: 24.962106), own: false),
-        Location(name: "SafeSpace 3", coordinate: CLLocationCoordinate2D(latitude: 60.164396, longitude: 24.937056), own: false),
-        Location(name: "SafeSpace 4", coordinate: CLLocationCoordinate2D(latitude: 60.181991, longitude: 24.950927), own: true),
-    ]
+//    let locations = [
+//        Location(name: "SafeSpace 1", coordinate: CLLocationCoordinate2D(latitude: 60.170011, longitude: 24.937062), own: true),
+//        Location(name: "SafeSpace 2", coordinate: CLLocationCoordinate2D(latitude: 60.167650, longitude: 24.962106), own: false),
+//        Location(name: "SafeSpace 3", coordinate: CLLocationCoordinate2D(latitude: 60.164396, longitude: 24.937056), own: false),
+//        Location(name: "SafeSpace 4", coordinate: CLLocationCoordinate2D(latitude: 60.181991, longitude: 24.950927), own: true),
+//    ]
     
     //let locations = [
     //  safeSpace1, safeSpace2
@@ -46,7 +47,7 @@ struct MapView: View {
     var body: some View {
         
         return ZStack {
-            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: locations) { location in
+            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: appState.locations) { location in
                 MapAnnotation(coordinate: location.coordinate) {
                     // TODO create own component for how safe spaces are displayed
                     if location.own == true {
@@ -54,6 +55,7 @@ struct MapView: View {
                         Circle()
                             .stroke(.purple, lineWidth: 3)
                             .frame(width: 30, height: 30)
+                        Text(location.name)
                     } else {
                         // Trusted contacts home location
                         Circle()
@@ -136,6 +138,7 @@ struct MapView: View {
                 )
         }
         .onAppear {
+            SafePlacesVM.getSafePlacesOfAuthenticatedtUser()
             print("MapView -> EVENT STATE: \(appState.event?.status.rawValue ?? "")")
 
             EventVM.sendNotification()

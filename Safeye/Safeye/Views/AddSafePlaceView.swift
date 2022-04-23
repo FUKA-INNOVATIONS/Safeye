@@ -11,19 +11,9 @@ import MapKit
 
 struct AddSafePlaceView: View {
     @Binding var isShowing: Bool
-    var isFound: Bool = true
-    
-    @State var name = ""
-    @State var street = ""
-    @State var city = ""
-    @State var zip = ""
-    
-    @StateObject private var locationManager = LocationService.shared
-    @StateObject private var result = SearchResultModel()
-
-    @State private var search: String = ""
     @State var selectedLocation: MKMapItem?
-
+    @StateObject private var result = SearchResultModel()
+    @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
     
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 500
@@ -36,6 +26,22 @@ struct AddSafePlaceView: View {
         let res = Double((curHeight - minHeight) / (maxHeight - minHeight))
         return max(0, min(1, res))
     }
+    
+    
+//    var isFound: Bool = true
+//    @State var name = ""
+//    @State var street = ""
+//    @State var city = ""
+//    @State var zip = ""
+    
+//    @StateObject private var locationManager = LocationService.shared
+    
+
+//    @State private var search: String = ""
+    
+
+    
+    
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -68,16 +74,27 @@ struct AddSafePlaceView: View {
             NavigationView {
                 
                 VStack {
-                    Text("Found \(result.locations.count)")
+                    Text("Found \(result.locations.count) places")
                         .frame(width: 100, height: 20)
                     List(result.locations, id: \.self) { place in
                         HStack {
                             Text(place.name!)
                             Spacer()
-                            BasicButtonComponent(label: "Add", action: {
-                                selectedLocation = place
-                                print("Selected place: \(place.placemark.coordinate.longitude), \(place.placemark.coordinate.latitude)")
-                            }).frame(width: 100, height: 50)
+                            Button("Save") {
+                                print("Safe place: saving")
+                                print("Safe place: Selected place name: \(place)")
+                                let didSave = SafePlaceVM.createSafePlace(place)
+                                print("Safe place: didSave?: \(didSave)")
+                            }
+                            
+                            
+//                            BasicButtonComponent(label: "Add", action: {
+//                                selectedLocation = place
+//                                // print("Selected place: \(place.placemark.name)")
+//                                print("Safe place: Selected place: \(place.placemark.coordinate.longitude), \(place.placemark.coordinate.latitude)")
+//                            }).frame(width: 100, height: 50)
+                            
+                            
                         }
                     }
                 }.searchable(text: $result.searchText)

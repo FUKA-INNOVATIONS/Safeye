@@ -27,7 +27,11 @@ class Store: ObservableObject {
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
     @Published var panicPofiles = [ProfileModel]()
+
     @Published var safePlaces = [SafePlaceModel]()
+    @Published var locations = [Location]()  // temporary solutoin
+    
+    
     @Published var settings = [SettingModel]()
     @Published var eventsOfCurrentUser = [Event]()
     @Published var eventsOfTrustedContacts = [Event]()

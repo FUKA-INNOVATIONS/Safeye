@@ -8,6 +8,10 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-class SafePlaceModel {
+struct SafePlaceModel: Codable, Identifiable {
     @DocumentID var id: String?
+    var ownerId: String
+    var name: String
+    var longitude: Double
+    var latitude: Double
 }
