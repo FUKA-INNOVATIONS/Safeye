@@ -99,6 +99,7 @@ struct ProfileView: View {
                 
             }
             .onAppear {
+                print("profileView view appeared")
                 ProfileVM.getProfileForCurrentUser()
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
                 fetchedPhoto = FileVM.fetchedPhoto
