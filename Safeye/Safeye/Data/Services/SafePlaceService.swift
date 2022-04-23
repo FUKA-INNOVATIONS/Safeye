@@ -33,8 +33,6 @@ class SafePlaceService {
         self.appState.safePlaces.removeAll() // empty safe places collection
         self.appState.locations.removeAll() // empty locations list
         
-        
-        
         self.safePlaceDB.whereField("ownerId", isEqualTo: userID).getDocuments() { places, error in
             if let error = error { print("Error in fetchUserSafePlaces: \(error)") ; return }
             else {
@@ -58,9 +56,19 @@ class SafePlaceService {
             }
         }
         
-        
     }
     
+    
     // // delete specific safe place from the database
-    func deleteSafePlaceByID(_ safePlaceID: String) {}
+    func deleteSafePlaceByID(_ safePlaceID: String) {
+        safePlaceDB.document(safePlaceID).delete() { error in
+            if let error = error {
+                print("Error deleting safe place: \(error)")
+            } else {
+                print("Safe place successfully deleted!")
+            }
+        }
+    }
+    
+    
 }

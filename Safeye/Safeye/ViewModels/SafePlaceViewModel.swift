@@ -41,6 +41,8 @@ class SafePlaceViewModel: ObservableObject {
     }
     
     // delete specific safe place
-    func deleteSafePlaceByID(_ safePlaceID: String) {}
+    func deleteSafePlaceByID(_ safePlaceID: String) {
+        self.safePlaceService.deleteSafePlaceByID(safePlaceID)
+    }
     
 }

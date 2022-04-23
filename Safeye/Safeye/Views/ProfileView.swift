@@ -84,7 +84,12 @@ struct ProfileView: View {
                 }
                 
                 Group {
-                    Text("My safe spaces").font(.system(size: 18, weight: .semibold))
+                    NavigationLink {
+                        MapView()
+                    } label: {
+                        Text("My safe spaces").font(.system(size: 18, weight: .semibold))//.foregroundColor(.black)
+                    }
+
                     HStack{
                         //size with icons doesn't work properly, will figure this out later
                         ListViewComponent(item: "safeSpace", size: 40)
