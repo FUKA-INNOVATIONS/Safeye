@@ -20,25 +20,19 @@ struct ProfileView: View {
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
-    @State var fetchedPhoto: UIImage?
     
     var body: some View {
         
         ZStack {
             VStack {
-                
                 Group{
-                    // AvatarComponent(size: 80)
-                    
                     // Display profile photo
                     VStack {
                         // if user already has a profile photo, display that
-                        if FileVM.fetchedPhoto != nil {
-                            ProfileImageComponent(size: 100, avatarImage: FileVM.fetchedPhoto!)
+                        if appState.userPhoto != nil {
+                            ProfileImageComponent(size: 100, avatarImage: appState.userPhoto!)
                         } else {
-                            // if they don't have it, display placeholder image
-                            // this technically shouldn't be needed because we are forcing them to upload an image. However, at the moment the fetching is a bit buggy and sometimes it shows this placeholder.
-                            ProfileImageComponent(size: 70, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
+                            ProgressView()
                         }
                     }
                     HStack {
@@ -61,7 +55,14 @@ struct ProfileView: View {
                     Spacer()
                     Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
                     HStack{
-                        ListViewComponent(item: "avatar", size: 50)
+                        ForEach(appState.connectionProfilesWithAvatars) { connection in
+                            VStack {
+                                ProfileImageComponent(size: 70, avatarImage: connection.avatarPhoto ?? UIImage(imageLiteralResourceName: "avatar-placeholder"))
+                                Text(connection.fullName)
+                            }
+                            
+                        }
+                        //ListViewComponent(item: "avatar", size: 50)
                         Button(action: {
                             showingAddContact = true
                         })
@@ -95,13 +96,10 @@ struct ProfileView: View {
                         Spacer(minLength: 20)
                     }
                 }
-                
-                
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
-                fetchedPhoto = FileVM.fetchedPhoto
             }
             AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
@@ -113,9 +111,3 @@ struct ProfileView: View {
         
     }
 }
-
-/*struct ProfileView_Previews: PreviewProvider {
- static var previews: some View {
- ProfileView()
- }
- }*/

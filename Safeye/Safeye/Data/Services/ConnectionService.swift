@@ -14,8 +14,7 @@ class ConnectionService: ObservableObject {
     private var appState = Store.shared
     private var connectionsDB = Firestore.firestore().collection("connections")
     private var profileDB = Firestore.firestore().collection("profiles")
-    
-    
+    private let fileService = FileService.shared
     
     func fetchConnections (_ userID: String) {
         print("fetchConnections -> userID: \(userID)")
@@ -37,6 +36,7 @@ class ConnectionService: ObservableObject {
                                 do {
                                     let convertedConection = try connection.data(as: ConnectionModel.self)
                                     self.appState.connections.append(convertedConection)
+                                    
                                 } catch {
                                     print("fetchConnections > Error while fetching connections: \(error)")
                                 }
@@ -126,11 +126,15 @@ class ConnectionService: ObservableObject {
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
+                self.appState.connectionProfilesWithAvatars.removeAll()
                 for profile in profiles!.documents {
                     print("\(profile.documentID) => \(profile.data())")
                     DispatchQueue.main.async {
                         do {
                             let convertedProfile = try profile.data(as: ProfileModel.self)
+                            self.fileService.fetchPhoto(avatarUrlFetched: convertedProfile.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                            let contact = TrustedContactModel(id: convertedProfile.id, fullName: convertedProfile.fullName, avatarPhoto: self.appState.trustecContactPhoto)
+                            self.appState.connectionProfilesWithAvatars.append(contact)
                             if eventCase {
                                 self.appState.currentEventTrustedContacts.append(convertedProfile)
                             } else {

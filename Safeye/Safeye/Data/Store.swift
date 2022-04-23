@@ -26,6 +26,7 @@ class Store: ObservableObject {
     @Published var connections = [ConnectionModel]() // Trusted contacts, status = true
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
+    @Published var connectionProfilesWithAvatars = [TrustedContactModel]()
     @Published var trustedContactProfile: ProfileModel? = nil
     @Published var safePlaces = [SafePlaceModel]()
     @Published var settings = [SettingModel]()
@@ -48,6 +49,10 @@ class Store: ObservableObject {
     @Published var currentUserEmail = ""
     @Published var isSignedIn = false
     @Published var lang = "EN" // Save app settings in persistant storage
+
+    @Published var userPhoto: UIImage?
+    @Published var searchResultPhoto: UIImage?
+    @Published var trustecContactPhoto: UIImage?
 
 }
 

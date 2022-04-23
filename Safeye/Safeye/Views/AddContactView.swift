@@ -15,7 +15,7 @@ struct AddContactView: View {
     let minHeight: CGFloat = 500
     let maxHeight: CGFloat = 600
     
-    let startOpacity: Double = 0.4
+    let startOpacity: Double = 0.8
     let endOpacity: Double = 0.9
     
     var dragPercentage: Double {
@@ -28,6 +28,7 @@ struct AddContactView: View {
     ///////////
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     @State var error = ""
     
@@ -73,13 +74,18 @@ struct AddContactView: View {
                             }
                             
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
+                             FileVM.fetchPhoto(avatarUrlFetched: appState.profileSearch?.avatar, isSearchResultPhoto: true)
                         }, label: {Text("Search")})
                     }
 
                     Spacer()
                     //  If searched code matches an existing profile, display avatar, full name and 'add' button
                     if appState.profileSearch != nil {
-                        AvatarComponent(size: 100)
+                        if appState.searchResultPhoto != nil {
+                            ProfileImageComponent(size: 90, avatarImage: appState.searchResultPhoto!)
+                        } else {
+                            ProgressView()
+                        }
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
                         BasicButtonComponent(label: "Add", action: {
                             // AddContactVM.addTrustedContact()
@@ -118,17 +124,19 @@ struct AddContactView: View {
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onChanged { val in
                 let dragAmount = val.translation.height - prevDragTransition.height
-                if curHeight > maxHeight || curHeight < minHeight {
+                if curHeight > maxHeight {
                     curHeight -= dragAmount / 6
+                } else if curHeight < minHeight {
+                    isShowing = false
                 } else {
                     curHeight -= dragAmount
                 }
                 
                 prevDragTransition = val.translation
             }
-            .onEnded { val in
-                prevDragTransition = .zero
-            }
+            //.onEnded { val in
+            //    prevDragTransition = .zero
+            //}
     }
 }
 

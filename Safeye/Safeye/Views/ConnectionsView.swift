@@ -30,7 +30,7 @@ struct ConnectionsView: View {
                         }
                         .sheet(isPresented: $showingConnectionProfile) {
                             //ProfileView(profileID: connection.id!)
-                            TrustedContactProfile(profileID: connection.connectionUsers[0])
+                            TrustedContactProfileView(profileID: connection.connectionUsers[0])
                             
                         }
                         //.background( NavigationLink(destination: ProfileView(profileID: connection.id!), isActive: $goConnectionProfile) { EmptyView() }.hidden() )

@@ -9,6 +9,7 @@
 
 import Foundation
 import Firebase // Import firebase
+import SwiftUI
 
 
 // TODO: Database is in test mode, set rules and change to production mode
@@ -24,6 +25,7 @@ class ProfileService {
     
     private var profiles: [ProfileModel] = [ProfileModel]()
     private var profileDetails: ProfileModel?
+    private let fileService = FileService.shared
     
     func fetchProfileByUserID(userID: String) {
         print("IDIDID: \(userID)")

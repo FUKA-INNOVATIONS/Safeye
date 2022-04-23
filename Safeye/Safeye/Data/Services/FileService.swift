@@ -14,7 +14,6 @@
      private let storageRef = Storage.storage().reference()
      private let fileDB = Firestore.firestore()
      private let appStore = Store.shared
-     private var fetchedPhoto: UIImage?
 
      private var eventFileName = "\(UUID().uuidString)"
 
@@ -29,9 +28,8 @@
          createEventFolder(eventFolderPath: eventFolderPath)
      }
 
-     func getPhoto(avatarUrlFetched: String?) -> UIImage? {
-         fetchPhoto(avatarUrlFetched: avatarUrlFetched)
-         return fetchedPhoto
+     func getPhoto(avatarUrlFetched: String?, isSearchResultPhoto: Bool = false, isTrustedContactPhoto: Bool = false) {
+         fetchPhoto(avatarUrlFetched: avatarUrlFetched, isSearchResultPhoto: isSearchResultPhoto, isTrustedContactPhoto: isTrustedContactPhoto)
      }
 
      func putPhoto(_ selectedPhoto: UIImage?, _ avatarUrl: String?) -> String {
@@ -61,31 +59,37 @@
              // checks for errors
              if error == nil && metadata != nil {
                  DispatchQueue.main.async {
-                     self.fetchedPhoto = selectedPhoto!
+                     self.appStore.userPhoto = selectedPhoto!
                  }
              }
          }
      }
 
-     func fetchPhoto(avatarUrlFetched: String?)  {
+     func fetchPhoto(avatarUrlFetched: String?, isSearchResultPhoto: Bool = false, isTrustedContactPhoto: Bool = false)  {
          // Get the data from the database
          fileDB.collection("avatars").getDocuments { snapshot, error in
              if error == nil && snapshot != nil {
-                 var path: String = ""
-
-                 for doc in snapshot!.documents {
-                     // extract the file path
-                     path = doc["url"] as! String
-                 }
+//                 var path: String = ""
+//
+//                 for doc in snapshot!.documents {
+//                     // extract the file path
+//                     path = doc["url"] as! String
+//                 }
                  // fetch the data from storage
                  let storageRef = Storage.storage().reference()
                  let fileRef = storageRef.child(avatarUrlFetched ?? "")
-                 fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                 fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                      if error == nil && data != nil {
                          // Create a UIImage and assign it to fetchedPhoto for display
                          if let image = UIImage(data: data!) {
                              DispatchQueue.main.async {
-                                 self.fetchedPhoto = image
+                                 if isSearchResultPhoto {
+                                     self.appStore.searchResultPhoto = image
+                                 } else if isTrustedContactPhoto {
+                                     self.appStore.trustecContactPhoto = image
+                                 } else {
+                                     self.appStore.userPhoto = image
+                                 }
                              }
                          }
                      }
