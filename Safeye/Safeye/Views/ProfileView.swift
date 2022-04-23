@@ -65,7 +65,9 @@ struct ProfileView: View {
                         Button(action: {
                             showingAddContact = true
                         })
-                        { Image("icon-add") }
+                        { Image(systemName: "plus.magnifyingglass")
+                                .font(.system(size: 30))
+                        }
                         Spacer(minLength: 20)
                     }
                     Spacer()
@@ -91,7 +93,9 @@ struct ProfileView: View {
                             showingAddSafePlace = true
                             print("modal: ($showingAddSafePlace)")
                         })
-                        { Image("icon-add") }
+                        { Image(systemName: "plus.magnifyingglass")
+                                .font(.system(size: 30))
+                        }
                         Spacer(minLength: 20)
                     }
                 }

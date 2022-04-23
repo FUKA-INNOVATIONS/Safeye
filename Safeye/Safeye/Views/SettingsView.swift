@@ -17,11 +17,24 @@ struct SettingsView: View {
     
     @EnvironmentObject var appState: Store
 
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
         
     var body: some View {
         
         return VStack {
+            
+            VStack{
+                Picker("Mode", selection: $isDarkMode){
+                Text("Light")
+                    .tag(false)
+                Text("Dark")
+                    .tag(true)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                Spacer()
+            }
             
             BasicButtonComponent(label: "Sign out") { // Sign out button
                 AuthVM.signOut()
