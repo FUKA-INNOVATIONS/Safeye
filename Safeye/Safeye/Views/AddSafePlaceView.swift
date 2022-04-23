@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import MapKit
+
 
 struct AddSafePlaceView: View {
     @Binding var isShowing: Bool
@@ -15,6 +17,12 @@ struct AddSafePlaceView: View {
     @State var street = ""
     @State var city = ""
     @State var zip = ""
+    
+    @StateObject private var locationManager = LocationService.shared
+    @StateObject private var result = SearchResultModel()
+
+    @State private var search: String = ""
+    @State var selectedLocation: MKMapItem?
 
     
     @State private var curHeight: CGFloat = 500
@@ -56,22 +64,34 @@ struct AddSafePlaceView: View {
                 .background(Color.white.opacity(0.00001))
                 .gesture(dragGesture)
         VStack {
-            VStack{
-                TextField("Name", text: $name).padding()
-                TextField("Street", text: $street).padding()
-                TextField("City", text: $city).padding()
-                TextField("Zip", text: $zip).padding()
-                    
-            }
-            .textFieldStyle(.roundedBorder)
         
-            NavigationLink(destination: MapView()) {
-                               Text("Choose From Map?")
+            NavigationView {
+                
+                VStack {
+                    Text("Found \(result.locations.count)")
+                        .frame(width: 100, height: 20)
+                    List(result.locations, id: \.self) { place in
+                        HStack {
+                            Text(place.name!)
+                            Spacer()
+                            BasicButtonComponent(label: "Add", action: {
+                                selectedLocation = place
+                                print("Selected place: \(place.placemark.coordinate.longitude), \(place.placemark.coordinate.latitude)")
+                            }).frame(width: 100, height: 50)
+                        }
+                    }
+                }.searchable(text: $result.searchText)
+                  
+                    .navigationTitle("Enter address here")
             }
-
-            BasicButtonComponent(label: "Add", action: { print("Added")})
             
-            Spacer()
+//            NavigationLink(destination: MapView()) {
+//                               Text("Choose From Map?")
+//            }
+//
+//            BasicButtonComponent(label: "Add", action: { print("Added")})
+//
+//            Spacer()
               
                 }
         .frame(maxHeight: .infinity)
