@@ -17,18 +17,7 @@ class EventService {
     
     private var eventDetails: Event?
     @Published var eventErrors: String = ""
-    
-    
-    /*func getEvent(_ eventID: String) -> Event? {
-        self.fetchDetails(eventID)
-        return self.eventDetails ?? nil
-    } */
-    
-    /* func updateEvent(_ event: Event) {
-        self.editEvent(event)
-    } */ // end of updateEvent
 
-    
     
     func createEvent(_ event: Event) -> Bool {
         do {
@@ -67,7 +56,7 @@ class EventService {
     }
     
     
-    func fetchEventsOfTrustedContacts(userID: String) {
+    func fetchEventsOfTrustedContacts(of userID: String) {
         self.eventDB.whereField("trustedContacts", arrayContains: userID)
             .getDocuments() { event, error in
             
@@ -82,6 +71,8 @@ class EventService {
                             do {
                                 let convertedEvent = try event.data(as: Event.self)
                                 self.appState.eventsOfTrustedContacts.append(convertedEvent)
+                                // Remove event from panic list, for cases when panic mode is deactivated
+                                self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }
                                 if convertedEvent.status == .PANIC {
                                     self.appState.panicMode = true
                                     self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }
