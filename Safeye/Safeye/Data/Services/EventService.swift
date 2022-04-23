@@ -17,11 +17,11 @@ class EventService {
     
     private var eventDetails: Event?
     @Published var eventErrors: String = ""
-
+    
     
     func createEvent(_ event: Event) -> Bool {
         do {
-            _ = try eventDB.addDocument(from: event)
+            _ = try self.eventDB.addDocument(from: event)
             return true
         }
         catch {
@@ -31,17 +31,17 @@ class EventService {
         
     } // end of createEvent
     
-
+    
     func fetchEventsForCurrentUser(userID: String) {
-        self.eventDB.whereField("ownerId", isEqualTo: userID).getDocuments() { event, error in
-            if let error = error { print("Error in fetchEventForCurrentUser: \(error)") ; return }
-            else {
-                self.appState.eventsOfCurrentUser.removeAll()
-                if event!.isEmpty { print("Current user has no event"); return }
-                if let event = event {
-                    for event in event.documents {
-                        print("Event of current user: \(event)")
-                        DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            self.eventDB.whereField("ownerId", isEqualTo: userID).addSnapshotListener() { event, error in
+                if let error = error { print("Error in fetchEventForCurrentUser: \(error)") ; return }
+                else {
+                    self.appState.eventsOfCurrentUser.removeAll()
+                    if event!.isEmpty { print("Current user has no event"); return }
+                    if let event = event {
+                        for event in event.documents {
+                            print("Event of current user: \(event)")
                             do {
                                 let convertedEvent = try event.data(as: Event.self)
                                 self.appState.eventsOfCurrentUser.append(convertedEvent)
@@ -57,49 +57,48 @@ class EventService {
     
     
     func fetchEventsOfTrustedContacts(of userID: String) {
-        self.eventDB.whereField("trustedContacts", arrayContains: userID)
-            .getDocuments() { event, error in
-            
-            if let error = error { print("Error in fetchEventsOfTrustedContacts: \(error)") ; return }
-            else {
-                self.appState.eventsOfTrustedContacts.removeAll()
-                if event!.isEmpty { print("fetchEventsOfTrustedContacts: Current user's trusted contacts have no events"); return }
-                if let event = event {
-                    for event in event.documents {
-                        print("Events of current trusted contacts: \(event)")
-                        DispatchQueue.main.async {
-                            do {
-                                let convertedEvent = try event.data(as: Event.self)
-                                self.appState.eventsOfTrustedContacts.append(convertedEvent)
-                                // Remove event from panic list, for cases when panic mode is deactivated
-                                self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }
-                                if convertedEvent.status == .PANIC {
-                                    self.appState.panicMode = true
+        DispatchQueue.main.async {
+            self.eventDB.whereField("trustedContacts", arrayContains: userID)
+                .addSnapshotListener() { event, error in
+                    
+                    if let error = error { print("Error in fetchEventsOfTrustedContacts: \(error)") ; return }
+                    else {
+                        self.appState.eventsOfTrustedContacts.removeAll()
+                        if event!.isEmpty { print("fetchEventsOfTrustedContacts: Current user's trusted contacts have no events"); return }
+                        if let event = event {
+                            for event in event.documents {
+                                print("Events of current trusted contacts: \(event)")
+                                do {
+                                    let convertedEvent = try event.data(as: Event.self)
+                                    self.appState.eventsOfTrustedContacts.append(convertedEvent)
+                                    // Remove event from panic list, for cases when panic mode is deactivated
                                     self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }
-                                    self.appState.eventsPanic.append(convertedEvent)
+                                    if convertedEvent.status == .PANIC {
+                                        self.appState.panicMode = true
+                                        self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != convertedEvent.id }
+                                        self.appState.eventsPanic.append(convertedEvent)
+                                    }
+                                } catch {
+                                    print("EventService: Error fetchEventsOfTrustedContacts: \(error)")
                                 }
-                            } catch {
-                                print("EventService: Error fetchEventsOfTrustedContacts: \(error)")
                             }
                         }
                     }
                 }
-            }
         }
     }
     
     
     
     func fetchDetails(_ eventID: String) {
-        let eventRef = eventDB.document(eventID)
-        
-        eventRef.addSnapshotListener { document, error in
-            if let error = error as NSError? {
-                self.eventErrors = "eventService: Error getting event: \(error.localizedDescription)"
-            }
-            else {
-                if let event = document {
-                    DispatchQueue.main.async {
+        let eventRef = self.eventDB.document(eventID)
+        DispatchQueue.main.async {
+            eventRef.addSnapshotListener { document, error in
+                if let error = error as NSError? {
+                    self.eventErrors = "eventService: Error getting event: \(error.localizedDescription)"
+                }
+                else {
+                    if let event = document {
                         do {
                             let convertedEvent =  try event.data(as: Event.self)
                             self.appState.event = convertedEvent
@@ -127,7 +126,7 @@ class EventService {
     
     
     func updateEvent(_ event: Event) {
-        let eventRef = eventDB.document(event.id!)
+        let eventRef = self.eventDB.document(event.id!)
         DispatchQueue.main.async {
             do {
                 try eventRef.setData(from: event)
@@ -140,7 +139,7 @@ class EventService {
     
     
     func changeStatus(_ eventID: String, _ newStatus: EventStatus) {
-        let eventRef = eventDB.document(eventID)
+        let eventRef = self.eventDB.document(eventID)
         
         eventRef.updateData(["status":newStatus.rawValue]) { err in
             if let err = err {
@@ -152,7 +151,7 @@ class EventService {
     } // end of changeStatus
     
     func deleteEvent(_ eventID: String) {
-        eventDB.document(eventID).delete() { error in
+        self.eventDB.document(eventID).delete() { error in
             if let error = error {
                 print("Error deleting event: \(error)")
             } else {

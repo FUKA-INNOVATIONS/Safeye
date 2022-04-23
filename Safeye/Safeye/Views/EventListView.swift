@@ -21,6 +21,7 @@ struct EventListView: View {
         return VStack {
             VStack {
                 Text("\(EventVM.getEventsCount()) events")
+                Spacer()
                 Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
                     .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
                 Form {
