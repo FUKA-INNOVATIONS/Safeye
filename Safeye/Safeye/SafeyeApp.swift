@@ -20,9 +20,11 @@ struct SafeyeApp: App {
     @StateObject private var MapVM = MapViewModel()
     @StateObject private var FileVM = FileViewModel.shared
     @StateObject private var CityVM = CityViewModel.shared
+    @StateObject private var SafePlaceVM = SafePlaceViewModel.shared
     
     @StateObject private var PlaygroundVM = PlaygroundViewModel.shared
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
     init() {
         FirebaseApp.configure() // Initialize Firebase
@@ -50,6 +52,10 @@ struct SafeyeApp: App {
                 }
                 
             }
+            //Dark Mode  switch
+            .preferredColorScheme(isDarkMode ? .dark : .light)
+            .accentColor(.primary)
+            
             .environmentObject(AuthVM)
             .environmentObject(ProfileVM)
             .environmentObject(ConnectionVM)
@@ -59,6 +65,7 @@ struct SafeyeApp: App {
             .environmentObject(PlaygroundVM)
             .environmentObject(FileVM)
             .environmentObject(CityVM)
+            .environmentObject(SafePlaceVM)
             .environment(\.managedObjectContext, Safeyecontroller.container.viewContext)
         }
     }

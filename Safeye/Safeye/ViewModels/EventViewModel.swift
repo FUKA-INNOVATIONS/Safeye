@@ -243,7 +243,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         // Fetch all events of authenticated user, result in appState.eventsOfTrustedContacts
         //DispatchQueue.main.async { self.appState.eventsOfTrustedContacts.removeAll() }
         let currentUserId = AuthenticationService.getInstance.currentUser!.uid
-        self.eventService.fetchEventsOfTrustedContacts(userID: currentUserId)
+        self.eventService.fetchEventsOfTrustedContacts(of: currentUserId)
     }
     
     func getEventsAll() {
