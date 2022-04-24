@@ -15,7 +15,7 @@ class ConnectionService: ObservableObject {
     private var connectionsDB = Firestore.firestore().collection("connections")
     private var profileDB = Firestore.firestore().collection("profiles")
     
-    
+    private let fileService = FileService.shared
     
     func fetchConnections (_ userID: String) {
         print("fetchConnections -> userID: \(userID)")
@@ -122,6 +122,8 @@ class ConnectionService: ObservableObject {
     func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
         eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
         
+        self.appState.allContactsWithPhotos.removeAll()
+
         self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
             if let error = error {
                 print("Error getting documents: \(error)")
@@ -131,10 +133,13 @@ class ConnectionService: ObservableObject {
                     DispatchQueue.main.async {
                         do {
                             let convertedProfile = try profile.data(as: ProfileModel.self)
+                            self.fileService.fetchPhoto(avatarUrlFetched: convertedProfile.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                            let contact = TrustedContactModel(id: convertedProfile.id ,userId: convertedProfile.userId, fullName: convertedProfile.fullName, avatarPhoto: self.appState.trustedContactPhoto)
                             if eventCase {
                                 self.appState.currentEventTrustedContacts.append(convertedProfile)
                             } else {
                                 self.appState.connectionPofiles.append(convertedProfile)
+                                self.appState.allContactsWithPhotos.append(contact)
                             }
                         } catch {
                             print("Error while converting connection profiles: \(error)")
@@ -144,8 +149,5 @@ class ConnectionService: ObservableObject {
             }
         }
     }
-    
-    
-
 
 } // end of ConnectionService

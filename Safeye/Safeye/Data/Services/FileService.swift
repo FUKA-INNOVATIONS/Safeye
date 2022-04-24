@@ -101,45 +101,45 @@
      
      
      
-     func fetchAllContactPhotos()  {
-         // Get the data from the database
-         let connections = self.appStore.connectionPofiles
-         fileDB.collection("avatars").getDocuments { snapshot, error in
-             if error == nil && snapshot != nil {
-                 
-                 var paths = [String]()
-                 
-                 for doc in snapshot!.documents {
-                     paths.append(doc["url"] as! String)
-                 }
-                 
-                 for path in paths {
-//                     for conn in connections {
-//                         if path != conn.avatar {
-//                             return
+//     func fetchAllContactPhotos()  {
+//         // Get the data from the database
+//         let connections = self.appStore.connectionPofiles
+//         fileDB.collection("avatars").getDocuments { snapshot, error in
+//             if error == nil && snapshot != nil {
+//                 
+//                 var paths = [String]()
+//                 
+//                 for doc in snapshot!.documents {
+//                     paths.append(doc["url"] as! String)
+//                 }
+//                 
+//                 for path in paths {
+////                     for conn in connections {
+////                         if path != conn.avatar {
+////                             return
+////                         }
+////                     }
+//                     let storageRef = Storage.storage().reference()
+//                     let fileRef = storageRef.child(path)
+//                     
+//                     fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//                         
+//                         if error == nil && data != nil {
+//                             if let image = UIImage(data: data!) {
+//                                 self.retrievedPhotos.append(image)
+//                             }
 //                         }
+//                         
 //                     }
-                     let storageRef = Storage.storage().reference()
-                     let fileRef = storageRef.child(path)
-                     
-                     fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                         
-                         if error == nil && data != nil {
-                             if let image = UIImage(data: data!) {
-                                 self.retrievedPhotos.append(image)
-                             }
-                         }
-                         
-                     }
-                 }
-             }
-             DispatchQueue.main.async {
-                 self.appStore.allContactPhotos = self.retrievedPhotos
-             }
-         }
-     }
-     
-     
+//                 }
+//             }
+//             DispatchQueue.main.async {
+//                 self.appStore.allContactPhotos = self.retrievedPhotos
+//             }
+//         }
+//     }
+//     
+//     
      
      
      func createEventFolder(eventFolderPath: String) {

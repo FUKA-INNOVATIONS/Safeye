@@ -12,6 +12,7 @@ struct ProfileView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
     @EnvironmentObject var FileVM: FileViewModel
+    @EnvironmentObject var connService: ConnectionService
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
     
@@ -58,37 +59,37 @@ struct ProfileView: View {
                 Group {
                     Spacer()
                     Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
-                    HStack {
-                        ForEach(appState.connectionPofiles) { conn in
-                            VStack {
-                                    
-                                if appState.trustedContactPhoto != nil {
-                                    ProfileImageComponent(size: 50, avatarImage: appState.trustedContactPhoto!)
-                                } else {
-                                    ProgressView()
-                                        
+                    
+                    Group {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            ForEach(appState.allContactsWithPhotos) { contact in
+                                VStack {
+                                    if contact.avatarPhoto != nil {
+                                        ProfileImageComponent(size: 50, avatarImage: contact.avatarPhoto!)
+                                    } else {
+                                        ProgressView()
+                                            
+                                    }
+        
+                                    Text(contact.fullName)
+
                                 }
-                                Text(conn.fullName)
+                                Spacer()
                             }
-                            .onAppear {
-                                FileVM.fetchPhoto(avatarUrlFetched: conn.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                            Spacer()
+                            Button(action: {
+                                showingAddContact = true
+                            })
+                            { Image(systemName: "plus.magnifyingglass")
+                                    .font(.system(size: 30))
                             }
+                            Spacer()
                         }
                     }
-                    .onAppear {
-                        FileVM.fetchAllPhotos()
-                    }
-                    HStack{
-                        ListViewComponent(item: "avatar", size: 50)
-                        Button(action: {
-                            showingAddContact = true
-                        })
-                        { Image(systemName: "plus.magnifyingglass")
-                                .font(.system(size: 30))
-                        }
-                        Spacer(minLength: 20)
-                    }
-                    Spacer()
+                    
+  
                 }
                 
                 VStack {
@@ -138,7 +139,6 @@ struct ProfileView: View {
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
             ConnectionVM.getPendingRequests()
-            FileVM.fetchAllPhotos()
             EventVM.sendNotification()
             SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }

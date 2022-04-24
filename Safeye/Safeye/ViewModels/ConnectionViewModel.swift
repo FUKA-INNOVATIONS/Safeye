@@ -18,8 +18,8 @@ class ConnectionViewModel: ObservableObject {
     func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> ProfileModel { // to filter specific connection profile from appState
         print("CONNECTION PROFILES BEFORE FILTERING \(appState.connectionPofiles)")
         let trustedContactProfileId = connection.connectionUsers.filter { $0 != appState.currentUserID }[0]
-        print("filterConnectionProfileFromAppState \(trustedContactProfileId)")
-        print("connection profiles: \(self.appState.connectionPofiles)")
+        //print("filterConnectionProfileFromAppState \(trustedContactProfileId)")
+        //print("connection profiles: \(self.appState.connectionPofiles)")
         let connectionProfile = self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
         return connectionProfile
     }
