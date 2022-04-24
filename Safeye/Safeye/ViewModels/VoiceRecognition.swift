@@ -30,6 +30,8 @@ class VoiceRecognizer: ObservableObject {
     
     @Published var userMessage: String = ""
     
+    static let shared = VoiceRecognizer()
+    
     private var audioEngine: AVAudioEngine?
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
@@ -97,6 +99,7 @@ class VoiceRecognizer: ObservableObject {
         audioEngine = nil
         request = nil
         task = nil
+        userMessage = ""
     }
     
     private static func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
