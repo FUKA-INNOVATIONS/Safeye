@@ -98,6 +98,17 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager?.distanceFilter = 100
         // TODO: remove notification
     }
+    
+    // TODO Repeating function for monitoring voice when in panic mode
+    
+    func monitorSpeechWhilstInPanicMode() {
+        
+    }
+    
+    func stopMonitoringSpeech() {
+        
+    }
+    
     // Send notification about panic mode
     func sendNotification() {
         print("Panic events count: \(self.appState.eventsPanic.count)")
