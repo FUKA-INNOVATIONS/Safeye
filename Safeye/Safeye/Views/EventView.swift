@@ -6,10 +6,18 @@
 //  Edited by FUKA
 
 import SwiftUI
+import nanopb
 
 struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var appState: Store
+    
+    @StateObject var voiceRecognizer = VoiceRecognizer()
+
+    @State var panicMode: Bool = false
+    @State private var isPresented: Bool = false
+    @State private var text: String = ""
+    @State private var showingRecordMessage: Bool = false
 
     
     //@State var goBack = false
@@ -44,29 +52,37 @@ struct EventView: View {
                     }
                     
                     Section(header: Text("Event details")) {
-                        Text("Envent type: \(appState.event?.city ?? "")")
+                        Text("Event type: \(appState.event?.city ?? "")")
                         Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
                         Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
-                        Text("Envent type: \(appState.event?.eventType ?? "")")
+                        Text("Event type: \(appState.event?.eventType ?? "")")
                         Text("Other info: \(appState.event?.otherInfo ?? "")")
                     }
                     
                 }
                 
-                if EventVM.isEventOwner() {
-                    appState.event!.status == .STARTED ?
-                    Button(action: { // Actions after panic button Has been pressed
-                        EventVM.activatePanicMode()
-                        //EventVM.sentNotification()
-                    }) {
-                        TrackingModeButtonComponent()
-                    }
-                    : // User is in panic mode presses safe button
-                    Button(action: {
-                        EventVM.disablePanicMode()
-                    }) {
-                        TrackingModeButtonComponent()
-                    }
+            }
+            
+            if EventVM.isEventOwner() {
+                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
+                .disabled( appState.panicMode == true)
+                .opacity( appState.panicMode == true ? 0 : 1)
+                .padding()
+                .sheet(isPresented: $showingRecordMessage) {
+                    RecordingView()
+                }
+                appState.event!.status == .STARTED ?
+                Button(action: { // Actions after panic button Has been pressed
+                    EventVM.activatePanicMode()
+                    //EventVM.sentNotification()
+                }) {
+                    TrackingModeButtonComponent()
+                }
+                : // User is in panic mode presses safe button
+                Button(action: {
+                    EventVM.disablePanicMode()
+                }) {
+                    TrackingModeButtonComponent()
                 }
             } // end of ZStack
             

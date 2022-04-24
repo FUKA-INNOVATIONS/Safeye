@@ -17,6 +17,12 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var profileService = ProfileService.shared
     private var fileService = FileService.shared
     private var notificationService = NotificationService.shared
+    private var voiceClass = VoiceRecognizer.shared
+    
+    @State private var isRecording = false
+    
+    var audioTimer : Timer?
+    
 
     
     // Lines 30-77 location manager for tracking and panic mode
@@ -81,6 +87,13 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         //self.getEventsOfCurrentUser()
         locationManager?.distanceFilter = 1
+        
+        // Timer function doesn't record first loop round
+        self.voiceClass.reset()
+        self.voiceClass.transcribe()
+        self.isRecording = true
+        
+        monitorSpeechWhilstInPanicMode()
         print("Panic Mode activated")
     }
     
@@ -92,12 +105,53 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.eventService.updateEvent(self.appState.event!)
             
             // Remove event from list of panic events
-//            self.appState.eventsPanic =  self.appState.eventsPanic.filter { $0.id != self.appState.event!.id }
+            //  self.appState.eventsPanic =  self.appState.eventsPanic.filter { $0.id != self.appState.event!.id }
         }
         //self.getEventsOfCurrentUser()
         locationManager?.distanceFilter = 100
+        stopMonitoringSpeech()
         // TODO: remove notification
     }
+    
+    // Creates a new string every 15 second and adds it to an array to send  to database
+    func monitorSpeechWhilstInPanicMode() {
+        
+        var panicModeUserSpeech: [String] = []
+        
+        guard audioTimer == nil else { return }
+        
+        audioTimer =  Timer.scheduledTimer(withTimeInterval: TimeInterval(15), repeats: true) { timer in
+            
+            /**
+                string is added at the start of timer so that the full 15 seconds of recorded audio is added
+             */
+            let date = Date()
+            let format = DateFormatter()
+            format.dateFormat = "dd/MM HH:mm"
+            let timestamp = format.string(from: date)
+            panicModeUserSpeech.append("\(timestamp): \(self.voiceClass.userMessage)")
+            print(panicModeUserSpeech)
+            
+            // TODO: Send panicModeUserSpeechArray to database
+            
+            self.voiceClass.reset()
+            self.voiceClass.transcribe()
+            self.isRecording = true
+
+        }
+    }
+    
+    /**
+        Stops the timer function and stops listening for any audio
+        runs when the user pressed the safe button
+     */
+    func stopMonitoringSpeech() {
+        audioTimer?.invalidate()
+        audioTimer = nil
+        self.voiceClass.stopTranscribing()
+        isRecording = false
+    }
+    
     // Send notification about panic mode
     func sendNotification() {
         print("Panic events count: \(self.appState.eventsPanic.count)")
