@@ -10,6 +10,7 @@ import SwiftUI
 struct ConnectionsView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     @State var showingConnectionProfile = false
     
@@ -20,17 +21,20 @@ struct ConnectionsView: View {
                 
                 Section("Connections") {
                     ForEach(appState.connections) { connection in
-                        //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
+                        let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
                         Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash").foregroundColor(.red) }
                         HStack {
                             Image(systemName: "trash")
-                            Text("Full name")
+                            Text(profile.fullName)
                             Spacer()
                             Text("profile")
-                            Button { showingConnectionProfile = true } label: { Image(systemName: "eye") }
+                            Button {
+                                showingConnectionProfile = true
+                                FileVM.fetchPhoto(avatarUrlFetched: profile.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                            } label: { Image(systemName: "eye") }
                         }
                         .sheet(isPresented: $showingConnectionProfile) {
-                            //ProfileView(profileID: connection.id!)
+                            TCProfileView(profile: profile)
                         }
                         //.background( NavigationLink(destination: ProfileView(profileID: connection.id!), isActive: $goConnectionProfile) { EmptyView() }.hidden() )
                     }
@@ -70,9 +74,9 @@ struct ConnectionsView: View {
             
         }
         .onAppear {
-            ConnectionVM.getConnections()
+            //ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()
-            ConnectionVM.getConnectionProfiles()
+            //ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }
     }

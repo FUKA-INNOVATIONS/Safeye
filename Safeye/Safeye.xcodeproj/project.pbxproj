@@ -81,6 +81,8 @@
 		5FE0B098280BF2FF00CFED16 /* CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */; };
 		5FE0B09A280C18A200CFED16 /* eventStatusColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */; };
 		6A0F203C281434FF00213FBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A0F203B281434FF00213FBC /* GoogleService-Info.plist */; };
+		6A0F203E2814C4C900213FBC /* TCProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F203D2814C4C900213FBC /* TCProfileView.swift */; };
+		6A0F20402814CA6D00213FBC /* TrustContactDetailsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0F203F2814CA6D00213FBC /* TrustContactDetailsComponent.swift */; };
 		6A29154E2803128E00988C2C /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A29154D2803128E00988C2C /* EventView.swift */; };
 		6A2CFC2B280182F40046395D /* MapCurtainComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */; };
 		6A2CFC2D2801B9280046395D /* CurtainTCListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */; };
@@ -205,6 +207,8 @@
 		5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitalizeFirstLetter.swift; sourceTree = "<group>"; };
 		5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventStatusColorModifier.swift; sourceTree = "<group>"; };
 		6A0F203B281434FF00213FBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A0F203D2814C4C900213FBC /* TCProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCProfileView.swift; sourceTree = "<group>"; };
+		6A0F203F2814CA6D00213FBC /* TrustContactDetailsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustContactDetailsComponent.swift; sourceTree = "<group>"; };
 		6A29154D2803128E00988C2C /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCurtainComponent.swift; sourceTree = "<group>"; };
 		6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurtainTCListComponent.swift; sourceTree = "<group>"; };
@@ -403,6 +407,7 @@
 				75994EF62809B8EB003244C6 /* alertBoxComponent.swift */,
 				5FBC1A70280DFB3F0015CC26 /* ProfileImageComponent.swift */,
 				5F639DC2281322D600EC39E3 /* AlertPanicComponent.swift */,
+				6A0F203F2814CA6D00213FBC /* TrustContactDetailsComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 				5F244A9E27F711B900BFE1FB /* SettingsView.swift */,
 				5FE0B094280BD3C900CFED16 /* EventListView.swift */,
 				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
+				6A0F203D2814C4C900213FBC /* TCProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -688,6 +694,7 @@
 				75994EF72809B8EB003244C6 /* alertBoxComponent.swift in Sources */,
 				75EB68522813186B00F607B7 /* LocationService.swift in Sources */,
 				5F23EE0A2801B54800623B0C /* SettingsListViewComponent.swift in Sources */,
+				6A0F203E2814C4C900213FBC /* TCProfileView.swift in Sources */,
 				5F244A8827F70CC900BFE1FB /* Theme.swift in Sources */,
 				5F244AD327F71BB700BFE1FB /* safeButtonModifier.swift in Sources */,
 				5FBC1A71280DFB3F0015CC26 /* ProfileImageComponent.swift in Sources */,
@@ -727,6 +734,7 @@
 				5F553BB22806123B000518F7 /* ConnectionModel.swift in Sources */,
 				5F244AE327F71FEE00BFE1FB /* BasicButtonComponent.swift in Sources */,
 				5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */,
+				6A0F20402814CA6D00213FBC /* TrustContactDetailsComponent.swift in Sources */,
 				5FBC1A6F280D5E6C0015CC26 /* ConnectionsView.swift in Sources */,
 				5F244A9227F70EC600BFE1FB /* ProfileView.swift in Sources */,
 				5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */,

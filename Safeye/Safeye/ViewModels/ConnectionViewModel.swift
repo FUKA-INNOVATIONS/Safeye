@@ -15,12 +15,13 @@ class ConnectionViewModel: ObservableObject {
     private var profileService = ProfileService.shared
     @ObservedObject var appState = Store.shared
     
-    func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> String { // to filter specific connection profile from appState
-        let trustedContactProfileId = connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
-        //print("filterConnectionProfileFromAppState \(trustedContactProfileId)")
+    func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> ProfileModel { // to filter specific connection profile from appState
+        print("CONNECTION PROFILES BEFORE FILTERING \(appState.connectionPofiles)")
+        let trustedContactProfileId = connection.connectionUsers.filter { $0 != appState.currentUserID }[0]
+        print("filterConnectionProfileFromAppState \(trustedContactProfileId)")
+        print("connection profiles: \(self.appState.connectionPofiles)")
         let connectionProfile = self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
-        //print("filterConnectionProfileFromAppState \(connectionProfile.fullName)")
-        return connectionProfile.fullName
+        return connectionProfile
     }
     
     func deleteConnection(_ connectionID: String, _ type: String) {

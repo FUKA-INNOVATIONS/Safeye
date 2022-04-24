@@ -31,6 +31,7 @@ class Store: ObservableObject {
     @Published var userPhoto: UIImage?
     @Published var searchResultPhoto: UIImage?
     @Published var trustedContactPhoto: UIImage?
+    @Published var tCProfile: ProfileModel?
 
     @Published var safePlaces = [SafePlaceModel]()
     @Published var locations = [Location]()  // temporary solutoin
