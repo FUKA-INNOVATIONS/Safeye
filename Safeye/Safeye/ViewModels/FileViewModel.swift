@@ -27,5 +27,11 @@
      func fetchPhoto(avatarUrlFetched: String?, isSearchResultPhoto: Bool = false, isTrustedContactPhoto: Bool = false) {
          fileService.fetchPhoto(avatarUrlFetched: avatarUrlFetched, isSearchResultPhoto: isSearchResultPhoto, isTrustedContactPhoto: isTrustedContactPhoto)
      }
+     
+     // fetch all contacts' photos
+     func fetchAllPhotos() {
+         fileService.fetchAllContactPhotos()
+         print("ALL PHOTOS: \(appStore.allContactPhotos)")
+     }
 
  }
