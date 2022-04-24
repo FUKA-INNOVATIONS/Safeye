@@ -127,7 +127,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
              */
             let date = Date()
             let format = DateFormatter()
-            format.dateFormat = "dd/MM HH:mm:ss"
+            format.dateFormat = "dd/MM HH:mm"
             let timestamp = format.string(from: date)
             panicModeUserSpeech.append("\(timestamp) \(self.voiceClass.userMessage)")
             print(panicModeUserSpeech)
