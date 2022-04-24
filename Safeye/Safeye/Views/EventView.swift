@@ -6,6 +6,7 @@
 //  Edited by FUKA
 
 import SwiftUI
+import nanopb
 
 struct EventView: View {
     @EnvironmentObject var EventVM: EventViewModel
@@ -60,6 +61,8 @@ struct EventView: View {
             
             if EventVM.isEventOwner() {
                 Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
+                .disabled( appState.panicMode == true)
+                .opacity( appState.panicMode == true ? 0 : 1)
                 .padding()
                 .sheet(isPresented: $showingRecordMessage) {
                     RecordingView()
