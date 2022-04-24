@@ -129,7 +129,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             let format = DateFormatter()
             format.dateFormat = "dd/MM HH:mm"
             let timestamp = format.string(from: date)
-            panicModeUserSpeech.append("\(timestamp) \(self.voiceClass.userMessage)")
+            panicModeUserSpeech.append("\(timestamp): \(self.voiceClass.userMessage)")
             print(panicModeUserSpeech)
             
             // TODO: Send panicModeUserSpeechArray to database
