@@ -27,7 +27,7 @@ struct ConnectionsView: View {
                             Image(systemName: "trash")
                             Text(profile.fullName)
                             Spacer()
-                            Text("profile")
+                            Text("view")
                             Button {
                                 showingConnectionProfile = true
                                 FileVM.fetchPhoto(avatarUrlFetched: profile.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
@@ -75,7 +75,7 @@ struct ConnectionsView: View {
         }
         .onAppear {
             //ConnectionVM.getConnections()
-            ConnectionVM.getPendingRequests()
+            //ConnectionVM.getPendingRequests()
             //ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }

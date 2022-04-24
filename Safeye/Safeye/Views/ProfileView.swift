@@ -117,6 +117,7 @@ struct ProfileView: View {
             FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
             ConnectionVM.getConnections()
             ConnectionVM.getConnectionProfiles()
+            ConnectionVM.getPendingRequests()
             EventVM.sendNotification()
             SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }

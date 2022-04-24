@@ -9,17 +9,19 @@ import SwiftUI
 
 struct SearchFieldComponent: View {
     @Binding var searchInput: String
+    @EnvironmentObject var appState: Store
     
     var body: some View {
         HStack {
             HStack {
                 //the icons need to be changed to FS Symbols
                 
-                
                 Image("icon-search").padding(8)
                 TextField("TC code...", text: $searchInput)
                 Button(action: {
                     searchInput = ""
+                    appState.searchResultPhoto = nil
+                    appState.profileSearch = nil
                 })
                 { Image("icon-clear") }.padding(8)
             }
