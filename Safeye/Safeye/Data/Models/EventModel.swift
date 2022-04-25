@@ -22,5 +22,6 @@ struct Event: Codable, Identifiable {
     var coordinates: [String : Double]
     var eventFolderPath: String
     var city: String
+    var userMessage: [String] = []
     //var isOwner = false // TODO: check for ownership before adding to state
 }

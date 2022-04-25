@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RecordingView: View {
-    
+    @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var appState: Store
     @StateObject var voiceRecognizer = VoiceRecognizer()
     @State private var isRecording = false
     
@@ -30,7 +31,9 @@ struct RecordingView: View {
             
             Button {
                 
-                // TODO Act functionality to save current message to database
+                // save current message to database
+                appState.event!.userMessage.append(voiceRecognizer.userMessage)
+                EventVM.updateEvent(appState.event!)
                 
                 voiceRecognizer.stopTranscribing()
                 isRecording = false

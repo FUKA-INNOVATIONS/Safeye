@@ -78,6 +78,7 @@
 		5FBC1A75280DFC860015CC26 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBC1A74280DFC860015CC26 /* FileService.swift */; };
 		5FBC1A77280DFD1C0015CC26 /* FileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBC1A76280DFD1C0015CC26 /* FileViewModel.swift */; };
 		5FBC1A7A280DFD810015CC26 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBC1A79280DFD810015CC26 /* ImagePicker.swift */; };
+		5FCC119C2816DD1F0038D565 /* RecordedMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */; };
 		5FE0B095280BD3C900CFED16 /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B094280BD3C900CFED16 /* EventListView.swift */; };
 		5FE0B098280BF2FF00CFED16 /* CapitalizeFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */; };
 		5FE0B09A280C18A200CFED16 /* eventStatusColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */; };
@@ -206,6 +207,7 @@
 		5FBC1A74280DFC860015CC26 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 		5FBC1A76280DFD1C0015CC26 /* FileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewModel.swift; sourceTree = "<group>"; };
 		5FBC1A79280DFD810015CC26 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedMessagesView.swift; sourceTree = "<group>"; };
 		5FE0B094280BD3C900CFED16 /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		5FE0B097280BF2FF00CFED16 /* CapitalizeFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitalizeFirstLetter.swift; sourceTree = "<group>"; };
 		5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventStatusColorModifier.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				6A8792DF2812EFC0009B469B /* RecordingView.swift */,
 				5F244A8D27F70E8700BFE1FB /* RegisterView.swift */,
 				5F244A9E27F711B900BFE1FB /* SettingsView.swift */,
+				5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				5F244ADF27F71CAF00BFE1FB /* inputFieldModifier.swift in Sources */,
 				6ABCDD2827FFF8F9009563E7 /* SelectContactComponent.swift in Sources */,
 				5F244AEB27F7217800BFE1FB /* Camera.swift in Sources */,
+				5FCC119C2816DD1F0038D565 /* RecordedMessagesView.swift in Sources */,
 				5FBC1A73280DFC370015CC26 /* FileModel.swift in Sources */,
 				6AD96E4427FD49E600063439 /* AvatarComponent.swift in Sources */,
 				5F5962022802CD7900C8F682 /* TackingModeButtonComponent.swift in Sources */,

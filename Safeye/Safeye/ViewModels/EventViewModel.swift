@@ -71,7 +71,9 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // Runs when a there is a location change specified by the distance filter
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(" COORDNATES locationManager()  called")
         guard let userLoc = locations.last else { return }
+        print("COORDNATES \(userLoc.coordinate)")
         if self.appState.event != nil {
             self.appState.event?.coordinates = ["latitude": userLoc.coordinate.latitude, "longitude": userLoc.coordinate.longitude]
             self.eventService.updateEvent(self.appState.event!)
@@ -80,6 +82,9 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // User presses panic mode
     func activatePanicMode() {
+        print("COORDNATES: \(self.appState.event!.coordinates)")
+        
+        
         DispatchQueue.main.async {
             //self.appState.panicMode = true
             self.appState.event?.status = EventStatus.PANIC
@@ -115,24 +120,33 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // Creates a new string every 15 second and adds it to an array to send  to database
     func monitorSpeechWhilstInPanicMode() {
+        print("monitorSpeechWhilstInPanicMode 1")
         
-        var panicModeUserSpeech: [String] = []
+        let date = Date() ;  let format = DateFormatter() ; format.dateFormat = "dd/MM HH:mm"
+        let timestamp = format.string(from: date)
+        
+        var panicModeUserSpeech = "\(timestamp): "
         
         guard audioTimer == nil else { return }
         
-        audioTimer =  Timer.scheduledTimer(withTimeInterval: TimeInterval(15), repeats: true) { timer in
+        audioTimer =  Timer.scheduledTimer(withTimeInterval: TimeInterval(5), repeats: true) { timer in
             
             /**
                 string is added at the start of timer so that the full 15 seconds of recorded audio is added
              */
-            let date = Date()
-            let format = DateFormatter()
-            format.dateFormat = "dd/MM HH:mm"
-            let timestamp = format.string(from: date)
-            panicModeUserSpeech.append("\(timestamp): \(self.voiceClass.userMessage)")
+            
+//            panicModeUserSpeech.append("\(timestamp): \(self.voiceClass.userMessage)")
+            
+            panicModeUserSpeech += self.voiceClass.userMessage
+            
             print(panicModeUserSpeech)
             
-            // TODO: Send panicModeUserSpeechArray to database
+            print("monitorSpeechWhilstInPanicMode 2")
+            // save user message (speech) in database
+            self.appState.event!.userMessage.append(panicModeUserSpeech)
+            print("monitorSpeechWhilstInPanicMode 3")
+            self.eventService.updateEvent(self.appState.event!)
+            print("monitorSpeechWhilstInPanicMode 4")
             
             self.voiceClass.reset()
             self.voiceClass.transcribe()
