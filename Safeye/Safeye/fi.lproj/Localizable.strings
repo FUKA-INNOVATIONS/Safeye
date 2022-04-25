@@ -10,9 +10,9 @@
 
 "signInTitle" = "Kirjaudu sisään";
 "emailTitle" = "Sähköpostiosoite";
-"emailPlaceholder" = "Email address";
+"emailPlaceholder" = "Kirjoita sähköpostiosoitteesi";
 "passwordTitle" = "Salasana";
-"passwordPlaceholder" = "Password";
+"passwordPlaceholder" = "Kirjoita salasanasi";
 "signInButton" = "Kirjaudu sisään";
 "createNewAcc" = "Luo uusi tili"; // "Or sign up instead"
 
@@ -20,9 +20,9 @@
 
 "createNewTitle" = "Luo uusi tili"; // "Sign up"
 "emailTitle" = "Sähköpostiosoite";
-"emailPlaceholder" = "Sähköpostiosoite";
+"emailPlaceholder" = "Kirjoita sähköpostiosoitteesi";
 "passwordTitle" = "Salasana";
-"passwordPlaceholder" = "Salasana";
+"passwordPlaceholder" = "Kirjoita salasanasi";
 "signUpButton" = "Luo tili";  // "Sign up" "Register"
 "backToSignIn" = "Kirjaudu sisään";
 // Alert in case wrong input
@@ -33,7 +33,7 @@
 // Create profile
 
 
-"textProfile" = "Turvallisuuden vuoksi sinun on luotava profiili";
+"textProfile" = "Luomalla profiili ja pysy turvassa!";
 "createProfileBtn" = "Luo profiili";
 
 "textProfileUpdate" = "Täytä kentät, jotka haluat päivittää";
@@ -41,9 +41,9 @@
 "fullNameTitle" = "Etu- ja sukunimi";
 "fullNamePlaceholder" = "Koko nimi";
 "addressTitle" = "Osoitteesi";
-"addressPlaceholder" = "Katuosoite";
+"addressPlaceholder" = "Kirojoita koko osoite";
 "birthdayTitle" = "Syntymäpäiväsi";
-"birthdayPlaceholder" = "Birthday";
+"birthdayPlaceholder" = "Kirjoita syntymäpäiväsi";
 "bloodTypeTitle" = "Valitse veriryhmäsi";
 "illnessTitle" = "Sinun sairautesi";
 "illnessPlaceholder" = "Ilness";
@@ -91,17 +91,17 @@
 
 // Create event view
 "selectContactsTitle" = "Määritä tapahtuman turvaverkko";
-"createEventInfoText" = "Nämä käyttäjät voivat nähdä tapahtumien tiedot";
-"dateAndTime" = "ARVIOITU TAPAHTUMAN PÄIVÄMÄÄRÄ JA AIKA";
+"createEventInfoText" = "Valitut käyttäjät näkevät tapahtuman kaikki tiedot";
+"dateAndTime" = "Tapahtuman arivioitu ajankohta";
 "startTime" = "Alkaa";
 "endTime" = "Päättyy";
-"eventType" = "TAPAHTUMATYYPPI";
+"eventType" = "Tapahtumatyyppi";
 "addContactBtn" = "Lisää";
 "removeContactBtn" = "Poista";
 // Event types
 "selectEventType" = "Valitse tapahtumatyyppi";
 "barNight" = "Baari-ilta";
-"nightClub" = "Night club";
+"nightClub" = "Bailaaminen";
 "dinner" = "Illallinen";
 "houseParty" = "Kotibileet";
 "firstDate" = "Treffi";
@@ -111,27 +111,27 @@
 "detailPlaceholder" = "Mitään muuta?";
 "saveActivateBtn" = "Tallenna & aktivoi";
 "addEventInfo" = "Lisää tapahtuman tiedot";
-"savingEventInfo" = "Tallentaminen ottaa myös seurantatilan käyttöön";
+"savingEventInfo" = "Tallentaminen aktivoit seurantatilan";
 
 // PROFILE
 
 "trustedContactsTitle" = "Yhteyshenkilöt";
 "bornTitle" = "Syntynyt:";
 "bloodTitle" = "Veriryhmä";
-"illnessTitle" = "Sairaukset";
+"illnessTitle" = "Sairaudet";
 "allergiesTitle" = "Allergiat";
 "safeSpaceTitle" = "Omat turvapaikat";
 // Add TC
 "codeInput" = "TC koodi..";
 "searchBtn" = "Hae";
 "addBtn" = "Lisätä";
-"nothingTitle" = "Ei mitään esitettävää";
+"nothingTitle" = "Ei sisältöä";
 // Add safe space
 "chooseMapBtn" = "Valitse kartalta";
 "addSafeBtn" = "Lisätä";
 "nameSafe" = "Nimi";
 "streetSafe" = "Osoite";
-"citySafe" = "Kaupunki";
+"citySafe" = "Paikkakunta";
 "zipSafe" = "Postinumero";
 
 

@@ -259,18 +259,12 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         let currentUserId = AuthenticationService.getInstance.currentUser!.uid
         self.eventService.fetchEventsOfTrustedContacts(of: currentUserId)
     }
+
     
-    func getEventsAll() {
-        DispatchQueue.main.async {
-            self.appState.eventsOfCurrentUser.removeAll()
-            self.appState.eventsOfTrustedContacts.removeAll()
-            self.getEventsOfTrustedContacts()
-            self.getEventsOfCurrentUser()
-        }
-    }
     
+    // Get trusted contacts of an event, result in appState.eventTrustedContactsProfiles
     func getEventTrustedContactsProfiles(eventID: String) {
-        // Get trusted contacts of an event, result in appState.eventTrustedContactsProfiles
+        // self.appState.eventTrustedContactsProfiles.removeAll() // Creates issue, returns user back to eventListView from EventView
         DispatchQueue.main.async {
             self.profileService.fetchEventTrustedContactsProfiles(self.appState.event?.trustedContacts ?? [""])
         }
@@ -295,7 +289,9 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     func resetEventSelectedContacts() {
-        self.appState.eventSelctedContacts.removeAll()
+        DispatchQueue.main.async {
+            self.appState.eventSelctedContacts.removeAll()
+        }
     }
     
     /*func getCurrentEventTrustedContacts() {
