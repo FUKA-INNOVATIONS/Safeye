@@ -16,8 +16,25 @@ struct ConnectionsView: View {
     
     var body: some View {
         
-        return VStack {
+        VStack {
+            Spacer(minLength: 50)
+
             Form {
+                Section (header: Text("Connection code"), footer: Text("Your connection code is the only way people can find you on Safeye. Share it with others and they'll be able to send you a connection request.")) {
+                                    
+                                    HStack{
+                                        Text("\(appState.profile?.connectionCode ?? "No code")")
+                                        Spacer()
+                                        
+                                        Button(action: {
+                                            let pasteboard = UIPasteboard.general
+                                            pasteboard.string = appState.profile?.connectionCode
+                                            print("Copied")
+                        //                }, label: {Text("Copy")})
+                                        }, label: {Text(translationManager.copyBtn)})
+                                        
+                                    }
+                                }
                 
 //                Section("Connections") {
                 Section(translationManager.connectionsTitle) {
@@ -76,6 +93,7 @@ struct ConnectionsView: View {
             }
             
         }
+        .ignoresSafeArea()
         .onAppear {
             ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()
