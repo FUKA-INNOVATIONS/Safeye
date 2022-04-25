@@ -24,6 +24,8 @@ struct SafeyeApp: App {
     
     @StateObject private var PlaygroundVM = PlaygroundViewModel.shared
     
+    var translationManager = TranslationService.shared
+    
     @AppStorage("isDarkMode") private var isDarkMode = false
 
     init() {
