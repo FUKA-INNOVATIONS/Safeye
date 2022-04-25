@@ -15,6 +15,7 @@ struct ContentView: View {
     @StateObject private var notificationService = NotificationService.shared
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var LocationVM: LocationViewModel
     var translationManager = TranslationService.shared
     
     @State private var showingCreateProfile = false
@@ -50,6 +51,7 @@ struct ContentView: View {
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
+                LocationVM.checkIfLocationServicesIsEnabled()
             }
             .onAppear(perform: notificationService.reloadAuthorizationStatus)
             .onChange(of: notificationService.authorizationStatus) { authorizationStatus in

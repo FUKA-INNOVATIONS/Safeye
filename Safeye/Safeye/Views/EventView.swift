@@ -13,6 +13,7 @@ struct EventView: View {
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
     
+    @StateObject var locationManager = LocationViewModel()
     @StateObject var voiceRecognizer = VoiceRecognizer()
 
     @State var panicMode: Bool = false
@@ -97,8 +98,7 @@ struct EventView: View {
         .onAppear {
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
-            print("SSDSDSDSDSD: \(appState.eventTrustedContactsProfiles.count)")
-            //EventVM.checkIfLocationServicesIsEnabled() // This creates ui isssue, user is sent back to eventListView
+            if EventVM.isEventOwner() { locationManager.locationDuringTrackingMode() }
         }
 
     }
