@@ -11,7 +11,9 @@ import SwiftUI
 struct UserDetailsComponent: View {
     @EnvironmentObject var profileVM: ProfileViewModel
     @EnvironmentObject var appState: Store
-
+    
+    var translationManager = TranslationService.shared
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
@@ -24,7 +26,7 @@ struct UserDetailsComponent: View {
             HStack{
                 Image(systemName: "person.badge.clock.fill")
                     .font(.system(size: 30))
-                Text("Born: \(appState.profile?.birthday ?? "Still in mama's stomach")")
+                Text("\(Text(translationManager.bornTitle)) \(appState.profile?.birthday ?? "Still in mama's stomach")")
                     .padding()
             }
      
@@ -32,9 +34,9 @@ struct UserDetailsComponent: View {
                 Image(systemName: "stethoscope.circle.fill")
                     .font(.system(size: 30))
                 VStack(alignment: .leading){
-                    Text("Blood type: \(appState.profile?.bloodType ?? "Water engine")")
-                    Text("Illness: \(appState.profile?.illness ?? "Are you serious")")
-                    Text("Allergies: \(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
+                    Text("\(Text(translationManager.bloodTitle)) \(appState.profile?.bloodType ?? "Water engine")")
+                    Text("\(Text(translationManager.illnessTitle)) \(appState.profile?.illness ?? "Are you serious")")
+                    Text("\(Text(translationManager.allergiesTitle)) \(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
                 }
                 .padding()
             }

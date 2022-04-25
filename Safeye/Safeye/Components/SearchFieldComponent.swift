@@ -10,14 +10,16 @@ import SwiftUI
 struct SearchFieldComponent: View {
     @Binding var searchInput: String
     
+    var translationManager = TranslationService.shared
+    
     var body: some View {
         HStack {
             HStack {
                 //the icons need to be changed to FS Symbols
                 
                 
-                Image(systemName:"magnifyingglass").padding(8)
-                TextField("TC code...", text: $searchInput)
+                Image("icon-search").padding(8)
+                TextField(translationManager.codeInput, text: $searchInput)
                 Button(action: {
                     searchInput = ""
                 })

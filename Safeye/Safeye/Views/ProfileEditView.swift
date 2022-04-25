@@ -13,6 +13,7 @@ struct ProfileEditView: View {
     @EnvironmentObject var appState: Store
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var FileVM: FileViewModel
+    var translationManager = TranslationService.shared
     
     @State private var showEmptyFieldAlert = false
     
@@ -49,10 +50,12 @@ struct ProfileEditView: View {
         
         return VStack() {
             if self.appState.profile != nil {
-                Text("Please fill the fileds you want to update")
+//                Text("Please fill the fileds you want to update")
+                Text(translationManager.textProfileUpdate)
                 
             } else {
-                Text("Please fill all fields to create new profile")
+//                Text("Please fill all fields to create new profile")
+                Text(translationManager.textProfileBlanc)
             }
             
             
@@ -83,37 +86,46 @@ struct ProfileEditView: View {
             
             
             HStack{
-                InputFieldComponent(title: "Full name", inputText: $fullName)
+//                InputFieldComponent(title: "Full name", inputText: $fullName)
+                InputFieldComponent(title: translationManager.fullNameTitle, inputText: $fullName)
             }
             
             HStack{
-                InputFieldComponent(title: "Address", inputText: $address)
+//                InputFieldComponent(title: "Address", inputText: $address)
+                InputFieldComponent(title: translationManager.addressTitle, inputText: $address)
             }
             HStack{
-                InputFieldComponent(title: "Birthday", inputText: $birthday)
+//                InputFieldComponent(title: "Birthday", inputText: $birthday)
+                InputFieldComponent(title: translationManager.birthdayTitle, inputText: $birthday)
             }
             HStack{
                 VStack(alignment: .leading){
                     
                     // Select blood type
                     Section { // Sections can have header and footer
-                        Picker("Blood type", selection: $bloodType) {
+//                        Picker("Blood type", selection: $bloodType) {
+                        Picker(translationManager.bloodTypeTitle, selection: $bloodType) {
                             ForEach(bloodTypes, id: \.self) {
                                 Text($0)
                             }
                         }
                         .pickerStyle(.segmented)
                     } header: {
-                        Text("Blood type")
+//                        Text("Blood type")
+                        Text(translationManager.bloodTitle)
                     }
                     
-                    InputFieldComponent(title: "Illness", inputText: $illness)
-                    InputFieldComponent(title: "Allergies", inputText: $allergies)
+//                    InputFieldComponent(title: "Illness", inputText: $illness)
+//                    InputFieldComponent(title: "Allergies", inputText: $allergies)
+                    InputFieldComponent(title: translationManager.illnessTitle, inputText: $illness)
+                    InputFieldComponent(title: translationManager.allergiesTitle, inputText: $allergies)
+                    
                 }
             }
             
             
-            BasicButtonComponent(label: "Save & go back") { // Button to save profile details
+//            BasicButtonComponent(label: "Save & go back") { // Button to save profile details
+            BasicButtonComponent(label: translationManager.saveBtn) {
                 print("Save profile details pressed")
                 
                 if self.appState.profile == nil { // User has no profile, create new one
@@ -164,8 +176,10 @@ struct ProfileEditView: View {
             }
             .alert(isPresented: $showEmptyFieldAlert) { // Alert user about emptu fields
                 Alert(
-                    title: Text("Fill all fields"),
-                    message: Text("Please fill all fields")
+//                    title: Text("Fill all fields"),
+//                    message: Text("Please fill all fields")
+                    title: Text(translationManager.fieldAlertTitle),
+                    message: Text(translationManager.fieldAlertText)
                 )
             }
             

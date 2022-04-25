@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddContactView: View {
     @Binding var isShowing: Bool
-    @State var searchInput: String    
+    @State var searchInput: String
         
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 500
@@ -29,6 +29,7 @@ struct AddContactView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var appState: Store
+    var translationManager = TranslationService.shared
     @State var error = ""
     
     
@@ -72,7 +73,8 @@ struct AddContactView: View {
                             }
                             
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
-                        }, label: {Text("Search")})
+//                        }, label: {Text("Search")})
+                        }, label: {Text(translationManager.searchBtn)})
                     }
 
                     Spacer()
@@ -80,7 +82,8 @@ struct AddContactView: View {
                     if appState.profileSearch != nil {
                         AvatarComponent(size: 100)
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
-                        BasicButtonComponent(label: "Add", action: {
+//                      BasicButtonComponent(label: "Add", action: {
+                        BasicButtonComponent(label: translationManager.addBtn, action: {
                             // AddContactVM.addTrustedContact()
                             if appState.profileSearch != nil {
                                 ConnectionVM.addConnection()
@@ -89,7 +92,8 @@ struct AddContactView: View {
                             appState.profileSearch = nil
                         })
                     } else {
-                        Text("Nothing to display.")
+//                      Text("Nothing to display.")
+                        Text(translationManager.nothingTitle)
                         Text(self.error)
                     }
                     Spacer()

@@ -1,0 +1,150 @@
+/*
+  Localizable.strings
+  Safeye
+
+  Created by Pavlo Leinonen on 19.4.2022.
+  
+*/
+
+// Sign in
+
+"signInTitle" = "Kirjaudu sisään";
+"emailTitle" = "Sähköpostiosoitte";
+"emailPlaceholder" = "Email address";
+"passwordTitle" = "Salasana";
+"passwordPlaceholder" = "Password";
+"signInButton" = "Kirjaudu sisään";
+"createNewAcc" = "Luo uusi tili"; // "Or sign up instead"
+
+// Create new account
+
+"createNewTitle" = "Luo uusi tili"; // "Sign up"
+"emailTitle" = "Sähköpostiosoitte";
+"emailPlaceholder" = "Email address";
+"passwordTitle" = "Salasana";
+"passwordPlaceholder" = "Password";
+"signUpButton" = "Luo tili";  // "Sign up" "Register"
+"backToSignIn" = "Kirjaudu sisään";
+// Alert in case wrong input
+"loginAlertTitle" = "Kirjautuminen epäonnistui";
+"okBtn" = "ai että, okeei";
+
+
+// Create profile
+
+
+"textProfile" = "Turvallisuuden vuoksi sinun on luotava profiili";
+"createProfileBtn" = "Luo profiili";
+
+"textProfileUpdate" = "Täytä kentät, jotka haluat päivittää";
+"textProfileBlanc" = "Täytä kaikki kentät luodaksesi uuden profiilin";
+"fullNameTitle" = "Etunimi ja sukunimi";
+"fullNamePlaceholder" = "Full name";
+"addressTitle" = "Osoitteesi";
+"addressPlaceholder" = "Address";
+"birthdayTitle" = "Sinun syntymäpäiväsi";
+"birthdayPlaceholder" = "Birthday";
+"bloodTypeTitle" = "Valitse veriryhmäsi";
+"illnessTitle" = "Sinun sairautesi";
+"illnessPlaceholder" = "Ilness";
+"allergiesTitle" = "Sinun allergiasi";
+"allergiesPlaceholder" = "Allergies";
+"saveBtn" = "Tallenna ja palaa takaisin";
+// Alert in case wrong input
+"fieldAlertTitle" = "Täytä kaikki kentät";
+"fieldAlertText" = "Täytä kaikki kentät jatkaaksesi";
+"okBtn" = "okei";
+
+
+// SETTINGS
+
+"signOut" = "Kirjaudu ulos";
+"connection" = "Yhteyskoodi";
+"copyBtn" = "Kopio"; // might be an icon
+"nocode" = "Ei koodia";
+
+
+// HOME
+
+"eventsNumber" = "tapahtumat";
+"createNewEventBtn" = "Luo uusi tapahtuma";
+"yourEventsTitle" = "SINUN TAPAHTUMAT";
+"yourFriendsEventsTitle" = "YSTÄVIESI TAPAHTUMAT";
+"eventInfoTitle" = "Aloitettu";
+
+// Tracking mode view
+"safeStatusTitle" = "Aloitettu";
+"panicStatusTitle" = "Paniikki";
+"startedStatusTitle" = "Aloitettu";
+"deleteBtn" = "Poista";
+"trustedContactsTrack" = "LUOTTEET HENKILÖT";
+"eventdDetailsTrack" = "TAPAHTUMAN TIEDOT";
+"startTrack" = "Alkaen:";
+"endTrack" = "Päättyy:";
+"eventTypeTrack" = "Tapahtumatyyppi:";
+"otherTrack" = "Muut tiedot:";
+//Tracking mode copmponent
+"sosBtn" = "SOS!";
+"safeBtn" = "Safe";
+
+
+
+// Create event view
+"selectContactsTitle" = "VALITSE TAPAHTUMAN LUOTTEET HENKILÖT";
+"createEventInfoText" = "Nämä käyttäjät voivat nähdä tapahtumien tiedot";
+"dateAndTime" = "ARVIOITU TAPAHTUMAN PÄIVÄMÄÄRÄ JA AIKA";
+"startTime" = "Alkaa";
+"endTime" = "Päättyy";
+"eventType" = "TAPAHTUMATYYPPI";
+"addContactBtn" = "lisätä";
+"removeContactBtn" = "poista";
+// Event types
+"selectEventType" = "Valitse tapahtumatyyppi";
+"barNight" = "Baari-ilta";
+"nightClub" = "Night club";
+"dinner" = "Illallinen";
+"houseParty" = "Kotibileet";
+"firstDate" = "Treffi";
+"otherType" = "Muu";
+
+"otherDetailTitle" = "MUUT TIEDOT";
+"detailPlaceholder" = "Mitään muuta?";
+"saveActivateBtn" = "Tallenna & aktivoi";
+"addEventInfo" = "Lisää tapahtuman tiedot";
+"savingEventInfo" = "Tallentaminen ottaa myös seurantatilan käyttöön";
+
+// PROFILE
+
+"trustedContactsTitle" = "Luotetut yhteyshenkilöni";
+"bornTitle" = "Syntynyt:";
+"bloodTitle" = "Veriryhmä";
+"illnessTitle" = "Sairaukset";
+"allergiesTitle" = "Allergiat";
+"safeSpaceTitle" = "Omat turvapaikat";
+// Add TC
+"codeInput" = "TC koodi..";
+"searchBtn" = "Hae";
+"addBtn" = "Lisätä";
+"nothingTitle" = "Ei mitään esitettävää";
+// Add safe space
+"chooseMapBtn" = "Valitse kartalta";
+"addSafeBtn" = "Lisätä";
+"nameSafe" = "Nimi";
+"streetSafe" = "Osoite";
+"citySafe" = "Kaupunki";
+"zipSafe" = "Postinumero";
+
+
+// CONNECTIONS
+
+"connectionsTitle" = "YHTEYDET";
+"receivedReqTitle" = "SAATUJA PYYNTÖJÄ";
+"sentReqTitle" = "LÄHETETTY PYYNTÖJÄ";
+"acceptBtn" = "hyväksy";
+"profileBtn" = "profiili";
+
+// NAVITEM
+"homeNav" = "Koti";
+"profileNav" = "Profiili";
+"connectNav" = "Yhteydet";
+"settingsNav" = "Asetukset";

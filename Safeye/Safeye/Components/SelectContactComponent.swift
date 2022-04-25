@@ -12,6 +12,10 @@ struct SelectContactComponent: View {
     @EnvironmentObject var appState: Store
     @State var selected = false
     
+    var translationManager = TranslationService.shared
+
+    let remove = TranslationService.shared.removeContactBtn
+    
     var body: some View {
         VStack{
             AvatarComponent(size: 30).padding(.top)
@@ -20,7 +24,7 @@ struct SelectContactComponent: View {
                 .foregroundColor(.white)
                 .padding(.bottom)
                 .frame(width: 120, height: 20, alignment: .center)
-            Button("\(selected ? "remove" : "add")") {
+            Button("\(selected ? Text(translationManager.removeContactBtn) : Text(translationManager.addContactBtn))") {
                 if selected { appState.eventSelctedContacts =  appState.eventSelctedContacts.filter { $0.id != profileDetails.id } } else { appState.eventSelctedContacts.append(profileDetails) }
                 selected.toggle()
             }
