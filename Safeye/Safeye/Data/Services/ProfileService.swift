@@ -120,7 +120,7 @@ class ProfileService {
                 if let error = error {
                     print("ProfileService: Error getting profiles of trusted contacts: \(error)")
                 } else {
-                    self.appState.eventTrustedContactsProfiles.removeAll()
+//                    self.appState.eventTrustedContactsProfiles.removeAll()
                     for profile in profiles!.documents {
                         print("TC profile: \(profile.documentID) => \(profile.data())")
                         do {

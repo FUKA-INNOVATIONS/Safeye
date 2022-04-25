@@ -26,7 +26,7 @@ struct EventView: View {
     
     var body: some View {
         
-        return ZStack {
+        return VStack {
             
             VStack {
                 Text("\(appState.event?.status.rawValue ?? "")")

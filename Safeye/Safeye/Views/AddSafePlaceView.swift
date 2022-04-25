@@ -28,20 +28,6 @@ struct AddSafePlaceView: View {
     }
     
     
-    //    var isFound: Bool = true
-    //    @State var name = ""
-    //    @State var street = ""
-    //    @State var city = ""
-    //    @State var zip = ""
-    
-    //    @StateObject private var locationManager = LocationService.shared
-    
-    
-    //    @State private var search: String = ""
-    
-    
-    
-    
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -87,15 +73,6 @@ struct AddSafePlaceView: View {
                                     print("Safe place: didSave?: \(didSave)")
                                     isShowing = false
                                 }
-                                
-                                
-                                //                            BasicButtonComponent(label: "Add", action: {
-                                //                                selectedLocation = place
-                                //                                // print("Selected place: \(place.placemark.name)")
-                                //                                print("Safe place: Selected place: \(place.placemark.coordinate.longitude), \(place.placemark.coordinate.latitude)")
-                                //                            }).frame(width: 100, height: 50)
-                                
-                                
                             }
                         }
                     }
@@ -103,15 +80,6 @@ struct AddSafePlaceView: View {
                     .searchable(text: $result.searchText)
                     
                 }
-                
-                //            NavigationLink(destination: MapView()) {
-                //                               Text("Choose From Map?")
-                //            }
-                //
-                //            BasicButtonComponent(label: "Add", action: { print("Added")})
-                //
-                //            Spacer()
-                
             }
             .frame(maxHeight: .infinity)
             .padding(.bottom, 35)

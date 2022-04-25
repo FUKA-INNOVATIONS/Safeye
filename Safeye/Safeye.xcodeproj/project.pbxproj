@@ -452,20 +452,20 @@
 		5F8B94F527F70A570067C6C9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
 				5F244A9527F70F0A00BFE1FB /* AddContactView.swift */,
 				5F244A9827F70F6200BFE1FB /* AddSafePlaceView.swift */,
+				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
 				5F244A9327F70EEA00BFE1FB /* CreateEventView.swift */,
+				5FE0B094280BD3C900CFED16 /* EventListView.swift */,
 				6A29154D2803128E00988C2C /* EventView.swift */,
 				5F244A8B27F70E7300BFE1FB /* LoginView.swift */,
 				5F244A9C27F711A500BFE1FB /* MapView.swift */,
 				5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */,
 				5F20CC9728006850001E9AED /* ProfileEditView.swift */,
 				5F244A9127F70EC600BFE1FB /* ProfileView.swift */,
+				6A8792DF2812EFC0009B469B /* RecordingView.swift */,
 				5F244A8D27F70E8700BFE1FB /* RegisterView.swift */,
 				5F244A9E27F711B900BFE1FB /* SettingsView.swift */,
-				5FE0B094280BD3C900CFED16 /* EventListView.swift */,
-				6A8792DF2812EFC0009B469B /* RecordingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -38,18 +38,18 @@ struct ProfileEditView: View {
         // Profile exists and user has all profile details, prefell all fields
         if appState.profile != nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                self.fullName = self.appState.profile!.fullName
-                self.address = self.appState.profile!.address
-                self.birthday = self.appState.profile!.birthday
-                self.bloodType = self.appState.profile!.bloodType
-                self.illness = self.appState.profile!.illness
-                self.allergies = self.appState.profile!.allergies
-                self.avatar = self.appState.profile!.avatar
+                fullName = appState.profile!.fullName
+                address = appState.profile!.address
+                birthday = appState.profile!.birthday
+                bloodType = appState.profile!.bloodType
+                illness = appState.profile!.illness
+                allergies = appState.profile!.allergies
+                avatar = appState.profile!.avatar
             }
         }
         
         return VStack() {
-            if self.appState.profile != nil {
+            if appState.profile != nil {
 //                Text("Please fill the fileds you want to update")
                 Text(translationManager.textProfileUpdate)
                 
@@ -128,20 +128,20 @@ struct ProfileEditView: View {
             BasicButtonComponent(label: translationManager.saveBtn) {
                 print("Save profile details pressed")
                 
-                if self.appState.profile == nil { // User has no profile, create new one
+                if appState.profile == nil { // User has no profile, create new one
                     print("User has no PROFILE, add new profile")
                     
                     // User has not filled all form fields
                     // TODO: show different alert when no photo is selected
                     if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 || selectedPhoto == nil {
-                        self.showEmptyFieldAlert = true // Show alert box
+                        showEmptyFieldAlert = true // Show alert box
                         return
                     }
                     
                     // set avatar path/name to a random string that will be stored in profile // TODO: change avatar path name > userID
-                    self.avatar = "avatars/\(UUID().uuidString).jpg"
+                    avatar = "avatars/\(UUID().uuidString).jpg"
                     // upload the image
-                    FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: self.avatar)
+                    FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatar)
                     
                     // Insert new profile data into the database
                     ProfileVM.createProfile(fullName, address, birthday, bloodType, illness, allergies, avatar)
@@ -155,7 +155,7 @@ struct ProfileEditView: View {
                     
                     // User has not filled all form fields
                     if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 {
-                        self.showEmptyFieldAlert = true // Show alert box
+                        showEmptyFieldAlert = true // Show alert box
                         return
                     }
                     

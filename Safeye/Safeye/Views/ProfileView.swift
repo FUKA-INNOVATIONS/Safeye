@@ -121,8 +121,8 @@ struct ProfileView: View {
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
         .onAppear {
-            ConnectionVM.getConnections()
-            ConnectionVM.getConnectionProfiles()
+//            ConnectionVM.getConnections()
+//            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
             SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }
