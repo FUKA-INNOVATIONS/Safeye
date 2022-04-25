@@ -1,0 +1,150 @@
+/*
+  Localizable.strings
+  Safeye
+
+  Created by Pavlo Leinonen on 19.4.2022.
+  
+*/
+
+// Sign in
+
+"signInTitle" = "Sign in";
+"emailTitle" = "Your email address";
+"emailPlaceholder" = "Email address";
+"passwordTitle" = "Your password";
+"passwordPlaceholder" = "Password";
+"signInButton" = "Sign in";
+"createNewAcc" = "Create a new account"; // "Or sign up instead"
+
+// Create new account
+
+"createNewTitle" = "Create new account"; // "Sign up"
+"emailTitle" = "Your email address";
+"emailPlaceholder" = "Email address";
+"passwordTitle" = "Your password";
+"passwordPlaceholder" = "Password";
+"signUpButton" = "Create account";  // "Sign up" "Register"
+"backToSignIn" = "Sign in";
+// Alert in case wrong input
+"loginAlertTitle" = "Login failed";
+"okBtn" = "OK";
+
+
+// Create profile
+
+"textProfile" = "In order to be safe, you must create a profile";
+"createProfileBtn" = "Create a profile";
+
+"textProfileUpdate" = "Please fill the fileds you want to update";
+"textProfileBlanc" = "Please fill all fields to create new profile";
+"fullNameTitle" = "Your full name";
+"fullNamePlaceholder" = "Full name";
+"addressTitle" = "Your address";
+"addressPlaceholder" = "Address";
+"birthdayTitle" = "Your birthday";
+"birthdayPlaceholder" = "Birthday";
+"bloodTypeTitle" = "Choose your blood type";
+"illnessTitle" = "Your illness";
+"illnessPlaceholder" = "Illness";
+"allergiesTitle" = "Your allergies";
+"allergiesPlaceholder" = "Allergies";
+"saveBtn" = "Save & go back";
+// Alert in case wrong input
+"fieldAlertTitle" = "Fill all fields";
+"fieldAlertText" = "Please fill all fields";
+"okBtn" = "OK";
+
+
+// SETTINGS
+
+"signOut" = "Sign out";
+"connection" = "Connection code";
+"copyBtn" = "Copy"; // might be an icon
+"nocode" = "No code";
+
+// HOME
+
+"eventsNumber" = "events";
+"createNewEventBtn" = "Create new event";
+"yourEventsTitle" = "YOUR EVENTS";
+"yourFriendsEventsTitle" = "YOUR FRIEND´S EVENTS";
+"eventInfoTitle" = "Started";
+
+// Tracking mode view
+"safeStatusTitle" = "Started";
+"panicStatusTitle" = "Panic";
+"startedStatusTitle" = "Started";
+"deleteBtn" = "Delete";
+"trustedContactsTrack" = "TRUSTED CONTACTS";
+"eventdDetailsTrack" = "EVENT DETAILS";
+"startTrack" = "Starting from:";
+"endTrack" = "Ending at:";
+"eventTypeTrack" = "Event type:";
+"otherTrack" = "Other info:";
+//Tracking mode copmponent
+"sosBtn" = "SOS!";
+"safeBtn" = "Safe";
+
+
+
+// Create event view
+"selectContactsTitle" = "SELECT CONTACTS FOR THE EVENT*";
+"createEventInfoText" = "These contacts will be able to see events details";
+"dateAndTime" = "ESTIMATED EVENT DATE AND TIME";
+"startTime" = "Start*";
+"endTime" = "End";
+"eventType" = "EVENT TYPE*";
+"addContactBtn" = "add";
+"removeContactBtn" = "remove";
+// Event types
+"selectEventType" = "Select event type";
+"barNight" = "Bar night";
+"nightClub" = "Night club";
+"dinner" = "Dinner";
+"houseParty" = "House party";
+"firstDate" = "First date";
+"otherType" = "Other";
+
+"otherDetailTitle" = "OTHER VALUABLE DETAILS";
+"detailPlaceholder" = "Anything else?";
+"saveActivateBtn" = "Save & activate";
+"addEventInfo" = "Add event information";
+"savingEventInfo" = "Saving will also enable the tracking mode";
+
+// PROFILE
+
+"trustedContactsTitle" = "My trusted contacts";
+"bornTitle" = "Born:";
+"bloodTitle" = "Blood type";
+"illnessTitle" = "Illness";
+"allergiesTitle" = "Allergies";
+"safeSpaceTitle" = "My safe spaces";
+// Add TC
+"codeInput" = "TC code..";
+"searchBtn" = "Search";
+"addBtn" = "Add";
+"nothingTitle" = "Nothing to display";
+// Add safe space
+"chooseMapBtn" = "Choose from map?";
+"addSafeBtn" = "Add";
+"nameSafe" = "Name";
+"streetSafe" = "Street";
+"citySafe" = "City";
+"zipSafe" = "Zip";
+
+
+// CONNECTIONS
+
+"connectionsTitle" = "CONNECTIONS";
+"receivedReqTitle" = "RECEIVED REQUESTS";
+"sentReqTitle" = "SENT REQUESTS";
+"acceptBtn" = "accept";
+"profileBtn" = "profile";
+"cancelReq" = "cancel";
+
+
+// NAVITEM
+"homeNav" = "Home";
+"profileNav" = "Profile";
+"connectNav" = "Connections";
+"settingsNav" = "Setting";
