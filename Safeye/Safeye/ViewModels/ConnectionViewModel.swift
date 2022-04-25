@@ -15,21 +15,25 @@ class ConnectionViewModel: ObservableObject {
     private var profileService = ProfileService.shared
     @ObservedObject var appState = Store.shared
     
-    func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> String { // to filter specific connection profile from appState
+    func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> ProfileModel { // to filter specific connection profile from appState
         let trustedContactProfileId = connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
-        //print("filterConnectionProfileFromAppState \(trustedContactProfileId)")
-        let connectionProfile = self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
-        //print("filterConnectionProfileFromAppState \(connectionProfile.fullName)")
-        return connectionProfile.fullName
+        return self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
     }
+    
+    func getConnectionProfileID(of connection: ConnectionModel) -> String {
+        connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+    }
+    
     
     func deleteConnection(_ connectionID: String, _ type: String) {
         self.connService.deleteConnection(connectionID)
-        DispatchQueue.main.async {
-            if type == "established" {
-                self.appState.connections = self.appState.connections.filter { $0.id != connectionID }
-            } else {
-                self.appState.pendingConnectionRequestsOwner = self.appState.pendingConnectionRequestsOwner.filter { $0.id != connectionID }
+        withAnimation {
+            DispatchQueue.main.async {
+                if type == "established" {
+                    self.appState.connections = self.appState.connections.filter { $0.id != connectionID }
+                } else {
+                    self.appState.pendingConnectionRequestsOwner = self.appState.pendingConnectionRequestsOwner.filter { $0.id != connectionID }
+                }
             }
         }
     }
@@ -40,13 +44,17 @@ class ConnectionViewModel: ObservableObject {
     }
 
     func getPendingRequests()  {
-        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-        self.connService.fetchPendingConnectionRequests(currentUserID)
+        DispatchQueue.main.async {
+            self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
+            self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
+            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            self.connService.fetchPendingConnectionRequests(currentUserID)
+        }
     }
     
     func getConnectionProfiles() {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-        self.appState.connectionPofiles.removeAll()
+//        self.appState.connectionPofiles.removeAll()
         // self.getConnections()
         var connectionIDS = [String]()
         for connection in self.appState.connections {
@@ -59,8 +67,11 @@ class ConnectionViewModel: ObservableObject {
     }
     
     func getConnections() {
-        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-        self.connService.fetchConnections(currentUserID)
+        DispatchQueue.main.async {
+            self.appState.connections.removeAll()
+            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            self.connService.fetchConnections(currentUserID)
+        }
     }
 
 

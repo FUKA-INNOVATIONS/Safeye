@@ -29,7 +29,7 @@ class ConnectionService: ObservableObject {
                     else {
                         if connections!.isEmpty { print("There are no connections"); return }
                         if let connections = connections {
-                            self.appState.connections.removeAll()
+//                            self.appState.connections.removeAll()
                             print("fetchConnections metaData PendingWrites: \(connections.metadata.hasPendingWrites)")
                             print("fetchConnections > User connections: => \(connections.count)")
                             for connection in connections.documents {
@@ -59,8 +59,8 @@ class ConnectionService: ObservableObject {
                         //if requests!.isEmpty { print("There are no pending connection requests"); return }
                         if let requests = requests {
                            
-                            self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
-                            self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
+//                            self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
+//                            self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
                             
                             print("fetchPendingConnectionRequests: => \(requests.count)")
                             
@@ -118,7 +118,7 @@ class ConnectionService: ObservableObject {
     
     func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
         DispatchQueue.main.async {
-            eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
+//            eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
             
             self.profileDB.whereField("userId", in: userIDS).addSnapshotListener() { profiles, error in
                 if let error = error {

@@ -51,8 +51,8 @@ struct PlayGroundView: View {
         }
         .onAppear {
             
-            self.ConnectionVM.getConnections()
-            self.ConnectionVM.getConnectionProfiles()
+//            ConnectionVM.getConnections()
+//            ConnectionVM.getConnectionProfiles()
             print("Connections: \(appState.connections.count)")
             print("Profiles: \(appState.connectionPofiles.count)")
         }

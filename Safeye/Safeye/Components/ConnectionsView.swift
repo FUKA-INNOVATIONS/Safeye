@@ -20,11 +20,11 @@ struct ConnectionsView: View {
                 
                 Section("Connections") {
                     ForEach(appState.connections) { connection in
-                        //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
+                        let trustedContactProfileId = ConnectionVM.getConnectionProfileID(of: connection)
                         Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash").foregroundColor(.red) }
                         HStack {
                             Image(systemName: "trash")
-                            Text("Full name")
+                            Text("Full name \(trustedContactProfileId):")
                             Spacer()
                             Text("profile")
                             Button { showingConnectionProfile = true } label: { Image(systemName: "eye") }
@@ -70,9 +70,9 @@ struct ConnectionsView: View {
             
         }
         .onAppear {
-            ConnectionVM.getConnections()
-            ConnectionVM.getPendingRequests()
-            ConnectionVM.getConnectionProfiles()
+//            ConnectionVM.getConnections()
+//            ConnectionVM.getPendingRequests()
+//            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }
     }

@@ -103,8 +103,8 @@ struct CreateEventView: View {
         }
         .onAppear {
             EventVM.resetEventSelectedContacts()
-            ConnectionVM.getConnections()
-            ConnectionVM.getConnectionProfiles()
+//            ConnectionVM.getConnections()
+//            ConnectionVM.getConnectionProfiles()
         }
         
     }

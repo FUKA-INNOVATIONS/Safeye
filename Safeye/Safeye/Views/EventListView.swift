@@ -81,9 +81,9 @@ struct EventListView: View {
             }
             .onAppear {
                 print("eventList view appeared")
-                ConnectionVM.getConnections()
-                EventVM.getEventsOfCurrentUser()
-                EventVM.getEventsOfTrustedContacts()
+//                ConnectionVM.getConnections()
+//                EventVM.getEventsOfCurrentUser()
+//                EventVM.getEventsOfTrustedContacts()
                 EventVM.sendNotification()
             }
         } // end of outer VStack
