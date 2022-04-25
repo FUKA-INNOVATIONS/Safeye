@@ -25,7 +25,7 @@ struct EventListView: View {
                 Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
                 Spacer()
 //                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
-                Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn) }
+                Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn).foregroundColor(.blue) }
                     .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
                 Form {
 //                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
@@ -83,6 +83,7 @@ struct EventListView: View {
                     }
                 }
             }
+            .padding(.top, -60)
             .onAppear {
                 print("eventList view appeared")
 //                ConnectionVM.getConnections()

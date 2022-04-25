@@ -23,15 +23,22 @@ struct ConnectionsView: View {
                 Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
                         //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
-                        Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash").foregroundColor(.red) }
-                        HStack {
-                            Image(systemName: "trash")
+                      
+                        HStack{
+                            //Image(systemName: "trash")
+                            Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash")
+                                .foregroundColor(.red) }
+                            
                             Text("Full name")
                             Spacer()
 //                            Text("profile")
                             Text(translationManager.profileBtn)
                             Button { showingConnectionProfile = true } label: { Image(systemName: "eye") }
+                       
+                       
                         }
+                        .buttonStyle(BorderlessButtonStyle())
+                        
                         .sheet(isPresented: $showingConnectionProfile) {
                             //ProfileView(profileID: connection.id!)
                         }
@@ -76,6 +83,7 @@ struct ConnectionsView: View {
             }
             
         }
+        .padding(.top, -100)
         .onAppear {
 //            ConnectionVM.getConnections()
 //            ConnectionVM.getPendingRequests()

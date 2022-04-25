@@ -109,11 +109,13 @@ struct ProfileEditView: View {
                                 Text($0)
                             }
                         }
-                        .pickerStyle(.segmented)
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding()
                     } header: {
 //                        Text("Blood type")
                         Text(translationManager.bloodTitle)
                     }
+                    .padding()
                     
 //                    InputFieldComponent(title: "Illness", inputText: $illness)
 //                    InputFieldComponent(title: "Allergies", inputText: $allergies)
@@ -174,6 +176,7 @@ struct ProfileEditView: View {
                     dismiss()
                 }
             }
+            
             .alert(isPresented: $showEmptyFieldAlert) { // Alert user about emptu fields
                 Alert(
 //                    title: Text("Fill all fields"),

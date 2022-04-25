@@ -14,6 +14,7 @@ struct BasicButtonModifier: ViewModifier {
                 .frame(width: 200, height: 50)
                 .cornerRadius(40)
                 .background(Color.blue)
+                .clipShape(Capsule())
                 .padding()
         }
 }

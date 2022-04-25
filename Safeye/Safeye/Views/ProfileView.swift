@@ -47,20 +47,21 @@ struct ProfileView: View {
                         Text("\(appState.profile?.fullName ?? "No name")")
                             .font(.system(size: 25, weight: .bold))
                         
-                        Button { showingEditProfile = true } label: { Image(systemName: "pencil.circle.fill") }
+                        Button { showingEditProfile = true } label: { Image(systemName: "pencil.circle.fill")
+                                .foregroundColor(.blue)
+                            .buttonStyle(BorderlessButtonStyle()) }
                     }
                     .sheet(isPresented: $showingEditProfile) {
                         ProfileEditView()
                     }
-                    Spacer()
                 }
-                
-                
-                
                 Spacer()
                 
-                Group {
-                    Spacer()
+                
+                
+// Trusted Contact
+                VStack(spacing: 0) {
+                
 //                    Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
                     Text(translationManager.trustedContactsTitle).font(.system(size: 18, weight: .semibold))
                     HStack{
@@ -71,27 +72,19 @@ struct ProfileView: View {
                         { Image(systemName: "plus.magnifyingglass")
                                 .font(.system(size: 30))
                         }
-                        Spacer(minLength: 20)
+                        
                     }
-                    Spacer()
+                  
                 }
-                
-                VStack {
-                    /* Button("Create new event", action: { showingCreateEvent = true } )
-                     .sheet(isPresented: $showingCreateEvent) {
-                     CreateEventView()
-                     } */
-                    
-                    Form {
-                        UserDetailsComponent()
-                    }
-                }
-                
-                Group {
+//                .overlay(
+//                     RoundedRectangle(cornerRadius: 16)
+//                         .stroke(Color.gray, lineWidth: 1))
+// Safe Spaces
+                VStack(spacing: 0) {
                     NavigationLink {
                         MapView()
                     } label: {
-                        Text("My safe spaces").font(.system(size: 18, weight: .semibold))//.foregroundColor(.black)
+                        Text("My safe spaces").font(.system(size: 18, weight: .semibold)).foregroundColor(.blue)
                     }
 
                     HStack{
@@ -104,12 +97,29 @@ struct ProfileView: View {
                         { Image(systemName: "plus.magnifyingglass")
                                 .font(.system(size: 30))
                         }
-                        Spacer(minLength: 20)
+                 
                     }
                 }
+//                .overlay(
+//                     RoundedRectangle(cornerRadius: 16)
+//                         .stroke(Color.gray, lineWidth: 1))
+//
+                
+                VStack {
+                    /* Button("Create new event", action: { showingCreateEvent = true } )
+                     .sheet(isPresented: $showingCreateEvent) {
+                     CreateEventView()
+                     } */
+                    
+                    Form {
+                        UserDetailsComponent()
+                    }
+                }
+                .padding()
                 
                 
             }
+            .padding(.top, -100)
             .onAppear {
                 print("profileView view appeared")
                 ProfileVM.getProfileForCurrentUser()
