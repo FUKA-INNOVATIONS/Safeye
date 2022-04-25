@@ -13,11 +13,12 @@ struct SettingsView: View {
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var MapVM: MapViewModel
+    @EnvironmentObject var appState: Store
+    var translationManager = TranslationService.shared
     @State var tcList = []
     @State var contacts: [ProfileModel] = [ProfileModel]()
     @State var fetchClicked = 0
     
-    @EnvironmentObject var appState: Store
 
     @AppStorage("isDarkMode") private var isDarkMode = false
 
@@ -38,7 +39,8 @@ struct SettingsView: View {
                 Spacer()
             }
             
-            BasicButtonComponent(label: "Sign out") { // Sign out button
+//            BasicButtonComponent(label: "Sign out") { // Sign out button
+            BasicButtonComponent(label: translationManager.signOut) {
                 AuthVM.signOut()
             }
             
@@ -71,7 +73,8 @@ struct SettingsView: View {
                     let pasteboard = UIPasteboard.general
                     pasteboard.string = appState.profile?.connectionCode
                     print("Copied")
-                }, label: {Text("Copy")})
+//                }, label: {Text("Copy")})
+                }, label: {Text(translationManager.copyBtn)})
                 
             }.padding()
             

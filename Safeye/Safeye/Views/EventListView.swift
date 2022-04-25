@@ -11,6 +11,7 @@ struct EventListView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
+    var translationManager = TranslationService.shared
     @State var showingCreateEvent = false
     
     
@@ -20,13 +21,15 @@ struct EventListView: View {
         
         return VStack {
             VStack {
-                Text("\(EventVM.getEventsCount()) events")
+//                Text("\(EventVM.getEventsCount()) events")
+                Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
                 Spacer()
-                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
+//                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
+                Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn) }
                     .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
                 Form {
-                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
-                        ForEach(appState.eventsOfCurrentUser) { event in
+//                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
+                    Section(header: Text(" \(Text(translationManager.yourEventsTitle)) (\(appState.eventsOfCurrentUser.count)) ")) {                        ForEach(appState.eventsOfCurrentUser) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green
                             
                             List {
@@ -51,7 +54,8 @@ struct EventListView: View {
                         .onDelete(perform: EventVM.deleteEvent)
                     }
                     
-                    Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
+//                    Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
+                    Section(header: Text(" \(Text(translationManager.yourFriendsEventsTitle)) (\(appState.eventsOfTrustedContacts.count)) ")) {
                         ForEach(appState.eventsOfTrustedContacts) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green
                             //let panicIcon =  event.status == .PANIC ? Image(systemName: "exclamationmark.triangle.fill").font(.system(size: 23, weight: .bold)) : EmptyView()

@@ -13,6 +13,7 @@ struct ContentView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var appState: Store
     @StateObject private var notificationService = NotificationService.shared
+    var translationManager = TranslationService.shared
     
     @State private var showingCreateProfile = false
     @State var goMapView = false
@@ -27,8 +28,10 @@ struct ContentView: View {
                 if appState.profile == nil {
                     // User has no profile, create new one
                     // Is displayed the first time a user joins the app
-                    Text("In order to be safe, you must create a profile")
-                    BasicButtonComponent(label: "Create a profile") {
+//                    Text("In order to be safe, you must create a profile")
+//                    BasicButtonComponent(label: "Create a profile") {
+                    Text(translationManager.textProfile)
+                    BasicButtonComponent(label: translationManager.createProfileBtn) {
                         showingCreateProfile = true
                     }
                     .sheet(isPresented: $showingCreateProfile) {

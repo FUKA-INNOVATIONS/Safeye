@@ -11,6 +11,7 @@ struct CreateEventView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var appState: Store
+    var translationManager = TranslationService.shared
     
     @State var authUID = AuthenticationService.getInstance.currentUser?.uid
     @State var startDate = Date()
@@ -33,7 +34,8 @@ struct CreateEventView: View {
     var body: some View {
         VStack{
             Form {
-                Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
+//              Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
+                Section(header: Text(translationManager.selectContactsTitle), footer: Text(translationManager.createEventInfoText)) {
                     SelectContactGridComponent()
                 }
                 
@@ -45,12 +47,17 @@ struct CreateEventView: View {
                     }
                 }
                 
-                Section(header: Text("Estimated event date and time")) {
-                    DatePicker("Start*", selection: $startDate)
-                    DatePicker("End", selection: $endDate)
+//                Section(header: Text("Estimated event date and time")) {
+//                    DatePicker("Start*", selection: $startDate)
+//                    DatePicker("End", selection: $endDate)
+                Section(header: Text(translationManager.dateAndTime)) {
+                    DatePicker(translationManager.startTime, selection: $startDate)
+                    DatePicker(translationManager.endTime, selection: $endDate)
                 }
-                Section(header: Text("Event type*")) {
-                    Picker(selection: $eventType, label: Text("Select event type")) {
+//                Section(header: Text("Event type*")) {
+//                    Picker(selection: $eventType, label: Text("Select event type")) {
+                Section(header: Text(translationManager.eventType)) {
+                    Picker(selection: $eventType, label: Text(translationManager.selectEventType)) {
                         ForEach(eventTypesArray, id: \.self) {
                             Text($0).tag($0)
                         }
@@ -70,16 +77,21 @@ struct CreateEventView: View {
                 }
                 
                 
-                Section(header: Text("Other valuable details")) {
-                    TextField("Anything else?", text: $otherInfo)
+//                Section(header: Text("Other valuable details")) {
+//                    TextField("Anything else?", text: $otherInfo)
+//                }
+                Section(header: Text(translationManager.otherDetailTitle)) {
+                    TextField(translationManager.detailPlaceholder, text: $otherInfo)
                 }
                 
-            }.navigationBarTitle("Add event information", displayMode: .inline)
+//            }.navigationBarTitle("Add event information", displayMode: .inline)
+            }.navigationBarTitle(translationManager.addEventInfo, displayMode: .inline)
             Spacer()
             
             
             
-            BasicButtonComponent(label: "Save & activate", action: {
+//            BasicButtonComponent(label: "Save & activate", action: {
+            BasicButtonComponent(label: translationManager.saveActivateBtn, action: {
                 print("City: \(cityOfEvent)")
                 if eventType.isEmpty || cityOfEvent.isEmpty { print("Fill all fields") ; return }
                 
@@ -96,7 +108,8 @@ struct CreateEventView: View {
             //let updatedEvent = Event(id: id, ownerId: authUID ?? "", status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
             // BasicButtonComponent(label: "Save & activate", action: { EventVM.updateEvent( updatedEvent ) })
             
-            Text("Saving will also enable the tracking mode")
+//            Text("Saving will also enable the tracking mode")
+            Text(translationManager.savingEventInfo)
                 .font(.system(size: 15))
                 .foregroundColor(.blue)
                 .frame(maxWidth: .infinity, alignment: .center)
