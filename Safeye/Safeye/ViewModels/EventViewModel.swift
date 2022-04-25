@@ -18,67 +18,11 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var fileService = FileService.shared
     private var notificationService = NotificationService.shared
     private var voiceClass = VoiceRecognizer.shared
+    private var locationManager = LocationViewModel.shared
     
     @State private var isRecording = false
     
     var audioTimer : Timer?
-    
-
-    
-    // Lines 30-77 location manager for tracking and panic mode
-    var locationManager: CLLocationManager?
-    
-    // First checks loction permissions are allowed and created locationManager
-    func checkIfLocationServicesIsEnabled() {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager = CLLocationManager()
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager?.delegate = self
-            locationManager?.startUpdatingLocation()
-            locationManager?.distanceFilter = 100
-            locationManager?.allowsBackgroundLocationUpdates = true
-            locationManager?.pausesLocationUpdatesAutomatically = false
-            
-            
-        } else {
-            print("Show Alert saying location not active")
-        }
-    }
-    
-    // Request always in use authorization so it can run in background
-    private func checkLocationAuthorization() {
-        guard let locationManager = locationManager else { return }
-
-        switch locationManager.authorizationStatus {
-            
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            print("Your location is restricted")
-        case .denied:
-            print("You have denied this permission")
-        case .authorizedAlways, .authorizedWhenInUse:
-            break
-        @unknown default:
-            break
-        }
-    }
-    
-    // Reruns authorization check if permissions are changed
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
-    }
-    
-    // Runs when a there is a location change specified by the distance filter
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(" COORDNATES locationManager()  called")
-        guard let userLoc = locations.last else { return }
-        print("COORDNATES \(userLoc.coordinate)")
-        if self.appState.event != nil {
-            self.appState.event?.coordinates = ["latitude": userLoc.coordinate.latitude, "longitude": userLoc.coordinate.longitude]
-            self.eventService.updateEvent(self.appState.event!)
-        }
-    }
     
     // User presses panic mode
     func activatePanicMode() {
@@ -91,7 +35,8 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.eventService.updateEvent(self.appState.event!)
         }
         //self.getEventsOfCurrentUser()
-        locationManager?.distanceFilter = 1
+        //locationManager?.distanceFilter = 1
+        locationManager.locationDuringPanicMode()
         
         // Timer function doesn't record first loop round
         self.voiceClass.reset()
@@ -113,7 +58,8 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             //  self.appState.eventsPanic =  self.appState.eventsPanic.filter { $0.id != self.appState.event!.id }
         }
         //self.getEventsOfCurrentUser()
-        locationManager?.distanceFilter = 100
+        //locationManager?.distanceFilter = 100
+        locationManager.locationDuringTrackingMode()
         stopMonitoringSpeech()
         // TODO: remove notification
     }
