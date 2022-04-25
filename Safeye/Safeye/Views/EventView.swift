@@ -30,8 +30,8 @@ struct EventView: View {
         return VStack {
             
             VStack {
-                Text("\(appState.event?.status.rawValue ?? "")")
-                    .font(.largeTitle)
+//                Text("\(appState.event?.status.rawValue ?? "")")
+//                    .font(.largeTitle)
                     /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
                         EventVM.deleteEvent(eventID)
                         goBack = true
@@ -97,6 +97,7 @@ struct EventView: View {
         .onAppear {
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
+            print("SSDSDSDSDSD: \(appState.eventTrustedContactsProfiles.count)")
             //EventVM.checkIfLocationServicesIsEnabled() // This creates ui isssue, user is sent back to eventListView
         }
 

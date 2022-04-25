@@ -50,8 +50,8 @@ class ConnectionViewModel: ObservableObject {
 
     func getPendingRequests()  {
         DispatchQueue.main.async {
-            self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
-            self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
+//            self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
+//            self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
             let currentUserID = AuthenticationService.getInstance.currentUser!.uid
             self.connService.fetchPendingConnectionRequests(currentUserID)
         }
@@ -73,7 +73,7 @@ class ConnectionViewModel: ObservableObject {
     
     func getConnections() {
         DispatchQueue.main.async {
-            self.appState.connections.removeAll()
+//            self.appState.connections.removeAll()
             let currentUserID = AuthenticationService.getInstance.currentUser!.uid
             self.connService.fetchConnections(currentUserID)
         }

@@ -77,9 +77,9 @@ struct ConnectionsView: View {
             
         }
         .onAppear {
-//            ConnectionVM.getConnections()
-//            ConnectionVM.getPendingRequests()
-//            ConnectionVM.getConnectionProfiles()
+            ConnectionVM.getConnections()
+            ConnectionVM.getPendingRequests()
+            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }
     }
