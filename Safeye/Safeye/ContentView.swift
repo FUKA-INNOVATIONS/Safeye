@@ -30,9 +30,6 @@ struct ContentView: View {
                 //TODO: BUG : after registration, create profile is not displayed, it is diaplyed on next app start
                 if appState.profile == nil {
                     // User has no profile, create new one
-                    // Is displayed the first time a user joins the app
-                    //                    Text("In order to be safe, you must create a profile")
-                    //                    BasicButtonComponent(label: "Create a profile") {
                     Text(translationManager.textProfile)
                     BasicButtonComponent(label: translationManager.createProfileBtn) {
                         showingCreateProfile = true
