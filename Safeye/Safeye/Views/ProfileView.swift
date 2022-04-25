@@ -14,6 +14,7 @@ struct ProfileView: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
+    var translationManager = TranslationService.shared
     
     @State private var showingEditProfile = false
     @State private var showingAddContact = false
@@ -60,7 +61,8 @@ struct ProfileView: View {
                 
                 Group {
                     Spacer()
-                    Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
+//                    Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
+                    Text(translationManager.trustedContactsTitle).font(.system(size: 18, weight: .semibold))
                     HStack{
                         ListViewComponent(item: "avatar", size: 50)
                         Button(action: {

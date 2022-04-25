@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SecureInputFieldComponent: View {
     
-    let title: String
+    let title: LocalizedStringKey
     @Binding var secureText: String
     
     

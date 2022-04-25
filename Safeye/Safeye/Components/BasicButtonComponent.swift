@@ -12,7 +12,7 @@ import SwiftUI
 
 struct BasicButtonComponent: View {
     // @Binding var action: Any
-    let label: String
+    let label: LocalizedStringKey
     let action: () -> Void
     
     // This is the parent
