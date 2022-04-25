@@ -28,25 +28,25 @@ struct AddSafePlaceView: View {
     }
     
     
-//    var isFound: Bool = true
-//    @State var name = ""
-//    @State var street = ""
-//    @State var city = ""
-//    @State var zip = ""
+    //    var isFound: Bool = true
+    //    @State var name = ""
+    //    @State var street = ""
+    //    @State var city = ""
+    //    @State var zip = ""
     
-//    @StateObject private var locationManager = LocationService.shared
+    //    @StateObject private var locationManager = LocationService.shared
     
-
-//    @State private var search: String = ""
     
-
+    //    @State private var search: String = ""
+    
+    
     
     
     var body: some View {
         
         ZStack(alignment: .bottom) {
             if isShowing {
-                Color.black
+                Color(UIColor.systemBackground)
                     .opacity(startOpacity + (endOpacity - startOpacity) * dragPercentage)
                     .ignoresSafeArea()
                     .onTapGesture { isShowing = false}
@@ -59,78 +59,80 @@ struct AddSafePlaceView: View {
         .ignoresSafeArea()
     }
     
-var mainView: some View {
-            VStack {
-                ZStack {
-                    Capsule()
-                        .frame(width: 40, height: 6)
-                }
-                .frame(height: 40)
-                .frame(maxWidth: .infinity)
-                .background(Color.white.opacity(0.00001))
-                .gesture(dragGesture)
+    var mainView: some View {
         VStack {
-        
-            NavigationView {
+            ZStack {
+                Capsule()
+                    .frame(width: 40, height: 6)
+            }
+            .frame(height: 40)
+            .frame(maxWidth: .infinity)
+            .background(Color(UIColor.systemBackground))
+            .gesture(dragGesture)
+            VStack {
                 
-                VStack {
-                    Text("Found \(result.locations.count) places")
-                        .frame(width: 100, height: 20)
-                    List(result.locations, id: \.self) { place in
-                        HStack {
-                            Text(place.name!)
-                            Spacer()
-                            Button("Save") {
-                                print("Safe place: saving")
-                                print("Safe place: Selected place name: \(place)")
-                                let didSave = SafePlaceVM.createSafePlace(place)
-                                print("Safe place: didSave?: \(didSave)")
+                NavigationView {
+                    
+                    VStack {
+                        Text("Found \(result.locations.count) places")
+                            .frame(width: 100, height: 20)
+                        List(result.locations, id: \.self) { place in
+                            HStack {
+                                Text(place.name!)
+                                Spacer()
+                                Button("Save") {
+                                    print("Safe place: saving")
+                                    print("Safe place: Selected place name: \(place)")
+                                    let didSave = SafePlaceVM.createSafePlace(place)
+                                    print("Safe place: didSave?: \(didSave)")
+                                    isShowing = false
+                                }
+                                
+                                
+                                //                            BasicButtonComponent(label: "Add", action: {
+                                //                                selectedLocation = place
+                                //                                // print("Selected place: \(place.placemark.name)")
+                                //                                print("Safe place: Selected place: \(place.placemark.coordinate.longitude), \(place.placemark.coordinate.latitude)")
+                                //                            }).frame(width: 100, height: 50)
+                                
+                                
                             }
-                            
-                            
-//                            BasicButtonComponent(label: "Add", action: {
-//                                selectedLocation = place
-//                                // print("Selected place: \(place.placemark.name)")
-//                                print("Safe place: Selected place: \(place.placemark.coordinate.longitude), \(place.placemark.coordinate.latitude)")
-//                            }).frame(width: 100, height: 50)
-                            
-                            
                         }
                     }
-                }.searchable(text: $result.searchText)
-                  
                     .navigationTitle("Enter address here")
-            }
-            
-//            NavigationLink(destination: MapView()) {
-//                               Text("Choose From Map?")
-//            }
-//
-//            BasicButtonComponent(label: "Add", action: { print("Added")})
-//
-//            Spacer()
-              
+                    .searchable(text: $result.searchText)
+                    
                 }
-        .frame(maxHeight: .infinity)
-            .padding(.bottom, 35)
+                
+                //            NavigationLink(destination: MapView()) {
+                //                               Text("Choose From Map?")
+                //            }
+                //
+                //            BasicButtonComponent(label: "Add", action: { print("Added")})
+                //
+                //            Spacer()
+                
             }
-           
-                .frame(height: curHeight)
-                .frame(maxWidth: .infinity)
-                .background(
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 30)
-                        Rectangle()
-                            .frame(height: curHeight / 2)
-                    }
-                        .foregroundColor(.white)
-                )
-                .onDisappear { curHeight = minHeight}
-            
+            .frame(maxHeight: .infinity)
+            .padding(.bottom, 35)
         }
+        
+        .frame(height: curHeight)
+        .frame(maxWidth: .infinity)
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 30)
+                Rectangle()
+                    .frame(height: curHeight / 2)
+            }
+                .foregroundColor(Color(UIColor.systemBackground))
+        )
+        .onDisappear { curHeight = minHeight}
+        
+    }
     
     @State private var prevDragTransition = CGSize.zero
-
+    
     var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onChanged { val in
@@ -147,7 +149,7 @@ var mainView: some View {
                 prevDragTransition = .zero
             }
     }
-    }
+}
 
 
 struct AddSafePlaceView_Previews: PreviewProvider {

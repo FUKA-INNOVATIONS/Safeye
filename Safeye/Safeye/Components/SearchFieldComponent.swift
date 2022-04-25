@@ -16,15 +16,17 @@ struct SearchFieldComponent: View {
                 //the icons need to be changed to FS Symbols
                 
                 
-                Image("icon-search").padding(8)
+                Image(systemName:"magnifyingglass").padding(8)
                 TextField("TC code...", text: $searchInput)
                 Button(action: {
                     searchInput = ""
                 })
-                { Image("icon-clear") }.padding(8)
+                { Image(systemName: "xmark.circle") }.padding(8)
             }
             .background(.bar)
-            .frame(width: 280, height: 20, alignment: .center)
+            .cornerRadius(10)
+            .frame(width: 340, height: 20, alignment: .center)
+            
             
         }
         .frame(width: 400, height: 80, alignment: .center)
