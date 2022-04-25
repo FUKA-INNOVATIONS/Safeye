@@ -13,6 +13,8 @@ struct ContentView: View {
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var appState: Store
     @StateObject private var notificationService = NotificationService.shared
+    @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var ConnectionVM: ConnectionViewModel
     var translationManager = TranslationService.shared
     
     @State private var showingCreateProfile = false
@@ -28,8 +30,8 @@ struct ContentView: View {
                 if appState.profile == nil {
                     // User has no profile, create new one
                     // Is displayed the first time a user joins the app
-//                    Text("In order to be safe, you must create a profile")
-//                    BasicButtonComponent(label: "Create a profile") {
+                    //                    Text("In order to be safe, you must create a profile")
+                    //                    BasicButtonComponent(label: "Create a profile") {
                     Text(translationManager.textProfile)
                     BasicButtonComponent(label: translationManager.createProfileBtn) {
                         showingCreateProfile = true
@@ -44,7 +46,7 @@ struct ContentView: View {
                         if !appState.eventsPanic.isEmpty { AlertPanicComponent() }
                         NavItem()
                     }
-                   
+                    
                 }
                 
                 
@@ -61,18 +63,6 @@ struct ContentView: View {
                     notificationService.requestAuthorization()
                 }
             }
-//            .onChange(of: notificationManager.authorizationStatus) { authorizationStatus in
-//                switch authorizationStatus {
-//                case .notDetermined:
-//                    // request authorization
-//                    notificationManager.requestAuthorization()
-//                case .authorized:
-//                    // get local notification
-//                    notificationManager.reloadLocalNotifications()
-//                default:
-//                    break
-//                }
-//            }
             .background(
                 NavigationLink(destination: MapView(), isActive: $goMapView) {
                     EmptyView()
@@ -83,6 +73,12 @@ struct ContentView: View {
         .onAppear {
             print("content view appeared")
             AuthVM.signedIn = AuthVM.isSignedIn
+            
+//            ConnectionVM.getConnections()
+//            ConnectionVM.getConnectionProfiles()
+//            ConnectionVM.getPendingRequests()
+//            EventVM.getEventsOfCurrentUser()
+//            EventVM.getEventsOfTrustedContacts()
         }
     }
 }

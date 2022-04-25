@@ -9,7 +9,7 @@
 // Sign in
 
 "signInTitle" = "Kirjaudu sisään";
-"emailTitle" = "Sähköpostiosoitte";
+"emailTitle" = "Sähköpostiosoite";
 "emailPlaceholder" = "Email address";
 "passwordTitle" = "Salasana";
 "passwordPlaceholder" = "Password";
@@ -19,10 +19,10 @@
 // Create new account
 
 "createNewTitle" = "Luo uusi tili"; // "Sign up"
-"emailTitle" = "Sähköpostiosoitte";
-"emailPlaceholder" = "Email address";
+"emailTitle" = "Sähköpostiosoite";
+"emailPlaceholder" = "Sähköpostiosoite";
 "passwordTitle" = "Salasana";
-"passwordPlaceholder" = "Password";
+"passwordPlaceholder" = "Salasana";
 "signUpButton" = "Luo tili";  // "Sign up" "Register"
 "backToSignIn" = "Kirjaudu sisään";
 // Alert in case wrong input
@@ -38,11 +38,11 @@
 
 "textProfileUpdate" = "Täytä kentät, jotka haluat päivittää";
 "textProfileBlanc" = "Täytä kaikki kentät luodaksesi uuden profiilin";
-"fullNameTitle" = "Etunimi ja sukunimi";
-"fullNamePlaceholder" = "Full name";
+"fullNameTitle" = "Etu- ja sukunimi";
+"fullNamePlaceholder" = "Koko nimi";
 "addressTitle" = "Osoitteesi";
-"addressPlaceholder" = "Address";
-"birthdayTitle" = "Sinun syntymäpäiväsi";
+"addressPlaceholder" = "Katuosoite";
+"birthdayTitle" = "Syntymäpäiväsi";
 "birthdayPlaceholder" = "Birthday";
 "bloodTypeTitle" = "Valitse veriryhmäsi";
 "illnessTitle" = "Sinun sairautesi";
@@ -77,7 +77,7 @@
 "panicStatusTitle" = "Paniikki";
 "startedStatusTitle" = "Aloitettu";
 "deleteBtn" = "Poista";
-"trustedContactsTrack" = "LUOTTEET HENKILÖT";
+"trustedContactsTrack" = "Tapahtuman turvaverkko";
 "eventdDetailsTrack" = "TAPAHTUMAN TIEDOT";
 "startTrack" = "Alkaen:";
 "endTrack" = "Päättyy:";
@@ -90,14 +90,14 @@
 
 
 // Create event view
-"selectContactsTitle" = "VALITSE TAPAHTUMAN LUOTTEET HENKILÖT";
+"selectContactsTitle" = "Määritä tapahtuman turvaverkko";
 "createEventInfoText" = "Nämä käyttäjät voivat nähdä tapahtumien tiedot";
 "dateAndTime" = "ARVIOITU TAPAHTUMAN PÄIVÄMÄÄRÄ JA AIKA";
 "startTime" = "Alkaa";
 "endTime" = "Päättyy";
 "eventType" = "TAPAHTUMATYYPPI";
-"addContactBtn" = "lisätä";
-"removeContactBtn" = "poista";
+"addContactBtn" = "Lisää";
+"removeContactBtn" = "Poista";
 // Event types
 "selectEventType" = "Valitse tapahtumatyyppi";
 "barNight" = "Baari-ilta";
@@ -115,7 +115,7 @@
 
 // PROFILE
 
-"trustedContactsTitle" = "Luotetut yhteyshenkilöni";
+"trustedContactsTitle" = "Yhteyshenkilöt";
 "bornTitle" = "Syntynyt:";
 "bloodTitle" = "Veriryhmä";
 "illnessTitle" = "Sairaukset";
@@ -137,9 +137,9 @@
 
 // CONNECTIONS
 
-"connectionsTitle" = "YHTEYDET";
-"receivedReqTitle" = "SAATUJA PYYNTÖJÄ";
-"sentReqTitle" = "LÄHETETTY PYYNTÖJÄ";
+"connectionsTitle" = "Yhteydet";
+"receivedReqTitle" = "Vastaanotetut pyynnöt";
+"sentReqTitle" = "Lähetetyt pyynnöt";
 "acceptBtn" = "hyväksy";
 "profileBtn" = "profiili";
 
