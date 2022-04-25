@@ -35,11 +35,10 @@ struct AddContactView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             if isShowing {
-                Color.black
+                Color(UIColor.systemBackground)
                     .opacity(startOpacity + (endOpacity - startOpacity) * dragPercentage)
                     .ignoresSafeArea()
                     .onTapGesture { isShowing = false}
-                
                 mainView
                     .transition(.move(edge: .bottom))
             }
@@ -56,7 +55,7 @@ struct AddContactView: View {
             }
             .frame(height: 40)
             .frame(maxWidth: .infinity)
-            .background(Color.white.opacity(0.00001))
+            .background(Color(UIColor.systemBackground))
             .gesture(dragGesture)
             
             ZStack {
@@ -101,13 +100,15 @@ struct AddContactView: View {
         }
         .frame(height: curHeight)
         .frame(maxWidth: .infinity)
+
+
         .background(
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                 Rectangle()
                     .frame(height: curHeight / 2)
             }
-                .foregroundColor(.white)
+                .foregroundColor(Color(UIColor.systemBackground))
         )
         .onDisappear { curHeight = minHeight}
     }
