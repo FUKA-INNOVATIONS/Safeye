@@ -233,6 +233,8 @@
 		755FCBB2281683650081B160 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCBB4281683660081B160 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCBB5281683E00081B160 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		755FCBB7281695C40081B160 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		755FCBB8281695D20081B160 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75994EF62809B8EB003244C6 /* alertBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertBoxComponent.swift; sourceTree = "<group>"; };
 		75EB684D28130B0D00F607B7 /* SafeSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeSpaceModel.swift; sourceTree = "<group>"; };
 		75EB684F28130B5000F607B7 /* SearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModel.swift; sourceTree = "<group>"; };
@@ -402,7 +404,6 @@
 				6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */,
 				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
 				D5148A5227FF5C8800E98347 /* NavItem.swift */,
-				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
 				6ABCDD2527FFEC7B009563E7 /* SafeSpaceComponent.swift */,
 				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
@@ -451,6 +452,7 @@
 		5F8B94F527F70A570067C6C9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
 				5F244A9527F70F0A00BFE1FB /* AddContactView.swift */,
 				5F244A9827F70F6200BFE1FB /* AddSafePlaceView.swift */,
 				5F244A9327F70EEA00BFE1FB /* CreateEventView.swift */,
@@ -625,6 +627,8 @@
 				en,
 				Base,
 				fi,
+				uk,
+				lt,
 			);
 			mainGroup = 5F0EA2EE27F6F9E000FBD77B;
 			packageReferences = (
@@ -809,6 +813,8 @@
 			children = (
 				755FCBB2281683650081B160 /* en */,
 				755FCBB4281683660081B160 /* fi */,
+				755FCBB7281695C40081B160 /* uk */,
+				755FCBB8281695D20081B160 /* lt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
