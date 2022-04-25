@@ -19,7 +19,8 @@ struct EventView: View {
     @State private var isPresented: Bool = false
     @State private var text: String = ""
     @State private var showingRecordMessage: Bool = false
-
+    @State private var showingRecordedMessageView: Bool = false
+    
     
     //@State var goBack = false
     var eventID: String
@@ -41,7 +42,6 @@ struct EventView: View {
                 
                 
                 Form {
-//                    Section(header: Text("Trusted contacts")) {
                     Section(header: Text(translationManager.trustedContactsTrack)) {
                         ForEach(appState.eventTrustedContactsProfiles) { profile in
                             HStack {
@@ -53,12 +53,6 @@ struct EventView: View {
                         }
                     }
                     
-//                    Section(header: Text("Event details")) {
-//                        Text("Event type: \(appState.event?.city ?? "")")
-//                        Text("Starting from  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
-//                        Text("Ending at  \(appState.event?.endTime.formatted(.dateTime) ?? "")")
-//                        Text("Event type: \(appState.event?.eventType ?? "")")
-//                        Text("Other info: \(appState.event?.otherInfo ?? "")")
                     Section(header: Text(translationManager.eventdDetailsTrack)) {
                         Text("\(Text(translationManager.startTrack))  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
                         Text("\(Text(translationManager.endTrack)) \(appState.event?.endTime.formatted(.dateTime) ?? "")")
@@ -69,6 +63,10 @@ struct EventView: View {
                 }
                 
             }
+            
+            // Modal showing a list of recorded messages from even onwer's speech
+            Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") }
+                .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
             
             if EventVM.isEventOwner() {
                 Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
@@ -91,25 +89,8 @@ struct EventView: View {
                 }) {
                     TrackingModeButtonComponent()
                 }
-            } // end of ZStack
+            } // end of Parent/Main VStack
             
-            
-            
-            
-            
-            //Spacer()
-            
-            //Spacer()
-            
-            //Send value of tracking: true to map view
-            /* NavigationLink("View Map", destination: MapView())
-             .padding() */
-            
-            // Replace with button?
-            /*NavigationLink("Disable Tracking", destination: ContentView())
-             .disabled(true)*/
-            
-            //Spacer()
           
         }
         //.navigationBarHidden(true)
