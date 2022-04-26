@@ -22,7 +22,6 @@ struct ProfileView: View {
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
-    @State var fetchedPhoto: UIImage?
     
     var body: some View {
         
@@ -35,12 +34,10 @@ struct ProfileView: View {
                     // Display profile photo
                     VStack {
                         // if user already has a profile photo, display that
-                        if FileVM.fetchedPhoto != nil {
-                            ProfileImageComponent(size: 100, avatarImage: FileVM.fetchedPhoto!)
+                        if appState.userPhoto != nil {
+                            ProfileImageComponent(size: 100, avatarImage: appState.userPhoto!)
                         } else {
-                            // if they don't have it, display placeholder image
-                            // this technically shouldn't be needed because we are forcing them to upload an image. However, at the moment the fetching is a bit buggy and sometimes it shows this placeholder.
-                            ProfileImageComponent(size: 70, avatarImage: UIImage(imageLiteralResourceName: "avatar-placeholder"))
+                            ProgressView()
                         }
                     }
                     HStack {
@@ -124,7 +121,6 @@ struct ProfileView: View {
                 print("profileView view appeared")
                 ProfileVM.getProfileForCurrentUser()
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
-                fetchedPhoto = FileVM.fetchedPhoto
                 //ProfileVM.updateUserHomeCoordinates()
             }
             AddContactView(isShowing: $showingAddContact, searchInput: "")

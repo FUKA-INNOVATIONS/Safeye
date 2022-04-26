@@ -27,6 +27,10 @@ class Store: ObservableObject {
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
     @Published var panicPofiles = [ProfileModel]()
+    
+    @Published var userPhoto: UIImage?
+    @Published var searchResultPhoto: UIImage?
+    @Published var trustedContactPhoto: UIImage?
 
     @Published var safePlaces = [SafePlaceModel]()
     @Published var locations = [Location]()  // temporary solutoin
