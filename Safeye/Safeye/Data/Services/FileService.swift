@@ -78,7 +78,7 @@
                  // fetch the data from storage
                  let storageRef = Storage.storage().reference()
                  let fileRef = storageRef.child(avatarUrlFetched ?? "")
-                 fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                 fileRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                      if error == nil && data != nil {
                          // Create a UIImage and assign it to fetchedPhoto for display
                          if let image = UIImage(data: data!) {

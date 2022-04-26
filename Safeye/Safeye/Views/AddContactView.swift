@@ -28,6 +28,7 @@ struct AddContactView: View {
     ///////////
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
+    @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
     @State var error = ""
@@ -80,7 +81,16 @@ struct AddContactView: View {
                     Spacer()
                     //  If searched code matches an existing profile, display avatar, full name and 'add' button
                     if appState.profileSearch != nil {
-                        AvatarComponent(size: 100)
+                        
+                        if appState.searchResultPhoto != nil {
+                            ProfileImageComponent(size: 90, avatarImage: appState.searchResultPhoto!)
+                        } else {
+                            ProgressView()
+                                .onAppear {
+                                    FileVM.fetchPhoto(avatarUrlFetched: appState.profileSearch?.avatar, isSearchResultPhoto: true, isTrustedContactPhoto: false)
+                                }
+                        }
+                        
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
 //                      BasicButtonComponent(label: "Add", action: {
                         BasicButtonComponent(label: translationManager.addBtn, action: {
@@ -114,7 +124,11 @@ struct AddContactView: View {
             }
                 .foregroundColor(Color(UIColor.systemBackground))
         )
-        .onDisappear { curHeight = minHeight}
+        .onDisappear {
+            curHeight = minHeight
+            appState.searchResultPhoto = nil
+            appState.profileSearch = nil
+        }
     }
     
     @State private var prevDragTransition = CGSize.zero

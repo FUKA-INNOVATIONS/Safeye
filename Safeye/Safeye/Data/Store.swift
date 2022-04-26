@@ -27,6 +27,7 @@ class Store: ObservableObject {
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
     @Published var panicPofiles = [ProfileModel]()
+    @Published var tCProfile: ProfileModel?
     
     @Published var userPhoto: UIImage?
     @Published var searchResultPhoto: UIImage?

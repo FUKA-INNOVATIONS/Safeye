@@ -57,6 +57,9 @@ struct ProfileView: View {
                 
                 
 // Trusted Contact
+                
+                // TODO: remove TC list from profile. Move "add contact" to connections view
+                
                 VStack(spacing: 0) {
                 
 //                    Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
