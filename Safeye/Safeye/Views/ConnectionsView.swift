@@ -22,38 +22,38 @@ struct ConnectionsView: View {
         ZStack {
             Spacer(minLength: 50)
             
+            //Connection code
             Form {
                 Section (header: Text("Connection code"), footer: Text("Your connection code is the only way people can find you on Safeye. Share it with others and they'll be able to send you a connection request.")) {
                     
                     HStack{
+                        //Display connection code
                         Text("\(appState.profile?.connectionCode ?? "No code")")
                         Spacer()
                         
+                        //Copy code to clipboard
                         Button(action: {
                             let pasteboard = UIPasteboard.general
                             pasteboard.string = appState.profile?.connectionCode
-                            print("Copied")
-                            //                }, label: {Text("Copy")})
                         }, label: {Text(translationManager.copyBtn)})
-                        
+                            .foregroundColor(.blue)
                     }
                 }
                 
-                // Trusted Contact
-                
-                Button(action: {
-                    showingAddContact = true
-                })
-                {
+                // Add new contact
+                HStack {
                     Text("Add a new contact")
+                    Spacer()
+                    Button(action: {
+                        showingAddContact = true
+                    })
+                    {
+                        Image(systemName: "plus.magnifyingglass")
+                            .foregroundColor(.blue)
+                    }
                 }
-//                { Image(systemName: "plus.magnifyingglass")
-//                        .font(.system(size: 30))
-//                }
                 
-                
-                
-                //                Section("Connections") {
+                // Section("Connections") {
                 Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
                         //let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
@@ -84,7 +84,7 @@ struct ConnectionsView: View {
                     
                 }
                 
-                //                Section("Received requests") {
+                // Section("Received requests") {
                 Section(translationManager.receivedReqTitle) {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
                         HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)} label: {Text("")}
@@ -101,7 +101,7 @@ struct ConnectionsView: View {
                     }
                 }
                 
-                //                Section("Sent requests") {
+                // Section("Sent requests") {
                 Section(translationManager.sentReqTitle) {
                     ForEach(appState.pendingConnectionRequestsOwner) { request in
                         HStack {
@@ -119,7 +119,7 @@ struct ConnectionsView: View {
                 
             }
             AddContactView(isShowing: $showingAddContact, searchInput: "")
-
+            
             
         }
         .navigationTitle("")
@@ -130,7 +130,7 @@ struct ConnectionsView: View {
             ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }
-
+        
     }
 }
 

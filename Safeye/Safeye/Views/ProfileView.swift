@@ -97,8 +97,7 @@ struct ProfileView: View {
                         Spacer()
                         
                     }
-                    
-                    
+   
                 }
                 
                 Text("My details")
@@ -108,12 +107,7 @@ struct ProfileView: View {
                 ScrollView {
                     UserDetailsComponent()
                 }
-                
-                
-                
-                
-                
-                
+   
             }
             //.padding(.top, -100)
             .onAppear {

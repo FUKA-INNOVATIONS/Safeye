@@ -39,34 +39,14 @@ struct SettingsView: View {
                     .padding()
                 }
                 
-    //            BasicButtonComponent(label: "Sign out") { // Sign out button
-                Button(translationManager.signOut) {
-                    AuthVM.signOut()
-                }
-                
-    //            NavigationLink("Playground") {
-    //                PlayGroundView()
-    //            }
-    //
-    //            NavigationLink("Go To Map") {
-    //                MapView()
-    //            }
-                
-                /* NavigationLink("\(appState.eventCurrentUser == nil ? "Create event" : "You have an event")") {
-                    if appState.eventCurrentUser == nil {
-                        CreateEventView()
-                    } else {
-                        EventView()
-                    }
-                } */
-                
-                // Button to update users home coordinates
-                // TODO add popup info box when pressed
+                // Update user's home coordinates
+                // TODO: add popup info box when pressed
                 if CLLocationManager().authorizationStatus.rawValue == 4 {
                     Button("Update Home Coordinates") {
                         ProfileVM.updateUserHomeCoordinates()
                     }
                 }
+                
             }
             
             
@@ -93,6 +73,12 @@ struct SettingsView: View {
                 }
             }
             
+            // Sign out button
+            Button(translationManager.signOut) {
+                AuthVM.signOut()
+            }
+            .foregroundColor(.red)
+            
         }
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -103,9 +89,3 @@ struct SettingsView: View {
         }
     }
 }
-
-/* struct SettingsView_Previews: PreviewProvider {
- static var previews: some View {
- SettingsView()
- }
- } */
