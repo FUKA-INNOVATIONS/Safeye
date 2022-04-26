@@ -24,7 +24,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        return Section {
+        return VStack {
             
             VStack {
                 //TODO: BUG : after registration, create profile is not displayed, it is diaplyed on next app start
@@ -69,6 +69,9 @@ struct ContentView: View {
                     .hidden()
             )
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .ignoresSafeArea()
         .onAppear {
             print("content view appeared")
             AuthVM.signedIn = AuthVM.isSignedIn

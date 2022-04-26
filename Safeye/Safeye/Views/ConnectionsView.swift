@@ -14,10 +14,12 @@ struct ConnectionsView: View {
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
     @State var showingConnectionProfile = false
+    @State private var showingAddContact = false
+    
     
     var body: some View {
         
-        VStack {
+        ZStack {
             Spacer(minLength: 50)
             
             Form {
@@ -36,6 +38,20 @@ struct ConnectionsView: View {
                         
                     }
                 }
+                
+                // Trusted Contact
+                
+                Button(action: {
+                    showingAddContact = true
+                })
+                {
+                    Text("Add a new contact")
+                }
+//                { Image(systemName: "plus.magnifyingglass")
+//                        .font(.system(size: 30))
+//                }
+                
+                
                 
                 //                Section("Connections") {
                 Section(translationManager.connectionsTitle) {
@@ -102,16 +118,19 @@ struct ConnectionsView: View {
                 }
                 
             }
+            AddContactView(isShowing: $showingAddContact, searchInput: "")
+
             
         }
-        //.padding(.top, -100)
-        //.ignoresSafeArea()
+        .navigationTitle("")
+        .navigationBarHidden(true)
         .onAppear {
             ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()
             ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }
+
     }
 }
 

@@ -94,12 +94,13 @@ struct SettingsView: View {
             }
             
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
         .onAppear {
             //EventVM.getEventsOfTrustedContacts() // to check for panic events
             //EventVM.getEventsOfCurrentUser()
             EventVM.sendNotification()
         }
-        .navigationBarHidden(true)
     }
 }
 
