@@ -43,10 +43,11 @@ class AuthenticationViewModel: ObservableObject {
     
     
     func signIn(email: String, password: String) { // Login user with email and password
+        self.appState.appLoading = true
         authService.signIn(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
                 self?.signinError = true
-                // print("Error in signIn() -> viewModel: \(error?.localizedDescription)")
+                self?.appState.appLoading = false
                 return
             }
             // Login Success
@@ -55,28 +56,34 @@ class AuthenticationViewModel: ObservableObject {
                 self?.signedIn = true
                 self?.appState.currentUserID = result!.user.uid
                 self?.appState.currentUserEmail = result!.user.email!
+                self?.appState.appLoading = false
             }
         }
     }
     
     func signUp(email: String, password: String) { // Create new user account with email and password
+        self.appState.appLoading = true
         authService.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard result != nil, error == nil else {
+                self?.appState.appLoading = false
                 return
             }
             // Account creation Success
             DispatchQueue.main.async {
                 self?.signedIn = true
+                self?.appState.appLoading = false
                 
             }
         }
     }
     
     func signOut() { // Logout user
+        self.appState.appLoading = true
         try? authService.signOut()
         self.signedIn = false
         self.appState.currentUserID = ""
         self.appState.currentUserEmail = ""
+        self.appState.appLoading = false
     }
     
 }
