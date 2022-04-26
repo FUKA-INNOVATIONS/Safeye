@@ -30,7 +30,7 @@ struct ListViewComponent: View {
                     }.padding(5)
                 }
             }
-        }.padding(15)
+        }.padding()
         
     }
 }

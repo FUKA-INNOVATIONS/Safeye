@@ -98,6 +98,8 @@ struct EventListView: View {
             
             }
         } // end of outer VStack
+        .navigationTitle("")
+        .navigationBarHidden(true)
     }
 }
 

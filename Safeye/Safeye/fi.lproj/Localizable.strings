@@ -122,7 +122,7 @@
 "allergiesTitle" = "Allergiat";
 "safeSpaceTitle" = "Omat turvapaikat";
 // Add TC
-"codeInput" = "TC koodi..";
+"codeInput" = "TC koodi.."; // TODO: change to "Connection code..." in FIN
 "searchBtn" = "Hae";
 "addBtn" = "Lisää";
 "nothingTitle" = "Ei sisältöä";

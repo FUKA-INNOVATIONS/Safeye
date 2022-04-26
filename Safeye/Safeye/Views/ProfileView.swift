@@ -17,7 +17,6 @@ struct ProfileView: View {
     var translationManager = TranslationService.shared
     
     @State private var showingEditProfile = false
-    @State private var showingAddContact = false
     @State private var showingAddSafePlace = false
     
     @State var isImagePickerShowing = false
@@ -28,96 +27,87 @@ struct ProfileView: View {
         return ZStack {
             VStack {
                 
-                Group{
-                    // AvatarComponent(size: 80)
+                VStack {
+                    // display profile photo
+                    if appState.userPhoto != nil {
+                        ProfileImageComponent(size: 100, avatarImage: appState.userPhoto!)
+                    } else {
+                        ProgressView()
+                    }
                     
-                    // Display profile photo
-                    VStack {
-                        // if user already has a profile photo, display that
-                        if appState.userPhoto != nil {
-                            ProfileImageComponent(size: 100, avatarImage: appState.userPhoto!)
-                        } else {
-                            ProgressView()
-                        }
-                    }
-                    HStack {
-                        Text("\(appState.profile?.fullName ?? "No name")")
-                            .font(.system(size: 25, weight: .bold))
-                        
-                        Button { showingEditProfile = true } label: { Image(systemName: "pencil.circle.fill")
-                                .foregroundColor(.blue)
-                            .buttonStyle(BorderlessButtonStyle()) }
-                    }
-                    .sheet(isPresented: $showingEditProfile) {
-                        ProfileEditView()
-                    }
+                    // display full name
+                    Text("\(appState.profile?.fullName ?? "No name")")
+                        .font(.system(size: 25, weight: .bold))
+                        .lineLimit(1)
+                        .padding(5)
+                        .padding(.leading, 10)
                 }
-                Spacer()
                 
-                
-                
-// Trusted Contact
-                
-                // TODO: remove TC list from profile. Move "add contact" to connections view
-                
-                VStack(spacing: 0) {
-                
-//                    Text("My trusted contacts").font(.system(size: 18, weight: .semibold))
-                    Text(translationManager.trustedContactsTitle).font(.system(size: 18, weight: .semibold))
-                    HStack{
-                        ListViewComponent(item: "avatar", size: 50)
-                        Button(action: {
-                            showingAddContact = true
-                        })
-                        { Image(systemName: "plus.magnifyingglass")
-                                .font(.system(size: 30))
-                        }
-                        
-                    }
-                  
+                // edit profile button
+                Button { showingEditProfile = true } label: {
+                    Text("Edit profile")
+                    Image(systemName: "pencil")
                 }
-//                .overlay(
-//                     RoundedRectangle(cornerRadius: 16)
-//                         .stroke(Color.gray, lineWidth: 1))
-// Safe Spaces
-                VStack(spacing: 0) {
-                    NavigationLink {
-                        MapView()
-                    } label: {
-                        Text("My safe spaces").font(.system(size: 18, weight: .semibold)).foregroundColor(.blue)
-                    }
-
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(.blue)
+                .padding(.bottom, 15)
+                
+                .sheet(isPresented: $showingEditProfile) {
+                    ProfileEditView()
+                }
+                
+                
+                // Safe Spaces
+                VStack {
+                    
+                    Text("My safe spaces")
+                        .fontWeight(.bold)
+                    
+                    ListViewComponent(item: "safeSpace", size: 40)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 20)
+                    
+                    
                     HStack{
-                        //size with icons doesn't work properly, will figure this out later
-                        ListViewComponent(item: "safeSpace", size: 40)
+                        Spacer()
+                        
+                        NavigationLink {
+                            MapView()
+                        } label: {
+                            Text("View on map")
+                            
+                            Image(systemName: "paperplane")
+                        }
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.blue)
+                        
+                        Spacer()
+                        
                         Button(action: {
                             showingAddSafePlace = true
                             print("modal: ($showingAddSafePlace)")
                         })
-                        { Image(systemName: "plus.magnifyingglass")
-                                .font(.system(size: 30))
+                        { //Image(systemName: "plus.magnifyingglass")
+                            Text("Add new")
+                            Image(systemName: "plus.magnifyingglass")
                         }
-                 
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.blue)
+                        
+                        Spacer()
+                        
                     }
+   
                 }
-//                .overlay(
-//                     RoundedRectangle(cornerRadius: 16)
-//                         .stroke(Color.gray, lineWidth: 1))
-//
                 
-                VStack {
-                    /* Button("Create new event", action: { showingCreateEvent = true } )
-                     .sheet(isPresented: $showingCreateEvent) {
-                     CreateEventView()
-                     } */
-                    
-                    Form {
-                        UserDetailsComponent()
-                    }
+                Text("My details")
+                    .fontWeight(.bold)
+                    .padding(.top, 20)
+                
+                ScrollView {
+                    UserDetailsComponent()
                 }
-                .padding()
-                
-                
+   
             }
             //.padding(.top, -100)
             .onAppear {
@@ -126,12 +116,13 @@ struct ProfileView: View {
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
                 //ProfileVM.updateUserHomeCoordinates()
             }
-            AddContactView(isShowing: $showingAddContact, searchInput: "")
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
         .onAppear {
-//            ConnectionVM.getConnections()
-//            ConnectionVM.getConnectionProfiles()
+            //            ConnectionVM.getConnections()
+            //            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
             SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }
