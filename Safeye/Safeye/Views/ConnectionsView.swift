@@ -10,6 +10,7 @@ import SwiftUI
 struct ConnectionsView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var EventVM: EventViewModel
+    @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
     @State var showingConnectionProfile = false
@@ -39,17 +40,21 @@ struct ConnectionsView: View {
                 //                Section("Connections") {
                 Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
-                        //_ = ConnectionVM.filterConnectionProfileFromAppState(connection)
+                        //let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
                         HStack{
                             //Image(systemName: "trash")
                             Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash")
                                 .foregroundColor(.red) }
                             
                             Text("Full name")
+                            //Text(profile.fullName)
                             Spacer()
                             //                            Text("profile")
                             Text(translationManager.profileBtn)
-                            Button { showingConnectionProfile = true } label: { Image(systemName: "eye") }
+                            Button {
+                                //FileVM.fetchPhoto(avatarUrlFetched: profile.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                                showingConnectionProfile = true
+                            } label: { Image(systemName: "eye") }
                             
                             
                         }
@@ -57,6 +62,7 @@ struct ConnectionsView: View {
                         
                         .sheet(isPresented: $showingConnectionProfile) {
                             //ProfileView(profileID: connection.id!)
+                            //TCProfileView(profile: profile)
                         }
                     }
                     
