@@ -15,7 +15,7 @@ struct AddContactView: View {
     let minHeight: CGFloat = 500
     let maxHeight: CGFloat = 600
     
-    let startOpacity: Double = 0.4
+    let startOpacity: Double = 0.8
     let endOpacity: Double = 0.9
     
     var dragPercentage: Double {
@@ -123,8 +123,10 @@ struct AddContactView: View {
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onChanged { val in
                 let dragAmount = val.translation.height - prevDragTransition.height
-                if curHeight > maxHeight || curHeight < minHeight {
+                if curHeight > maxHeight {
                     curHeight -= dragAmount / 6
+                } else if curHeight < minHeight {
+                    isShowing = false
                 } else {
                     curHeight -= dragAmount
                 }
