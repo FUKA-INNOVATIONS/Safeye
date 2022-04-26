@@ -173,7 +173,6 @@ struct ProfileEditView: View {
                     
                     // presentationMode.wrappedValue.dismiss() // Close modal and return to ProfileView
                     appState.userPhoto = selectedPhoto
-                    selectedPhoto = nil
                     dismiss()
                 }
             }

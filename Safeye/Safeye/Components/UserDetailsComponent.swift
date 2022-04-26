@@ -20,14 +20,14 @@ struct UserDetailsComponent: View {
                 Image(systemName: "house.circle.fill")
                     .font(.system(size: 30))
                 Text("\(appState.profile?.address ?? "Homeless")")
-                    .padding()
+                    .padding(5)
                 Spacer()
             }
             HStack{
                 Image(systemName: "person.badge.clock.fill")
                     .font(.system(size: 30))
                 Text("\(Text(translationManager.bornTitle)) \(appState.profile?.birthday ?? "Still in mama's stomach")")
-                    .padding()
+                    .padding(5)
             }
      
             HStack{
@@ -38,9 +38,10 @@ struct UserDetailsComponent: View {
                     Text("\(Text(translationManager.illnessTitle)) \(appState.profile?.illness ?? "Are you serious")")
                     Text("\(Text(translationManager.allergiesTitle)) \(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
                 }
-                .padding()
+                .padding(5)
             }
         }
+        .padding(.leading, 50)
     }
     
 }
