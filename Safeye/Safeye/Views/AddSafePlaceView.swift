@@ -16,10 +16,10 @@ struct AddSafePlaceView: View {
     @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
     
     @State private var curHeight: CGFloat = 500
-    let minHeight: CGFloat = 500
+    let minHeight: CGFloat = 400
     let maxHeight: CGFloat = 600
     
-    let startOpacity: Double = 0.4
+    let startOpacity: Double = 0.8
     let endOpacity: Double = 0.9
     
     var dragPercentage: Double {
@@ -55,10 +55,10 @@ struct AddSafePlaceView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemBackground))
             .gesture(dragGesture)
+            
             VStack {
-                
+                Text("Enter address here")
                 NavigationView {
-                    
                     VStack {
                         Text("Found \(result.locations.count) places")
                             .frame(width: 100, height: 20)
@@ -76,7 +76,6 @@ struct AddSafePlaceView: View {
                             }
                         }
                     }
-                    .navigationTitle("Enter address here")
                     .searchable(text: $result.searchText)
                     
                 }
@@ -95,7 +94,7 @@ struct AddSafePlaceView: View {
             }
                 .foregroundColor(Color(UIColor.systemBackground))
         )
-        .onDisappear { curHeight = minHeight}
+        .onDisappear { curHeight = 500 }
         
     }
     
@@ -105,8 +104,10 @@ struct AddSafePlaceView: View {
         DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onChanged { val in
                 let dragAmount = val.translation.height - prevDragTransition.height
-                if curHeight > maxHeight || curHeight < minHeight {
+                if curHeight > maxHeight {
                     curHeight -= dragAmount / 6
+                } else if curHeight < minHeight {
+                    isShowing = false
                 } else {
                     curHeight -= dragAmount
                 }

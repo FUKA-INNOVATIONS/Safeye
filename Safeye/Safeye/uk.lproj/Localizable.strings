@@ -120,7 +120,7 @@
 "allergiesTitle" = "Allergies";
 "safeSpaceTitle" = "My safe spaces";
 // Add TC
-"codeInput" = "TC code..";
+"codeInput" = "Connection code...";
 "searchBtn" = "Search";
 "addBtn" = "Add";
 "nothingTitle" = "Nothing to display";
