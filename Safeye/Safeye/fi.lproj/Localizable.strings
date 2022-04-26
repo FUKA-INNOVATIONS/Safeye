@@ -33,7 +33,7 @@
 // Create profile
 
 
-"textProfile" = "Luomalla profiili ja pysy turvassa!";
+"textProfile" = "Luo profiili ja pysy turvassa!";
 "createProfileBtn" = "Luo profiili";
 
 "textProfileUpdate" = "Täytä kentät, jotka haluat päivittää";
@@ -111,7 +111,7 @@
 "detailPlaceholder" = "Mitään muuta?";
 "saveActivateBtn" = "Tallenna & aktivoi";
 "addEventInfo" = "Lisää tapahtuman tiedot";
-"savingEventInfo" = "Tallentaminen aktivoit seurantatilan";
+"savingEventInfo" = "Tallentaminen aktivoi seurantatilan";
 
 // PROFILE
 
@@ -124,11 +124,11 @@
 // Add TC
 "codeInput" = "TC koodi..";
 "searchBtn" = "Hae";
-"addBtn" = "Lisätä";
+"addBtn" = "Lisää";
 "nothingTitle" = "Ei sisältöä";
 // Add safe space
 "chooseMapBtn" = "Valitse kartalta";
-"addSafeBtn" = "Lisätä";
+"addSafeBtn" = "Lisää";
 "nameSafe" = "Nimi";
 "streetSafe" = "Osoite";
 "citySafe" = "Paikkakunta";

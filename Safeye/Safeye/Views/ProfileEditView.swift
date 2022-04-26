@@ -109,11 +109,14 @@ struct ProfileEditView: View {
                                 Text($0)
                             }
                         }
-                        .pickerStyle(.segmented)
+                        //.pickerStyle(.segmented)
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding()
                     } header: {
 //                        Text("Blood type")
                         Text(translationManager.bloodTitle)
                     }
+                    .padding()
                     
 //                    InputFieldComponent(title: "Illness", inputText: $illness)
 //                    InputFieldComponent(title: "Allergies", inputText: $allergies)
