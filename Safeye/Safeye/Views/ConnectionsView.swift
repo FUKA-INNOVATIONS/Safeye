@@ -56,29 +56,26 @@ struct ConnectionsView: View {
                 // Section("Connections") {
                 Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
-                        //let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
+                        let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
                         HStack{
                             //Image(systemName: "trash")
                             Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash")
                                 .foregroundColor(.red) }
                             
-                            Text("Full name")
-                            //Text(profile.fullName)
+                            Text(profile?.fullName ?? "")
                             Spacer()
                             //                            Text("profile")
                             Text(translationManager.profileBtn)
                             Button {
-                                //FileVM.fetchPhoto(avatarUrlFetched: profile.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                                FileVM.fetchPhoto(avatarUrlFetched: profile!.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
                                 showingConnectionProfile = true
                             } label: { Image(systemName: "eye") }
-                            
-                            
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         
                         .sheet(isPresented: $showingConnectionProfile) {
                             //ProfileView(profileID: connection.id!)
-                            //TCProfileView(profile: profile)
+                            TCProfileView(profile: profile!)
                         }
                     }
                     
