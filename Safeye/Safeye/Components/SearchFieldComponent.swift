@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchFieldComponent: View {
     @Binding var searchInput: String
+    @EnvironmentObject var appState: Store
     
     var translationManager = TranslationService.shared
     
@@ -22,6 +23,8 @@ struct SearchFieldComponent: View {
                 TextField(translationManager.codeInput, text: $searchInput)
                 Button(action: {
                     searchInput = ""
+                    appState.searchResultPhoto = nil
+                    appState.profileSearch = nil
                 })
                 { Image(systemName: "xmark.circle") }.padding(8)
             }
