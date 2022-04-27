@@ -76,6 +76,8 @@ struct AddContactView: View {
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
 //                        }, label: {Text("Search")})
                         }, label: {Text(translationManager.searchBtn)})
+                            .foregroundColor(.blue)
+                            .buttonStyle(BorderlessButtonStyle())
                     }
 
                     Spacer()
@@ -92,15 +94,17 @@ struct AddContactView: View {
                         }
                         
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
+                            .padding(.bottom)
 //                      BasicButtonComponent(label: "Add", action: {
-                        BasicButtonComponent(label: translationManager.addBtn, action: {
-                            // AddContactVM.addTrustedContact()
+                        Button(action: {
                             if appState.profileSearch != nil {
                                 ConnectionVM.addConnection()
                             }
                             searchInput = ""
                             appState.profileSearch = nil
-                        })
+                        }, label: {Text(translationManager.addBtn)})
+                            .foregroundColor(.blue)
+                            .buttonStyle(BorderlessButtonStyle())
                     } else {
 //                      Text("Nothing to display.")
                         Text(translationManager.nothingTitle)
