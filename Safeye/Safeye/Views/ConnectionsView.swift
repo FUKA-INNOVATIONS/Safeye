@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ConnectionsView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
@@ -67,15 +68,20 @@ struct ConnectionsView: View {
                             //                            Text("profile")
                             Text(translationManager.profileBtn)
                             Button {
+                                // fetch trusted contact photo
                                 FileVM.fetchPhoto(avatarUrlFetched: profile!.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                                
+                                //set trusted contact profile in app state to profile
+                                self.appState.tCProfile = profile
+                                
+                                //opens trusted contact profile view
                                 showingConnectionProfile = true
                             } label: { Image(systemName: "eye") }
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         
                         .sheet(isPresented: $showingConnectionProfile) {
-                            //ProfileView(profileID: connection.id!)
-                            TCProfileView(profile: profile!)
+                            TCProfileView()
                         }
                     }
                     

@@ -12,17 +12,11 @@ struct TCProfileView: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     
-    var profile: ProfileModel
-    
-    init(profile: ProfileModel) {
-        self.profile = profile
-    }
-    
     var body: some View {
         VStack {
             Spacer(minLength: 30)
             VStack {
-                Text(profile.fullName)
+                Text(appState.tCProfile?.fullName ?? "")
                 if appState.trustedContactPhoto != nil {
                     ProfileImageComponent(size: 100, avatarImage: appState.trustedContactPhoto!)
                 } else {
@@ -31,7 +25,7 @@ struct TCProfileView: View {
                 
             }
             Form {
-                TrustContactDetailsComponent(profile: profile)
+                TrustContactDetailsComponent(profile: appState.tCProfile!)
             }
         }
     }
