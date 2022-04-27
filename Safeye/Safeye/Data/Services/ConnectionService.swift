@@ -116,7 +116,7 @@ class ConnectionService: ObservableObject {
         }
     }
     
-    func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
+    func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false, isPendingReq: Bool = false, isSentReq: Bool = false) {
         DispatchQueue.main.async {
             eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
             
@@ -130,7 +130,14 @@ class ConnectionService: ObservableObject {
                                 let convertedProfile = try profile.data(as: ProfileModel.self)
                                 if eventCase {
                                     self.appState.currentEventTrustedContacts.append(convertedProfile)
-                                } else {
+                                }
+                                if isPendingReq {
+                                    self.appState.pendingReqProfiles.append(convertedProfile)
+                                }
+                                if isSentReq {
+                                    self.appState.sentReqProfiles.append(convertedProfile)
+                                }
+                                else {
                                     self.appState.connectionPofiles.append(convertedProfile)
                                 }
                             } catch {

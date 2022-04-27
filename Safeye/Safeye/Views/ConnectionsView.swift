@@ -90,9 +90,10 @@ struct ConnectionsView: View {
                 // Section("Received requests") {
                 Section(translationManager.receivedReqTitle) {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
+                        let profile = ConnectionVM.filterPendingReqProfileFromAppState(request)
                         HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)} label: {Text("")}
                             
-                            Text("Full name")
+                            Text(profile?.fullName ?? "")
                             Spacer()
                             Group {
                                 //                                Text("accept")
@@ -107,8 +108,9 @@ struct ConnectionsView: View {
                 // Section("Sent requests") {
                 Section(translationManager.sentReqTitle) {
                     ForEach(appState.pendingConnectionRequestsOwner) { request in
+                        let profile = ConnectionVM.filterSentReqProfileFromAppState(request)
                         HStack {
-                            Text("Full name")
+                            Text(profile?.fullName ?? "")
                             Spacer()
                             Group {
                                 //                                Text("cancel")
@@ -131,6 +133,8 @@ struct ConnectionsView: View {
             ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()
             ConnectionVM.getConnectionProfiles()
+            ConnectionVM.getPendingReqProfiles()
+            ConnectionVM.getSentReqProfiles()
             EventVM.sendNotification()
         }
         

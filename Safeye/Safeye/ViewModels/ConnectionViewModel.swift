@@ -22,6 +22,22 @@ class ConnectionViewModel: ObservableObject {
         } else { return nil }
     }
     
+    // filter profiles from appState of pending received requests
+    func filterPendingReqProfileFromAppState(_ pendingReq: ConnectionModel) -> ProfileModel? {
+        let trustedContactProfileId = pendingReq.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+        if !self.appState.pendingReqProfiles.isEmpty {
+            return self.appState.pendingReqProfiles.filter { $0.userId == trustedContactProfileId }[0]
+        } else { return nil }
+    }
+    
+    // filter profiles from appState of sent requests
+    func filterSentReqProfileFromAppState(_ sentReq: ConnectionModel) -> ProfileModel? {
+        let trustedContactProfileId = sentReq.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+        if !self.appState.sentReqProfiles.isEmpty {
+            return self.appState.sentReqProfiles.filter { $0.userId == trustedContactProfileId }[0]
+        } else { return nil }
+    }
+    
     func getConnectionProfileID(of connection: ConnectionModel) -> String {
         connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
     }
@@ -59,11 +75,39 @@ class ConnectionViewModel: ObservableObject {
         }
     }
     
+    // get connection profiles of pending received requests
+    func getPendingReqProfiles() {
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+        var connectionIDS = [String]()
+        for request in self.appState.pendingConnectionRequestsTarget {
+            for userID in request.connectionUsers {
+                if !userID.isEmpty, userID != currentUserID {
+                    connectionIDS.append(String(userID))
+                }
+            }
+        }
+        if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS, isPendingReq: true) }
+    }
+    
+    // get connection profiles of sent requests
+    func getSentReqProfiles() {
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+        var connectionIDS = [String]()
+        for request in self.appState.pendingConnectionRequestsOwner {
+            for userID in request.connectionUsers {
+                if !userID.isEmpty, userID != currentUserID {
+                    connectionIDS.append(String(userID))
+                }
+            }
+        }
+        if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS, isSentReq: true) }
+    }
+    
+    // get confirmed connection profiles
     func getConnectionProfiles() {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-//        self.appState.connectionPofiles.removeAll()
-        // self.getConnections()
         var connectionIDS = [String]()
+        
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
