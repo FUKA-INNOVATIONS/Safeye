@@ -16,6 +16,7 @@ struct ConnectionsView: View {
     var translationManager = TranslationService.shared
     @State var showingConnectionProfile = false
     @State private var showingAddContact = false
+    @State var changed = 0
     
     
     var body: some View {
@@ -38,6 +39,8 @@ struct ConnectionsView: View {
                             pasteboard.string = appState.profile?.connectionCode
                         }, label: {Text(translationManager.copyBtn)})
                             .foregroundColor(.blue)
+                            .buttonStyle(BorderlessButtonStyle())
+
                     }
                 }
                 
@@ -52,6 +55,8 @@ struct ConnectionsView: View {
                         Image(systemName: "plus.magnifyingglass")
                             .foregroundColor(.blue)
                     }
+                    .buttonStyle(BorderlessButtonStyle())
+
                 }
                 
                 // Section("Connections") {
@@ -137,7 +142,6 @@ struct ConnectionsView: View {
             ConnectionVM.getSentReqProfiles()
             EventVM.sendNotification()
         }
-        
     }
 }
 

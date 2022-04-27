@@ -128,6 +128,10 @@ struct AddContactView: View {
             curHeight = 600
             appState.searchResultPhoto = nil
             appState.profileSearch = nil
+            ConnectionVM.getConnections()
+            ConnectionVM.getPendingRequests()
+            ConnectionVM.getConnectionProfiles()
+            ConnectionVM.getSentReqProfiles()
         }
     }
     
