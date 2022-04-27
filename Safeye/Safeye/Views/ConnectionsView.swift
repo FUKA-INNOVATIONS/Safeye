@@ -50,6 +50,11 @@ struct ConnectionsView: View {
                     Spacer()
                     Button(action: {
                         showingAddContact = true
+                        ConnectionVM.getConnections()
+                        ConnectionVM.getConnectionProfiles()
+                        ConnectionVM.getPendingRequests()
+                        ConnectionVM.getPendingReqProfiles()
+                        ConnectionVM.getSentReqProfiles()
                     })
                     {
                         Image(systemName: "plus.magnifyingglass")
@@ -64,13 +69,11 @@ struct ConnectionsView: View {
                     ForEach(appState.connections) { connection in
                         let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
                         HStack{
-                            //Image(systemName: "trash")
                             Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash")
                                 .foregroundColor(.red) }
                             
                             Text(profile?.fullName ?? "")
                             Spacer()
-                            //                            Text("profile")
                             Text(translationManager.profileBtn)
                             Button {
                                 // fetch trusted contact photo
@@ -96,12 +99,12 @@ struct ConnectionsView: View {
                 Section(translationManager.receivedReqTitle) {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
                         let profile = ConnectionVM.filterPendingReqProfileFromAppState(request)
-                        HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)} label: {Text("")}
+                        HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)
+                        } label: {Text("")}
                             
                             Text(profile?.fullName ?? "")
                             Spacer()
                             Group {
-                                //                                Text("accept")
                                 Text(translationManager.acceptBtn)
                                 Image(systemName: "hand.thumbsup.fill")
                             }
@@ -118,9 +121,10 @@ struct ConnectionsView: View {
                             Text(profile?.fullName ?? "")
                             Spacer()
                             Group {
-                                //                                Text("cancel")
                                 Text(translationManager.cancelReq)
-                                Button { ConnectionVM.deleteConnection(request.id!, "sent") } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
+                                Button {
+                                    ConnectionVM.deleteConnection(request.id!, "sent")
+                                } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
                             }
                             .foregroundColor(.red)
                         }
@@ -136,8 +140,8 @@ struct ConnectionsView: View {
         .navigationBarHidden(true)
         .onAppear {
             ConnectionVM.getConnections()
-            ConnectionVM.getPendingRequests()
             ConnectionVM.getConnectionProfiles()
+            ConnectionVM.getPendingRequests()
             ConnectionVM.getPendingReqProfiles()
             ConnectionVM.getSentReqProfiles()
             EventVM.sendNotification()

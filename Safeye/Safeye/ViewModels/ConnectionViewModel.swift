@@ -38,6 +38,31 @@ class ConnectionViewModel: ObservableObject {
         } else { return nil }
     }
     
+    func filterSearchResult(_ searchConnCode: String) -> String? {
+        var error: String? = nil
+        
+        if searchConnCode == appState.profile!.connectionCode {
+            error = "You cannot add yourself."
+        }
+        
+        let connections = self.appState.connectionPofiles.filter { $0.connectionCode == searchConnCode }
+        if connections.count > 0 {
+            error = "This person is already in your contacts."
+        }
+        
+        let sentReq = self.appState.sentReqProfiles.filter { $0.connectionCode == searchConnCode }
+        if sentReq.count > 0 {
+            error = "You have already sent a connection request to this person."
+        }
+        
+        let pendingReq = self.appState.pendingReqProfiles.filter { $0.connectionCode == searchConnCode }
+        if pendingReq.count > 0 {
+            error = "You already have a pending request from this person."
+        }
+        
+        return error
+    }
+    
     func getConnectionProfileID(of connection: ConnectionModel) -> String {
         connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
     }

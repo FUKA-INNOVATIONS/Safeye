@@ -31,7 +31,7 @@ struct AddContactView: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
-    @State var error = ""
+    @State var error = "Nothing to display."
     
     
     var body: some View {
@@ -45,6 +45,13 @@ struct AddContactView: View {
                     .transition(.move(edge: .bottom))
             }
         }
+//        .onAppear {
+//            ConnectionVM.getConnections()
+//            ConnectionVM.getConnectionProfiles()
+//            ConnectionVM.getPendingRequests()
+//            ConnectionVM.getPendingReqProfiles()
+//            ConnectionVM.getSentReqProfiles()
+//        }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .ignoresSafeArea()
     }
@@ -67,12 +74,12 @@ struct AddContactView: View {
                     VStack {
                         SearchFieldComponent(searchInput: $searchInput)
                         Button(action: {
-                            if searchInput == appState.profile?.connectionCode {
-                                print("You can not add your self as trusted contact")
-                                error = "You can not add your self as trusted contact"
+                            
+                            let filterResult = ConnectionVM.filterSearchResult(searchInput)
+                            if filterResult != nil {
+                                self.error = filterResult!
                                 return
                             }
-                            
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
 //                        }, label: {Text("Search")})
                         }, label: {Text(translationManager.searchBtn)})
@@ -101,14 +108,16 @@ struct AddContactView: View {
                                 ConnectionVM.addConnection()
                             }
                             searchInput = ""
+                            self.error = ""
                             appState.profileSearch = nil
                         }, label: {Text(translationManager.addBtn)})
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
                     } else {
-//                      Text("Nothing to display.")
-                        Text(translationManager.nothingTitle)
+                        //Text(translationManager.nothingTitle)
                         Text(self.error)
+                            .frame(alignment: .center)
+                            .padding()
                     }
                     Spacer()
                 }
@@ -130,12 +139,10 @@ struct AddContactView: View {
         )
         .onDisappear {
             curHeight = 600
+            searchInput = ""
+            self.error = "Nothing to display"
             appState.searchResultPhoto = nil
             appState.profileSearch = nil
-            ConnectionVM.getConnections()
-            ConnectionVM.getPendingRequests()
-            ConnectionVM.getConnectionProfiles()
-            ConnectionVM.getSentReqProfiles()
         }
     }
     
