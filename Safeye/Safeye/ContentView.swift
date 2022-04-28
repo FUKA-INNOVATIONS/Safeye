@@ -24,10 +24,11 @@ struct ContentView: View {
     
     var body: some View {
         
-        return Section {
+        return VStack {
             
             VStack {
                 //TODO: BUG : after registration, create profile is not displayed, it is diaplyed on next app start
+                if self.appState.appLoading { AnimationLottieView(lottieJson: "eye") }
                 if appState.profile == nil {
                     // User has no profile, create new one
                     Text(translationManager.textProfile)
@@ -38,6 +39,7 @@ struct ContentView: View {
                         ProfileEditView()
                     }
                 } else {
+                    
                     // User has profile -> show the app
                     VStack {
                         // Show alert on every view when someone in panic mode
@@ -69,6 +71,9 @@ struct ContentView: View {
                     .hidden()
             )
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
+        .ignoresSafeArea()
         .onAppear {
             print("content view appeared")
             AuthVM.signedIn = AuthVM.isSignedIn

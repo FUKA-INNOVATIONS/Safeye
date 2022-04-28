@@ -28,7 +28,7 @@ struct SafeyeApp: App {
     var translationManager = TranslationService.shared
     
     @AppStorage("isDarkMode") private var isDarkMode = false
-
+    
     init() {
         FirebaseApp.configure() // Initialize Firebase
     }
@@ -42,9 +42,13 @@ struct SafeyeApp: App {
                     
                     if AuthVM.isSignedIn {
                         ContentView()
-
+                        
                     } else {
-                        LoginView()
+                        if self.appStore.appLoading {
+                            AnimationLottieView(lottieJson: "eye")
+                        } else {
+                            LoginView()
+                        }
                     }
                     
                 }

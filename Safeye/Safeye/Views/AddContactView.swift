@@ -11,9 +11,9 @@ struct AddContactView: View {
     @Binding var isShowing: Bool
     @State var searchInput: String
         
-    @State private var curHeight: CGFloat = 500
+    @State private var curHeight: CGFloat = 600
     let minHeight: CGFloat = 500
-    let maxHeight: CGFloat = 600
+    let maxHeight: CGFloat = 700
     
     let startOpacity: Double = 0.8
     let endOpacity: Double = 0.9
@@ -125,7 +125,7 @@ struct AddContactView: View {
                 .foregroundColor(Color(UIColor.systemBackground))
         )
         .onDisappear {
-            curHeight = minHeight
+            curHeight = 600
             appState.searchResultPhoto = nil
             appState.profileSearch = nil
         }
