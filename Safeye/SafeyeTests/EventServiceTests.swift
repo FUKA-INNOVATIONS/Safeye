@@ -62,7 +62,7 @@ class EventServiceTests: XCTestCase {
         
     }
     
-    func testGetEventsOfCurrentUser_FromAppState_AssumingUserHasAtLeastOneEvent() throws {
+    func testGetEventsOfCurrentUser_FromAppState_CreateAnEventToMakeSureUSerHasEvent() throws {
         self.expectation4.isInverted = true // the expectation is not intended to happen
         
         try? self.testCreateNewEventWithOneTrustedContactAndRetrieveItFromAppState() // create an event to make sure user has min. 1 event
