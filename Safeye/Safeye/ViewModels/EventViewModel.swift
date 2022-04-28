@@ -26,7 +26,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // User presses panic mode
     func activatePanicMode() {
-        print("COORDNATES: \(self.appState.event!.coordinates)")
+//        print("COORDNATES: \(self.appState.event!.coordinates)")
         
         
         DispatchQueue.main.async {
