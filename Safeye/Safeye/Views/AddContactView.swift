@@ -103,6 +103,12 @@ struct AddContactView: View {
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
                     } else {
+//                      Text("Nothing to display.")
+                        VStack {
+                            AnimationLottieView(lottieJson: "no-data")
+                            Text(self.error)
+                        }
+                        .frame(width: 150, height: 150, alignment: .center)
                         //Text(translationManager.nothingTitle)
                         Text(self.error)
                             .frame(alignment: .center)
