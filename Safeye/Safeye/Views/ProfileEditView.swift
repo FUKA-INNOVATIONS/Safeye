@@ -48,7 +48,7 @@ struct ProfileEditView: View {
             }
         }
         
-        return VStack() {
+        return VStack {
             if appState.profile != nil {
 //                Text("Please fill the fileds you want to update")
                 Text(translationManager.textProfileUpdate)
@@ -57,9 +57,7 @@ struct ProfileEditView: View {
 //                Text("Please fill all fields to create new profile")
                 Text(translationManager.textProfileBlanc)
             }
-            
-            
-            
+      
             
             HStack { // Display profile photo
                 if selectedPhoto != nil { // if user has picked a new photo, show that one
@@ -80,10 +78,7 @@ struct ProfileEditView: View {
                 // Image picker
                 ImagePicker(selectedPhoto: $selectedPhoto, isImagePickerShowing: $isImagePickerShowing)  // this opens ImagePicker helper
             }
-            
-            
-            
-            
+           
             
             HStack{
 //                InputFieldComponent(title: "Full name", inputText: $fullName)
@@ -97,6 +92,13 @@ struct ProfileEditView: View {
             HStack{
 //                InputFieldComponent(title: "Birthday", inputText: $birthday)
                 InputFieldComponent(title: translationManager.birthdayTitle, inputText: $birthday)
+                
+//                DatePicker(
+//                    translationManager.birthdayTitle,
+//                    selection: $birthday,
+//                    displayedComponents: [.date]
+//                )
+                
             }
             HStack{
                 VStack(alignment: .leading){
@@ -111,12 +113,13 @@ struct ProfileEditView: View {
                         }
                         //.pickerStyle(.segmented)
                         .pickerStyle(SegmentedPickerStyle())
-                        .padding()
+                        .padding(.trailing)
+                        .padding(.leading)
                     } header: {
 //                        Text("Blood type")
                         Text(translationManager.bloodTitle)
+                            .padding(.leading)
                     }
-                    .padding()
                     
 //                    InputFieldComponent(title: "Illness", inputText: $illness)
 //                    InputFieldComponent(title: "Allergies", inputText: $allergies)
@@ -188,6 +191,7 @@ struct ProfileEditView: View {
             
             
         }
+        .padding(10)
         
         
     }

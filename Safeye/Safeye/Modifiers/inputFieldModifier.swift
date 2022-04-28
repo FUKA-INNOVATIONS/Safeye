@@ -12,6 +12,6 @@ struct InputFieldModifier: ViewModifier {
             content
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
-                .padding()
+                .padding(.leading)
         }
 }
