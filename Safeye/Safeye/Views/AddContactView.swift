@@ -31,7 +31,7 @@ struct AddContactView: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
-    @State var error = "Nothing to display."
+    @State var error = "To search, enter a valid connection code."
     
     
     var body: some View {
@@ -45,13 +45,6 @@ struct AddContactView: View {
                     .transition(.move(edge: .bottom))
             }
         }
-//        .onAppear {
-//            ConnectionVM.getConnections()
-//            ConnectionVM.getConnectionProfiles()
-//            ConnectionVM.getPendingRequests()
-//            ConnectionVM.getPendingReqProfiles()
-//            ConnectionVM.getSentReqProfiles()
-//        }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .ignoresSafeArea()
     }
@@ -74,12 +67,6 @@ struct AddContactView: View {
                     VStack {
                         SearchFieldComponent(searchInput: $searchInput)
                         Button(action: {
-                            
-                            let filterResult = ConnectionVM.filterSearchResult(searchInput)
-                            if filterResult != nil {
-                                self.error = filterResult!
-                                return
-                            }
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
 //                        }, label: {Text("Search")})
                         }, label: {Text(translationManager.searchBtn)})
@@ -105,10 +92,12 @@ struct AddContactView: View {
 //                      BasicButtonComponent(label: "Add", action: {
                         Button(action: {
                             if appState.profileSearch != nil {
-                                ConnectionVM.addConnection()
+                                let message = ConnectionVM.addConnection()
+                                if message != nil {
+                                    self.error = message!
+                                }
                             }
                             searchInput = ""
-                            self.error = ""
                             appState.profileSearch = nil
                         }, label: {Text(translationManager.addBtn)})
                             .foregroundColor(.blue)
@@ -140,7 +129,7 @@ struct AddContactView: View {
         .onDisappear {
             curHeight = 600
             searchInput = ""
-            self.error = "Nothing to display"
+            self.error = "To search, enter a valid connection code."
             appState.searchResultPhoto = nil
             appState.profileSearch = nil
         }

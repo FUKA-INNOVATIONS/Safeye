@@ -18,7 +18,7 @@ struct TCProfileView: View {
             VStack {
                 Text(appState.tCProfile?.fullName ?? "")
                 if appState.trustedContactPhoto != nil {
-                    ProfileImageComponent(size: 100, avatarImage: appState.trustedContactPhoto!)
+                    ProfileImageComponent(size: 70, avatarImage: appState.trustedContactPhoto!)
                 } else {
                     ProgressView()
                 }

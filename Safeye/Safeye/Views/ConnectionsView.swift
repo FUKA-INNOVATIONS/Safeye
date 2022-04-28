@@ -16,8 +16,6 @@ struct ConnectionsView: View {
     var translationManager = TranslationService.shared
     @State var showingConnectionProfile = false
     @State private var showingAddContact = false
-    @State var changed = 0
-    
     
     var body: some View {
         
@@ -40,7 +38,6 @@ struct ConnectionsView: View {
                         }, label: {Text(translationManager.copyBtn)})
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
-
                     }
                 }
                 
@@ -50,11 +47,6 @@ struct ConnectionsView: View {
                     Spacer()
                     Button(action: {
                         showingAddContact = true
-                        ConnectionVM.getConnections()
-                        ConnectionVM.getConnectionProfiles()
-                        ConnectionVM.getPendingRequests()
-                        ConnectionVM.getPendingReqProfiles()
-                        ConnectionVM.getSentReqProfiles()
                     })
                     {
                         Image(systemName: "plus.magnifyingglass")
@@ -64,7 +56,7 @@ struct ConnectionsView: View {
 
                 }
                 
-                // Section("Connections") {
+                // Established connections
                 Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
                         let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
@@ -95,10 +87,10 @@ struct ConnectionsView: View {
                     
                 }
                 
-                // Section("Received requests") {
+                // Pending received connection requests
                 Section(translationManager.receivedReqTitle) {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
-                        let profile = ConnectionVM.filterPendingReqProfileFromAppState(request)
+                        let profile = ConnectionVM.filterConnectionProfileFromAppState(request)
                         HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)
                         } label: {Text("")}
                             
@@ -113,12 +105,13 @@ struct ConnectionsView: View {
                     }
                 }
                 
-                // Section("Sent requests") {
+                // Pending sent connection requests
                 Section(translationManager.sentReqTitle) {
                     ForEach(appState.pendingConnectionRequestsOwner) { request in
-                        let profile = ConnectionVM.filterSentReqProfileFromAppState(request)
+                        //let profile = ConnectionVM.filterConnectionProfileFromAppState(request)
                         HStack {
-                            Text(profile?.fullName ?? "")
+                            //Text(profile?.fullName ?? "")
+                            Text("Full name")
                             Spacer()
                             Group {
                                 Text(translationManager.cancelReq)
@@ -140,10 +133,8 @@ struct ConnectionsView: View {
         .navigationBarHidden(true)
         .onAppear {
             ConnectionVM.getConnections()
-            ConnectionVM.getConnectionProfiles()
             ConnectionVM.getPendingRequests()
-            ConnectionVM.getPendingReqProfiles()
-            ConnectionVM.getSentReqProfiles()
+            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }
     }

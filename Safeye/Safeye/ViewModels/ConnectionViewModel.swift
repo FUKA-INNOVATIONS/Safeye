@@ -22,47 +22,6 @@ class ConnectionViewModel: ObservableObject {
         } else { return nil }
     }
     
-    // filter profiles from appState of pending received requests
-    func filterPendingReqProfileFromAppState(_ pendingReq: ConnectionModel) -> ProfileModel? {
-        let trustedContactProfileId = pendingReq.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
-        if !self.appState.pendingReqProfiles.isEmpty {
-            return self.appState.pendingReqProfiles.filter { $0.userId == trustedContactProfileId }[0]
-        } else { return nil }
-    }
-    
-    // filter profiles from appState of sent requests
-    func filterSentReqProfileFromAppState(_ sentReq: ConnectionModel) -> ProfileModel? {
-        let trustedContactProfileId = sentReq.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
-        if !self.appState.sentReqProfiles.isEmpty {
-            return self.appState.sentReqProfiles.filter { $0.userId == trustedContactProfileId }[0]
-        } else { return nil }
-    }
-    
-    func filterSearchResult(_ searchConnCode: String) -> String? {
-        var error: String? = nil
-        
-        if searchConnCode == appState.profile!.connectionCode {
-            error = "You cannot add yourself."
-        }
-        
-        let connections = self.appState.connectionPofiles.filter { $0.connectionCode == searchConnCode }
-        if connections.count > 0 {
-            error = "This person is already in your contacts."
-        }
-        
-        let sentReq = self.appState.sentReqProfiles.filter { $0.connectionCode == searchConnCode }
-        if sentReq.count > 0 {
-            error = "You have already sent a connection request to this person."
-        }
-        
-        let pendingReq = self.appState.pendingReqProfiles.filter { $0.connectionCode == searchConnCode }
-        if pendingReq.count > 0 {
-            error = "You already have a pending request from this person."
-        }
-        
-        return error
-    }
-    
     func getConnectionProfileID(of connection: ConnectionModel) -> String {
         connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
     }
@@ -93,39 +52,11 @@ class ConnectionViewModel: ObservableObject {
 
     func getPendingRequests()  {
         DispatchQueue.main.async {
-//            self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
-//            self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
+            // self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
+            // self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
             let currentUserID = AuthenticationService.getInstance.currentUser!.uid
             self.connService.fetchPendingConnectionRequests(currentUserID)
         }
-    }
-    
-    // get connection profiles of pending received requests
-    func getPendingReqProfiles() {
-        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-        var connectionIDS = [String]()
-        for request in self.appState.pendingConnectionRequestsTarget {
-            for userID in request.connectionUsers {
-                if !userID.isEmpty, userID != currentUserID {
-                    connectionIDS.append(String(userID))
-                }
-            }
-        }
-        if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS, isPendingReq: true) }
-    }
-    
-    // get connection profiles of sent requests
-    func getSentReqProfiles() {
-        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-        var connectionIDS = [String]()
-        for request in self.appState.pendingConnectionRequestsOwner {
-            for userID in request.connectionUsers {
-                if !userID.isEmpty, userID != currentUserID {
-                    connectionIDS.append(String(userID))
-                }
-            }
-        }
-        if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS, isSentReq: true) }
     }
     
     // get confirmed connection profiles
@@ -143,55 +74,53 @@ class ConnectionViewModel: ObservableObject {
     }
     
     func getConnections() {
+        //self.appState.connections.removeAll()
         DispatchQueue.main.async {
-//            self.appState.connections.removeAll()
+            //self.appState.connections.removeAll()
             let currentUserID = AuthenticationService.getInstance.currentUser!.uid
             self.connService.fetchConnections(currentUserID)
         }
     }
 
+   
+    func addConnection() -> String? {
+        var message: String? = nil
 
-    func addConnection() {
-        // TODO: Check, if user already have addded connection ? request exists ?
-        // TODO: If successful this should trigger a notification sent to target user (Sprint 3?) ???
-        
         guard let targetProfileID = self.appState.profileSearch?.userId else {
-            print("addConnection -> Searched profile not found")
-            return
+            message = "User not found"
+            return message
         }
-        
+
+        if targetProfileID == appState.profile!.userId {
+            message = "You cannot add yourself"
+            return message
+        }
+
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if userID == targetProfileID {
-                    print("You already have this connection as trusted conntact")
-                    return
+                    message = "This connection already exists."
+                    return message
                 }
             }
         }
-        
-        
+
+        // generate a connection ID
         let uid = AuthenticationService.getInstance.currentUser!.uid
         var hasher = Hasher()
         hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
         hasher.combine(targetProfileID)
         let connectionId = String(hasher.finalize())
-        
+
         let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [uid, targetProfileID], status: false)
-        
+
         // returns a boolean, was added or not?
         if connService.addConnection(newConn: newConn) {
-            print("New connection added")
+            message = "Connection request sent successfully."
         } else {
-            print("Adding new connection failed")
+            message = "An error occured while sending a connection request."
         }
+        return message
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
 } // end of ConnectionVM
