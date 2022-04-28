@@ -29,6 +29,8 @@ struct ProfileEditView: View {
     @State private var avatar = ""
     
     @State private var bloodTypes = ["A", "A+", "B"]
+    @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
+    @State private var selectedIndex = 0
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
@@ -59,8 +61,7 @@ struct ProfileEditView: View {
             }
             
             
-            
-            
+            ScrollView {
             HStack { // Display profile photo
                 if selectedPhoto != nil { // if user has picked a new photo, show that one
                     ProfileImageComponent(size: 60, avatarImage: selectedPhoto!)
@@ -82,7 +83,17 @@ struct ProfileEditView: View {
             }
             
             
-            
+                HStack {
+                    Text("Country")
+                    Spacer()
+                        Section {
+                            Picker(selection: $selectedIndex, label: Text("")) {
+                                ForEach(0 ..< countries.count) {
+                                    Text(self.countries[$0])
+                                }
+                            }
+                        }
+                }.padding()
             
             
             HStack{
@@ -192,6 +203,8 @@ struct ProfileEditView: View {
         
     }
 }
+}
+
 
 /* struct ProfileEditView_Previews: PreviewProvider {
  static var previews: some View {
