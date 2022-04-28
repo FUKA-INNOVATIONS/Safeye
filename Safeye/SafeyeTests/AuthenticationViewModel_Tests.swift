@@ -10,58 +10,70 @@ import XCTest
 import Combine
 
 class AuthenticationViewModel_Tests: XCTestCase {
+    let vm = AuthenticationViewModel.shared
+    let appState = Store.shared
+    
+    let email = "fuad.kalhori@gmail.com"
+    let password = "11111111"
+    let expectation = XCTestExpectation(description: "Should sign in after 3 seconds")
+    
     
     var cancellables = Set<AnyCancellable>()
-
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Make sure user is not signed in
+        self.vm.signOut()
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func test_AuthenticationViewModel_signIn_returnsTrueIfUserExists() {
-        // Given
-        let vm = AuthenticationViewModel.shared
+    
+    func test_AuthenticationViewModel_signIn_returnsTrueIfUserExists() throws {
         
-        // When
-        let expectation = XCTestExpectation(description: "Should sign in after 3 seconds")
-        
-        vm.$signedIn
+        self.vm.$signedIn
             .dropFirst()
             .sink { signedIn in
-                expectation.fulfill()
+                self.expectation.fulfill()
             }
             .store(in: &cancellables)
         
-        vm.signIn(email: "Unit@Testing.fi", password: "Test123")
+        self.vm.signIn(email: self.email, password: self.password)
         
-        wait(for: [expectation], timeout: 5)
+        wait(for: [self.expectation], timeout: 5)
         
-        XCTAssertTrue(vm.signedIn)
+        XCTAssertTrue(self.vm.signedIn)
     }
     
-    func test_AuthenticationViewModel_signUp_returnsFalseSinceUserAlreadyExists() {
+    
+    func test_Athentication_UserIsSignedIn_EmailStoredInAppState() throws {
         
-            // Given
-            let vm = AuthenticationViewModel.shared
+        self.vm.$signedIn
+            .dropFirst()
+            .sink { signedIn in
+                self.expectation.fulfill()
+            }
+            .store(in: &cancellables)
         
-            // When
-            let expectation = XCTestExpectation(description: "Should fail to sign in after 3 seconds")
+        self.vm.signIn(email: self.email, password: self.password)
+        wait(for: [self.expectation], timeout: 5)
         
-            vm.$signedIn
-                .sink { signedIn in
-                    expectation.fulfill()
-                }
-                .store(in: &cancellables)
+        XCTAssertEqual(self.email, self.appState.currentUserEmail)
         
-            vm.signUp(email: "NewUser@Test.fi", password: "Test123")
-            
-            wait(for: [expectation], timeout: 5)
-            
-            XCTAssertFalse(vm.signedIn)
-            
-            
+    }
+    
+    func test_AuthenticationViewModel_signUp_returnsFalseSinceUserAlreadyExists() throws {
+        self.vm.$signedIn
+            .sink { signedIn in
+                self.expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        
+        self.vm.signUp(email: "NewUser@Test.fi", password: "Test123")
+        
+        wait(for: [self.expectation], timeout: 5)
+        
+        XCTAssertFalse(vm.signedIn)
+        
     }
 }
