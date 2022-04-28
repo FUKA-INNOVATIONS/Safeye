@@ -28,6 +28,7 @@ class EventListUITests: XCTestCase {
         let eventsCountTextField = self.app.staticTexts["eventListViewEventsCountText"]
         XCTAssertTrue(eventsCountTextField.waitForExistence(timeout: 5))
 
+        // cant use app files, creates Firebase error and hence cant compare events count to appState/database
         XCTAssertEqual(eventsCountTextField.label, "4 events")
         print("TESTTEST \(eventsCountTextField.label)")
     }
