@@ -28,12 +28,6 @@ struct ProfileView: View {
             VStack {
                 
                 VStack {
-                    // display profile photo
-                    if appState.userPhoto != nil {
-                        ProfileImageComponent(size: 100, avatarImage: appState.userPhoto!)
-                    } else {
-                        ProgressView()
-                    }
                     
                     // display full name
                     Text("\(appState.profile?.fullName ?? "No name")")
@@ -41,12 +35,20 @@ struct ProfileView: View {
                         .lineLimit(1)
                         .padding(5)
                         .padding(.leading, 10)
+                    
+                    // display profile photo
+                    if appState.userPhoto != nil {
+                        ProfileImageComponent(size: 100, avatarImage: appState.userPhoto!)
+                            .padding(.bottom)
+                    } else {
+                        ProgressView()
+                    }
                 }
                 
                 // edit profile button
                 Button { showingEditProfile = true } label: {
                     Text("Edit profile")
-                    Image(systemName: "pencil")
+                    //Image(systemName: "pencil")
                 }
                 .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(.blue)
@@ -55,7 +57,8 @@ struct ProfileView: View {
                 .sheet(isPresented: $showingEditProfile) {
                     ProfileEditView()
                 }
-                
+                Divider()
+                Spacer(minLength: 30)
                 
                 // Safe Spaces
                 VStack {
@@ -65,8 +68,7 @@ struct ProfileView: View {
                     
                     ListViewComponent(item: "safeSpace", size: 40)
                         .padding(.leading, 20)
-                        .padding(.trailing, 20)
-                    
+                        .padding(.trailing, 20)                    
                     
                     HStack{
                         Spacer()
@@ -84,7 +86,7 @@ struct ProfileView: View {
                         Spacer()
                         
                         Button(action: {
-                            showingAddSafePlace = true
+                            withAnimation { showingAddSafePlace = true }
                             print("modal: ($showingAddSafePlace)")
                         })
                         { //Image(systemName: "plus.magnifyingglass")
@@ -95,11 +97,11 @@ struct ProfileView: View {
                         .foregroundColor(.blue)
                         
                         Spacer()
-                        
                     }
    
                 }
-                
+                Spacer(minLength: 40)
+                Divider()
                 Text("My details")
                     .fontWeight(.bold)
                     .padding(.top, 20)
@@ -118,8 +120,8 @@ struct ProfileView: View {
             }
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
         .onAppear {
             //            ConnectionVM.getConnections()
             //            ConnectionVM.getConnectionProfiles()

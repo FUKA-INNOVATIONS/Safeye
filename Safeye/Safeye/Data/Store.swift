@@ -28,6 +28,7 @@ class Store: ObservableObject {
     @Published var connectionPofiles = [ProfileModel]()
     @Published var panicPofiles = [ProfileModel]()
     @Published var tCProfile: ProfileModel?
+    // @Published var eventContactsWithAvatars = [TrustedContactModel]()
     
     @Published var userPhoto: UIImage?
     @Published var searchResultPhoto: UIImage?
@@ -44,7 +45,7 @@ class Store: ObservableObject {
     @Published var eventTrustedContactsProfiles = [ProfileModel]()
     //@Published var eventCurrentUser: Event?
     @Published var panicMode = false
-    @Published var citiesFinland = [String]()
+    @Published var cities = [String]()
    
     
     @Published var errors = [String]()

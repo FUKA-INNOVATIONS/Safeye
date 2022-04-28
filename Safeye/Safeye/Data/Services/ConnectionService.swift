@@ -69,7 +69,8 @@ class ConnectionService: ObservableObject {
                                         let convertedRequest = try request.data(as: ConnectionModel.self)
                                         //convertedRequest.id = request.documentID
                                         print("fetchPendingConnectionRequests \(convertedRequest)")
-                                        if convertedRequest.connectionUsers[0] == userID { self.appState.pendingConnectionRequestsOwner.append(convertedRequest) } else {
+                                        if convertedRequest.connectionUsers[0] == userID { self.appState.pendingConnectionRequestsOwner.append(convertedRequest)
+                                        } else {
                                             self.appState.pendingConnectionRequestsTarget.append(convertedRequest) }
                                     } catch {
                                         print("Error while fetching pending requests: \(error)")
@@ -130,7 +131,8 @@ class ConnectionService: ObservableObject {
                                 let convertedProfile = try profile.data(as: ProfileModel.self)
                                 if eventCase {
                                     self.appState.currentEventTrustedContacts.append(convertedProfile)
-                                } else {
+                                }
+                                else {
                                     self.appState.connectionPofiles.append(convertedProfile)
                                 }
                             } catch {
