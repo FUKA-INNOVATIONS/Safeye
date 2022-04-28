@@ -103,8 +103,11 @@ struct AddContactView: View {
                         })
                     } else {
 //                      Text("Nothing to display.")
-                        Text(translationManager.nothingTitle)
-                        Text(self.error)
+                        VStack {
+                            AnimationLottieView(lottieJson: "no-data")
+                            Text(self.error)
+                        }
+                        .frame(width: 150, height: 150, alignment: .center)
                     }
                     Spacer()
                 }

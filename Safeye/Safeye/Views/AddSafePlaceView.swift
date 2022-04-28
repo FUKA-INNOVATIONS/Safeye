@@ -73,11 +73,14 @@ struct AddSafePlaceView: View {
                             }
                         }
                         if(result.locations.count != 0) {
-                        Text("Found \(result.locations.count) places")
-                            .frame(width: 150, height: 50)
+                            Text("Found \(result.locations.count) places")
+                                .frame(width: 150, height: 50)
                         } else {
-                        AnimationLottieView(lottieJson: "find")
-                                .background(Color(.systemBackground))
+                            VStack {
+                                AnimationLottieView(lottieJson: "find")
+                            }
+                            .frame(width: 150, height: 150, alignment: .center)
+                            
                         }
                     }
                     .searchable(text: $result.searchText)
