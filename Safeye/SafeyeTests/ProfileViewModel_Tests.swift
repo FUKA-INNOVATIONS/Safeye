@@ -10,9 +10,6 @@ import XCTest
 import Combine
 import CoreLocation
 
-// Naming Structure: test_UnitOfWork_StateUnderTest_ExpectedBehaviour
-
-// Testing Structure: Given, When, Then
 
 class ProfileViewModel_Tests: XCTestCase {
     
