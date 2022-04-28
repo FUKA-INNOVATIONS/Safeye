@@ -30,7 +30,7 @@ class SafeyeController: ObservableObject {
     
     func saveCitiesInDevice(appState: Store) {
         // save all cities in device momeory
-        for city in appState.citiesFinland {
+        for city in appState.cities{
             let c = City(context: container.viewContext)
             c.id = UUID()
             c.name = city

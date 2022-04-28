@@ -23,10 +23,12 @@ struct EventListView: View {
             VStack {
 //                Text("\(EventVM.getEventsCount()) events")
                 Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
+                    .accessibility(identifier: "eventListViewEventsCountText")
                 Spacer()
 //                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
                 Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn).foregroundColor(.blue) }
                     .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
+                    .accessibility(identifier: "eventListViewCreateNewEventButton")
                 Form {
 //                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
                     Section(header: Text(" \(Text(translationManager.yourEventsTitle)) (\(appState.eventsOfCurrentUser.count)) ")) {                        ForEach(appState.eventsOfCurrentUser) { event in
@@ -48,8 +50,9 @@ struct EventListView: View {
                                     .frame(height: 60)
                                     
                                 }
-                                
                             }
+                            .accessibility(identifier: "eventListViewEventsListOfAuthenticatedUser")
+                        
                         }
                         .onDelete(perform: EventVM.deleteEvent)
                     }
@@ -98,8 +101,8 @@ struct EventListView: View {
             
             }
         } // end of outer VStack
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
     }
 }
 
