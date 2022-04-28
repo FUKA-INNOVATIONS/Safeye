@@ -15,6 +15,9 @@ struct ProfileEditView: View {
     @EnvironmentObject var FileVM: FileViewModel
     var translationManager = TranslationService.shared
     
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject private var CityVM: CityViewModel
+    
     @State private var showEmptyFieldAlert = false
     
     @Environment(\.dismiss) var dismiss
@@ -160,16 +163,18 @@ struct ProfileEditView: View {
                         
                         
                         
-//                        // set avatar path/name to a random string that will be stored in profile // TODO: change avatar path name > userID
-//                        avatar = "avatars/\(UUID().uuidString).jpg"
-//                        // upload the image
-//                        FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatar)
-//
-//                        // Insert new profile data into the database
-//                        ProfileVM.createProfile(fullName, address, birthday, bloodType, illness, allergies, avatar)
-//
-//                        // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
-//                        dismiss()
+                        // set avatar path/name to a random string that will be stored in profile // TODO: change avatar path name > userID
+                        avatar = "avatars/\(UUID().uuidString).jpg"
+                        // upload the image
+                        FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatar)
+
+                        // Insert new profile data into the database
+                        ProfileVM.createProfile(fullName, address, birthday, bloodType, illness, allergies, avatar)
+                        
+                        saveCitiesInDevice(of: selectedCountry) // fetch cities and save in user device > coreData
+
+                        // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
+                        dismiss()
                         
                         
                     } else { // User has profile, update existing
@@ -211,6 +216,36 @@ struct ProfileEditView: View {
             
         }
     }
+    
+    
+    func saveCitiesInDevice(of userSelectedCountry: String) {
+        CityVM.getCities(of: userSelectedCountry)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            // save all cities in device momeory
+            for city in appState.cities {
+                let c = City(context: moc)
+                c.id = UUID()
+                c.name = city
+                c.country = userSelectedCountry
+            }
+            
+            // save all cities in device persistant storage if data has changed
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                    print("CoreData: Cities saved")
+                } catch {
+                    print("CoreData: Error while saving citites into device \(error.localizedDescription)")
+                }
+            } else { print("CoreData: Cities not saved in device beause of no changes") }
+        }
+        
+        
+    }
+    
+    
 }
 
 
