@@ -84,7 +84,7 @@ struct ProfileView: View {
                         Spacer()
                         
                         Button(action: {
-                            showingAddSafePlace = true
+                            withAnimation { showingAddSafePlace = true }
                             print("modal: ($showingAddSafePlace)")
                         })
                         { //Image(systemName: "plus.magnifyingglass")
