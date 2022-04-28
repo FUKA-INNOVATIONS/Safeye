@@ -57,11 +57,8 @@ struct AddSafePlaceView: View {
             .gesture(dragGesture)
             
             VStack {
-                Text("Enter address here")
                 NavigationView {
                     VStack {
-                        Text("Found \(result.locations.count) places")
-                            .frame(width: 100, height: 20)
                         List(result.locations, id: \.self) { place in
                             HStack {
                                 Text(place.name!)
@@ -74,6 +71,13 @@ struct AddSafePlaceView: View {
                                     isShowing = false
                                 }
                             }
+                        }
+                        if(result.locations.count != 0) {
+                        Text("Found \(result.locations.count) places")
+                            .frame(width: 150, height: 50)
+                        } else {
+                        AnimationLottieView(lottieJson: "find")
+                                .background(Color(.systemBackground))
                         }
                     }
                     .searchable(text: $result.searchText)
