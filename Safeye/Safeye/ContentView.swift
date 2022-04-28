@@ -73,7 +73,7 @@ struct ContentView: View {
         }
         .navigationTitle("")
         .navigationBarHidden(true)
-        .ignoresSafeArea()
+        //.ignoresSafeArea()
         .onAppear {
             print("content view appeared")
             AuthVM.signedIn = AuthVM.isSignedIn
