@@ -45,7 +45,7 @@ struct ConnectionsView: View {
                     Text("Add a new contact")
                     Spacer()
                     Button(action: {
-                        showingAddContact = true
+                        withAnimation { showingAddContact = true }
                     })
                     {
                         Image(systemName: "plus.magnifyingglass")
