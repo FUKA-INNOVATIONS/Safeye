@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SelectContactGridComponent: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appStore: Store
     @State var selectedContacts = [String]()
     
@@ -22,11 +23,11 @@ struct SelectContactGridComponent: View {
             LazyHGrid(rows: layout) {
                 ForEach(appStore.connectionPofiles) { profile in
                     SelectContactComponent(profileDetails: profile)
+                        .onAppear{
+                            FileVM.fetchPhoto(avatarUrlFetched: profile.avatar, isTrustedContactPhoto: true)
+                        }
                 }
             }
-        }
-        .onAppear {
-            
         }
     }
 }
