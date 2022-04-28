@@ -45,7 +45,7 @@ struct ConnectionsView: View {
                     Text("Add a new contact")
                     Spacer()
                     Button(action: {
-                        showingAddContact = true
+                        withAnimation { showingAddContact = true }
                     })
                     {
                         Image(systemName: "plus.magnifyingglass")
@@ -119,8 +119,8 @@ struct ConnectionsView: View {
             
             
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
         .onAppear {
             ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()

@@ -15,6 +15,9 @@ struct ProfileEditView: View {
     @EnvironmentObject var FileVM: FileViewModel
     var translationManager = TranslationService.shared
     
+    @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject private var CityVM: CityViewModel
+    
     @State private var showEmptyFieldAlert = false
     
     @Environment(\.dismiss) var dismiss
@@ -30,7 +33,7 @@ struct ProfileEditView: View {
     
     @State private var bloodTypes = ["A", "A+", "B"]
     @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
-    @State private var selectedIndex = 0
+    @State private var selectedCountry = "Finland"
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
@@ -83,17 +86,19 @@ struct ProfileEditView: View {
                 }
                 
                 //
-                HStack { // Picker for country of residence
-                    Text("Country")
-                    Spacer()
-                    Section {
-                        Picker(selection: $selectedIndex, label: Text("")) {
-                            ForEach(0 ..< countries.count) {
-                                Text(self.countries[$0])
+                if appState.profile == nil {
+                    HStack { // Picker for country of residence
+                        Text("Country")
+                        Spacer()
+                        Section {
+                            Picker("Country", selection: $selectedCountry) {
+                                ForEach(countries, id: \.self) { country in
+                                    Text(country)
+                                }
                             }
                         }
-                    }
-                }.padding()
+                    }.padding()
+                }
                 
                 
                 HStack{
@@ -142,24 +147,32 @@ struct ProfileEditView: View {
                 BasicButtonComponent(label: translationManager.saveBtn) {
                     print("Save profile details pressed")
                     
+                    print(selectedCountry)
+                    
                     if appState.profile == nil { // User has no profile, create new one
                         print("User has no PROFILE, add new profile")
                         
                         // User has not filled all form fields
                         // TODO: show different alert when no photo is selected
-                        if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 || selectedPhoto == nil {
+                        if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 || selectedPhoto == nil || selectedCountry.count < 0 {
                             showEmptyFieldAlert = true // Show alert box
                             return
                         }
+                        
+                        
+                        
+                        
                         
                         // set avatar path/name to a random string that will be stored in profile // TODO: change avatar path name > userID
                         avatar = "avatars/\(UUID().uuidString).jpg"
                         // upload the image
                         FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatar)
-                        
+
                         // Insert new profile data into the database
                         ProfileVM.createProfile(fullName, address, birthday, bloodType, illness, allergies, avatar)
                         
+                        saveCitiesInDevice(of: selectedCountry) // fetch cities and save in user device > coreData
+
                         // presentationMode.wrappedValue.dismiss() // Close modal and return to ContentView()
                         dismiss()
                         
@@ -203,6 +216,36 @@ struct ProfileEditView: View {
             
         }
     }
+    
+    
+    func saveCitiesInDevice(of userSelectedCountry: String) {
+        CityVM.getCities(of: userSelectedCountry)
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            // save all cities in device momeory
+            for city in appState.cities {
+                let c = City(context: moc)
+                c.id = UUID()
+                c.name = city
+                c.country = userSelectedCountry
+            }
+            
+            // save all cities in device persistant storage if data has changed
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                    print("CoreData: Cities saved")
+                } catch {
+                    print("CoreData: Error while saving citites into device \(error.localizedDescription)")
+                }
+            } else { print("CoreData: Cities not saved in device beause of no changes") }
+        }
+        
+        
+    }
+    
+    
 }
 
 

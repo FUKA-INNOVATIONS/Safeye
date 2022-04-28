@@ -84,7 +84,7 @@ struct ProfileView: View {
                         Spacer()
                         
                         Button(action: {
-                            showingAddSafePlace = true
+                            withAnimation { showingAddSafePlace = true }
                             print("modal: ($showingAddSafePlace)")
                         })
                         { //Image(systemName: "plus.magnifyingglass")
@@ -118,8 +118,8 @@ struct ProfileView: View {
             }
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
         .onAppear {
             //            ConnectionVM.getConnections()
             //            ConnectionVM.getConnectionProfiles()

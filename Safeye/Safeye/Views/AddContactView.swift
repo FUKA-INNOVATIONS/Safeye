@@ -40,7 +40,7 @@ struct AddContactView: View {
                 Color(UIColor.systemBackground)
                     .opacity(startOpacity + (endOpacity - startOpacity) * dragPercentage)
                     .ignoresSafeArea()
-                    .onTapGesture { isShowing = false}
+                    .onTapGesture { withAnimation { isShowing = false } }
                 mainView
                     .transition(.move(edge: .bottom))
             }
