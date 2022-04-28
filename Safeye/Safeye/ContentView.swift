@@ -28,8 +28,8 @@ struct ContentView: View {
             
             VStack {
                 //TODO: BUG : after registration, create profile is not displayed, it is diaplyed on next app start
-                if self.appState.appLoading { AnimationLottieView(lottieJson: "eye") }
-                if appState.profile == nil {
+                if appState.appLoading { AnimationLottieView(lottieJson: "eye") }
+                if appState.profile == nil && !appState.appLoading {
                     // User has no profile, create new one
                     Text(translationManager.textProfile)
                     BasicButtonComponent(label: translationManager.createProfileBtn) {
@@ -38,7 +38,7 @@ struct ContentView: View {
                     .sheet(isPresented: $showingCreateProfile) {
                         ProfileEditView()
                     }
-                } else {
+                } else if !appState.appLoading {
                     
                     // User has profile -> show the app
                     VStack {
@@ -48,8 +48,6 @@ struct ContentView: View {
                     }
                     
                 }
-                
-                
             }
             .onAppear {
                 ProfileVM.getProfileForCurrentUser()
