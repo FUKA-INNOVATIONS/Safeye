@@ -33,6 +33,7 @@ struct CreateEventView: View {
     
     
     var body: some View {
+        
         VStack{
             Form {
 //              Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {

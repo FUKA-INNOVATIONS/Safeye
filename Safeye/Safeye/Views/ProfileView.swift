@@ -118,8 +118,8 @@ struct ProfileView: View {
             }
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
         .onAppear {
             //            ConnectionVM.getConnections()
             //            ConnectionVM.getConnectionProfiles()

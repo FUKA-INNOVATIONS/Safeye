@@ -119,8 +119,8 @@ struct ConnectionsView: View {
             
             
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
         .onAppear {
             ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()
