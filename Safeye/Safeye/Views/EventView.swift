@@ -60,7 +60,13 @@ struct EventView: View {
                         Text("\(Text(translationManager.eventTypeTrack)) \(appState.event?.eventType ?? "")")
                         Text("\(Text(translationManager.otherTrack)) \(appState.event?.otherInfo ?? "")")
                     }
-                    
+                    if !EventVM.isEventOwner() {
+                        NavigationLink {
+                            EventMapView()
+                        } label: {
+                            Text("View Tracked User On Map")
+                        }
+                    }
                 }
                 
             }
