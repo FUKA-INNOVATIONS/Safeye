@@ -24,7 +24,7 @@ struct LoginView: View {
             //            SecureInputFieldComponent(title: "Password", secureText: $password)
             //            InputFieldComponent(title: translationManager.createEmailTitle, inputText: $email)
             
-            LoginInputComponent(title: translationManager.emailTitle, inputText: $email)
+            LoginInputComponent(title: translationManager.emailTitle, inputText: $email, icon: "envelope")
             SecureInputFieldComponent(title: translationManager.passwordTitle, secureText: $password)
             
             //            BasicButtonComponent(label: "Sign In", action: {

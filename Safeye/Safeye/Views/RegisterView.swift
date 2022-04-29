@@ -21,7 +21,7 @@ struct RegisterView: View {
 //            InputFieldComponent(title: "Email address", inputText: $email)
 //            SecureInputFieldComponent(title: "Password", secureText: $password)
 //            InputFieldComponent(title: translationManager.createEmailTitle, inputText: $email)
-            LoginInputComponent(title: translationManager.emailTitle, inputText: $email)
+            LoginInputComponent(title: translationManager.emailTitle, inputText: $email, icon: "envelope")
             SecureInputFieldComponent(title: translationManager.createPasswordTitle, secureText: $password)
             
 
