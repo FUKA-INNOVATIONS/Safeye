@@ -31,14 +31,14 @@ class CityService {
         request.httpMethod = "POST"
         request.httpBody = finalBody
         
-        self.appState.citiesFinland.removeAll()
+        self.appState.cities.removeAll()
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             do {
                 if let data = data {
                     
                     let result = try JSONDecoder().decode(CityTransformer.self, from: data)
-                    DispatchQueue.main.async { self.appState.citiesFinland = result.data }
+                    DispatchQueue.main.async { self.appState.cities = result.data }
                 } else {
                     print("No data")
                 }

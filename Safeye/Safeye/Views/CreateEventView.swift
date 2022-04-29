@@ -23,6 +23,7 @@ struct CreateEventView: View {
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
     @State var cityOfEvent = ""
+    @State var selectedEventCityIndex = 0
     
     @State var goEventView = false
     @Environment(\.dismiss) var dismiss
@@ -32,6 +33,7 @@ struct CreateEventView: View {
     
     
     var body: some View {
+        
         VStack{
             Form {
 //              Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
@@ -63,10 +65,9 @@ struct CreateEventView: View {
                 
                 
                 Section(header: Text("Location")) {
-                    Button("Load citites") { saveCitiesInDevice() }
-                    Picker(selection: $cityOfEvent, label: Text("Select a city or area")) {
-                        ForEach(appState.citiesFinland, id: \.self) {
-                            Text($0)
+                    Picker(selection: $selectedEventCityIndex, label: Text("")) {
+                        ForEach(0..<cities.count) {
+                            Text(cities[$0].name!)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -80,12 +81,12 @@ struct CreateEventView: View {
             Spacer()
             
             BasicButtonComponent(label: translationManager.saveActivateBtn, action: {
-                print("City: \(cityOfEvent)")
-                if eventType.isEmpty || cityOfEvent.isEmpty { print("Fill all fields") ; return }
+                print("City: \(cities[selectedEventCityIndex].name!)")
+                if eventType.isEmpty { print("Fill all fields") ; return }
                 
                 // set a random path for event folder and pass it to EventVM to createEvent()
                 eventFolderPath = "events/\(UUID().uuidString)/"
-                if EventVM.createEvent(startDate, endDate, otherInfo, eventType, cityOfEvent, eventFolderPath) {
+                if EventVM.createEvent(startDate, endDate, otherInfo, eventType, cities[selectedEventCityIndex].name!, eventFolderPath) {
                     //goEventView.toggle()
                     //NavigationLink("", destination: EventView(), isActive: $goEventView)
                     dismiss()
@@ -105,31 +106,6 @@ struct CreateEventView: View {
         
     }
     
-    func saveCitiesInDevice() {
-        // save all cities in device momeory
-        for city in appState.citiesFinland {
-            let c = City(context: moc)
-            c.id = UUID()
-            c.name = city
-            c.country = "Finland"
-        }
-        
-        // save all cities in device persistant storage if data has changed
-        if moc.hasChanges {
-            do {
-                try moc.save()
-                print("CoreData: Cities saved")
-            } catch {
-                print("CoreData: Error while saving citites into device \(error.localizedDescription)")
-            }
-        } else { print("CoreData: Cities not saved in device beause of no changes") }
-        //print("CoreData: : \(cities.count)")
-    }
     
 }
 
-struct CreateEventView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateEventView()
-    }
-}

@@ -88,8 +88,8 @@ struct SettingsView: View {
             .foregroundColor(.red)
             
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
         .onAppear {
             //EventVM.getEventsOfTrustedContacts() // to check for panic events
             //EventVM.getEventsOfCurrentUser()

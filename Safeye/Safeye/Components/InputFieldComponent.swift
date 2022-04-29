@@ -20,8 +20,14 @@ struct InputFieldComponent: View {
         var body: some View {
             VStack(alignment: .leading) {
                 Text(title)
-                TextField(title, text: $inputText)
+                VStack{
+                    TextField(title, text: $inputText)
+                        .background(.bar)
+                        .cornerRadius(6)
+                        .frame(width: 340, height: 30, alignment: .center)
+                }
             }
+
             .modifier(inputFieldModifier())
         }
 }

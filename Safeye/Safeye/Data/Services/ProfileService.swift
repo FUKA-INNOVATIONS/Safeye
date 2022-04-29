@@ -28,7 +28,6 @@ class ProfileService {
 
     
     func fetchProfileByUserID(userID: String, panicProfile: Bool = false) {
-        self.appState.appLoading = true
         DispatchQueue.main.async {
             self.profileDB.whereField("userId", isEqualTo: userID).getDocuments()  { profile, error in
                 if let error = error as NSError? {
@@ -48,7 +47,6 @@ class ProfileService {
                             print("Error on fetchProfileByID: \(error)")
                         }
                     }
-                    self.appState.appLoading = false
                 }
             }
         }

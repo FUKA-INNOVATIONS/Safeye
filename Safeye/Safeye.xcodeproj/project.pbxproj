@@ -51,6 +51,7 @@
 		5F2EAD8527FCA271006FDFD9 /* secureInputFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */; };
 		5F2EAD8727FCA2A0006FDFD9 /* SecureInputFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */; };
 		5F2EAD9227FDBE28006FDFD9 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */; };
+		5F4BFDB8281C1A0500973639 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F4BFDB7281C1A0400973639 /* GoogleService-Info.plist */; };
 		5F553BB22806123B000518F7 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F553BB12806123B000518F7 /* ConnectionModel.swift */; };
 		5F5962022802CD7900C8F682 /* TackingModeButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */; };
 		5F5D0C662807EB6E00999B78 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5D0C652807EB6E00999B78 /* Store.swift */; };
@@ -64,6 +65,7 @@
 		5FA4189C2807058100B6C6E9 /* PlayGroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */; };
 		5FAB464B28045806009C4D0E /* EventStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAB464A28045806009C4D0E /* EventStatus.swift */; };
 		5FAB464F28047E44009C4D0E /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAB464E28047E44009C4D0E /* EventViewModel.swift */; };
+		5FACE176281B3787007CB089 /* LoginInputComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FACE175281B3787007CB089 /* LoginInputComponent.swift */; };
 		5FBAA9802811B489007961AE /* SafeyeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAA97F2811B489007961AE /* SafeyeController.swift */; };
 		5FBAA9822811B531007961AE /* CityTransformerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAA9812811B531007961AE /* CityTransformerModel.swift */; };
 		5FBAA9842811B5FF007961AE /* CityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAA9832811B5FF007961AE /* CityViewModel.swift */; };
@@ -101,6 +103,8 @@
 		6AB938132816E6CD0077552C /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB938122816E6CD0077552C /* FirebaseFirestoreSwift-Beta */; };
 		6AB938152816E6CD0077552C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB938142816E6CD0077552C /* FirebaseStorage */; };
 		6AB938172816EB9A0077552C /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB938162816EB9A0077552C /* LocationViewModel.swift */; };
+		6AB93831281A74330077552C /* EventMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB93830281A74330077552C /* EventMapView.swift */; };
+		6AB93833281A78460077552C /* EventMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB93832281A78460077552C /* EventMapViewModel.swift */; };
 		6AB9381D28182E460077552C /* ProfileViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB9381C28182E460077552C /* ProfileViewModel_Tests.swift */; };
 		6AB93825281991D70077552C /* EventViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB93824281991D70077552C /* EventViewModel_Tests.swift */; };
 		6AB93827281A4FA20077552C /* AuthenticationViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB93826281A4FA20077552C /* AuthenticationViewModel_Tests.swift */; };
@@ -192,6 +196,7 @@
 		5F2EAD8427FCA271006FDFD9 /* secureInputFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secureInputFieldModifier.swift; sourceTree = "<group>"; };
 		5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputFieldComponent.swift; sourceTree = "<group>"; };
 		5F2EAD9127FDBE28006FDFD9 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		5F4BFDB7281C1A0400973639 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F553BB12806123B000518F7 /* ConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
 		5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TackingModeButtonComponent.swift; sourceTree = "<group>"; };
 		5F5D0C652807EB6E00999B78 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -205,6 +210,7 @@
 		5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGroundView.swift; sourceTree = "<group>"; };
 		5FAB464A28045806009C4D0E /* EventStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatus.swift; sourceTree = "<group>"; };
 		5FAB464E28047E44009C4D0E /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		5FACE175281B3787007CB089 /* LoginInputComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInputComponent.swift; sourceTree = "<group>"; };
 		5FBAA97F2811B489007961AE /* SafeyeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeyeController.swift; sourceTree = "<group>"; };
 		5FBAA9812811B531007961AE /* CityTransformerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTransformerModel.swift; sourceTree = "<group>"; };
 		5FBAA9832811B5FF007961AE /* CityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewModel.swift; sourceTree = "<group>"; };
@@ -239,6 +245,8 @@
 		6A8792DD2812EDC5009B469B /* VoiceRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognition.swift; sourceTree = "<group>"; };
 		6A8792DF2812EFC0009B469B /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
 		6AB938162816EB9A0077552C /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		6AB93830281A74330077552C /* EventMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapView.swift; sourceTree = "<group>"; };
+		6AB93832281A78460077552C /* EventMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMapViewModel.swift; sourceTree = "<group>"; };
 		6AB9381C28182E460077552C /* ProfileViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel_Tests.swift; sourceTree = "<group>"; };
 		6AB93824281991D70077552C /* EventViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel_Tests.swift; sourceTree = "<group>"; };
 		6AB93826281A4FA20077552C /* AuthenticationViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel_Tests.swift; sourceTree = "<group>"; };
@@ -321,7 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				6A55867E280D66260076B3CE /* Info.plist */,
-				6AC44629281B0ABE0040BD42 /* GoogleService-Info.plist */,
+				5F4BFDB7281C1A0400973639 /* GoogleService-Info.plist */,
 				5F244AE827F7213E00BFE1FB /* Utils */,
 				5F8B94F527F70A570067C6C9 /* Views */,
 				5F244A8327F70B3300BFE1FB /* Components */,
@@ -428,6 +436,10 @@
 		5F244A8327F70B3300BFE1FB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5FACE175281B3787007CB089 /* LoginInputComponent.swift */,
+				75994EF62809B8EB003244C6 /* alertBoxComponent.swift */,
+				5F639DC2281322D600EC39E3 /* AlertPanicComponent.swift */,
+				755FCC0C281816450081B160 /* AnimationLottieView.swift */,
 				6AD96E4327FD49E600063439 /* AvatarComponent.swift */,
 				5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */,
 				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
@@ -436,6 +448,7 @@
 				6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */,
 				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
 				D5148A5227FF5C8800E98347 /* NavItem.swift */,
+				5FBC1A70280DFB3F0015CC26 /* ProfileImageComponent.swift */,
 				6ABCDD2527FFEC7B009563E7 /* SafeSpaceComponent.swift */,
 				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
@@ -444,12 +457,8 @@
 				6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */,
 				5F23EE092801B54800623B0C /* SettingsListViewComponent.swift */,
 				5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */,
-				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
-				75994EF62809B8EB003244C6 /* alertBoxComponent.swift */,
-				5FBC1A70280DFB3F0015CC26 /* ProfileImageComponent.swift */,
-				5F639DC2281322D600EC39E3 /* AlertPanicComponent.swift */,
-				755FCC0C281816450081B160 /* AnimationLottieView.swift */,
 				6A0F204B281808A500213FBC /* TrustContactDetailsComponent.swift */,
+				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -503,6 +512,7 @@
 				5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */,
 				6A0F20472817193F00213FBC /* InfoDetailView.swift */,
 				6AC44623281810E20040BD42 /* TCProfileView.swift */,
+				6AB93830281A74330077552C /* EventMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -522,6 +532,7 @@
 				6A8792DD2812EDC5009B469B /* VoiceRecognition.swift */,
 				5F8164842813FD8D0037B987 /* SafePlaceViewModel.swift */,
 				6AB938162816EB9A0077552C /* LocationViewModel.swift */,
+				6AB93832281A78460077552C /* EventMapViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -695,6 +706,7 @@
 				6AC4462A281B0ABE0040BD42 /* GoogleService-Info.plist in Resources */,
 				755FCBB1281683650081B160 /* Localizable.strings in Resources */,
 				5F0EA2FF27F6F9E100FBD77B /* Assets.xcassets in Resources */,
+				5F4BFDB8281C1A0500973639 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +741,7 @@
 				5F86F103280848C40089EAC6 /* SafePlaceModel.swift in Sources */,
 				5FE0B095280BD3C900CFED16 /* EventListView.swift in Sources */,
 				5F244AEF27F721B100BFE1FB /* Location.swift in Sources */,
+				6AB93833281A78460077552C /* EventMapViewModel.swift in Sources */,
 				5FAB464B28045806009C4D0E /* EventStatus.swift in Sources */,
 				5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */,
 				5F244AC327F71A5700BFE1FB /* EventModel.swift in Sources */,
@@ -795,11 +808,13 @@
 				5F244AE327F71FEE00BFE1FB /* BasicButtonComponent.swift in Sources */,
 				5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */,
 				5FBC1A6F280D5E6C0015CC26 /* ConnectionsView.swift in Sources */,
+				6AB93831281A74330077552C /* EventMapView.swift in Sources */,
 				5F244A9227F70EC600BFE1FB /* ProfileView.swift in Sources */,
 				5F244A8A27F70CFA00BFE1FB /* AuthenticationService.swift in Sources */,
 				5F244AED27F721A300BFE1FB /* Microphone.swift in Sources */,
 				5F244A9627F70F0A00BFE1FB /* AddContactView.swift in Sources */,
 				5FA4189A2806977E00B6C6E9 /* ConnectionService.swift in Sources */,
+				5FACE176281B3787007CB089 /* LoginInputComponent.swift in Sources */,
 				5F8164872813FE860037B987 /* SafePlaceService.swift in Sources */,
 				6A2CFC2F2801BABD0046395D /* CurtainTCComponent.swift in Sources */,
 				5F244ADB27F71C7D00BFE1FB /* titleTextModifier.swift in Sources */,
