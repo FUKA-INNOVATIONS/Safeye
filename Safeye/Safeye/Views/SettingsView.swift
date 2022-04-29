@@ -57,14 +57,22 @@ struct SettingsView: View {
                             section = "about"
                             isInfoDetailShowing = true
                         }
-                    Text("Privacy")
+                    
+                    Text("How it works")
                         .onTapGesture {
-                            section = "privacy"
+                            section = "how"
                             isInfoDetailShowing = true
                         }
+                    
                     Text("FAQ")
                         .onTapGesture {
                             section = "FAQ"
+                            isInfoDetailShowing = true
+                        }
+                    
+                    Text("Privacy")
+                        .onTapGesture {
+                            section = "privacy"
                             isInfoDetailShowing = true
                         }
                 }

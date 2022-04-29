@@ -70,11 +70,50 @@ struct InfoDetailView : View {
                     }
                 }
                 .padding()
+            } else if (self.section == "how") {
+                
+                Text("How it works")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding()
+            
+                ScrollView {
+                ForEach(HowItWorksItem.items) { item in
+                    HStack {
+                        Spacer()
+                        Image(item.icon)
+                        Spacer()
+                        Text(item.step)
+                            .frame(width: 230, alignment: .leading)
+Spacer()
+                    }
+                }
+                .padding(.bottom)
+  
+                }
             }
             
         }
         
     }
+}
+
+struct HowItWorksItem: Identifiable {
+    var id = UUID()
+    var icon: String
+    var step: String
+}
+
+extension HowItWorksItem {
+    static let items = [
+        HowItWorksItem(icon: "contact", step: "Make sure to add at least one contact on Safeye."),
+        HowItWorksItem(icon: "event", step: "Create a new event: fill out the event details and select contacts."),
+        HowItWorksItem(icon: "emergency", step: "In case of an emergency, tap SOS. Your location will be tracked and Safeye will record messages of anything it can detect in your surroundings."),
+        HowItWorksItem(icon: "alert", step: "Your contacts will be alerted. They will be able to see your live location and read recorded messages."),
+        HowItWorksItem(icon: "safe", step: "When you're safe again, tap SAFE to disable the emergency mode."),
+        HowItWorksItem(icon: "delete", step: "Once your event is over and you're in a safe location, you can delete the event. This will also delete any information related to it."),
+
+    ]
 }
 
 struct FAQItem: Identifiable {
