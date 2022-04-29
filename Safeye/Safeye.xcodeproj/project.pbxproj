@@ -94,6 +94,7 @@
 		6A2CFC332801C8B80046395D /* TCListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC322801C8B80046395D /* TCListModifier.swift */; };
 		6A2CFC352801CAA10046395D /* TCItemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC342801CAA10046395D /* TCItemModifier.swift */; };
 		6A3A881928031E460049DC7F /* ContactConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A881828031E460049DC7F /* ContactConnectionModel.swift */; };
+		6A40921D281B29EE0094F948 /* InfoTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A40921C281B29EE0094F948 /* InfoTextModifier.swift */; };
 		6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */; };
 		6A8792DE2812EDC5009B469B /* VoiceRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8792DD2812EDC5009B469B /* VoiceRecognition.swift */; };
 		6A8792E02812EFC0009B469B /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8792DF2812EFC0009B469B /* RecordingView.swift */; };
@@ -114,6 +115,7 @@
 		6ABCDD2827FFF8F9009563E7 /* SelectContactComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD2727FFF8F9009563E7 /* SelectContactComponent.swift */; };
 		6ABCDD2A280000EE009563E7 /* SelectContactsGridComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABCDD29280000EE009563E7 /* SelectContactsGridComponent.swift */; };
 		6AC44624281810E20040BD42 /* TCProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC44623281810E20040BD42 /* TCProfileView.swift */; };
+		6AC4462A281B0ABE0040BD42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC44629281B0ABE0040BD42 /* GoogleService-Info.plist */; };
 		6AD96E4427FD49E600063439 /* AvatarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD96E4327FD49E600063439 /* AvatarComponent.swift */; };
 		6AE0A8602801BB8800661B1F /* SearchFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */; };
 		6AEA6A362803747900C36830 /* ConnectionRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEA6A352803747900C36830 /* ConnectionRequestModel.swift */; };
@@ -237,6 +239,7 @@
 		6A2CFC322801C8B80046395D /* TCListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCListModifier.swift; sourceTree = "<group>"; };
 		6A2CFC342801CAA10046395D /* TCItemModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCItemModifier.swift; sourceTree = "<group>"; };
 		6A3A881828031E460049DC7F /* ContactConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactConnectionModel.swift; sourceTree = "<group>"; };
+		6A40921C281B29EE0094F948 /* InfoTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextModifier.swift; sourceTree = "<group>"; };
 		6A55867E280D66260076B3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItemComponent.swift; sourceTree = "<group>"; };
 		6A8792DD2812EDC5009B469B /* VoiceRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognition.swift; sourceTree = "<group>"; };
@@ -254,6 +257,7 @@
 		6ABCDD2727FFF8F9009563E7 /* SelectContactComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactComponent.swift; sourceTree = "<group>"; };
 		6ABCDD29280000EE009563E7 /* SelectContactsGridComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactsGridComponent.swift; sourceTree = "<group>"; };
 		6AC44623281810E20040BD42 /* TCProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCProfileView.swift; sourceTree = "<group>"; };
+		6AC44629281B0ABE0040BD42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6AD96E4327FD49E600063439 /* AvatarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarComponent.swift; sourceTree = "<group>"; };
 		6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldComponent.swift; sourceTree = "<group>"; };
 		6AEA6A352803747900C36830 /* ConnectionRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionRequestModel.swift; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 				6A2CFC322801C8B80046395D /* TCListModifier.swift */,
 				6A2CFC342801CAA10046395D /* TCItemModifier.swift */,
 				5FE0B099280C18A200CFED16 /* eventStatusColorModifier.swift */,
+				6A40921C281B29EE0094F948 /* InfoTextModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -698,6 +703,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F0EA30227F6F9E100FBD77B /* Preview Assets.xcassets in Resources */,
+				6AC4462A281B0ABE0040BD42 /* GoogleService-Info.plist in Resources */,
 				755FCBB1281683650081B160 /* Localizable.strings in Resources */,
 				5F0EA2FF27F6F9E100FBD77B /* Assets.xcassets in Resources */,
 				5F4BFDB8281C1A0500973639 /* GoogleService-Info.plist in Resources */,
@@ -754,6 +760,7 @@
 				6AC44624281810E20040BD42 /* TCProfileView.swift in Sources */,
 				6A2CFC312801C11A0046395D /* CurtainModifier.swift in Sources */,
 				7516A3A428075D4100162C43 /* NotificationService.swift in Sources */,
+				6A40921D281B29EE0094F948 /* InfoTextModifier.swift in Sources */,
 				75994EF72809B8EB003244C6 /* alertBoxComponent.swift in Sources */,
 				75EB68522813186B00F607B7 /* LocationService.swift in Sources */,
 				5F23EE0A2801B54800623B0C /* SettingsListViewComponent.swift in Sources */,
@@ -1002,6 +1009,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1038,6 +1046,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
