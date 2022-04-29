@@ -38,7 +38,14 @@ class SafePlaceViewModel: ObservableObject {
     func getSafePlacesOfAuthenticatedtUser() {
         let userID = AuthenticationService.getInstance.currentUser!.uid // Current usre id
         self.safePlaceService.fetchUserSafePlaces(of: userID)
+        for trusted in appState.connectionPofiles {
+            if trusted.homeLatitude != nil {
+                let trustedLocation = Location(name: trusted.fullName, coordinate: CLLocationCoordinate2D(latitude: trusted.homeLatitude!, longitude: trusted.homeLongitude!), own: false)
+                appState.locations.append(trustedLocation)
+            }
+        }
     }
+    
     
     // delete specific safe place
     func deleteSafePlaceByID(_ safePlaceID: String) {
