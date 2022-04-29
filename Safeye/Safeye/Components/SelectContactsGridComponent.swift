@@ -19,16 +19,22 @@ struct SelectContactGridComponent: View {
     ]
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: true) {
-            LazyHGrid(rows: layout) {
-                ForEach(appStore.connectionPofiles) { profile in
+//        ScrollView(.vertical, showsIndicators: true) {
+//            LazyHGrid(rows: layout) {
+        if appStore.connectionPofiles.isEmpty {
+            Text("You have not added any contacts.") // TODO: translation
+        } else {
+            ForEach(appStore.connectionPofiles) { profile in
+                Section {
                     SelectContactComponent(profileDetails: profile)
-                        .onAppear{
-                            FileVM.fetchPhoto(avatarUrlFetched: profile.avatar, isTrustedContactPhoto: true)
-                        }
+                }
+                .onAppear{
+                    FileVM.fetchPhoto(avatarUrlFetched: profile.avatar, isTrustedContactPhoto: true)
                 }
             }
         }
+//            }
+//        }
     }
 }
 

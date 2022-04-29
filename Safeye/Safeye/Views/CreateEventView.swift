@@ -41,13 +41,13 @@ struct CreateEventView: View {
                     SelectContactGridComponent()
                 }
                 
-                ForEach(appState.eventSelctedContacts) { selectedContact in
-                    HStack {
-                        Text("\(selectedContact.fullName)")
-                        Spacer()
-                        Image(systemName: "person.fill.checkmark")
-                    }
-                }
+//                ForEach(appState.eventSelctedContacts) { selectedContact in
+//                    HStack {
+//                        Text("\(selectedContact.fullName)")
+//                        Spacer()
+//                        Image(systemName: "person.fill.checkmark")
+//                    }
+//                }
                 
                 Section(header: Text(translationManager.dateAndTime)) {
                     DatePicker(translationManager.startTime, selection: $startDate)
