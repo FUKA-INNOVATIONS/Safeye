@@ -99,7 +99,6 @@ struct EventView: View {
             EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
             if EventVM.isEventOwner() { locationManager.locationDuringTrackingMode() }
-            print(appState.event!.coordinates["longitude"])
         }
 
     }

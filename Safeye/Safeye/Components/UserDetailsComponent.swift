@@ -16,32 +16,60 @@ struct UserDetailsComponent: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack{
-                Image(systemName: "house.circle.fill")
-                    .font(.system(size: 30))
-                Text("\(appState.profile?.address ?? "Homeless")")
-                    .padding(5)
-                Spacer()
-            }
-            HStack{
-                Image(systemName: "person.badge.clock.fill")
-                    .font(.system(size: 30))
-                Text("\(Text(translationManager.bornTitle)) \(appState.profile?.birthday ?? "Still in mama's stomach")")
-                    .padding(5)
-            }
-     
-            HStack{
-                Image(systemName: "stethoscope.circle.fill")
-                    .font(.system(size: 30))
-                VStack(alignment: .leading){
-                    Text("\(Text(translationManager.bloodTitle)) \(appState.profile?.bloodType ?? "Water engine")")
-                    Text("\(Text(translationManager.illnessTitle)) \(appState.profile?.illness ?? "Are you serious")")
-                    Text("\(Text(translationManager.allergiesTitle)) \(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
+
+            GroupBox {
+                DisclosureGroup("Person details") { // TODO: translation
+                    HStack{
+                        Text("Address")
+                        Spacer()
+                        Text("\(appState.profile?.address ?? "Homeless")")
+                    }
+                    .padding(.top, 15)
+                    .font(.subheadline)
+                    
+                    HStack{
+                        Text("\(Text(translationManager.bornTitle))")
+                        Spacer()
+                        Text("\(appState.profile?.birthday ?? "Still in mama's stomach")")
+                    }
+                    .padding(.top, 10)
+                    .font(.subheadline)
                 }
-                .padding(5)
+                .font(.headline)
             }
+                        
+            GroupBox {
+                DisclosureGroup("Health details") { // TODO: translation
+                    HStack {
+                        Text("\(Text(translationManager.illnessTitle))")
+                        Spacer()
+                        Text("\(appState.profile?.illness ?? "Are you serious?")")
+                    }
+                    .padding(.top, 15)
+                    .font(.subheadline)
+
+                    HStack {
+                        Text("\(Text(translationManager.allergiesTitle)) ")
+                        Spacer()
+                        Text("\(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
+
+                    }
+                    .padding(.top, 10)
+                    .font(.subheadline)
+
+                    HStack {
+                        Text("\(Text(translationManager.bloodTitle))")
+                        Spacer()
+                        Text("\(appState.profile?.bloodType ?? "Water engine")")
+                    }
+                    .padding(.top, 10)
+                    .font(.subheadline)
+                }
+                .font(.headline)
+            }
+
         }
-        .padding(.leading, 50)
+        .padding()
     }
     
 }

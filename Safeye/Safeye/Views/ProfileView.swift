@@ -25,38 +25,43 @@ struct ProfileView: View {
     var body: some View {
         
         return ZStack {
-            VStack {
+            ScrollView {
                 
                 VStack {
-                    
-                    // display full name
-                    Text("\(appState.profile?.fullName ?? "No name")")
-                        .font(.system(size: 25, weight: .bold))
-                        .lineLimit(1)
-                        .padding(5)
-                        .padding(.leading, 10)
-                    
                     // display profile photo
                     if appState.userPhoto != nil {
-                        ProfileImageComponent(size: 100, avatarImage: appState.userPhoto!)
+                        ProfileImageComponent(size: 150, avatarImage: appState.userPhoto!)
                             .padding(.bottom)
                     } else {
                         ProgressView()
                     }
+                    
+                    HStack {
+                        // display full name
+                        Text("\(appState.profile?.fullName ?? "No name")")
+                            .font(.system(size: 35, weight: .bold))
+                            .lineLimit(1)
+                            .padding(5)
+                            .padding(.leading, 10)
+                        
+                        
+                        // edit profile button
+                        Button { showingEditProfile = true } label: {
+                            //Text("Edit profile")
+                            Image(systemName: "pencil.and.outline")
+                        }
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.blue)
+                        .padding(.bottom, 15)
+                        
+                        .sheet(isPresented: $showingEditProfile) {
+                            ProfileEditView()
+                        }
+                    }
                 }
+                //.background(Color(UIColor.lightGray))
                 
-                // edit profile button
-                Button { showingEditProfile = true } label: {
-                    Text("Edit profile")
-                    //Image(systemName: "pencil")
-                }
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(.blue)
-                .padding(.bottom, 15)
                 
-                .sheet(isPresented: $showingEditProfile) {
-                    ProfileEditView()
-                }
                 Divider()
                 Spacer(minLength: 30)
                 
@@ -65,6 +70,8 @@ struct ProfileView: View {
                     
                     Text("My safe spaces")
                         .fontWeight(.bold)
+                    
+                    if appState.safePlaces.isEmpty { Text("You haven't yet added any places").font(.caption).padding(.top) }
                     
                     ListViewComponent(item: "safeSpace", size: 40)
                         .padding(.leading, 20)
@@ -100,11 +107,11 @@ struct ProfileView: View {
                     }
    
                 }
-                Spacer(minLength: 40)
+//                Spacer(minLength: 40)
                 Divider()
-                Text("My details")
-                    .fontWeight(.bold)
-                    .padding(.top, 20)
+//                Text("My details")
+//                    .fontWeight(.bold)
+//                    .padding(.top, 20)
                 
                 ScrollView {
                     UserDetailsComponent()

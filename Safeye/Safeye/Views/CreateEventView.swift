@@ -82,7 +82,7 @@ struct CreateEventView: View {
             
             BasicButtonComponent(label: translationManager.saveActivateBtn, action: {
                 print("City: \(cities[selectedEventCityIndex].name!)")
-                if eventType.isEmpty || cityOfEvent.isEmpty { print("Fill all fields") ; return }
+                if eventType.isEmpty { print("Fill all fields") ; return }
                 
                 // set a random path for event folder and pass it to EventVM to createEvent()
                 eventFolderPath = "events/\(UUID().uuidString)/"

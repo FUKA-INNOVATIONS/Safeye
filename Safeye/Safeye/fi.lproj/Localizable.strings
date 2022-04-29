@@ -60,7 +60,7 @@
 
 "signOut" = "Kirjaudu ulos";
 "connection" = "Yhteyskoodi";
-"copyBtn" = "Kopio"; // might be an icon
+"copyBtn" = "Kopioi"; // might be an icon
 "nocode" = "Ei koodia";
 
 
@@ -116,7 +116,7 @@
 // PROFILE
 
 "trustedContactsTitle" = "Yhteyshenkilöt";
-"bornTitle" = "Syntynyt:";
+"bornTitle" = "Syntynyt";
 "bloodTitle" = "Veriryhmä";
 "illnessTitle" = "Sairaudet";
 "allergiesTitle" = "Allergiat";
