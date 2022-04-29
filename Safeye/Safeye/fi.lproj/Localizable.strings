@@ -37,7 +37,7 @@
 "createProfileBtn" = "Luo profiili";
 
 "textProfileUpdate" = "Täytä kentät, jotka haluat päivittää";
-"textProfileBlanc" = "Täytä kaikki kentät luodaksesi uuden profiilin";
+"textProfileBlanc" = "Täytä kaikki kentät";
 "fullNameTitle" = "Etu- ja sukunimi";
 "fullNamePlaceholder" = "Koko nimi";
 "addressTitle" = "Osoitteesi";
