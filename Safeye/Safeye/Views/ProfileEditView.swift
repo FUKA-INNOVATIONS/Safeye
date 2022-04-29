@@ -31,7 +31,7 @@ struct ProfileEditView: View {
     @State private var connectionCode = ""
     @State private var avatar = ""
     
-    @State private var bloodTypes = ["-A", "B", "AB", "O"]
+    @State private var bloodTypes = ["A", "B", "AB", "O"]
     @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
     @State private var selectedCountry = "Finland"
     
