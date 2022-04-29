@@ -10,13 +10,14 @@ import MapKit
 
 struct EventMapView: View {
     
-    @ObservedObject var appState: Store
+    @EnvironmentObject var appState: Store
     @EnvironmentObject var eventMapVM: EventMapViewModel
-    
-    
-    var body: some View {
         
-        Map(coordinateRegion: $eventMapVM.mapRegion, showsUserLocation: true, annotationItems: [eventMapVM.trackedUser]) { trackedUser in
+    var body: some View {
+        var cll = CLLocationCoordinate2D(latitude: appState.event!.coordinates["latitude"]!, longitude: appState.event!.coordinates["longitude"]!)
+        var x = TrackedUser(name: "name", coordinate: cll)
+        
+        Map(coordinateRegion: $eventMapVM.mapRegion, showsUserLocation: true, annotationItems: [x]) { trackedUser in
             MapAnnotation(coordinate: trackedUser.coordinate) {
                 Circle()
                     .stroke(.orange, lineWidth: 3)
@@ -25,8 +26,8 @@ struct EventMapView: View {
             }
             
             .onAppear {
-                eventMapVM.getTrackedUserMapInfo()
-                eventMapVM.updateTrackedUser()
+                //eventMapVM.getTrackedUserMapInfo()
+                //eventMapVM.updateTrackedUser()
             }
             .ignoresSafeArea()
     }

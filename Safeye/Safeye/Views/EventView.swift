@@ -62,7 +62,7 @@ struct EventView: View {
                     }
                     if !EventVM.isEventOwner() {
                         NavigationLink {
-                            EventMapView(appState: appState)
+                            EventMapView()
                         } label: {
                             Text("View Tracked User On Map")
                         }
