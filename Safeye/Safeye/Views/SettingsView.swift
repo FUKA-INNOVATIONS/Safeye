@@ -81,11 +81,15 @@ struct SettingsView: View {
                 }
             }
             
-            // Sign out button
-            Button(translationManager.signOut) {
-                AuthVM.signOut()
+            HStack {
+                // Sign out button
+                Button(translationManager.signOut) {
+                    AuthVM.signOut()
+                }
+                .foregroundColor(.red)
+                Spacer()
+                Text("\(AuthenticationService.getInstance.currentUser?.email ?? "")").foregroundColor(.gray).font(.caption2)
             }
-            .foregroundColor(.red)
             
         }
 //        .navigationTitle("")

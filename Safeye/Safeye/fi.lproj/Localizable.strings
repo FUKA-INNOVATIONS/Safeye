@@ -84,7 +84,7 @@
 "eventTypeTrack" = "Tapahtumatyyppi:";
 "otherTrack" = "Muut tiedot:";
 //Tracking mode copmponent
-"sosBtn" = "SOS!";
+"sosBtn" = "SOS";
 "safeBtn" = "Safe";
 
 
