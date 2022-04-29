@@ -34,11 +34,14 @@ struct InfoDetailView : View {
                         .padding()
                     ForEach(FAQItem.items) { item in
                         HStack {
+                            Spacer()
                             Image(item.icon)
+                            Spacer()
                             Text(item.question)
                                 .font(.system(size: 15))
                                 .fontWeight(.bold)
-                                .frame(width: 200)
+                                .frame(width: 230, alignment: .leading)
+                            Spacer()
                             
                         }
                         .frame(alignment: .center)
