@@ -6,11 +6,8 @@
 //
 
 import SwiftUI
-import MapKit
 
 struct CurtainTCComponent: View {
-    
-    @EnvironmentObject var mapVM: MapViewModel
     var trustedContact: ProfileModel
     
     var body: some View {
@@ -19,13 +16,11 @@ struct CurtainTCComponent: View {
             Spacer()
             Text(trustedContact.fullName)
             Spacer()
-            if trustedContact.homeLatitude != nil {
-                Button(action: {
-                    mapVM.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: trustedContact.homeLatitude!, longitude: trustedContact.homeLongitude!), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                }, label: {Text("Focus on")})
+            BasicButtonComponent(label: "Focus") {
+                
             }
+            .modifier(TCItemModifier())
         }
-        .modifier(TCItemModifier())
         
     }
 }
