@@ -31,7 +31,7 @@ struct AddContactView: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
-    @State var error = ""
+    @State var error = "To search, enter a valid connection code."
     
     
     var body: some View {
@@ -40,7 +40,7 @@ struct AddContactView: View {
                 Color(UIColor.systemBackground)
                     .opacity(startOpacity + (endOpacity - startOpacity) * dragPercentage)
                     .ignoresSafeArea()
-                    .onTapGesture { isShowing = false}
+                    .onTapGesture { withAnimation { isShowing = false } }
                 mainView
                     .transition(.move(edge: .bottom))
             }
@@ -67,15 +67,11 @@ struct AddContactView: View {
                     VStack {
                         SearchFieldComponent(searchInput: $searchInput)
                         Button(action: {
-                            if searchInput == appState.profile?.connectionCode {
-                                print("You can not add your self as trusted contact")
-                                error = "You can not add your self as trusted contact"
-                                return
-                            }
-                            
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
 //                        }, label: {Text("Search")})
                         }, label: {Text(translationManager.searchBtn)})
+                            .foregroundColor(.blue)
+                            .buttonStyle(BorderlessButtonStyle())
                     }
 
                     Spacer()
@@ -92,19 +88,31 @@ struct AddContactView: View {
                         }
                         
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
+                            .padding(.bottom)
 //                      BasicButtonComponent(label: "Add", action: {
-                        BasicButtonComponent(label: translationManager.addBtn, action: {
-                            // AddContactVM.addTrustedContact()
+                        Button(action: {
                             if appState.profileSearch != nil {
-                                ConnectionVM.addConnection()
+                                let message = ConnectionVM.addConnection()
+                                if message != nil {
+                                    self.error = message!
+                                }
                             }
                             searchInput = ""
                             appState.profileSearch = nil
-                        })
+                        }, label: {Text(translationManager.addBtn)})
+                            .foregroundColor(.blue)
+                            .buttonStyle(BorderlessButtonStyle())
                     } else {
 //                      Text("Nothing to display.")
-                        Text(translationManager.nothingTitle)
+                        VStack {
+                            AnimationLottieView(lottieJson: "no-data")
+                            Text(self.error)
+                        }
+                        .frame(width: 150, height: 150, alignment: .center)
+                        //Text(translationManager.nothingTitle)
                         Text(self.error)
+                            .frame(alignment: .center)
+                            .padding()
                     }
                     Spacer()
                 }
@@ -126,6 +134,8 @@ struct AddContactView: View {
         )
         .onDisappear {
             curHeight = 600
+            searchInput = ""
+            self.error = "To search, enter a valid connection code."
             appState.searchResultPhoto = nil
             appState.profileSearch = nil
         }

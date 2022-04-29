@@ -28,7 +28,7 @@ struct PlayGroundView: View {
             
             
             VStack {
-                Text("cities in appState: : \(appState.citiesFinland.count)")
+                Text("cities in appState: : \(appState.cities.count)")
                 Text("cities in device: : \(cities.count)")
                 Button("save device") { saveDevice() }
                 List(cities, id: \.id) { city in
@@ -62,7 +62,7 @@ struct PlayGroundView: View {
     
     func saveDevice() {
         // save all cities in device momeory
-        for city in appState.citiesFinland {
+        for city in appState.cities {
             let c = City(context: moc)
             c.id = UUID()
             c.name = city

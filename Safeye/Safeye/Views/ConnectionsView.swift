@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ConnectionsView: View {
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
+    @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
     @State var showingConnectionProfile = false
     @State private var showingAddContact = false
-    
     
     var body: some View {
         
@@ -37,6 +37,7 @@ struct ConnectionsView: View {
                             pasteboard.string = appState.profile?.connectionCode
                         }, label: {Text(translationManager.copyBtn)})
                             .foregroundColor(.blue)
+                            .buttonStyle(BorderlessButtonStyle())
                     }
                 }
                 
@@ -45,51 +46,57 @@ struct ConnectionsView: View {
                     Text("Add a new contact")
                     Spacer()
                     Button(action: {
-                        showingAddContact = true
+                        withAnimation { showingAddContact = true }
                     })
                     {
                         Image(systemName: "plus.magnifyingglass")
                             .foregroundColor(.blue)
                     }
+                    .buttonStyle(BorderlessButtonStyle())
+
                 }
                 
-                // Section("Connections") {
+                // Established connections
                 Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
                         let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
                         HStack{
-                            //Image(systemName: "trash")
                             Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash")
                                 .foregroundColor(.red) }
                             
                             Text(profile?.fullName ?? "")
                             Spacer()
-                            //                            Text("profile")
                             Text(translationManager.profileBtn)
                             Button {
+                                // fetch trusted contact photo
                                 FileVM.fetchPhoto(avatarUrlFetched: profile!.avatar, isSearchResultPhoto: false, isTrustedContactPhoto: true)
+                                
+                                //set trusted contact profile in app state to profile
+                                self.appState.tCProfile = profile
+                                
+                                //opens trusted contact profile view
                                 showingConnectionProfile = true
                             } label: { Image(systemName: "eye") }
                         }
                         .buttonStyle(BorderlessButtonStyle())
                         
                         .sheet(isPresented: $showingConnectionProfile) {
-                            //ProfileView(profileID: connection.id!)
-                            TCProfileView(profile: profile!)
+                            TCProfileView()
                         }
                     }
                     
                 }
                 
-                // Section("Received requests") {
+                // Pending received connection requests
                 Section(translationManager.receivedReqTitle) {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
-                        HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)} label: {Text("")}
+                        let profile = ConnectionVM.filterConnectionProfileFromAppState(request)
+                        HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)
+                        } label: {Text("")}
                             
-                            Text("Full name")
+                            Text(profile?.fullName ?? "")
                             Spacer()
                             Group {
-                                //                                Text("accept")
                                 Text(translationManager.acceptBtn)
                                 Image(systemName: "hand.thumbsup.fill")
                             }
@@ -98,16 +105,19 @@ struct ConnectionsView: View {
                     }
                 }
                 
-                // Section("Sent requests") {
+                // Pending sent connection requests
                 Section(translationManager.sentReqTitle) {
                     ForEach(appState.pendingConnectionRequestsOwner) { request in
+                        //let profile = ConnectionVM.filterConnectionProfileFromAppState(request)
                         HStack {
+                            //Text(profile?.fullName ?? "")
                             Text("Full name")
                             Spacer()
                             Group {
-                                //                                Text("cancel")
                                 Text(translationManager.cancelReq)
-                                Button { ConnectionVM.deleteConnection(request.id!, "sent") } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
+                                Button {
+                                    ConnectionVM.deleteConnection(request.id!, "sent")
+                                } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
                             }
                             .foregroundColor(.red)
                         }
@@ -119,15 +129,14 @@ struct ConnectionsView: View {
             
             
         }
-        .navigationTitle("")
-        .navigationBarHidden(true)
+//        .navigationTitle("")
+//        .navigationBarHidden(true)
         .onAppear {
             ConnectionVM.getConnections()
             ConnectionVM.getPendingRequests()
             ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
         }
-        
     }
 }
 

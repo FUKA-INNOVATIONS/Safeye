@@ -23,6 +23,7 @@ struct CreateEventView: View {
     
     let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
     @State var cityOfEvent = ""
+    @State var selectedEventCityIndex = 0
     
     @State var goEventView = false
     @Environment(\.dismiss) var dismiss
@@ -32,6 +33,7 @@ struct CreateEventView: View {
     
     
     var body: some View {
+        
         VStack{
             Form {
 //              Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
@@ -47,15 +49,11 @@ struct CreateEventView: View {
                     }
                 }
                 
-//                Section(header: Text("Estimated event date and time")) {
-//                    DatePicker("Start*", selection: $startDate)
-//                    DatePicker("End", selection: $endDate)
                 Section(header: Text(translationManager.dateAndTime)) {
                     DatePicker(translationManager.startTime, selection: $startDate)
                     DatePicker(translationManager.endTime, selection: $endDate)
                 }
-//                Section(header: Text("Event type*")) {
-//                    Picker(selection: $eventType, label: Text("Select event type")) {
+
                 Section(header: Text(translationManager.eventType)) {
                     Picker(selection: $eventType, label: Text(translationManager.selectEventType)) {
                         ForEach(eventTypesArray, id: \.self) {
@@ -67,48 +65,34 @@ struct CreateEventView: View {
                 
                 
                 Section(header: Text("Location")) {
-                    Button("Load citites") { saveCitiesInDevice() }
-                    Picker(selection: $cityOfEvent, label: Text("Select a city or area")) {
-                        ForEach(appState.citiesFinland, id: \.self) {
-                            Text($0)
+                    Picker(selection: $selectedEventCityIndex, label: Text("")) {
+                        ForEach(0..<cities.count) {
+                            Text(cities[$0].name!)
                         }
                     }
                     .pickerStyle(.wheel)
                 }
                 
-                
-//                Section(header: Text("Other valuable details")) {
-//                    TextField("Anything else?", text: $otherInfo)
-//                }
                 Section(header: Text(translationManager.otherDetailTitle)) {
                     TextField(translationManager.detailPlaceholder, text: $otherInfo)
                 }
                 
-//            }.navigationBarTitle("Add event information", displayMode: .inline)
             }.navigationBarTitle(translationManager.addEventInfo, displayMode: .inline)
             Spacer()
             
-            
-            
-//            BasicButtonComponent(label: "Save & activate", action: {
             BasicButtonComponent(label: translationManager.saveActivateBtn, action: {
-                print("City: \(cityOfEvent)")
-                if eventType.isEmpty || cityOfEvent.isEmpty { print("Fill all fields") ; return }
+                print("City: \(cities[selectedEventCityIndex].name!)")
+                if eventType.isEmpty { print("Fill all fields") ; return }
                 
                 // set a random path for event folder and pass it to EventVM to createEvent()
                 eventFolderPath = "events/\(UUID().uuidString)/"
-                if EventVM.createEvent(startDate, endDate, otherInfo, eventType, cityOfEvent, eventFolderPath) {
+                if EventVM.createEvent(startDate, endDate, otherInfo, eventType, cities[selectedEventCityIndex].name!, eventFolderPath) {
                     //goEventView.toggle()
                     //NavigationLink("", destination: EventView(), isActive: $goEventView)
                     dismiss()
                 }
             })
-            
-            //let id = "qGcGgDF8K3FvJjplNYP4"
-            //let updatedEvent = Event(id: id, ownerId: authUID ?? "", status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: locationDetails, eventType: eventType, trustedContacts: selectedContacts, coordinates: coordinates)
-            // BasicButtonComponent(label: "Save & activate", action: { EventVM.updateEvent( updatedEvent ) })
-            
-//            Text("Saving will also enable the tracking mode")
+
             Text(translationManager.savingEventInfo)
                 .font(.system(size: 15))
                 .foregroundColor(.blue)
@@ -122,31 +106,6 @@ struct CreateEventView: View {
         
     }
     
-    func saveCitiesInDevice() {
-        // save all cities in device momeory
-        for city in appState.citiesFinland {
-            let c = City(context: moc)
-            c.id = UUID()
-            c.name = city
-            c.country = "Finland"
-        }
-        
-        // save all cities in device persistant storage if data has changed
-        if moc.hasChanges {
-            do {
-                try moc.save()
-                print("CoreData: Cities saved")
-            } catch {
-                print("CoreData: Error while saving citites into device \(error.localizedDescription)")
-            }
-        } else { print("CoreData: Cities not saved in device beause of no changes") }
-        //print("CoreData: : \(cities.count)")
-    }
     
 }
 
-struct CreateEventView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateEventView()
-    }
-}

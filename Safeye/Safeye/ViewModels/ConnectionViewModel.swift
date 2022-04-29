@@ -52,18 +52,18 @@ class ConnectionViewModel: ObservableObject {
 
     func getPendingRequests()  {
         DispatchQueue.main.async {
-//            self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
-//            self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
+            // self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
+            // self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
             let currentUserID = AuthenticationService.getInstance.currentUser!.uid
             self.connService.fetchPendingConnectionRequests(currentUserID)
         }
     }
     
+    // get confirmed connection profiles
     func getConnectionProfiles() {
         let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-//        self.appState.connectionPofiles.removeAll()
-        // self.getConnections()
         var connectionIDS = [String]()
+        
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
@@ -74,55 +74,53 @@ class ConnectionViewModel: ObservableObject {
     }
     
     func getConnections() {
+        //self.appState.connections.removeAll()
         DispatchQueue.main.async {
-//            self.appState.connections.removeAll()
+            //self.appState.connections.removeAll()
             let currentUserID = AuthenticationService.getInstance.currentUser!.uid
             self.connService.fetchConnections(currentUserID)
         }
     }
 
+   
+    func addConnection() -> String? {
+        var message: String? = nil
 
-    func addConnection() {
-        // TODO: Check, if user already have addded connection ? request exists ?
-        // TODO: If successful this should trigger a notification sent to target user (Sprint 3?) ???
-        
         guard let targetProfileID = self.appState.profileSearch?.userId else {
-            print("addConnection -> Searched profile not found")
-            return
+            message = "User not found"
+            return message
         }
-        
+
+        if targetProfileID == appState.profile!.userId {
+            message = "You cannot add yourself"
+            return message
+        }
+
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if userID == targetProfileID {
-                    print("You already have this connection as trusted conntact")
-                    return
+                    message = "This connection already exists."
+                    return message
                 }
             }
         }
-        
-        
+
+        // generate a connection ID
         let uid = AuthenticationService.getInstance.currentUser!.uid
         var hasher = Hasher()
         hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
         hasher.combine(targetProfileID)
         let connectionId = String(hasher.finalize())
-        
+
         let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [uid, targetProfileID], status: false)
-        
+
         // returns a boolean, was added or not?
         if connService.addConnection(newConn: newConn) {
-            print("New connection added")
+            message = "Connection request sent successfully."
         } else {
-            print("Adding new connection failed")
+            message = "An error occured while sending a connection request."
         }
+        return message
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
 } // end of ConnectionVM

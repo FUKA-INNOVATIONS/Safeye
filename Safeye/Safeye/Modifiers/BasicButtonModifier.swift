@@ -11,9 +11,11 @@ struct BasicButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
             content
                 .foregroundColor(Color.white)
-                .frame(width: 200, height: 50)
-                .cornerRadius(40)
-                .background(Color.blue)
+                .padding(8)
+                .buttonStyle(.bordered)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .background(RoundedRectangle(cornerRadius: 4.0))
+                .foregroundColor(.blue)
                 .padding()
         }
 }

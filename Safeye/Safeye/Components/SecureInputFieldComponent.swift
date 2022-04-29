@@ -12,18 +12,33 @@ struct SecureInputFieldComponent: View {
     let title: LocalizedStringKey
     @Binding var secureText: String
     
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-            SecureField(title, text: $secureText)
-        }
-        .modifier(inputFieldModifier())
-    }
-}
 
-struct SecureInputFieldComponent_Previews: PreviewProvider {
-    static var previews: some View {
-        SecureInputFieldComponent(title: "Password", secureText: .constant("12445"))
-    }
+    @State private var showPassword = false
+
+    var body: some View {
+        VStack{
+        HStack {
+            Image(systemName: "lock")
+                .foregroundColor(.secondary)
+            if showPassword {
+                TextField(title, text: $secureText)
+            } else {
+            SecureField(title,
+                      text: $secureText)
+            }
+            Button(action: { self.showPassword.toggle()}) {
+                
+                Image(systemName: "eye")
+                .foregroundColor(.secondary)
+            }
+        }    .padding()
+            .background(.bar)
+            .cornerRadius(10)
+        } .padding()
 }
+}
+//struct SecureInputFieldComponent_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SecureInputFieldComponent(title: "Password", secureText: .constant("12445"))
+//    }
+//}
