@@ -21,17 +21,22 @@ struct EventListView: View {
         
         return VStack {
             VStack {
-//                Text("\(EventVM.getEventsCount()) events")
-                Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
-                    .accessibility(identifier: "eventListViewEventsCountText")
-                Spacer()
-//                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
-                Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn).foregroundColor(.blue) }
-                    .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
-                    .accessibility(identifier: "eventListViewCreateNewEventButton")
+                
+                HStack {
+                    Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
+                        .accessibility(identifier: "eventListViewEventsCountText")
+                    Spacer()
+    //                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
+                    Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn).foregroundColor(.blue) }
+                        .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
+                        .accessibility(identifier: "eventListViewCreateNewEventButton")
+                }
+                .padding()
+                
                 Form {
-//                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
-                    Section(header: Text(" \(Text(translationManager.yourEventsTitle)) (\(appState.eventsOfCurrentUser.count)) ")) {                        ForEach(appState.eventsOfCurrentUser) { event in
+                    //                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
+                    Section(header: Text(" \(Text(translationManager.yourEventsTitle)) (\(appState.eventsOfCurrentUser.count)) ")) {
+                        ForEach(appState.eventsOfCurrentUser) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green
                             
                             List {
@@ -42,7 +47,7 @@ struct EventListView: View {
                                             .onTapGesture { EventVM.getEventTrustedContactsProfiles(eventID: event.id!) }
                                         Spacer()
                                         Text(event.startTime, style: .date)
-                                            .font(.caption)
+                                            .font(.caption2)
                                         Spacer()
                                         Text("\(event.trustedContacts.count)")
                                         Image(systemName: "eye")
@@ -52,12 +57,12 @@ struct EventListView: View {
                                 }
                             }
                             .accessibility(identifier: "eventListViewEventsListOfAuthenticatedUser")
-                        
+                            
                         }
                         .onDelete(perform: EventVM.deleteEvent)
                     }
                     
-//                    Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
+                    //                    Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
                     Section(header: Text(" \(Text(translationManager.yourFriendsEventsTitle)) (\(appState.eventsOfTrustedContacts.count)) ")) {
                         ForEach(appState.eventsOfTrustedContacts) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green
@@ -89,20 +94,15 @@ struct EventListView: View {
             //.padding(.top, -60)
             .onAppear {
                 print("eventList view appeared")
-//                ConnectionVM.getConnections()
-//                EventVM.getEventsOfCurrentUser()
-//                EventVM.getEventsOfTrustedContacts()
                 EventVM.sendNotification()
                 ConnectionVM.getConnections()
                 ConnectionVM.getConnectionProfiles()
                 ConnectionVM.getPendingRequests()
                 EventVM.getEventsOfCurrentUser()
                 EventVM.getEventsOfTrustedContacts()
-            
+                
             }
         } // end of outer VStack
-//        .navigationTitle("")
-//        .navigationBarHidden(true)
     }
 }
 
@@ -118,14 +118,14 @@ struct EventListView_Previews: PreviewProvider {
  
  
  .toolbar {
-     ToolbarItem(placement: .navigationBarTrailing) {
-         EditButton()
-     }
-     ToolbarItem {
-         Button(action: { showingCreateEvent = true }) {
-             Label("Create new event", systemImage: "plus")
-         }
-     }
+ ToolbarItem(placement: .navigationBarTrailing) {
+ EditButton()
+ }
+ ToolbarItem {
+ Button(action: { showingCreateEvent = true }) {
+ Label("Create new event", systemImage: "plus")
+ }
+ }
  }
  
  

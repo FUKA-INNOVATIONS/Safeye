@@ -75,11 +75,13 @@ struct AddSafePlaceView: View {
                         if(result.locations.count != 0) {
                             Text("Found \(result.locations.count) places")
                                 .frame(width: 150, height: 50)
+                                .padding(.bottom, 30)
                         } else {
                             VStack {
                                 AnimationLottieView(lottieJson: "find")
                             }
                             .frame(width: 150, height: 150, alignment: .center)
+                            .padding()
                             
                         }
                     }
@@ -88,7 +90,7 @@ struct AddSafePlaceView: View {
                 }
             }
             .frame(maxHeight: .infinity)
-            .padding(.bottom, 35)
+            .padding(.bottom, 55)
         }
         
         .frame(height: curHeight)
