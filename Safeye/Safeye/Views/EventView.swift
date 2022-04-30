@@ -67,25 +67,41 @@ struct EventView: View {
                         NavigationLink {
                             EventMapView()
                         } label: {
-                            Text("View Tracked User On Map")
+                            Text("View Tracked User On Map") // TODO: translation
                         }
                     }
                 }
                 
             }
             
-            // Modal showing a list of recorded messages from even onwer's speech
-            Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") }
-                .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
+            
+            if !EventVM.isEventOwner() {
+                // Modal showing a list of recorded messages from even onwer's speech
+                Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") } // TODO: translation
+                    .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
+            }
+            
+            
+            HStack {
+                if EventVM.isEventOwner() {
+                    Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") } // TODO: translation
+                        .disabled( appState.panicMode == true)
+                        .opacity( appState.panicMode == true ? 0 : 1)
+                        .padding()
+                        .sheet(isPresented: $showingRecordMessage) {
+                            RecordingView()
+                        }
+                    Spacer()
+                    // Modal showing a list of recorded messages from even onwer's speech
+                    Button { showingRecordedMessageView.toggle() } label: { Text("Show messages") } // TODO: translation
+                        .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
+                }
+            }
+            .padding()
+            
+            
             
             if EventVM.isEventOwner() {
-                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
-                .disabled( appState.panicMode == true)
-                .opacity( appState.panicMode == true ? 0 : 1)
-                .padding()
-                .sheet(isPresented: $showingRecordMessage) {
-                    RecordingView()
-                }
                 appState.event!.status == .STARTED ?
                 Button(action: { // Actions after panic button Has been pressed
                     EventVM.activatePanicMode()
