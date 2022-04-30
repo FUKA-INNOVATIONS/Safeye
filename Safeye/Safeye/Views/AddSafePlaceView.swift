@@ -14,7 +14,7 @@ struct AddSafePlaceView: View {
     @State var selectedLocation: MKMapItem?
     @StateObject private var result = SearchResultModel()
     @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
-    
+
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 400
     let maxHeight: CGFloat = 600
@@ -47,18 +47,18 @@ struct AddSafePlaceView: View {
     
     var mainView: some View {
         VStack {
-            ZStack {
+            VStack{
                 Capsule()
                     .frame(width: 40, height: 6)
             }
-            .frame(height: 40)
+            .frame(height: 20)
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemBackground))
             .gesture(dragGesture)
-            
-            VStack {
-                NavigationView {
-                    VStack {
+           
+                    VStack(){
+                        SafeSpaceSearchComponent(searchText: $result.searchText)
+                        
                         List(result.locations, id: \.self) { place in
                             HStack {
                                 Text(place.name!)
@@ -70,38 +70,44 @@ struct AddSafePlaceView: View {
                                     print("Safe place: didSave?: \(didSave)")
                                     isShowing = false
                                 }
+                                .foregroundColor(Color.blue)
+                                .buttonStyle(BorderlessButtonStyle())
                             }
                         }
+//                        .onAppear(perform: {
+//                                UITableView.appearance().contentInset.top = -50
+//                        })
                         if(result.locations.count != 0) {
                             Text("Found \(result.locations.count) places")
-                                .frame(width: 150, height: 50)
+                                
+                                .frame(width: 150, height: 50).padding(.bottom, 35)
                         } else {
-                            VStack {
+                            VStack{
                                 AnimationLottieView(lottieJson: "find")
                             }
                             .frame(width: 150, height: 150, alignment: .center)
                             
                         }
+                        
                     }
-                    .searchable(text: $result.searchText)
-                    
-                }
+            Spacer(minLength: 50)
+//                    .searchable(text: $result.searchText)
+
+                
             }
-            .frame(maxHeight: .infinity)
-            .padding(.bottom, 35)
-        }
-        
-        .frame(height: curHeight)
-        .frame(maxWidth: .infinity)
-        .background(
+        .frame(minHeight: 500, maxHeight: .infinity)
+            .frame(height: curHeight)
+            .frame(maxWidth: .infinity)
+            .background(
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                 Rectangle()
-                    .frame(height: curHeight / 2)
+                .frame(height: curHeight / 2)
             }
                 .foregroundColor(Color(UIColor.systemBackground))
         )
         .onDisappear { curHeight = 500 }
+        
         
     }
     
