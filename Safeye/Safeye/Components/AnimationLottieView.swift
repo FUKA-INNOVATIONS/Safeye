@@ -15,6 +15,9 @@ struct AnimationLottieView: UIViewRepresentable {
     typealias UIViewType = UIView
     
     var lottieJson: String
+    var loopOnce: Bool?
+    
+    @State var play: Bool = true
     
     func makeUIView(context: UIViewRepresentableContext<AnimationLottieView>) -> UIView {
         let view = UIView(frame: .zero)
@@ -23,8 +26,9 @@ struct AnimationLottieView: UIViewRepresentable {
         let animationView = AnimationView()
         animationView.animation = Animation.named(lottieJson)
         animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = .loop
-        animationView.play()
+        if play { animationView.play() } else { animationView.stop() }
+        if loopOnce != nil { animationView.loopMode = .playOnce} else { animationView.loopMode = .loop }
+        
         view.addSubview(animationView)
         
         //Constrains as container for animation view
@@ -39,5 +43,9 @@ struct AnimationLottieView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<AnimationLottieView>) {
+    }
+    
+    func togglePlay() {
+        play.toggle()
     }
 }

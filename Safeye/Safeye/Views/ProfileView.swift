@@ -66,7 +66,7 @@ struct ProfileView: View {
                     Text("My safe spaces")
                         .fontWeight(.bold)
                     
-                    ListViewComponent(item: "safeSpace", size: 40)
+                    ListViewComponent(item: "safeSpace", size: 50)
                         .padding(.leading, 20)
                         .padding(.trailing, 20)                    
                     

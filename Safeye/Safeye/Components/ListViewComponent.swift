@@ -26,7 +26,7 @@ struct ListViewComponent: View {
                     }.padding(5)
                 } else if item == "safeSpace" {
                     ForEach(appState.safePlaces) {_ in
-                        SafeSpaceComponent(size: size)
+                        SafeSpaceComponent(size: size, own: true, name: "test")
                     }.padding(5)
                 }
             }
