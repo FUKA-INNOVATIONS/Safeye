@@ -59,8 +59,6 @@ struct ProfileView: View {
                         }
                     }
                 }
-                //.background(Color(UIColor.lightGray))
-                
                 
                 Divider()
                 Spacer(minLength: 30)
@@ -108,40 +106,24 @@ struct ProfileView: View {
                     }
    
                 }
-//                Spacer(minLength: 40)
                 Divider()
-//                Text("My details")
-//                    .fontWeight(.bold)
-//                    .padding(.top, 20)
-                
+
                 ScrollView {
                     UserDetailsComponent()
                 }
    
             }
-            //.padding(.top, -100)
             .onAppear {
                 print("profileView view appeared")
                 ProfileVM.getProfileForCurrentUser()
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
-                //ProfileVM.updateUserHomeCoordinates()
             }
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
-//        .navigationTitle("")
-//        .navigationBarHidden(true)
         .onAppear {
-            //            ConnectionVM.getConnections()
-            //            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
             SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }
         
     }
 }
-
-/*struct ProfileView_Previews: PreviewProvider {
- static var previews: some View {
- ProfileView()
- }
- }*/
