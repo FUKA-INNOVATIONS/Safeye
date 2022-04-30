@@ -105,7 +105,7 @@ class EventService {
                             if convertedEvent.status == .PANIC {
                                 self.appState.panicMode = true
                                 for eventPanic in self.appState.eventsPanic {
-                                    if eventPanic.id != convertedEvent.id && eventPanic.ownerId != AuthenticationService.getInstance.currentUser!.uid {
+                                    if eventPanic.id != convertedEvent.id && eventPanic.ownerId != Store.shared.currentUserID {
                                         //self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != eventPanic.id }
                                         self.appState.eventsPanic.append(convertedEvent)
                                     }

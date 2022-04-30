@@ -18,36 +18,36 @@ struct SafeSpaceComponent: View {
     }
     @State var showName: Bool = false
     
-        var body: some View {
-            VStack {
-                ZStack {
-                    if own {
-                        AnimationLottieView(lottieJson: "safe-place-own", loopOnce: true)
-                                                                .frame(width: size, height: size, alignment: .center)
-                                                                .onTapGesture {
-                                                                    showName.toggle()
-                                                                }
-                    } else {
-                        AnimationLottieView(lottieJson: "safe-place-trusted")
-                            .frame(width: size, height: size, alignment: .center)
-                            .onTapGesture {
-                                showName.toggle()
-                            }
-                    }
-                    
-                    Circle()
-                        .stroke(.blue, lineWidth: 2)
-                        .frame(width: size + 5, height: size + 5)
+    var body: some View {
+        VStack {
+            ZStack {
+                if own {
+                    AnimationLottieView(lottieJson: "safe-place-own", loopOnce: true)
+                        .frame(width: size, height: size, alignment: .center)
+                        .onTapGesture {
+                            showName.toggle()
+                        }
+                } else {
+                    AnimationLottieView(lottieJson: "safe-place-trusted")
+                        .frame(width: size, height: size, alignment: .center)
+                        .onTapGesture {
+                            showName.toggle()
+                        }
                 }
                 
-                if showName { Text(name) }
+                Circle()
+                    .stroke(.blue, lineWidth: 2)
+                    .frame(width: size + 5, height: size + 5)
             }
-//            Image(systemName:"house.circle")
-//                .font(.system(size: 40))
-//                .frame(width: size, height: size, alignment: .center)
-//                .scaledToFit()
-//                .aspectRatio(contentMode: .fill)
+            
+            if showName { Text(name) }
         }
+        //            Image(systemName:"house.circle")
+        //                .font(.system(size: 40))
+        //                .frame(width: size, height: size, alignment: .center)
+        //                .scaledToFit()
+        //                .aspectRatio(contentMode: .fill)
+    }
 }
 
 struct SafeSpaceComponent_Previews: PreviewProvider {

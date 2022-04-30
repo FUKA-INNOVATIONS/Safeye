@@ -59,8 +59,6 @@ struct ProfileView: View {
                         }
                     }
                 }
-                //.background(Color(UIColor.lightGray))
-                
                 
                 Divider()
                 Spacer(minLength: 30)
@@ -71,12 +69,12 @@ struct ProfileView: View {
                     Text("My safe spaces")
                         .fontWeight(.bold)
                     
-
+                    
                     if appState.safePlaces.isEmpty { Text("You haven't yet added any places").font(.caption).padding(.top) }
                     
                     ListViewComponent(item: "safeSpace", size: 40)
                         .padding(.leading, 20)
-                        .padding(.trailing, 20)                    
+                        .padding(.trailing, 20)
                     
                     HStack{
                         Spacer()
@@ -106,42 +104,22 @@ struct ProfileView: View {
                         
                         Spacer()
                     }
-   
+                    
                 }
-//                Spacer(minLength: 40)
                 Divider()
-//                Text("My details")
-//                    .fontWeight(.bold)
-//                    .padding(.top, 20)
-                
-                ScrollView {
-                    UserDetailsComponent()
-                }
-   
+                UserDetailsComponent() // Personal and health info
             }
-            //.padding(.top, -100)
             .onAppear {
                 print("profileView view appeared")
                 ProfileVM.getProfileForCurrentUser()
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
-                //ProfileVM.updateUserHomeCoordinates()
             }
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
-//        .navigationTitle("")
-//        .navigationBarHidden(true)
         .onAppear {
-            //            ConnectionVM.getConnections()
-            //            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
             SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }
         
     }
 }
-
-/*struct ProfileView_Previews: PreviewProvider {
- static var previews: some View {
- ProfileView()
- }
- }*/
