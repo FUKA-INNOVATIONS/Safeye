@@ -68,7 +68,6 @@ struct AddContactView: View {
                         SearchFieldComponent(searchInput: $searchInput)
                         Button(action: {
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
-//                        }, label: {Text("Search")})
                         }, label: {Text(translationManager.searchBtn)})
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
@@ -79,7 +78,8 @@ struct AddContactView: View {
                     if appState.profileSearch != nil {
                         
                         if appState.searchResultPhoto != nil {
-                            ProfileImageComponent(size: 90, avatarImage: appState.searchResultPhoto!)
+                            ProfileImageComponent(size: 150, avatarImage: appState.searchResultPhoto!)
+                                .padding(.bottom, 20)
                         } else {
                             ProgressView()
                                 .onAppear {
@@ -88,8 +88,8 @@ struct AddContactView: View {
                         }
                         
                         Text("\(appState.profileSearch?.fullName ?? "No name")")
+                            .font(.title)
                             .padding(.bottom)
-//                      BasicButtonComponent(label: "Add", action: {
                         Button(action: {
                             DispatchQueue.main.async {
                                 if appState.profileSearch != nil {
@@ -105,13 +105,11 @@ struct AddContactView: View {
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
                     } else {
-//                      Text("Nothing to display.")
                         VStack {
                             AnimationLottieView(lottieJson: "no-data")
-                            Text(self.error)
+                            //Text(self.error)
                         }
                         .frame(width: 150, height: 150, alignment: .center)
-                        //Text(translationManager.nothingTitle)
                         Text(self.error)
                             .frame(alignment: .center)
                             .padding()
