@@ -20,14 +20,13 @@ struct LoginView: View {
     
     var body: some View {
         VStack{
-            //            InputFieldComponent(title: "Email address", inputText: $email)
-            //            SecureInputFieldComponent(title: "Password", secureText: $password)
-            //            InputFieldComponent(title: translationManager.createEmailTitle, inputText: $email)
             
-            LoginInputComponent(title: translationManager.emailTitle, inputText: $email)
+            AnimationLottieView(lottieJson: "sign-in-secure")
+            
+            
+            LoginInputComponent(title: translationManager.emailTitle, inputText: $email, icon: "envelope")
             SecureInputFieldComponent(title: translationManager.passwordTitle, secureText: $password)
             
-            //            BasicButtonComponent(label: "Sign In", action: {
             BasicButtonComponent(label: translationManager.signInButton, action: {
                 // Email and password not provided
                 guard !email.isEmpty, !password.isEmpty else {
@@ -38,20 +37,18 @@ struct LoginView: View {
             })
             
             // Go to Register view
-            //            NavigationLink("Create a new account", destination: RegisterView(viewModel: viewModel))
             NavigationLink(translationManager.createNewAcc, destination: RegisterView(viewModel: viewModel))
                 .foregroundColor(Color.blue)
-                .padding()
+            
+            
+            
         }
         Spacer()
         // Show alert on login failure
-        //        .alert("Login failed", isPresented: $viewModel.signinError) {
-        //            Button("OK", role: .cancel) { }
         .alert(translationManager.loginAlertTitle, isPresented: $viewModel.signinError) {
             Button(translationManager.okBtn, role: .cancel) { }
         }
-        //        .navigationTitle("Sign in") // TODO: this creates warnings
-        .navigationTitle(translationManager.signInTitle) // TODO: this creates warnings
+        .navigationTitle(translationManager.signInTitle)
         
     }
 }

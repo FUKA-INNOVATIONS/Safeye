@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct ConnectionModel: Codable, Identifiable {
+struct ConnectionModel: Codable, Identifiable, Equatable {
     @DocumentID var id: String?
     var connectionId: String
     var connectionUsers: [String]

@@ -41,13 +41,13 @@ struct CreateEventView: View {
                     SelectContactGridComponent()
                 }
                 
-                ForEach(appState.eventSelctedContacts) { selectedContact in
-                    HStack {
-                        Text("\(selectedContact.fullName)")
-                        Spacer()
-                        Image(systemName: "person.fill.checkmark")
-                    }
-                }
+//                ForEach(appState.eventSelctedContacts) { selectedContact in
+//                    HStack {
+//                        Text("\(selectedContact.fullName)")
+//                        Spacer()
+//                        Image(systemName: "person.fill.checkmark")
+//                    }
+//                }
                 
                 Section(header: Text(translationManager.dateAndTime)) {
                     DatePicker(translationManager.startTime, selection: $startDate)
@@ -82,7 +82,7 @@ struct CreateEventView: View {
             
             BasicButtonComponent(label: translationManager.saveActivateBtn, action: {
                 print("City: \(cities[selectedEventCityIndex].name!)")
-                if eventType.isEmpty || cityOfEvent.isEmpty { print("Fill all fields") ; return }
+                if eventType.isEmpty { print("Fill all fields") ; return }
                 
                 // set a random path for event folder and pass it to EventVM to createEvent()
                 eventFolderPath = "events/\(UUID().uuidString)/"

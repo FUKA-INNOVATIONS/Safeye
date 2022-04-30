@@ -19,31 +19,44 @@ struct SelectContactComponent: View {
     let remove = TranslationService.shared.removeContactBtn
     
     var body: some View {
-        VStack{
-            if photo != nil {
-                ProfileImageComponent(size: 30, avatarImage: photo!)
-            } else {
-                ProgressView()
-            }
-            //AvatarComponent(size: 30).padding(.top)
-            Text("\(profileDetails.fullName)")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(.white)
-                .padding(.bottom)
-                .frame(width: 120, height: 20, alignment: .center)
+        
+        
+        HStack {
+            Image(systemName: "person.fill.checkmark").foregroundColor(selected ? .blue : .gray)
+            Text(profileDetails.fullName).foregroundColor(selected ? .blue : .gray)
+            Spacer()
             Button("\(selected ? Text(translationManager.removeContactBtn) : Text(translationManager.addContactBtn))") {
                 if selected { appState.eventSelctedContacts =  appState.eventSelctedContacts.filter { $0.id != profileDetails.id } } else { appState.eventSelctedContacts.append(profileDetails) }
                 selected.toggle()
             }
-            .foregroundColor(Color.white)
-            //.position(y: -10)
         }
-        .onAppear {
-            photo = appState.trustedContactPhoto
-        }
-        .fixedSize()
-        .background(.gray)
-        .padding([.bottom], 10)
+        
+        
+//        VStack{
+//            if photo != nil {
+//                ProfileImageComponent(size: 30, avatarImage: photo!)
+//            } else {
+//                ProgressView()
+//            }
+//            //AvatarComponent(size: 30).padding(.top)
+//            Text("\(profileDetails.fullName)")
+//                .font(.system(size: 13, weight: .semibold))
+//                .foregroundColor(.white)
+//                .padding(.bottom)
+//                .frame(width: 120, height: 20, alignment: .center)
+//            Button("\(selected ? Text(translationManager.removeContactBtn) : Text(translationManager.addContactBtn))") {
+//                if selected { appState.eventSelctedContacts =  appState.eventSelctedContacts.filter { $0.id != profileDetails.id } } else { appState.eventSelctedContacts.append(profileDetails) }
+//                selected.toggle()
+//            }
+//            .foregroundColor(Color.white)
+//            //.position(y: -10)
+//        }
+//        .onAppear {
+//            photo = appState.trustedContactPhoto
+//        }
+//        .fixedSize()
+//        .background(.gray)
+//        .padding([.bottom], 10)
         
     }
 }

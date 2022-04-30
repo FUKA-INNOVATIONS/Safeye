@@ -27,7 +27,7 @@ struct SettingsView: View {
     var body: some View {
         
         Form {
-            Section("Settings") {
+            Section(header: Text("Settings"), footer: Text("Once 'Update home coordinates' is clicked, your coordinates will be automatically updated to match your current location.")) {
                 VStack{
                     Picker("Mode", selection: $isDarkMode){
                     Text("Light")
@@ -57,11 +57,19 @@ struct SettingsView: View {
                             section = "about"
                             isInfoDetailShowing = true
                         }
-                    Text("Concepts explained")
+                    
+                    Text("How it works")
                         .onTapGesture {
-                            section = "concepts"
+                            section = "how"
                             isInfoDetailShowing = true
                         }
+                    
+                    Text("FAQ")
+                        .onTapGesture {
+                            section = "FAQ"
+                            isInfoDetailShowing = true
+                        }
+                    
                     Text("Privacy")
                         .onTapGesture {
                             section = "privacy"
@@ -73,11 +81,15 @@ struct SettingsView: View {
                 }
             }
             
-            // Sign out button
-            Button(translationManager.signOut) {
-                AuthVM.signOut()
+            HStack {
+                // Sign out button
+                Button(translationManager.signOut) {
+                    AuthVM.signOut()
+                }
+                .foregroundColor(.red)
+                Spacer()
+                Text("\(AuthenticationService.getInstance.currentUser?.email ?? "")").foregroundColor(.gray).font(.caption2)
             }
-            .foregroundColor(.red)
             
         }
 //        .navigationTitle("")

@@ -31,7 +31,14 @@ struct ContentView: View {
 //                if self.appState.appLoading { AnimationLottieView(lottieJson: "eye") }
                 if appState.profile == nil {
                     // User has no profile, create new one
+                    
+                    Text("Sinä päätät ketkä näkevät profiilisi")
+                    AnimationLottieView(lottieJson: "profiles-of-people")
+                    
+                    Spacer()
                     Text(translationManager.textProfile)
+                        .font(.headline)
+                    
                     BasicButtonComponent(label: translationManager.createProfileBtn) {
                         showingCreateProfile = true
                     }

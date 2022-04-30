@@ -31,8 +31,8 @@ struct EventView: View {
         return VStack {
             
             VStack {
-//                Text("\(appState.event?.status.rawValue ?? "")")
-//                    .font(.largeTitle)
+                Text("\(appState.event?.status.rawValue ?? "")")
+                    .font(.largeTitle).foregroundColor(appState.event?.status == .STARTED ? .green : .red)
                     /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
                         EventVM.deleteEvent(eventID)
                         goBack = true
@@ -60,7 +60,13 @@ struct EventView: View {
                         Text("\(Text(translationManager.eventTypeTrack)) \(appState.event?.eventType ?? "")")
                         Text("\(Text(translationManager.otherTrack)) \(appState.event?.otherInfo ?? "")")
                     }
-                    
+                    if !EventVM.isEventOwner() {
+                        NavigationLink {
+                            EventMapView()
+                        } label: {
+                            Text("View Tracked User On Map")
+                        }
+                    }
                 }
                 
             }
