@@ -31,8 +31,8 @@ struct EventView: View {
         return VStack {
             
             VStack {
-//                Text("\(appState.event?.status.rawValue ?? "")")
-//                    .font(.largeTitle)
+                Text("\(appState.event?.status.rawValue ?? "")")
+                    .font(.largeTitle).foregroundColor(appState.event?.status == .STARTED ? .green : .red)
                     /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
                         EventVM.deleteEvent(eventID)
                         goBack = true

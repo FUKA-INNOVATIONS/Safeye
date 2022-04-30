@@ -93,7 +93,7 @@ class EventService {
     func fetchDetails(_ eventID: String) {
         let eventRef = self.eventDB.document(eventID)
         DispatchQueue.main.async {
-            eventRef.addSnapshotListener { document, error in
+            eventRef.addSnapshotListener() { document, error in
                 if let error = error as NSError? {
                     self.eventErrors = "eventService: Error getting event: \(error.localizedDescription)"
                 }
