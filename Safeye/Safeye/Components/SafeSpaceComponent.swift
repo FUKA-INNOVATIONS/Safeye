@@ -22,7 +22,7 @@ struct SafeSpaceComponent: View {
             VStack {
                 ZStack {
                     if own {
-                        AnimationLottieView(lottieJson: "safe-place-trusted", loopOnce: true)
+                        AnimationLottieView(lottieJson: "safe-place-own", loopOnce: true)
                                                                 .frame(width: size, height: size, alignment: .center)
                                                                 .onTapGesture {
                                                                     showName.toggle()
