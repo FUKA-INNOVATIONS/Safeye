@@ -50,18 +50,7 @@ struct MapView: View {
             Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: appState.locations) { location in
                 MapAnnotation(coordinate: location.coordinate) {
                     // TODO create own component for how safe spaces are displayed
-                    if location.own == true {
-                        // Users own created safe space
-                        Circle()
-                            .stroke(.purple, lineWidth: 3)
-                            .frame(width: 30, height: 30)
-                        Text(location.name)
-                    } else {
-                        // Trusted contacts home location
-                        Circle()
-                            .stroke(.blue, lineWidth: 3)
-                            .frame(width: 20, height: 20)
-                    }
+                    SafeSpaceComponent(size: 50, own: location.own, name: location.name)
                 }
             }
             .ignoresSafeArea()

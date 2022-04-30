@@ -71,6 +71,7 @@ struct ProfileView: View {
                     Text("My safe spaces")
                         .fontWeight(.bold)
                     
+
                     if appState.safePlaces.isEmpty { Text("You haven't yet added any places").font(.caption).padding(.top) }
                     
                     ListViewComponent(item: "safeSpace", size: 40)

@@ -10,6 +10,11 @@ import SwiftUI
 struct TCItemModifier: ViewModifier {
     func body(content: Content) -> some View {
             content
-                .padding(10)
+            .foregroundColor(Color.black)
+            .font(.title3)
+            .padding(.vertical, 20)
+            .padding(.horizontal, 40)
+            .background(Color.white)
+            .cornerRadius(5)
         }
 }

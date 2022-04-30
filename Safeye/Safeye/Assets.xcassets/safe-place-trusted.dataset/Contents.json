@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "safe-place-trusted.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

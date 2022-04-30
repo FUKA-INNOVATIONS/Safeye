@@ -93,6 +93,9 @@
 		6A2CFC312801C11A0046395D /* CurtainModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC302801C11A0046395D /* CurtainModifier.swift */; };
 		6A2CFC332801C8B80046395D /* TCListModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC322801C8B80046395D /* TCListModifier.swift */; };
 		6A2CFC352801CAA10046395D /* TCItemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2CFC342801CAA10046395D /* TCItemModifier.swift */; };
+		6A382E80281C0A53002E3BAB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A382E7F281C0A53002E3BAB /* GoogleService-Info.plist */; };
+		6A382E82281C19A0002E3BAB /* LoginInputComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A382E81281C19A0002E3BAB /* LoginInputComponent.swift */; };
+		6A382E84281D141B002E3BAB /* safe-place-own.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A382E83281D141B002E3BAB /* safe-place-own.json */; };
 		6A3A881928031E460049DC7F /* ContactConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3A881828031E460049DC7F /* ContactConnectionModel.swift */; };
 		6A40921D281B29EE0094F948 /* InfoTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A40921C281B29EE0094F948 /* InfoTextModifier.swift */; };
 		6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */; };
@@ -237,6 +240,9 @@
 		6A2CFC302801C11A0046395D /* CurtainModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurtainModifier.swift; sourceTree = "<group>"; };
 		6A2CFC322801C8B80046395D /* TCListModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCListModifier.swift; sourceTree = "<group>"; };
 		6A2CFC342801CAA10046395D /* TCItemModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCItemModifier.swift; sourceTree = "<group>"; };
+		6A382E7F281C0A53002E3BAB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A382E81281C19A0002E3BAB /* LoginInputComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInputComponent.swift; sourceTree = "<group>"; };
+		6A382E83281D141B002E3BAB /* safe-place-own.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "safe-place-own.json"; path = "../../../../../Downloads/safe-place-own.json"; sourceTree = "<group>"; };
 		6A3A881828031E460049DC7F /* ContactConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactConnectionModel.swift; sourceTree = "<group>"; };
 		6A40921C281B29EE0094F948 /* InfoTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextModifier.swift; sourceTree = "<group>"; };
 		6A55867E280D66260076B3CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -328,6 +334,7 @@
 		5F0EA2F927F6F9E000FBD77B /* Safeye */ = {
 			isa = PBXGroup;
 			children = (
+				6A382E7F281C0A53002E3BAB /* GoogleService-Info.plist */,
 				6A55867E280D66260076B3CE /* Info.plist */,
 				5F236845281C49AF0016CB65 /* GoogleService-Info.plist */,
 				5F244AE827F7213E00BFE1FB /* Utils */,
@@ -340,6 +347,7 @@
 				5F0EA2FA27F6F9E000FBD77B /* SafeyeApp.swift */,
 				755FCBB3281683650081B160 /* Localizable.strings */,
 				5F0EA2FC27F6F9E000FBD77B /* ContentView.swift */,
+				6A382E83281D141B002E3BAB /* safe-place-own.json */,
 				5F0EA2FE27F6F9E100FBD77B /* Assets.xcassets */,
 				5F0EA30027F6F9E100FBD77B /* Preview Content */,
 			);
@@ -444,6 +452,7 @@
 				5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */,
 				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
 				6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */,
+				6A382E81281C19A0002E3BAB /* LoginInputComponent.swift */,
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */,
 				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
@@ -710,6 +719,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A382E84281D141B002E3BAB /* safe-place-own.json in Resources */,
 				5F0EA30227F6F9E100FBD77B /* Preview Assets.xcassets in Resources */,
 				5F236846281C49AF0016CB65 /* GoogleService-Info.plist in Resources */,
 				755FCBB1281683650081B160 /* Localizable.strings in Resources */,
