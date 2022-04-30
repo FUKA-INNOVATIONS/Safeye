@@ -69,12 +69,12 @@ struct ProfileView: View {
                     Text("My safe spaces")
                         .fontWeight(.bold)
                     
-
+                    
                     if appState.safePlaces.isEmpty { Text("You haven't yet added any places").font(.caption).padding(.top) }
                     
                     ListViewComponent(item: "safeSpace", size: 40)
                         .padding(.leading, 20)
-                        .padding(.trailing, 20)                    
+                        .padding(.trailing, 20)
                     
                     HStack{
                         Spacer()
@@ -104,14 +104,10 @@ struct ProfileView: View {
                         
                         Spacer()
                     }
-   
+                    
                 }
                 Divider()
-
-                ScrollView {
-                    UserDetailsComponent()
-                }
-   
+                UserDetailsComponent() // Personal and health info
             }
             .onAppear {
                 print("profileView view appeared")
