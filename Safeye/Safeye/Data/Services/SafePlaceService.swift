@@ -43,7 +43,7 @@ class SafePlaceService {
                                 do {
                                     let convertedPlace = try place.data(as: SafePlaceModel.self)
                                     self.appState.safePlaces.append(convertedPlace)
-                                    let isOwner = (convertedPlace.ownerId == AuthenticationService.getInstance.currentUser!.uid) // temporary solution, not belogning here
+                                    let isOwner = (convertedPlace.ownerId == Store.shared.currentUserID) // temporary solution, not belogning here
                                     let location = Location(name: convertedPlace.name, coordinate: CLLocationCoordinate2D(latitude: convertedPlace.latitude, longitude: convertedPlace.longitude), own: isOwner)
                                     self.appState.locations.append(location)
                                 } catch {
