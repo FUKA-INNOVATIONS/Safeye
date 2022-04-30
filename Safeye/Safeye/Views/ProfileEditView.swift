@@ -24,6 +24,7 @@ struct ProfileEditView: View {
     
     @State private var fullName = ""
     @State private var address = ""
+    @State private var birthdate = Date()
     @State private var birthday = ""
     @State private var bloodType = ""
     @State private var illness = ""
@@ -42,10 +43,13 @@ struct ProfileEditView: View {
         
         // Profile exists and user has all profile details, prefill all fields
         if appState.profile != nil {
+            let birthdayFormatter = DateFormatter()
+            birthdayFormatter.dateFormat = "dd-MM-yyyy"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
                 fullName = appState.profile!.fullName
                 address = appState.profile!.address
                 birthday = appState.profile!.birthday
+                birthdate = birthdayFormatter.date(from: birthday)!
                 bloodType = appState.profile!.bloodType
                 illness = appState.profile!.illness
                 allergies = appState.profile!.allergies
@@ -116,8 +120,10 @@ struct ProfileEditView: View {
                     LoginInputComponent(title: translationManager.addressTitle, inputText: $address, icon: "map.fill")
                 }
                 HStack{
-                    LoginInputComponent(title: translationManager.birthdayTitle, inputText: $birthday, icon: "calendar.circle.fill")
+                    DatePicker("Birthdate", selection: $birthdate, in: ...Date(), displayedComponents: .date)
+                    //LoginInputComponent(title: translationManager.birthdayTitle, inputText: $birthday, icon: "calendar.circle.fill")
                 }
+                .frame(width: 350)
                 HStack{
                     VStack(alignment: .leading){
                         
@@ -146,17 +152,20 @@ struct ProfileEditView: View {
                     
                     print(selectedCountry)
                     
+                    let birthdayFormatter = DateFormatter()
+                    birthdayFormatter.dateFormat = "dd-MM-yyyy"
+                    birthday = birthdayFormatter.string(from: birthdate)
+                    
                     if appState.profile == nil { // User has no profile, create new one
                         print("User has no PROFILE, add new profile")
                         
                         // User has not filled all form fields
                         // TODO: show different alert when no photo is selected
-                        if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 || selectedPhoto == nil || selectedCountry.count < 0 {
+                        if fullName.count < 1 || address.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 || selectedPhoto == nil || selectedCountry.count < 0 {
                             showEmptyFieldAlert = true // Show alert box
                             return
                         }
 
-                        
                         // set avatar path/name to a random string that will be stored in profile // TODO: change avatar path name > userID
                         avatar = "avatars/\(UUID().uuidString).jpg"
                         // upload the image
@@ -174,7 +183,7 @@ struct ProfileEditView: View {
                         print("User has a profile, update it")
                         
                         // User has not filled all form fields
-                        if fullName.count < 1 || address.count < 1 || birthday.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 {
+                        if fullName.count < 1 || address.count < 1 || bloodType.count < 1 || illness.count < 1 || allergies.count < 1 {
                             showEmptyFieldAlert = true // Show alert box
                             return
                         }
