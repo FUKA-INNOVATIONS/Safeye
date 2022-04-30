@@ -66,7 +66,7 @@ struct CreateEventView: View {
                 }
                 
                 
-                Section(header: Text("Location")) {
+                Section(header: Text("Location")) { // TODO: translation
                     Picker(selection: $selectedEventCityIndex, label: Text("")) {
                         ForEach(0..<cities.count) {
                             Text(cities[$0].name!)

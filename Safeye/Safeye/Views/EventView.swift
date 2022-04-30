@@ -60,6 +60,7 @@ struct EventView: View {
                         Text("\(Text(translationManager.startTrack))  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
                         Text("\(Text(translationManager.endTrack)) \(appState.event?.endTime.formatted(.dateTime) ?? "")")
                         Text("\(Text(translationManager.eventTypeTrack)) \(appState.event?.eventType ?? "")")
+                        Text("\(Text("Location")): \(appState.event?.city ?? "")")  // TODO: translation > location, also in createEventView
                         Text("\(Text(translationManager.otherTrack)) \(appState.event?.otherInfo ?? "")")
                     }
                     if !EventVM.isEventOwner() {
