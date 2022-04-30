@@ -9,7 +9,7 @@ import Foundation
 
 import FirebaseFirestoreSwift
 
-struct Event: Codable, Identifiable {
+struct Event: Codable, Identifiable, Equatable {
     @DocumentID var id: String?
     var ownerId: String
     var status: EventStatus

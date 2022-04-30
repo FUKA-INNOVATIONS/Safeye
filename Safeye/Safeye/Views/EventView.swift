@@ -46,12 +46,14 @@ struct EventView: View {
                     Section(header: Text(translationManager.trustedContactsTrack)) {
                         ForEach(appState.eventTrustedContactsProfiles) { profile in
                             HStack {
-                                //Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
                                 Text("\(profile.fullName)")
                                 Spacer()
                                 Image(systemName: "eye.fill")
                             }
                         }
+                    }
+                    .onAppear {
+                        EventVM.getEventTrustedContactsProfiles(eventID: eventID)
                     }
                     
                     Section(header: Text(translationManager.eventdDetailsTrack)) {
@@ -86,7 +88,6 @@ struct EventView: View {
                 appState.event!.status == .STARTED ?
                 Button(action: { // Actions after panic button Has been pressed
                     EventVM.activatePanicMode()
-                    //EventVM.sentNotification()
                 }) {
                     TrackingModeButtonComponent()
                 }
@@ -102,10 +103,10 @@ struct EventView: View {
         }
         //.navigationBarHidden(true)
         .onAppear {
-            EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
             if EventVM.isEventOwner() { locationManager.locationDuringTrackingMode() }
         }
+        
 
     }
     
