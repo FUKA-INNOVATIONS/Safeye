@@ -62,6 +62,7 @@ struct CreateEventView: View {
                         }
                     }
                     .pickerStyle(.inline)
+                    .labelsHidden()
                 }
                 
                 
