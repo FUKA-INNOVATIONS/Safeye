@@ -19,15 +19,15 @@ struct SelectContactComponent: View {
     let remove = TranslationService.shared.removeContactBtn
     
     var body: some View {
+        let isSelected = appState.eventSelctedContacts.filter { $0.id == profileDetails.id }.count == 1
         
-        
-        HStack {
-            Image(systemName: "person.fill.checkmark").foregroundColor(selected ? .blue : .gray)
-            Text(profileDetails.fullName).foregroundColor(selected ? .blue : .gray)
+        return HStack {
+            Image(systemName: "person.fill.checkmark").foregroundColor(isSelected ? .blue : .gray)
+            Text(profileDetails.fullName).foregroundColor(isSelected ? .blue : .gray)
             Spacer()
-            Button("\(selected ? Text(translationManager.removeContactBtn) : Text(translationManager.addContactBtn))") {
-                if selected { appState.eventSelctedContacts =  appState.eventSelctedContacts.filter { $0.id != profileDetails.id } } else { appState.eventSelctedContacts.append(profileDetails) }
-                selected.toggle()
+            Button("\(isSelected ? Text(translationManager.removeContactBtn) : Text(translationManager.addContactBtn))") {
+                if isSelected { appState.eventSelctedContacts =  appState.eventSelctedContacts.filter { $0.id != profileDetails.id } } else { appState.eventSelctedContacts.append(profileDetails) }
+                //selected.toggle()
             }
         }
         
