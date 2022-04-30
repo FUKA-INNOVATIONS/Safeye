@@ -26,6 +26,8 @@ class Store: ObservableObject {
     @Published var connections = [ConnectionModel]() // Trusted contacts, status = true
     @Published var trustedContacts = [ProfileModel]()
     @Published var connectionPofiles = [ProfileModel]()
+    @Published var pendingConnectionRequestProfilesOwner = [ProfileModel]()
+    @Published var pendingConnectionRequestProfilesTarget = [ProfileModel]()
     @Published var panicPofiles = [ProfileModel]()
     @Published var tCProfile: ProfileModel?
     // @Published var eventContactsWithAvatars = [TrustedContactModel]()

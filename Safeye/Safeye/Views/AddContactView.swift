@@ -91,14 +91,16 @@ struct AddContactView: View {
                             .padding(.bottom)
 //                      BasicButtonComponent(label: "Add", action: {
                         Button(action: {
-                            if appState.profileSearch != nil {
-                                let message = ConnectionVM.addConnection()
-                                if message != nil {
-                                    self.error = message!
+                            DispatchQueue.main.async {
+                                if appState.profileSearch != nil {
+                                    let message = ConnectionVM.addConnection()
+                                    if message != nil {
+                                        self.error = message!
+                                    }
                                 }
+                                searchInput = ""
+                                appState.profileSearch = nil
                             }
-                            searchInput = ""
-                            appState.profileSearch = nil
                         }, label: {Text(translationManager.addBtn)})
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
