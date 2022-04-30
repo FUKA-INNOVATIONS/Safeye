@@ -21,7 +21,11 @@ struct CurtainTCComponent: View {
             if trustedContact.homeLatitude != nil {
                 Button(action: {
                     mapVM.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: trustedContact.homeLatitude!, longitude: trustedContact.homeLongitude!), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                            }, label: {Text("Focus on home")})
+                            }, label: {Text("Focus on")})
+                    .border(Color.blue, width: 2)
+                    .padding()
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
             } else {
                 Text("No home set")
                     .foregroundColor(Color.gray)
@@ -33,8 +37,8 @@ struct CurtainTCComponent: View {
     }
 }
 
-//struct CurtainTCComponent_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CurtainTCComponent()
-//    }
-//}
+struct CurtainTCComponent_Previews: PreviewProvider {
+    static var previews: some View {
+        CurtainTCComponent(trustedContact: ProfileModel(id: "", userId: "", fullName: "David Fallow", address: "", birthday: "", bloodType: "", illness: "", allergies: "", connectionCode: "", avatar: ""))
+    }
+}
