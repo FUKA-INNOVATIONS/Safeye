@@ -28,11 +28,14 @@
 // Alert in case wrong input
 "loginAlertTitle" = "Kirjautuminen epäonnistui";
 "okBtn" = "ai että, okeei";
+// Two extra empty keys
+"extraOne" = "";
+"extraTwo" = "";
 
 
 // Create profile
 
-
+"youDecidetext" = "Sinä päätät ketkä näkevät profiilisi";
 "textProfile" = "Luo profiili ja pysy turvassa!";
 "createProfileBtn" = "Luo profiili";
 
@@ -63,6 +66,16 @@
 "copyBtn" = "Kopioi"; // might be an icon
 "nocode" = "Ei koodia";
 
+"lightMode" = "Light";
+"darkMode" = "Dark";
+"settingsTitle" = "Asetukset";
+"updateCoordinatesBtn" = "Päivitä kodin koordinaatit";
+"updateCoordinatesInfo" = "Kun napstat 'Päivitä kodin koordinaatit', koordinaatit päivitetään automaattisesti vastaamaan nykyistä sijaintiasi.";
+"aboutSafeye" = "Safeye:sta";
+"faqTitle" = "FAQ";
+"privacyTitle" = "Yksityisyys";
+"howItWorksTitle" = "Miten se toimii";
+"infoSettingsTitle" = "Tiedot";
 
 // HOME
 
@@ -83,10 +96,18 @@
 "endTrack" = "Päättyy:";
 "eventTypeTrack" = "Tapahtumatyyppi:";
 "otherTrack" = "Muut tiedot:";
+"viewOnMapBtn" = "Näytä seurattu käyttäjä kartalla";
+"showRecordedBtn" = "Näytä tallennetut viestit";
+"recordMessageBtn" = "Tallenna viesti";
+
 //Tracking mode copmponent
 "sosBtn" = "SOS";
 "safeBtn" = "Safe";
-
+// Recording view
+"recordedMessages" = "Tallennetut viestit";
+"recordedYourMessages" = "Tallennetut viestit";
+"SaveUpdateBtn" = "Tallenna/päivitä viestisi";
+"cancelRecording" = "Peruuta tallennus";
 
 
 // Create event view
@@ -98,6 +119,8 @@
 "eventType" = "Tapahtumatyyppi";
 "addContactBtn" = "Lisää";
 "removeContactBtn" = "Poista";
+"location" = "Sijainti";
+
 // Event types
 "selectEventType" = "Valitse tapahtumatyyppi";
 "barNight" = "Baari-ilta";
@@ -121,11 +144,26 @@
 "illnessTitle" = "Sairaudet";
 "allergiesTitle" = "Allergiat";
 "safeSpaceTitle" = "Omat turvapaikat";
-// Add TC
-"codeInput" = "TC koodi.."; // TODO: change to "Connection code..." in FIN
+"noPlaceYet" = "Et ole vielä lisännyt paikkoja";
+"viewOnMap" = "Näytä kartalla";
+"addNew" = "Lisää uusi";
+"noName" = "Ei nimeä";
+
+// Edit profile
+"selectPhoto" = "Valitse profiilikuva";
+"country" = "Maa";
+"finland" = "Suomi";
+"sweden" = "Ruotsi";
+"estonia" = "Viro";
+"denmark" = "Tanska";
+"norway" = "Norja";
+
+// Add trusted contacts
 "searchBtn" = "Hae";
 "addBtn" = "Lisää";
 "nothingTitle" = "Ei sisältöä";
+"errorSearch" = "Syötä yhteyskoodi, hakua varten.";
+
 // Add safe space
 "chooseMapBtn" = "Valitse kartalta";
 "addSafeBtn" = "Lisää";
@@ -133,6 +171,8 @@
 "streetSafe" = "Osoite";
 "citySafe" = "Paikkakunta";
 "zipSafe" = "Postinumero";
+"foundWord" = "Löytyi";
+"placesWord" = "paikkaa";
 
 
 // CONNECTIONS
@@ -142,9 +182,29 @@
 "sentReqTitle" = "Lähetetyt pyynnöt";
 "acceptBtn" = "hyväksy";
 "profileBtn" = "profiili";
+"cancelReq" = "peruuttaa";
+"connectionCode" = "Yhteyskoodi";
+"connectiontInfo" = "Yhteyskoodisi on ainoa tapa, jolla ihmiset voivat löytää sinut Safeye:stä. Jaa se muiden kanssa, niin he voivat lähettää sinulle yhteyspyynnön.";
+"noCode" = "Ei koodia";
+"addNewContact" = "Lisää uusi yhteyshenkilö";
+"fullNameContact" = "Koko nimi";
+"sentContactBtn" = "lähetetty";
 
 // NAVITEM
 "homeNav" = "Koti";
 "profileNav" = "Profiili";
 "connectNav" = "Yhteydet";
 "settingsNav" = "Asetukset";
+
+// Components
+"friendAlert" = "Ystävä tarvitsee apuasi!";
+"imageAvatarError" = "Kuvan lataamisessa tapahtui virhe.";
+"focusBtn" = "Havaita";
+"trustedContactsMap" = "Luotetut yhteyshenkilöt";
+"noAddedContacts" = "Et ole lisännyt yhteystietoja.";
+"headline" = "Otsikko";
+"settingsItemText" = "TLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+"firstLastName" = "Etunimi Sukunimi";
+"maybeHomeAddress" = "Ehkä kotiosoite?";
+"healthDetail" = "Terveystiedot";
+

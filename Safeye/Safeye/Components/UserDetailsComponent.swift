@@ -20,7 +20,8 @@ struct UserDetailsComponent: View {
             GroupBox {
                 DisclosureGroup(translationManager.healthDetail) {
                     HStack{
-                        Text("Address")
+//                        Text("Address")
+                        Text(translationManager.addressTitle)
                         Spacer()
                         Text("\(appState.profile?.address ?? "Homeless")")
                     }
