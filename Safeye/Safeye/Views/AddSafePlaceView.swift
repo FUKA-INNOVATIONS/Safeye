@@ -94,7 +94,7 @@ struct AddSafePlaceView: View {
                         }
                         
                     }
-            Spacer(minLength: 100)
+            Spacer(minLength: 50)
 //                    .searchable(text: $result.searchText)
 
                 
