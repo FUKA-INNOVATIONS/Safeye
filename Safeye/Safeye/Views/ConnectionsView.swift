@@ -138,8 +138,6 @@ struct ConnectionsView: View {
             
             
         }
-//        .navigationTitle("")
-//        .navigationBarHidden(true)
         .onAppear {
             print("CALLCALLCALL")
             DispatchQueue.main.async { updateAllData() }
@@ -147,7 +145,7 @@ struct ConnectionsView: View {
         }
         
         .onChange(of: appState.pendingConnectionRequestsOwner) { c in
-            updateAllData()
+            DispatchQueue.main.async { updateAllData() }
             print("CALLCALLCALL \(c)")
         }
         .onChange(of: appState.pendingConnectionRequestsTarget) { c in
