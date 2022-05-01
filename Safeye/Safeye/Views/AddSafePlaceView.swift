@@ -56,9 +56,9 @@ struct AddSafePlaceView: View {
             .background(Color(UIColor.systemBackground))
             .gesture(dragGesture)
            
-                    VStack(){
+                    VStack{
                         SafeSpaceSearchComponent(searchText: $result.searchText)
-                        
+                        if (result.locations.count != 0) {
                         List(result.locations, id: \.self) { place in
                             HStack {
                                 Text(place.name!)
@@ -77,7 +77,7 @@ struct AddSafePlaceView: View {
 //                        .onAppear(perform: {
 //                                UITableView.appearance().contentInset.top = -50
 //                        })
-                        if(result.locations.count != 0) {
+                        //if(result.locations.count != 0) {
                             Text("Found \(result.locations.count) places")
 
                                 
@@ -94,7 +94,7 @@ struct AddSafePlaceView: View {
                         }
                         
                     }
-            Spacer(minLength: 50)
+            Spacer(minLength: 100)
 //                    .searchable(text: $result.searchText)
 
                 
