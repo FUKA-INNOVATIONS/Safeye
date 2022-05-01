@@ -24,11 +24,12 @@ struct ConnectionsView: View {
             
             //Connection code
             Form {
-                Section (header: Text("Connection code"), footer: Text("Your connection code is the only way people can find you on Safeye. Share it with others and they'll be able to send you a connection request.")) {
+//                Section (header: Text("Connection code"), footer: Text("Your connection code is the only way people can find you on Safeye. Share it with others and they'll be able to send you a connection request.")) {
+                Section (header: Text(translationManager.connectionCode), footer: Text(translationManager.connectiontInfo)) {
                     
                     HStack{
                         //Display connection code
-                        Text("\(appState.profile?.connectionCode ?? "No code")")
+                        Text("\(appState.profile?.connectionCode ?? "\(translationManager.noCode)")")
                         Spacer()
                         
                         //Copy code to clipboard
@@ -43,7 +44,8 @@ struct ConnectionsView: View {
                 
                 // Add new contact
                 HStack {
-                    Text("Add a new contact")
+//                    Text("Add a new contact")
+                    Text(translationManager.addNewContact)
                     Spacer()
                     Button(action: {
                         withAnimation { showingAddContact = true }
@@ -111,12 +113,12 @@ struct ConnectionsView: View {
                         //let profile = ConnectionVM.filterConnectionProfileFromAppState(request)
                         HStack {
                             //Text(profile?.fullName ?? "")
-                            Text("Full name")
+                            Text(translationManager.fullNameContact)
                             Spacer()
                             Group {
                                 Text(translationManager.cancelReq)
                                 Button {
-                                    ConnectionVM.deleteConnection(request.id!, "sent")
+                                    ConnectionVM.deleteConnection(request.id!, "\(translationManager.sentContactBtn)")
                                 } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
                             }
                             .foregroundColor(.red)

@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct MapCurtainComponent: View {
+    var translationManager = TranslationService.shared
+
     var body: some View {
         
         VStack {
     
             HStack {
                 Spacer()
-                Text("Trusted Contacts").padding(.top, 15)
+                Text(translationManager.trustedContactsMap).padding(.top, 15)
                 Spacer()
             }
             

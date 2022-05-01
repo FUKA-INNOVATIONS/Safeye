@@ -9,12 +9,14 @@ import SwiftUI
 
 struct RecordedMessagesView: View {
     @EnvironmentObject var appState: Store
+    var translationManager = TranslationService.shared
+
     
     // TODO: Distinguish panic/other messages
     
     var body: some View {
-        Text("Recorded messages")
-        
+//        Text("Recorded messages")
+        Text(translationManager.recordedMessages)
         Form {
             ForEach(appState.event!.userMessage, id: \.self) { message in
                 Text("\(message)")

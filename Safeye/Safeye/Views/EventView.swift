@@ -64,7 +64,8 @@ struct EventView: View {
                         NavigationLink {
                             EventMapView()
                         } label: {
-                            Text("View Tracked User On Map")
+//                            Text("View Tracked User On Map")
+                            Text(translationManager.viewOnMapBtn)
                         }
                     }
                 }
@@ -72,11 +73,14 @@ struct EventView: View {
             }
             
             // Modal showing a list of recorded messages from even onwer's speech
-            Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") }
+//            Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") }
+            Button { showingRecordedMessageView.toggle() } label: { Text(translationManager.showRecordedBtn) }
+
                 .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
             
             if EventVM.isEventOwner() {
-                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
+//                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
+                Button { showingRecordMessage = true } label: { Text(translationManager.recordMessageBtn); Image(systemName: "mic.circle") }
                 .disabled( appState.panicMode == true)
                 .opacity( appState.panicMode == true ? 0 : 1)
                 .padding()

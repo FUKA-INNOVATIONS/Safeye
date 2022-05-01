@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AvatarComponent: View {
     let avatarURL = URL(string: "https://i.pravatar.cc/100")!
+    var translationManager = TranslationService.shared
+
     
     let size: CGFloat
     init (size: CGFloat) {
@@ -22,7 +24,8 @@ struct AvatarComponent: View {
                         .resizable()
                         .scaledToFit()
                 } else if phase.error != nil {
-                    Text("There was an error loading the image.")
+//                    Text("There was an error loading the image.")
+                    Text(translationManager.imageAvatarError)
                 } else {
                     ProgressView()
                 }

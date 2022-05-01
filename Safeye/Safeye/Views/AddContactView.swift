@@ -31,7 +31,9 @@ struct AddContactView: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
+//    @State var error = "To search, enter a valid connection code."
     @State var error = "To search, enter a valid connection code."
+
     
     
     var body: some View {
@@ -87,7 +89,7 @@ struct AddContactView: View {
                                 }
                         }
                         
-                        Text("\(appState.profileSearch?.fullName ?? "No name")")
+                        Text("\(appState.profileSearch?.fullName ?? "\(translationManager.noName)")")
                             .padding(.bottom)
 //                      BasicButtonComponent(label: "Add", action: {
                         Button(action: {
@@ -135,6 +137,7 @@ struct AddContactView: View {
         .onDisappear {
             curHeight = 600
             searchInput = ""
+//            self.error = "To search, enter a valid connection code."
             self.error = "To search, enter a valid connection code."
             appState.searchResultPhoto = nil
             appState.profileSearch = nil

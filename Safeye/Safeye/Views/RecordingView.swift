@@ -12,6 +12,8 @@ struct RecordingView: View {
     @EnvironmentObject var appState: Store
     @StateObject var voiceRecognizer = VoiceRecognizer()
     @State private var isRecording = false
+    var translationManager = TranslationService.shared
+
     
     // Used to dismiss current sheet
     @Environment(\.presentationMode) var presentationMode
@@ -20,7 +22,8 @@ struct RecordingView: View {
         VStack {
             Spacer()
             
-            Text("Recording Your Message")
+//            Text("Recording Your Message")
+            Text(translationManager.recordedYourMessages)
                 .font(.largeTitle)
             
             Spacer()
@@ -41,7 +44,8 @@ struct RecordingView: View {
                 // Closes the sheet
                 self.presentationMode.wrappedValue.dismiss()
                 
-            } label: { Text("Save/Update Your Message") }
+//            } label: { Text("Save/Update Your Message") }
+            } label: { Text(translationManager.SaveUpdateBtn) }
             
             Spacer()
             
@@ -49,7 +53,9 @@ struct RecordingView: View {
             Button {
                 voiceRecognizer.stopTranscribing()
                 isRecording = false
-                self.presentationMode.wrappedValue.dismiss() } label: { Text("Cancel Recording")}
+//                self.presentationMode.wrappedValue.dismiss() } label: { Text("Cancel Recording")}
+                self.presentationMode.wrappedValue.dismiss() } label: { Text(translationManager.cancelRecording)}
+
             
         }
         .onAppear {

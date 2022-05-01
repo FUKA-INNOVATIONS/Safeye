@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileEditView: View {
+    
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var appState: Store
@@ -33,7 +34,9 @@ struct ProfileEditView: View {
     
     @State private var bloodTypes = ["A", "B", "AB", "O"]
     @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
+//    @State private var countries = [TranslationService.shared.finland,TranslationService.shared.sweden, TranslationService.shared.estonia, TranslationService.shared.denmark, TranslationService.shared.norway]
     @State private var selectedCountry = "Finland"
+//    @State private var selectedCountry = TranslationService.shared.finland
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
@@ -83,7 +86,8 @@ struct ProfileEditView: View {
                     Button {
                         isImagePickerShowing = true
                     } label: {
-                        Text("Select profile photo")
+//                        Text("Select profile photo")
+                        Text(translationManager.selectPhoto)
                     }
                     
                 }
@@ -95,7 +99,8 @@ struct ProfileEditView: View {
                 //
                 if appState.profile == nil {
                     HStack { // Picker for country of residence
-                        Text("Country")
+//                        Text("Country")
+                        Text(translationManager.country)
                         Spacer()
                         Section {
                             Picker("Country", selection: $selectedCountry) {

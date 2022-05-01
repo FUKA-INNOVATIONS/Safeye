@@ -18,7 +18,7 @@ struct UserDetailsComponent: View {
         VStack(alignment: .leading) {
 
             GroupBox {
-                DisclosureGroup("Person details") { // TODO: translation
+                DisclosureGroup(translationManager.healthDetail) {
                     HStack{
                         Text("Address")
                         Spacer()
@@ -39,7 +39,7 @@ struct UserDetailsComponent: View {
             }
                         
             GroupBox {
-                DisclosureGroup("Health details") { // TODO: translation
+                DisclosureGroup(translationManager.healthDetail) { 
                     HStack {
                         Text("\(Text(translationManager.illnessTitle))")
                         Spacer()

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TrustContactDetailsComponent: View {
     var profile: ProfileModel
+    var translationManager = TranslationService.shared
     
     init(profile: ProfileModel) {
         self.profile = profile
@@ -26,7 +27,8 @@ struct TrustContactDetailsComponent: View {
             HStack{
                 Image(systemName: "person.badge.clock.fill")
                     .font(.system(size: 30))
-                Text("Born: \(profile.birthday)")
+                Text(translationManager.bornTitle)
+                Text(profile.birthday)
                     .padding()
             }
      
@@ -34,9 +36,19 @@ struct TrustContactDetailsComponent: View {
                 Image(systemName: "stethoscope.circle.fill")
                     .font(.system(size: 30))
                 VStack(alignment: .leading){
-                    Text("Blood type: \(profile.bloodType)")
-                    Text("Illness: \(profile.illness)")
-                    Text("Allergies: \(profile.allergies)")
+                    HStack{
+                        Text(translationManager.bloodTitle)
+                        Text(profile.bloodType)
+                    }
+                    HStack {
+                        Text(translationManager.illnessTitle)
+                        Text(profile.illness)
+                    }
+                    HStack {
+                        Text(translationManager.allergiesTitle)
+                        Text(profile.allergies)
+                    }
+                   
                 }
                 .padding()
             }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CurtainTCComponent: View {
     var trustedContact: ProfileModel
+    var translationManager = TranslationService.shared
+
     
     var body: some View {
         HStack {
@@ -16,7 +18,7 @@ struct CurtainTCComponent: View {
             Spacer()
             Text(trustedContact.fullName)
             Spacer()
-            BasicButtonComponent(label: "Focus") {
+            BasicButtonComponent(label: translationManager.focusBtn) {
                 
             }
             .modifier(TCItemModifier())

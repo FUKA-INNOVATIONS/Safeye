@@ -14,6 +14,8 @@ struct AddSafePlaceView: View {
     @State var selectedLocation: MKMapItem?
     @StateObject private var result = SearchResultModel()
     @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
+    var translationManager = TranslationService.shared
+
     
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 400
@@ -63,8 +65,9 @@ struct AddSafePlaceView: View {
                             HStack {
                                 Text(place.name!)
                                 Spacer()
-                                Button("Save") {
-                                    print("Safe place: saving")
+//                                Button("Save") {
+                                Button(translationManager.saveBtn) {
+                                print("Safe place: saving")
                                     print("Safe place: Selected place name: \(place)")
                                     let didSave = SafePlaceVM.createSafePlace(place)
                                     print("Safe place: didSave?: \(didSave)")
@@ -73,8 +76,13 @@ struct AddSafePlaceView: View {
                             }
                         }
                         if(result.locations.count != 0) {
-                            Text("Found \(result.locations.count) places")
-                                .frame(width: 150, height: 50)
+//                            Text("Found \(result.locations.count) places")
+                            HStack {
+                                Text(translationManager.foundWord)
+                                Text("\(result.locations.count)")
+                                Text(translationManager.placesWord)
+                            }
+                            .frame(width: 150, height: 50)
                         } else {
                             VStack {
                                 AnimationLottieView(lottieJson: "find")
