@@ -98,6 +98,7 @@
 		6A7DB4A9280023E10054DD47 /* SettingsListItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */; };
 		6A8792DE2812EDC5009B469B /* VoiceRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8792DD2812EDC5009B469B /* VoiceRecognition.swift */; };
 		6A8792E02812EFC0009B469B /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8792DF2812EFC0009B469B /* RecordingView.swift */; };
+		6AB23AB6281E8BA900AFB259 /* SafeSpaceSearchComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB23AB5281E8BA900AFB259 /* SafeSpaceSearchComponent.swift */; };
 		6AB9380F2816E6CD0077552C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB9380E2816E6CD0077552C /* FirebaseAuth */; };
 		6AB938112816E6CD0077552C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB938102816E6CD0077552C /* FirebaseFirestore */; };
 		6AB938132816E6CD0077552C /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB938122816E6CD0077552C /* FirebaseFirestoreSwift-Beta */; };
@@ -244,6 +245,7 @@
 		6A7DB4A8280023E10054DD47 /* SettingsListItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListItemComponent.swift; sourceTree = "<group>"; };
 		6A8792DD2812EDC5009B469B /* VoiceRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognition.swift; sourceTree = "<group>"; };
 		6A8792DF2812EFC0009B469B /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		6AB23AB5281E8BA900AFB259 /* SafeSpaceSearchComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeSpaceSearchComponent.swift; sourceTree = "<group>"; };
 		6AB938162816EB9A0077552C /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		6AB9381C28182E460077552C /* ProfileViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel_Tests.swift; sourceTree = "<group>"; };
 		6AB93824281991D70077552C /* EventViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel_Tests.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 		5F244A8327F70B3300BFE1FB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6AB23AB5281E8BA900AFB259 /* SafeSpaceSearchComponent.swift */,
 				5FACE175281B3787007CB089 /* LoginInputComponent.swift */,
 				75994EF62809B8EB003244C6 /* alertBoxComponent.swift */,
 				5F639DC2281322D600EC39E3 /* AlertPanicComponent.swift */,
@@ -750,6 +753,7 @@
 				5F86F103280848C40089EAC6 /* SafePlaceModel.swift in Sources */,
 				5FE0B095280BD3C900CFED16 /* EventListView.swift in Sources */,
 				5F244AEF27F721B100BFE1FB /* Location.swift in Sources */,
+				6AB23AB6281E8BA900AFB259 /* SafeSpaceSearchComponent.swift in Sources */,
 				6AB93833281A78460077552C /* EventMapViewModel.swift in Sources */,
 				5FAB464B28045806009C4D0E /* EventStatus.swift in Sources */,
 				5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */,
