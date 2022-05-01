@@ -27,10 +27,8 @@
 		5F244A9F27F711B900BFE1FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244A9E27F711B900BFE1FB /* SettingsView.swift */; };
 		5F244AAB27F7180400BFE1FB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AAA27F7180400BFE1FB /* ProfileViewModel.swift */; };
 		5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB427F7186E00BFE1FB /* MapViewModel.swift */; };
-		5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */; };
 		5F244AB927F7198B00BFE1FB /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AB827F7198B00BFE1FB /* EventService.swift */; };
 		5F244ABB27F719A500BFE1FB /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ABA27F719A500BFE1FB /* ProfileService.swift */; };
-		5F244ABD27F719D600BFE1FB /* SettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ABC27F719D600BFE1FB /* SettingService.swift */; };
 		5F244ABF27F71A3500BFE1FB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244ABE27F71A3500BFE1FB /* UserModel.swift */; };
 		5F244AC127F71A4400BFE1FB /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AC027F71A4400BFE1FB /* ProfileModel.swift */; };
 		5F244AC327F71A5700BFE1FB /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F244AC227F71A5700BFE1FB /* EventModel.swift */; };
@@ -172,10 +170,8 @@
 		5F244A9E27F711B900BFE1FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5F244AAA27F7180400BFE1FB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		5F244AB427F7186E00BFE1FB /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
-		5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		5F244AB827F7198B00BFE1FB /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		5F244ABA27F719A500BFE1FB /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
-		5F244ABC27F719D600BFE1FB /* SettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingService.swift; sourceTree = "<group>"; };
 		5F244ABE27F71A3500BFE1FB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		5F244AC027F71A4400BFE1FB /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		5F244AC227F71A5700BFE1FB /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -404,7 +400,6 @@
 				5F244A8927F70CFA00BFE1FB /* AuthenticationService.swift */,
 				5F244AB827F7198B00BFE1FB /* EventService.swift */,
 				5F244ABA27F719A500BFE1FB /* ProfileService.swift */,
-				5F244ABC27F719D600BFE1FB /* SettingService.swift */,
 				7516A3A328075D4100162C43 /* NotificationService.swift */,
 				5FA418992806977E00B6C6E9 /* ConnectionService.swift */,
 				5FBC1A74280DFC860015CC26 /* FileService.swift */,
@@ -541,7 +536,6 @@
 				5F244AB427F7186E00BFE1FB /* MapViewModel.swift */,
 				5F5D0C6A2808068700999B78 /* PlaygroundViewModel.swift */,
 				5F244AAA27F7180400BFE1FB /* ProfileViewModel.swift */,
-				5F244AB627F7188300BFE1FB /* SettingsViewModel.swift */,
 				6A8792DD2812EDC5009B469B /* VoiceRecognition.swift */,
 				5F8164842813FD8D0037B987 /* SafePlaceViewModel.swift */,
 				6AB938162816EB9A0077552C /* LocationViewModel.swift */,
@@ -809,7 +803,6 @@
 				5FAB464F28047E44009C4D0E /* EventViewModel.swift in Sources */,
 				6ABCDD2A280000EE009563E7 /* SelectContactsGridComponent.swift in Sources */,
 				755FCBB6281683E00081B160 /* TranslationService.swift in Sources */,
-				5F244ABD27F719D600BFE1FB /* SettingService.swift in Sources */,
 				5F244AB527F7186E00BFE1FB /* MapViewModel.swift in Sources */,
 				5FBC1A7A280DFD810015CC26 /* ImagePicker.swift in Sources */,
 				5FE0B098280BF2FF00CFED16 /* CapitalizeFirstLetter.swift in Sources */,
@@ -844,7 +837,6 @@
 				5F5962022802CD7900C8F682 /* TackingModeButtonComponent.swift in Sources */,
 				6A0F204C281808A500213FBC /* TrustContactDetailsComponent.swift in Sources */,
 				5F20CC9B28009C3F001E9AED /* NavigationLazyView.swift in Sources */,
-				5F244AB727F7188300BFE1FB /* SettingsViewModel.swift in Sources */,
 				5F244AD527F71C1A00BFE1FB /* panicButtonModifier.swift in Sources */,
 				5FBAA9822811B531007961AE /* CityTransformerModel.swift in Sources */,
 				5FA4189C2807058100B6C6E9 /* PlayGroundView.swift in Sources */,

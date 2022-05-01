@@ -32,7 +32,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
-
+        
         switch locationManager.authorizationStatus {
             
         case .notDetermined:

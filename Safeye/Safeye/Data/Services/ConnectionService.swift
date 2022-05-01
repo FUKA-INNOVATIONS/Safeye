@@ -46,6 +46,8 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    
+    
     func fetchPendingConnectionRequests (_ userID: String) { // type: received= target / sent = owner
         DispatchQueue.main.async {
             self.connectionsDB.whereField("connectionUsers", arrayContains: userID)
@@ -82,6 +84,8 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    
+    
     func confirmConnectionRequest(_ connectionRequest: ConnectionModel) {
         DispatchQueue.main.async {
             let connectionRef = self.connectionsDB.document(connectionRequest.id!)
@@ -94,6 +98,8 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    
+    
     func deleteConnection(_ connectionID: String) {
         DispatchQueue.main.async {
             self.connectionsDB.document(connectionID).delete() { error in
@@ -105,6 +111,7 @@ class ConnectionService: ObservableObject {
             }
         }
     }
+    
     
     
     // Add user as trusted contact and create a new entry in 'connections' collection
@@ -120,8 +127,10 @@ class ConnectionService: ObservableObject {
                 didAdd = false
             }
         }
-        return didAdd
+        return didAdd // cant be trusted since it might be returned before dispached block
     }
+    
+    
     
     func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
         DispatchQueue.main.async {
@@ -150,6 +159,8 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    
+    
     // Fetch profiles of pending connection request's users
     func fetchProfilesOfPendingConectionRequests(_ userIDS: [String], sent: Bool = false, recieved: Bool = false) {
         DispatchQueue.main.async {
@@ -176,6 +187,5 @@ class ConnectionService: ObservableObject {
     }
     
     
-
 
 } // end of ConnectionService

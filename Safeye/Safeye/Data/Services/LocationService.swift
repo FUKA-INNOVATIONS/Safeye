@@ -29,6 +29,8 @@ class LocationService: NSObject, ObservableObject {
     }
 }
 
+
+
 extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -43,6 +45,8 @@ extension LocationService: CLLocationManagerDelegate {
     }
     
 }
+
+
 
 extension MKCoordinateRegion {
     

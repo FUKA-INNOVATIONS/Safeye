@@ -17,6 +17,7 @@ class SafePlaceService {
     
     // Add new safe place to database
     func addSafePlace(_ place: SafePlaceModel) -> Bool {
+        
         do {
             _ = try self.safePlaceDB.addDocument(from: place)
             return true
@@ -27,6 +28,8 @@ class SafePlaceService {
         }
         
     }
+    
+    
     
     // Fetch list of safe places from the database
     func fetchUserSafePlaces(of userID: String) {
@@ -58,6 +61,7 @@ class SafePlaceService {
     }
     
     
+    
     // // delete specific safe place from the database
     func deleteSafePlaceByID(_ safePlaceID: String) {
         self.safePlaceDB.document(safePlaceID).delete() { error in
@@ -68,6 +72,7 @@ class SafePlaceService {
             }
         }
     }
+    
     
     
 }

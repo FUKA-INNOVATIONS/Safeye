@@ -32,6 +32,7 @@ class EventService {
     } // end of createEvent
     
     
+    
     func fetchEventsForCurrentUser(userID: String) {
         DispatchQueue.main.async {
             self.eventDB.whereField("ownerId", isEqualTo: userID).addSnapshotListener() { event, error in
@@ -54,6 +55,7 @@ class EventService {
             }
         }
     }
+    
     
     
     func fetchEventsOfTrustedContacts(of userID: String) {
@@ -138,6 +140,7 @@ class EventService {
     } // end of editEcent
     
     
+    
     func changeStatus(_ eventID: String, _ newStatus: EventStatus) {
         let eventRef = self.eventDB.document(eventID)
         
@@ -150,6 +153,8 @@ class EventService {
         }
     } // end of changeStatus
     
+    
+    
     func deleteEvent(_ eventID: String) {
         self.eventDB.document(eventID).delete() { error in
             if let error = error {
@@ -159,7 +164,6 @@ class EventService {
             }
         }
     }
-    
     
     
     

@@ -21,6 +21,8 @@ final class NotificationService: ObservableObject {
         }
     }
     
+    
+    
     func requestAuthorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { isGranted, _ in
             DispatchQueue.main.async {
@@ -29,6 +31,8 @@ final class NotificationService: ObservableObject {
         }
     }
     
+    
+    
     func reloadLocalNotifications() {
         UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
             DispatchQueue.main.async {
@@ -36,6 +40,8 @@ final class NotificationService: ObservableObject {
             }
         }
     }
+    
+    
     
     func createLocalNotification(title: String, body: String, completion: @escaping (Error?) -> Void) {
         
@@ -50,4 +56,7 @@ final class NotificationService: ObservableObject {
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: completion)
     }
+    
+    
+    
 }
