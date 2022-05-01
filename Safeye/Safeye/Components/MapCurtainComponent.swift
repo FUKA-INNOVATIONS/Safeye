@@ -14,9 +14,9 @@ struct MapCurtainComponent: View {
     
             HStack {
                 Spacer()
-                Text("Trusted Contacts")
-                    .padding(.top, 15)
-                    .font(.headline)
+                Text("^   Trusted Contacts   ^")
+                    .padding(.top, 30)
+                    .font(.title2)
                 Spacer()
             }
             
