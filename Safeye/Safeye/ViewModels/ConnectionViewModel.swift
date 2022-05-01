@@ -16,7 +16,10 @@ class ConnectionViewModel: ObservableObject {
     @ObservedObject var appState = Store.shared
     
     func filterConnectionProfileFromAppState(_ connection: ConnectionModel, established: Bool = false, recieved: Bool = false, sent: Bool = false) -> ProfileModel? { // to filter specific connection profile from appState
-        let trustedContactProfileId = connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+        
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return nil }
+        
+        let trustedContactProfileId = connection.connectionUsers.filter { $0 != currentUserID }[0]
         if established && !self.appState.connectionPofiles.isEmpty {
             return self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
         } else if recieved && !self.appState.pendingConnectionRequestProfilesTarget.isEmpty {
@@ -27,7 +30,8 @@ class ConnectionViewModel: ObservableObject {
     }
     
     func getConnectionProfileID(of connection: ConnectionModel) -> String {
-        connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return "" }
+        return connection.connectionUsers.filter { $0 != currentUserID }[0]
     }
     
     
@@ -56,7 +60,7 @@ class ConnectionViewModel: ObservableObject {
 
     func getPendingRequests()  {
         DispatchQueue.main.async {
-            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             self.connService.fetchPendingConnectionRequests(currentUserID)
         }
     }
@@ -64,7 +68,7 @@ class ConnectionViewModel: ObservableObject {
     // get confirmed connection profiles
     func getConnectionProfiles() {
         DispatchQueue.main.async {
-            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             var connectionIDS = [String]()
             
             for connection in self.appState.connections {
@@ -80,7 +84,7 @@ class ConnectionViewModel: ObservableObject {
     // get pending connection request profiles. request sent by authenticated user
     func getProfilesOfPendingConectionRequestsSentByCurrentUser() {
         DispatchQueue.main.async {
-            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             var connectionIDS = [String]()
             
             for connection in self.appState.pendingConnectionRequestsOwner {
@@ -96,7 +100,7 @@ class ConnectionViewModel: ObservableObject {
     // get pending connection request profiles. request sent by other users to authenticated user
     func getProfilesOfPendingConectionRequestsSentToCurrentUser() {
         DispatchQueue.main.async {
-            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             var connectionIDS = [String]()
             
             for connection in self.appState.pendingConnectionRequestsTarget {
@@ -112,7 +116,7 @@ class ConnectionViewModel: ObservableObject {
     
     func getConnections() { // established connections
         DispatchQueue.main.async {
-            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             self.connService.fetchConnections(currentUserID)
         }
     }
@@ -145,13 +149,13 @@ class ConnectionViewModel: ObservableObject {
             }
 
             // generate a connection ID
-            let uid = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             var hasher = Hasher()
-            hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
+            hasher.combine(currentUserID)
             hasher.combine(targetProfileID)
             let connectionId = String(hasher.finalize())
 
-            let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [uid, targetProfileID], status: false)
+            let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [currentUserID, targetProfileID], status: false)
 
             // returns a boolean, was added or not?
             if canAdd {

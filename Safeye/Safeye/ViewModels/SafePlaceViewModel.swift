@@ -21,14 +21,14 @@ class SafePlaceViewModel: ObservableObject {
             return false
         }
         
-        let userID = AuthenticationService.getInstance.currentUser!.uid // Current user id
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return false } // Current user id
         // Extract selected location details
         let locationName = place.placemark.name!
         let longitude = place.placemark.coordinate.longitude
         let latitude = place.placemark.coordinate.latitude
         
         // Save new location, returns a boolean
-        let newPlace = SafePlaceModel(ownerId: userID, name: locationName, longitude: longitude, latitude: latitude)
+        let newPlace = SafePlaceModel(ownerId: currentUserID, name: locationName, longitude: longitude, latitude: latitude)
         let didCreate =  safePlaceService.addSafePlace(newPlace)
         return didCreate // was place created successfully? returns true/false
         
@@ -36,8 +36,8 @@ class SafePlaceViewModel: ObservableObject {
     
     // Get list of safe places and sotre in appState.safePlaces collection
     func getSafePlacesOfAuthenticatedtUser() {
-        let userID = AuthenticationService.getInstance.currentUser!.uid // Current usre id
-        self.safePlaceService.fetchUserSafePlaces(of: userID)
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return } // Current usre id
+        self.safePlaceService.fetchUserSafePlaces(of: currentUserID)
         for trusted in appState.connectionPofiles {
             if trusted.homeLatitude != nil {
                 let trustedLocation = Location(name: trusted.fullName, coordinate: CLLocationCoordinate2D(latitude: trusted.homeLatitude!, longitude: trusted.homeLongitude!), own: false)
