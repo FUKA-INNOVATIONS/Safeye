@@ -21,7 +21,7 @@ class SafePlaceViewModel: ObservableObject {
             return false
         }
         
-        let userID = Store.shared.currentUserID // Current usre id
+        let userID = AuthenticationService.getInstance.currentUser!.uid // Current user id
         // Extract selected location details
         let locationName = place.placemark.name!
         let longitude = place.placemark.coordinate.longitude
@@ -36,7 +36,7 @@ class SafePlaceViewModel: ObservableObject {
     
     // Get list of safe places and sotre in appState.safePlaces collection
     func getSafePlacesOfAuthenticatedtUser() {
-        let userID = Store.shared.currentUserID // Current usre id
+        let userID = AuthenticationService.getInstance.currentUser!.uid // Current usre id
         self.safePlaceService.fetchUserSafePlaces(of: userID)
         for trusted in appState.connectionPofiles {
             if trusted.homeLatitude != nil {
