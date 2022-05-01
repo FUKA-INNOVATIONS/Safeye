@@ -31,13 +31,21 @@ struct ConnectionsView: View {
                         Text("\(appState.profile?.connectionCode ?? "No code")")
                         Spacer()
                         
-                        //Copy code to clipboard
-                        Button(action: {
-                            let pasteboard = UIPasteboard.general
-                            pasteboard.string = appState.profile?.connectionCode
-                        }, label: {Text(translationManager.copyBtn)})
-                            .foregroundColor(.blue)
-                            .buttonStyle(BorderlessButtonStyle())
+//                        //Copy code to clipboard
+//                        Button(action: {
+//                            let pasteboard = UIPasteboard.general
+//                            pasteboard.string = appState.profile?.connectionCode
+//                        }, label: {Text(translationManager.copyBtn)})
+//                            .foregroundColor(.blue)
+//                            .buttonStyle(BorderlessButtonStyle())
+                        
+                        Button(action: shareConnectionCode) { // Share conection code
+                                        Image(systemName: "square.and.arrow.up.fill")
+//                                            .resizable()
+//                                            .aspectRatio(contentMode: .fit)
+//                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(.blue)
+                                    }
                     }
                 }
                 
@@ -161,6 +169,12 @@ struct ConnectionsView: View {
             ConnectionVM.getProfilesOfPendingConectionRequestsSentToCurrentUser() // recieved
         }
     }
+    
+    func shareConnectionCode() {
+            guard let connectionCode = appState.profile?.connectionCode else { return }
+            let activityVC = UIActivityViewController(activityItems: [connectionCode], applicationActivities: nil)
+            UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+        }
     
 }
 
