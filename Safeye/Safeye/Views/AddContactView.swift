@@ -23,9 +23,7 @@ struct AddContactView: View {
         return max(0, min(1, res))
     }
     
-    
-    
-    ///////////
+
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var FileVM: FileViewModel

@@ -60,7 +60,6 @@ struct ProfileView: View {
                     }
                 }
                 
-                Divider()
                 Spacer(minLength: 30)
                 
                 // Safe Spaces
@@ -106,8 +105,8 @@ struct ProfileView: View {
                     }
                     
                 }
-                Divider()
                 UserDetailsComponent() // Personal and health info
+                    .padding(.top, 10)
             }
             .onAppear {
                 print("profileView view appeared")

@@ -120,7 +120,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 //        if self.appState.panicMode {
             for panicEvent in self.appState.eventsPanic {
                 profileService.fetchProfileByUserID(userID: panicEvent.ownerId, panicProfile: true) // fetch and set panic users profiles
-                if panicEvent.ownerId != Store.shared.currentUserID {
+                if panicEvent.ownerId != AuthenticationService.getInstance.currentUser!.uid {
                     for profile in self.appState.panicPofiles {
                         notificationService.createLocalNotification(title: "\(profile.fullName) needs help!", body: "Check current location and listen to the environment!") { error in
                             if error != nil {
@@ -142,11 +142,11 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func isEventOwner() -> Bool {
-        return self.appState.event?.ownerId == Store.shared.currentUserID
+        return self.appState.event?.ownerId == AuthenticationService.getInstance.currentUser!.uid
     }
     
     func isEventTrustedContact() -> Bool {//Not working properly, checks if user is one of trusted contacts of an event
-        let selfFound = self.appState.event!.trustedContacts.filter { $0 == Store.shared.currentUserID }
+        let selfFound = self.appState.event!.trustedContacts.filter { $0 == AuthenticationService.getInstance.currentUser!.uid }
         if !selfFound.isEmpty {
             print("ISISI: \(selfFound)")
             return true
@@ -157,8 +157,8 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     func createEvent(_ startDate: Date, _ endDate: Date, _ otherInfo: String, _ eventType: String, _ eventCity: String, _ eventFolderPath: String ) -> Bool {
-        let currentUserID = Store.shared.currentUserID
-        
+        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+
         if self.appState.eventSelctedContacts.isEmpty { print("You must select atlest 1 contact") ; return false }
         
         let selectedContactIDS = appState.eventSelctedContacts.map { $0.userId }
@@ -195,15 +195,14 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func getEventsOfCurrentUser() {
         // Fetch all events of authenticated user, result in appState.eventsOfCurrentUser
         //DispatchQueue.main.async { self.appState.eventsOfCurrentUser.removeAll() }
-        let currentUserId = Store.shared.currentUserID
+        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
         self.eventService.fetchEventsForCurrentUser(userID: currentUserId)
     }
     
     func getEventsOfTrustedContacts() {
         // Fetch all events of authenticated user, result in appState.eventsOfTrustedContacts
         //DispatchQueue.main.async { self.appState.eventsOfTrustedContacts.removeAll() }
-        //let currentUserId = AuthenticationService.getInstance.currentUser!.uid
-        let currentUserId = Store.shared.currentUserID
+        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
         self.eventService.fetchEventsOfTrustedContacts(of: currentUserId)
     }
 
