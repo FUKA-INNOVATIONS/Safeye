@@ -8,13 +8,11 @@
 import Foundation
 import SwiftUI
 
-// Single source of truth for application state
+// Single source of truth for application state, Simplified version of REDUX pattern
 // Authentication is excluded
 
-// Check for event statuses on app launch iex. if contact is in PANIC mode ?
-// Usually app state is initialized on app launch
-// If there is any sense, maybe we initialize the entire state and optionally add it to persistance store and then listen to the database for changes
-
+// Usually whole app state is initialized on app launch
+// If there is any sense, maybe we initialize the entire state and optionally add it to persistance store and then listen to the database for changes and updating persistant store
 
 class Store: ObservableObject {
     static let shared = Store() ; private init() {}
@@ -30,7 +28,6 @@ class Store: ObservableObject {
     @Published var pendingConnectionRequestProfilesTarget = [ProfileModel]()
     @Published var panicPofiles = [ProfileModel]()
     @Published var tCProfile: ProfileModel?
-    // @Published var eventContactsWithAvatars = [TrustedContactModel]()
     
     @Published var userPhoto: UIImage?
     @Published var searchResultPhoto: UIImage?
@@ -39,13 +36,11 @@ class Store: ObservableObject {
     @Published var safePlaces = [SafePlaceModel]()
     @Published var locations = [Location]()  // temporary solutoin
     
-    
     @Published var settings = [SettingModel]()
     @Published var eventsOfCurrentUser = [Event]()
     @Published var eventsOfTrustedContacts = [Event]()
     @Published var event: Event?
     @Published var eventTrustedContactsProfiles = [ProfileModel]()
-    //@Published var eventCurrentUser: Event?
     @Published var panicMode = false
     @Published var cities = [String]()
    
