@@ -2,8 +2,13 @@
 //  LocationService.swift
 //  Safeye
 //
-//  Created by Pavlo Leinonen on 22.4.2022.
+//  Created by Safeye team on 22.4.2022.
 //
+
+/*
+    Service which is used in SearchResultModel for handling locations when the user is searching for
+    and adding new safeSpaces.
+ */
 
 import Foundation
 import CoreLocation
