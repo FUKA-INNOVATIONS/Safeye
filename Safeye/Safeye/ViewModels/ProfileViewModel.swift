@@ -2,9 +2,18 @@
 //  ProfileViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
-//  Edit by FUKA on 8.4.2022.
-// Edit by gintare on 10.4.2022.
+//  Created by Safeye team on 6.4.2022.
+
+
+/*
+        This class is handling REGISTERED USER'S PROFILE related functionalities.
+ 
+        1. Updating profile details. User can update own profile details
+        2. Updating authenicated user's device location coordinates. Used so see trusted contact's location on map
+        3. Getting a specific profile by profile owners connection code.
+        4. Getting currently authenicated user's profile details
+        5. Create new profile. User is obligated to create a profile after registration.
+ */
 
 import Foundation
 import SwiftUI
@@ -16,6 +25,8 @@ class ProfileViewModel: NSObject, ObservableObject {
     var AuthVM = AuthenticationViewModel.shared
     var appState = Store.shared
     
+    
+    // Update profile details
     func updateProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String, _ avatar: String) {
         guard let profileID = self.appState.profile?.id else {
             print("updateProfile -> profile id not found in app state")
@@ -26,7 +37,7 @@ class ProfileViewModel: NSObject, ObservableObject {
     }
     
     
-    
+    // Update authenicated user's device location coordinates
     func updateUserHomeCoordinates() {
         guard let profileID = self.appState.profile?.id else {
             print("updateProfile -> profile id not found in app state")
@@ -37,13 +48,13 @@ class ProfileViewModel: NSObject, ObservableObject {
     }
     
     
-    
+    // Get a specific profile by profile owners connection code
     func getProfileByConnectionCode(withCode connectionCode: String) {
         self.profileService.fetchProfileByConnectionCode(connCode: connectionCode)
     }
     
     
-    
+    // Get surrent user's profile
     func getProfileForCurrentUser() {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else {
             print("Fetching current user's profile: No signed in user found")
@@ -53,7 +64,7 @@ class ProfileViewModel: NSObject, ObservableObject {
     }
     
     
-    
+    // Create a new profile
     func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String, _ avatar: String) {
         
         let currentUserID = AuthVM.authService.currentUser!.uid
