@@ -2,14 +2,18 @@
 //  AuthenticationViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 6.4.2022.
-//  Edited by FUKA on 8.4.2022.
-//
+//  Created by Safeye team on 6.4.2022.
 
 
 /*
- TODO: Class Explanation
+        This class is handling user authentication:
+        1. Create new user account and sign the user in automatically if account was successfully created
+        2. Sign in the user using email and password and save user details in the app state
+        3. Sign the user out and reset user detials in app state
+        4. Check weather user is signed in -> returns a boolean
+        5. Get currenlty signed in user -> return authenticated user or nil
  */
+
 
 import SwiftUI
 
@@ -21,7 +25,7 @@ class AuthenticationViewModel: ObservableObject {
     @Published var signedIn = false
     @Published var signinError = false
     
-    var isSignedIn: Bool {
+    var isSignedIn: Bool { // check if user is signed in
         return authService.currentUser != nil
     }
     

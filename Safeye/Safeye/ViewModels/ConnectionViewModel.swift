@@ -2,8 +2,25 @@
 //  ConnectionViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 13.4.2022.
-//
+//  Created by Safeye team on 6.4.2022.
+
+
+/*
+        This class is handling connection/trusted contacts related functionalities.
+        Mainly communicating with app state and vaious services that in turn communicates with the database and stores retrieved data in app state
+ 
+        1. Filtering and return a specific connection's of pending request (recieved/sent) profile from app state, reurns the profile if exists, otherwise nil
+        2. Getting a specific profile id of established connection (trusted contact)
+        3. Deleting a specific connection, used to delete a stablished connection or to reject a pending request
+        4. Accepting a recieved pending request that was sent by another user using current users connection code
+        5. Getting current user's pending requests (sent and recieved)
+        6. Getting profiles of trusted contacts (stablished connections)
+        7. Getting pending connection request profiles. request sent by authenticated user
+        8. Getting pending connection request profiles. request sent by other users to authenticated user
+        9. Get established connection's details
+        10. Sending a new connection request: User searches for a by using connection code of target user
+ */
+
 
 import Foundation
 import Firebase
@@ -16,7 +33,8 @@ class ConnectionViewModel: ObservableObject {
     @ObservedObject var appState = Store.shared
     var translationManager = TranslationService.shared
     
-    func filterConnectionProfileFromAppState(_ connection: ConnectionModel, established: Bool = false, recieved: Bool = false, sent: Bool = false) -> ProfileModel? { // to filter specific connection profile from appState
+    // to filter specific connection profile from appState
+    func filterConnectionProfileFromAppState(_ connection: ConnectionModel, established: Bool = false, recieved: Bool = false, sent: Bool = false) -> ProfileModel? {
         
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return nil }
         
@@ -30,12 +48,15 @@ class ConnectionViewModel: ObservableObject {
         } else { return nil }
     }
     
+    
+    // Get a specific profile id of established connection (trusted contact)
     func getConnectionProfileID(of connection: ConnectionModel) -> String {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return "" }
         return connection.connectionUsers.filter { $0 != currentUserID }[0]
     }
     
     
+    // Delete a specific connection
     func deleteConnection(_ connectionID: String, _ type: String) {
         withAnimation {
             DispatchQueue.main.async {
@@ -49,6 +70,8 @@ class ConnectionViewModel: ObservableObject {
         }
     }
     
+    
+    // Accept a pending connection request sent by another user
     func confirmConnectionRequest(confirmedRequest: ConnectionModel) {
         withAnimation {
             DispatchQueue.main.async {
@@ -59,6 +82,8 @@ class ConnectionViewModel: ObservableObject {
         }
     }
 
+    
+    // Fetch current user's pending requests
     func getPendingRequests()  {
         DispatchQueue.main.async {
             guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
@@ -66,7 +91,8 @@ class ConnectionViewModel: ObservableObject {
         }
     }
     
-    // get confirmed connection profiles
+    
+    // Get established connection profiles
     func getConnectionProfiles() {
         DispatchQueue.main.async {
             guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
@@ -81,6 +107,7 @@ class ConnectionViewModel: ObservableObject {
             if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS) }
         }
     }
+    
     
     // get pending connection request profiles. request sent by authenticated user
     func getProfilesOfPendingConectionRequestsSentByCurrentUser() {
@@ -97,6 +124,7 @@ class ConnectionViewModel: ObservableObject {
             if !connectionIDS.isEmpty { self.connService.fetchProfilesOfPendingConectionRequests(connectionIDS, sent: true) }
         }
     }
+    
     
     // get pending connection request profiles. request sent by other users to authenticated user
     func getProfilesOfPendingConectionRequestsSentToCurrentUser() {
@@ -115,14 +143,16 @@ class ConnectionViewModel: ObservableObject {
     }
     
     
-    func getConnections() { // established connections
+    // Get established connection's details
+    func getConnections() {
         DispatchQueue.main.async {
             guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             self.connService.fetchConnections(currentUserID)
         }
     }
 
-   
+    
+   // Send a new connection request
     func addConnection() -> String? {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return nil }
         

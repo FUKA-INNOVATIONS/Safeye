@@ -2,8 +2,12 @@
 //  PlaygroundViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 14.4.2022.
+//  Created by Safeye team on 14.4.2022.
 //
+
+/*
+        As the name might explain, this is just a place where you are allowed to do what ever you like :)
+ */
 
 import Foundation
 
