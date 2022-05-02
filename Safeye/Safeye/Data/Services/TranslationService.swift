@@ -275,6 +275,12 @@ final class TranslationService {
     let alertFillAllfields:LocalizedStringKey = "alertFillAllfields"
     let showMessagesBtn:LocalizedStringKey = "showMessagesBtn"
     let alertHomeCoordinates:LocalizedStringKey = "alertHomeCoordinates"
+    let noHomeSet:LocalizedStringKey = "noHomeSet"
+    let removeAll:LocalizedStringKey = "removeAll"
+    let selectAll:LocalizedStringKey = "selectAll"
+    let personDetails:LocalizedStringKey = "personDetails"
+    let healthDetails:LocalizedStringKey = "healthDetails"
+
 
     
 }

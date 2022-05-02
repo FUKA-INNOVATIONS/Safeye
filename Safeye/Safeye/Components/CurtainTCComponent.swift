@@ -12,6 +12,7 @@ struct CurtainTCComponent: View {
     var trustedContact: ProfileModel
     
     @EnvironmentObject var mapVM: MapViewModel
+    var translationManager = TranslationService.shared
     
     var body: some View {
         HStack {
@@ -21,13 +22,15 @@ struct CurtainTCComponent: View {
             if trustedContact.homeLatitude != nil {
                 Button(action: {
                     mapVM.mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: trustedContact.homeLatitude!, longitude: trustedContact.homeLongitude!), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                            }, label: {Text("Focus on")})
+//                            }, label: {Text("Focus on")})
+                }, label: {Text(translationManager.focusBtn)})
                     .border(Color.blue, width: 2)
                     .padding()
                     .foregroundColor(Color.white)
                     .background(Color.blue)
             } else {
-                Text("No home set")
+//                Text("No home set")
+                Text(translationManager.noHomeSet)
                     .foregroundColor(Color.gray)
             }
             

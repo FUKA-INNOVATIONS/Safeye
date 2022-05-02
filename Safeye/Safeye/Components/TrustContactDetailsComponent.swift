@@ -20,9 +20,10 @@ struct TrustContactDetailsComponent: View {
         VStack(alignment: .leading) {
 
             GroupBox {
-                DisclosureGroup("Person details") { // TODO: translation
+//                DisclosureGroup("Person details") { // TODO: translation
+                DisclosureGroup(translationManager.personDetails) {
                     HStack{
-                        Text("Address")
+//                        Text("Address")
                         Spacer()
                         Text("\(profile.address)")
                     }
@@ -41,28 +42,29 @@ struct TrustContactDetailsComponent: View {
             }
                         
             GroupBox {
-                DisclosureGroup("Health details") { // TODO: translation
+//                DisclosureGroup("Health details") { // TODO: translation
+                DisclosureGroup(translationManager.healthDetails) {
                     HStack {
-                        Text("\(Text(translationManager.illnessTitle))")
+                        Text(translationManager.illnessTitle)
                         Spacer()
-                        Text("\(profile.illness)")
+                        Text(profile.illness)
                     }
                     .padding(.top, 15)
                     .font(.subheadline)
 
                     HStack {
-                        Text("\(Text(translationManager.allergiesTitle)) ")
+                        Text(translationManager.allergiesTitle)
                         Spacer()
-                        Text("\(profile.allergies)")
+                        Text(profile.allergies)
 
                     }
                     .padding(.top, 10)
                     .font(.subheadline)
 
                     HStack {
-                        Text("\(Text(translationManager.bloodTitle))")
+                        Text(translationManager.bloodTitle)
                         Spacer()
-                        Text("\(profile.bloodType)")
+                        Text(profile.bloodType)
                     }
                     .padding(.top, 10)
                     .font(.subheadline)

@@ -32,7 +32,8 @@ struct ContentView: View {
                 if appState.profile == nil {
                     // User has no profile, create new one
                     
-                    Text("Sinä päätät ketkä näkevät profiilisi")
+//                    Text("Sinä päätät ketkä näkevät profiilisi")
+                    Text(translationManager.youDecidetext)
                     AnimationLottieView(lottieJson: "profiles-of-people")
                     
                     Spacer()
