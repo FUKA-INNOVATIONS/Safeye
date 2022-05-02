@@ -26,16 +26,13 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // User presses panic mode
     func activatePanicMode() {
-//        print("COORDNATES: \(self.appState.event!.coordinates)")
-        
         
         DispatchQueue.main.async {
             //self.appState.panicMode = true
             self.appState.event?.status = EventStatus.PANIC
             self.eventService.updateEvent(self.appState.event!)
         }
-        //self.getEventsOfCurrentUser()
-        //locationManager?.distanceFilter = 1
+        
         locationManager.locationDuringPanicMode()
         
         // Timer function doesn't record first loop round
@@ -57,8 +54,6 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             // Remove event from list of panic events
             //  self.appState.eventsPanic =  self.appState.eventsPanic.filter { $0.id != self.appState.event!.id }
         }
-        //self.getEventsOfCurrentUser()
-        //locationManager?.distanceFilter = 100
         locationManager.locationDuringTrackingMode()
         stopMonitoringSpeech()
         // TODO: remove notification
@@ -78,10 +73,10 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         audioTimer =  Timer.scheduledTimer(withTimeInterval: TimeInterval(5), repeats: true) { timer in
             
             /**
-                string is added at the start of timer so that the full 15 seconds of recorded audio is added
+             string is added at the start of timer so that the full 15 seconds of recorded audio is added
              */
             
-//            panicModeUserSpeech.append("\(timestamp): \(self.voiceClass.userMessage)")
+            //            panicModeUserSpeech.append("\(timestamp): \(self.voiceClass.userMessage)")
             
             panicModeUserSpeech += self.voiceClass.userMessage
             
@@ -97,13 +92,13 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.voiceClass.reset()
             self.voiceClass.transcribe()
             self.isRecording = true
-
+            
         }
     }
     
     /**
-        Stops the timer function and stops listening for any audio
-        runs when the user pressed the safe button
+     Stops the timer function and stops listening for any audio
+     runs when the user pressed the safe button
      */
     func stopMonitoringSpeech() {
         audioTimer?.invalidate()
@@ -117,21 +112,22 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         print("Panic events count: \(self.appState.eventsPanic.count)")
         UNUserNotificationCenter.current().removeAllDeliveredNotifications() // For removing all delivered notification
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests() // For removing all pending notifications which are not delivered yet but scheduled.
-//        if self.appState.panicMode {
-            for panicEvent in self.appState.eventsPanic {
-                profileService.fetchProfileByUserID(userID: panicEvent.ownerId, panicProfile: true) // fetch and set panic users profiles
-                if panicEvent.ownerId != AuthenticationService.getInstance.currentUser!.uid {
-                    for profile in self.appState.panicPofiles {
-                        notificationService.createLocalNotification(title: "\(profile.fullName) needs help!", body: "Check current location and listen to the environment!") { error in
-                            if error != nil {
-                                print("sendNotification > error")
-                                return
-                            }
+        //        if self.appState.panicMode {
+        for panicEvent in self.appState.eventsPanic {
+            profileService.fetchProfileByUserID(userID: panicEvent.ownerId, panicProfile: true) // fetch and set panic users profiles
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
+            if panicEvent.ownerId != currentUserID {
+                for profile in self.appState.panicPofiles {
+                    notificationService.createLocalNotification(title: "\(profile.fullName) needs help!", body: "Check current location and listen to the environment!") { error in
+                        if error != nil {
+                            print("sendNotification > error")
+                            return
                         }
                     }
                 }
             }
-//        }
+        }
+        //        }
     }
     
     // User Pressed to disable tracking mode
@@ -142,11 +138,13 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func isEventOwner() -> Bool {
-        return self.appState.event?.ownerId == AuthenticationService.getInstance.currentUser!.uid
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return false }
+        return self.appState.event?.ownerId == currentUserID
     }
     
     func isEventTrustedContact() -> Bool {//Not working properly, checks if user is one of trusted contacts of an event
-        let selfFound = self.appState.event!.trustedContacts.filter { $0 == AuthenticationService.getInstance.currentUser!.uid }
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return false }
+        let selfFound = self.appState.event!.trustedContacts.filter { $0 == currentUserID }
         if !selfFound.isEmpty {
             print("ISISI: \(selfFound)")
             return true
@@ -157,7 +155,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     func createEvent(_ startDate: Date, _ endDate: Date, _ otherInfo: String, _ eventType: String, _ eventCity: String, _ eventFolderPath: String ) -> Bool {
-        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return false }
         
         if self.appState.eventSelctedContacts.isEmpty { print("You must select atlest 1 contact") ; return false }
         
@@ -166,21 +164,20 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         // TODO: MAX 5 contacts : firbase way to
         
         self.getEventsOfCurrentUser()
-        //if self.appState.eventCurrentUser != nil {  print("Current user has an event so new event was not created") ; return false }
+        //if self.appState.eventCurrentUser != nil {  print("Current user has an event so new event was not created") ; return false } // allow cretion of only 1 event
         
         print("SELECTED IDS: \(selectedContactIDS)")
         
         // create event folder
         fileService.putEventFolder(eventFolderPath: eventFolderPath)
         
-       @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
+        @State var coordinates: [String : Double] = ["longitude": Double(12334324), "latitude": Double(454545)]
         
         let newEvent = Event(ownerId: currentUserID, status: EventStatus.STARTED, startTime: startDate, endTime: endDate, otherInfo: otherInfo, eventType: eventType, trustedContacts: selectedContactIDS, coordinates: coordinates, eventFolderPath: eventFolderPath, city: eventCity)
         
         let didCreateEvent = eventService.createEvent(newEvent)
         didCreateEvent ? print("EventVM -> New event succeeded") : print("EventVM -> New event failed")
         return didCreateEvent
-        //return false
     } // end of createEvent()
     
     
@@ -188,24 +185,22 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func getDetails(for eventID: String) { // Get details for a specific evens, result in appState.even
         self.eventService.fetchDetails(eventID)
-            //let eventListener = self.eventService.fetchDetails(eventID)
-            //return eventListener
+        //let eventListener = self.eventService.fetchDetails(eventID)
+        //return eventListener
     }
     
     func getEventsOfCurrentUser() {
         // Fetch all events of authenticated user, result in appState.eventsOfCurrentUser
-        //DispatchQueue.main.async { self.appState.eventsOfCurrentUser.removeAll() }
-        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
-        self.eventService.fetchEventsForCurrentUser(userID: currentUserId)
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
+        self.eventService.fetchEventsForCurrentUser(userID: currentUserID)
     }
     
     func getEventsOfTrustedContacts() {
         // Fetch all events of authenticated user, result in appState.eventsOfTrustedContacts
-        //DispatchQueue.main.async { self.appState.eventsOfTrustedContacts.removeAll() }
-        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
-        self.eventService.fetchEventsOfTrustedContacts(of: currentUserId)
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
+        self.eventService.fetchEventsOfTrustedContacts(of: currentUserID)
     }
-
+    
     
     
     // Get trusted contacts of an event, result in appState.eventTrustedContactsProfiles
@@ -222,16 +217,10 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     
     
-    
     func updateEvent(_ event: Event) {
         self.eventService.updateEvent(event)
     }
     
-    
-    /* func getEventCurrentUser() { // TODO: Delete
-        let currentUserId = AuthenticationService.getInstance.currentUser!.uid
-        self.eventService.fetchEventsForCurrentUser(userID: currentUserId)
-    } */
     
     
     func resetEventSelectedContacts() {
@@ -240,12 +229,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    /*func getCurrentEventTrustedContacts() {
-        print(self.appState.eventCurrentUser!.trustedContacts)
-        self.connService.fetchConnectionProfiles(self.appState.eventCurrentUser!.trustedContacts, eventCase: true)
-    } */
     
-
     
     func changeStatus(_ eventID: String,_ newStatus: EventStatus) {
         if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.appState.panicMode = true  } }

@@ -16,17 +16,16 @@ struct TCProfileView: View {
         VStack {
             Spacer(minLength: 30)
             VStack {
-                Text(appState.tCProfile?.fullName ?? "")
                 if appState.trustedContactPhoto != nil {
-                    ProfileImageComponent(size: 70, avatarImage: appState.trustedContactPhoto!)
+                    ProfileImageComponent(size: 150, avatarImage: appState.trustedContactPhoto!)
                 } else {
                     ProgressView()
                 }
+                Text(appState.tCProfile?.fullName ?? "").font(.title).padding()
                 
             }
-            Form {
-                TrustContactDetailsComponent(profile: appState.tCProfile!)
-            }
+            TrustContactDetailsComponent(profile: appState.tCProfile!)
+            Spacer()
         }
     }
 }

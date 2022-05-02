@@ -16,43 +16,63 @@ struct TrustContactDetailsComponent: View {
     }
 
     var body: some View {
+
         VStack(alignment: .leading) {
-            HStack{
-                Image(systemName: "house.circle.fill")
-                    .font(.system(size: 30))
-                Text(profile.address)
-                    .padding()
-                Spacer()
-            }
-            HStack{
-                Image(systemName: "person.badge.clock.fill")
-                    .font(.system(size: 30))
-                Text(translationManager.bornTitle)
-                Text(profile.birthday)
-                    .padding()
-            }
-     
-            HStack{
-                Image(systemName: "stethoscope.circle.fill")
-                    .font(.system(size: 30))
-                VStack(alignment: .leading){
+
+            GroupBox {
+                DisclosureGroup("Person details") { // TODO: translation
                     HStack{
-                        Text(translationManager.bloodTitle)
-                        Text(profile.bloodType)
+                        Text("Address")
+                        Spacer()
+                        Text("\(profile.address)")
                     }
-                    HStack {
-                        Text(translationManager.illnessTitle)
-                        Text(profile.illness)
+                    .padding(.top, 15)
+                    .font(.subheadline)
+                    
+                    HStack{
+                        Text("\(Text(translationManager.bornTitle))")
+                        Spacer()
+                        Text("\(profile.birthday)")
                     }
-                    HStack {
-                        Text(translationManager.allergiesTitle)
-                        Text(profile.allergies)
-                    }
-                   
+                    .padding(.top, 10)
+                    .font(.subheadline)
                 }
-                .padding()
+                .font(.headline)
             }
+                        
+            GroupBox {
+                DisclosureGroup("Health details") { // TODO: translation
+                    HStack {
+                        Text("\(Text(translationManager.illnessTitle))")
+                        Spacer()
+                        Text("\(profile.illness)")
+                    }
+                    .padding(.top, 15)
+                    .font(.subheadline)
+
+                    HStack {
+                        Text("\(Text(translationManager.allergiesTitle)) ")
+                        Spacer()
+                        Text("\(profile.allergies)")
+
+                    }
+                    .padding(.top, 10)
+                    .font(.subheadline)
+
+                    HStack {
+                        Text("\(Text(translationManager.bloodTitle))")
+                        Spacer()
+                        Text("\(profile.bloodType)")
+                    }
+                    .padding(.top, 10)
+                    .font(.subheadline)
+                }
+                .font(.headline)
+            }
+
         }
+        .padding()
+        
     }
     
 }

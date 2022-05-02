@@ -25,8 +25,8 @@ struct ListViewComponent: View {
                         AvatarComponent(size: size)
                     }.padding(5)
                 } else if item == "safeSpace" {
-                    ForEach(appState.safePlaces) {_ in
-                        SafeSpaceComponent(size: size)
+                    ForEach(appState.safePlaces) {safePlace in
+                        SafeSpaceComponent(size: size, own: true, name: safePlace.name)
                     }.padding(5)
                 }
             }

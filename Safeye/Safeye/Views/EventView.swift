@@ -31,22 +31,22 @@ struct EventView: View {
         return VStack {
             
             VStack {
-                //Text("\(appState.event?.status.rawValue ?? "")")
-                //.font(.largeTitle)
-                /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
-                 EventVM.deleteEvent(eventID)
-                 goBack = true
-                 } }
-                 .background(
-                 NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
-                 )*/
+
+                Text("\(appState.event?.status.rawValue ?? "")")
+                    .font(.largeTitle).foregroundColor(appState.event?.status == .STARTED ? .green : .red)
+                    /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
+                        EventVM.deleteEvent(eventID)
+                        goBack = true
+                    } }
+                    .background(
+                        NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
+                    )*/
                 
                 
                 Form {
                     Section(header: Text(translationManager.trustedContactsTrack)) {
                         ForEach(appState.eventTrustedContactsProfiles) { profile in
                             HStack {
-                                //Text("\(EventVM.isEventTrustedContact() ? "You" : profile.fullName)")
                                 Text("\(profile.fullName)")
                                 Spacer()
                                 Image(systemName: "eye.fill")
@@ -75,6 +75,7 @@ struct EventView: View {
                         }
                         HStack {
                             Text(translationManager.location)
+
                             Spacer()
                             Text(appState.event?.city ?? "")
                         }
@@ -83,38 +84,51 @@ struct EventView: View {
                             Spacer()
                             Text(appState.event?.otherInfo ?? "")
                         }
+
                     }
                     if !EventVM.isEventOwner() {
                         NavigationLink {
                             EventMapView()
                         } label: {
-                            //Text("View Tracked User On Map")
                             Text(translationManager.viewOnMapBtn)
+
                         }
                     }
                 }
                 
             }
+
             
-            // Modal showing a list of recorded messages from even onwer's speech
-            //            Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") }
-            Button { showingRecordedMessageView.toggle() } label: { Text(translationManager.showRecordedBtn) }
+            if !EventVM.isEventOwner() {
+                // Modal showing a list of recorded messages from even onwer's speech
+                Button { showingRecordedMessageView.toggle() } label: { Text(translationManager.showRecordedBtn) } // TODO: translation
+                    .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
+            }
             
-                .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
+            
+            HStack {
+                if EventVM.isEventOwner() {
+                    Button { showingRecordMessage = true } label: { Text(translationManager.recordMessageBtn); Image(systemName: "mic.circle") } // TODO: translation
+                        .disabled( appState.panicMode == true)
+                        .opacity( appState.panicMode == true ? 0 : 1)
+                        .padding()
+                        .sheet(isPresented: $showingRecordMessage) {
+                            RecordingView()
+                        }
+                    Spacer()
+                    // Modal showing a list of recorded messages from even onwer's speech
+                    Button { showingRecordedMessageView.toggle() } label: { Text("Show messages") } // TODO: translation
+                        .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
+                }
+            }
+            .padding()
+            
+            
             
             if EventVM.isEventOwner() {
-                //                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
-                Button { showingRecordMessage = true } label: { Text(translationManager.recordMessageBtn); Image(systemName: "mic.circle") }
-                    .disabled( appState.panicMode == true)
-                    .opacity( appState.panicMode == true ? 0 : 1)
-                    .padding()
-                    .sheet(isPresented: $showingRecordMessage) {
-                        RecordingView()
-                    }
                 appState.event!.status == .STARTED ?
                 Button(action: { // Actions after panic button Has been pressed
                     EventVM.activatePanicMode()
-                    //EventVM.sentNotification()
                 }) {
                     TrackingModeButtonComponent()
                 }
@@ -130,11 +144,10 @@ struct EventView: View {
         }
         //.navigationBarHidden(true)
         .onAppear {
-            EventVM.getEventTrustedContactsProfiles(eventID: eventID)
             EventVM.getDetails(for: eventID)
             if EventVM.isEventOwner() { locationManager.locationDuringTrackingMode() }
         }
-        
+
     }
     
 }

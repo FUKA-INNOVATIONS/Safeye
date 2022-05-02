@@ -28,14 +28,14 @@
          createEventFolder(eventFolderPath: eventFolderPath)
      }
 
-//     func getPhoto(avatarUrlFetched: String?) {
-//         fetchPhoto(avatarUrlFetched: avatarUrlFetched)
-//     }
 
+     
      func putPhoto(_ selectedPhoto: UIImage?, _ avatarUrl: String?) -> String {
          uploadPhoto(selectedPhoto, avatarUrl)
          return self.path
      }
+     
+     
 
      func uploadPhoto(_ selectedPhoto: UIImage?, _ avatarUrl: String?) {
          // Make sure that selected image property isn't nil
@@ -64,6 +64,8 @@
              }
          }
      }
+     
+     
 
      func fetchPhoto(avatarUrlFetched: String?, isSearchResultPhoto: Bool = false, isTrustedContactPhoto: Bool = false)  {
          // Get the data from the database
@@ -98,6 +100,8 @@
          }
      }
      
+     
+     
      func createEventFolder(eventFolderPath: String) {
 
          // in order to create a folder, some file needs to be uploaded
@@ -120,4 +124,7 @@
              }
          }
      }
+     
+     
+     
  }

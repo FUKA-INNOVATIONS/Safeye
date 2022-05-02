@@ -32,6 +32,7 @@ struct CreateEventView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var cities: FetchedResults<City>
     
+    @State private var showingFormError = false
     
     var body: some View {
         
@@ -41,13 +42,6 @@ struct CreateEventView: View {
                     SelectContactGridComponent()
                 }
                 
-//                ForEach(appState.eventSelctedContacts) { selectedContact in
-//                    HStack {
-//                        Text("\(selectedContact.fullName)")
-//                        Spacer()
-//                        Image(systemName: "person.fill.checkmark")
-//                    }
-//                }
                 
                 Section(header: Text(translationManager.dateAndTime)) {
                     DatePicker(translationManager.startTime, selection: $startDate)
@@ -61,10 +55,13 @@ struct CreateEventView: View {
                         }
                     }
                     .pickerStyle(.inline)
+                    .labelsHidden()
                 }
                 
                 
+
                 Section(header: Text(translationManager.location)) {
+
                     Picker(selection: $selectedEventCityIndex, label: Text("")) {
                         ForEach(0..<cities.count) {
                             Text(cities[$0].name!)
@@ -78,11 +75,14 @@ struct CreateEventView: View {
                 }
                 
             }.navigationBarTitle(translationManager.addEventInfo, displayMode: .inline)
+                .alert("Please fill all form fields", isPresented: $showingFormError) { // TODO: translation
+                    Button(translationManager.okBtn, role: .cancel) { }
+                }
             Spacer()
             
             BasicButtonComponent(label: translationManager.saveActivateBtn, action: {
                 print("City: \(cities[selectedEventCityIndex].name!)")
-                if eventType.isEmpty { print("Fill all fields") ; return }
+                if eventType.isEmpty || appState.eventSelctedContacts.isEmpty || otherInfo.isEmpty { showingFormError.toggle() ; print("Fill all fields") ; return }
                 
                 // set a random path for event folder and pass it to EventVM to createEvent()
                 eventFolderPath = "events/\(UUID().uuidString)/"

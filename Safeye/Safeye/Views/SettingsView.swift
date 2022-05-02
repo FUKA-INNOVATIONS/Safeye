@@ -23,6 +23,7 @@ struct SettingsView: View {
 
     @AppStorage("isDarkMode") private var isDarkMode = false
 
+    @State private var showingCoordinatesUpdatedAlert = false
         
     var body: some View {
         
@@ -44,9 +45,13 @@ struct SettingsView: View {
                 if CLLocationManager().authorizationStatus.rawValue == 4 {
                     Button(translationManager.updateCoordinatesBtn) {
                         ProfileVM.updateUserHomeCoordinates()
+                        withAnimation { showingCoordinatesUpdatedAlert.toggle() }
                     }
                 }
                 
+            }
+            .alert("Home coordinates updated!", isPresented: $showingCoordinatesUpdatedAlert) { // TODO: translation
+                Button(translationManager.okBtn, role: .cancel) { }
             }
             
             
@@ -92,11 +97,8 @@ struct SettingsView: View {
             }
             
         }
-//        .navigationTitle("")
-//        .navigationBarHidden(true)
         .onAppear {
-            //EventVM.getEventsOfTrustedContacts() // to check for panic events
-            //EventVM.getEventsOfCurrentUser()
+
             EventVM.sendNotification()
         }
     }

@@ -30,14 +30,12 @@ struct ConnectionsView: View {
                         //Display connection code
                         Text("\(appState.profile?.connectionCode ?? "\(translationManager.noCode)")")
                         Spacer()
+
                         
-                        //Copy code to clipboard
-                        Button(action: {
-                            let pasteboard = UIPasteboard.general
-                            pasteboard.string = appState.profile?.connectionCode
-                        }, label: {Text(translationManager.copyBtn)})
-                            .foregroundColor(.blue)
-                            .buttonStyle(BorderlessButtonStyle())
+                        Button(action: shareConnectionCode) { // Share conection code
+                                        Image(systemName: "square.and.arrow.up.fill")
+                                            .foregroundColor(.blue)
+                                    }
                     }
                 }
                 
@@ -59,9 +57,9 @@ struct ConnectionsView: View {
                 // Established connections
                 Section(translationManager.connectionsTitle) {
                     ForEach(appState.connections) { connection in
-                        let profile = ConnectionVM.filterConnectionProfileFromAppState(connection)
+                        let profile = ConnectionVM.filterConnectionProfileFromAppState(connection, established: true)
                         HStack{
-                            Button { ConnectionVM.deleteConnection(connection.id!, "established") } label: { Image(systemName: "trash")
+                            Button { DispatchQueue.main.async { ConnectionVM.deleteConnection(connection.id!, "established") } } label: { Image(systemName: "trash")
                                 .foregroundColor(.red) }
                             
                             Text(profile?.fullName ?? "")
@@ -90,8 +88,8 @@ struct ConnectionsView: View {
                 // Pending received connection requests
                 Section(translationManager.receivedReqTitle) {
                     ForEach(appState.pendingConnectionRequestsTarget) { request in
-                        let profile = ConnectionVM.filterConnectionProfileFromAppState(request)
-                        HStack { Button { ConnectionVM.confirmConnectionRequest(confirmedRequest: request)
+                        let profile = ConnectionVM.filterConnectionProfileFromAppState(request, recieved: true)
+                        HStack { Button { DispatchQueue.main.async { ConnectionVM.confirmConnectionRequest(confirmedRequest: request) }
                         } label: {Text("")}
                             
                             Text(profile?.fullName ?? "")
@@ -108,19 +106,21 @@ struct ConnectionsView: View {
                 // Pending sent connection requests
                 Section(translationManager.sentReqTitle) {
                     ForEach(appState.pendingConnectionRequestsOwner) { request in
-                        //let profile = ConnectionVM.filterConnectionProfileFromAppState(request)
+                        let profile = ConnectionVM.filterConnectionProfileFromAppState(request, sent: true)
                         HStack {
-                            //Text(profile?.fullName ?? "")
-                            Text(translationManager.fullNameContact)
+
+                            Text(profile?.fullName ?? "")
+
                             Spacer()
                             Group {
                                 Text(translationManager.cancelReq)
                                 Button {
-                                    ConnectionVM.deleteConnection(request.id!, "\(translationManager.sentContactBtn)")
+                                    DispatchQueue.main.async { ConnectionVM.deleteConnection(request.id!, "sent") }
                                 } label: { Image(systemName: "hand.raised.slash.fill").foregroundColor(.red) }
                             }
                             .foregroundColor(.red)
                         }
+                        
                     }
                 }
                 
@@ -129,15 +129,42 @@ struct ConnectionsView: View {
             
             
         }
-//        .navigationTitle("")
-//        .navigationBarHidden(true)
         .onAppear {
-            ConnectionVM.getConnections()
-            ConnectionVM.getPendingRequests()
-            ConnectionVM.getConnectionProfiles()
+            print("CALLCALLCALL")
+            DispatchQueue.main.async { updateAllData() }
             EventVM.sendNotification()
         }
+        
+        .onChange(of: appState.pendingConnectionRequestsOwner) { c in
+            DispatchQueue.main.async { updateAllData() }
+            print("CALLCALLCALL \(c)")
+        }
+        .onChange(of: appState.pendingConnectionRequestsTarget) { c in
+            DispatchQueue.main.async { updateAllData() }
+            print("CALLCALLCALL \(c)")
+        }
+        .onChange(of: appState.connections) { c in
+            DispatchQueue.main.async { updateAllData() }
+            print("CALLCALLCALL \(c)")
+        }
     }
+    
+    func updateAllData() {
+        DispatchQueue.main.async {
+            ConnectionVM.getConnections() // established connections
+            ConnectionVM.getPendingRequests() // sent and recieved
+            ConnectionVM.getConnectionProfiles() // established connections
+            ConnectionVM.getProfilesOfPendingConectionRequestsSentByCurrentUser() // sent
+            ConnectionVM.getProfilesOfPendingConectionRequestsSentToCurrentUser() // recieved
+        }
+    }
+    
+    func shareConnectionCode() {
+            guard let connectionCode = appState.profile?.connectionCode else { return }
+            let activityVC = UIActivityViewController(activityItems: [connectionCode], applicationActivities: nil)
+            UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+        }
+    
 }
 
 struct ConnectionsView_Previews: PreviewProvider {

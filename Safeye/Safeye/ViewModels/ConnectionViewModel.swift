@@ -15,15 +15,23 @@ class ConnectionViewModel: ObservableObject {
     private var profileService = ProfileService.shared
     @ObservedObject var appState = Store.shared
     
-    func filterConnectionProfileFromAppState(_ connection: ConnectionModel) -> ProfileModel? { // to filter specific connection profile from appState
-        let trustedContactProfileId = connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
-        if !self.appState.connectionPofiles.isEmpty {
+    func filterConnectionProfileFromAppState(_ connection: ConnectionModel, established: Bool = false, recieved: Bool = false, sent: Bool = false) -> ProfileModel? { // to filter specific connection profile from appState
+        
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return nil }
+        
+        let trustedContactProfileId = connection.connectionUsers.filter { $0 != currentUserID }[0]
+        if established && !self.appState.connectionPofiles.isEmpty {
             return self.appState.connectionPofiles.filter { $0.userId == trustedContactProfileId }[0]
+        } else if recieved && !self.appState.pendingConnectionRequestProfilesTarget.isEmpty {
+            return self.appState.pendingConnectionRequestProfilesTarget.filter { $0.userId == trustedContactProfileId }[0]
+        } else if sent && !self.appState.pendingConnectionRequestProfilesOwner.isEmpty {
+            return self.appState.pendingConnectionRequestProfilesOwner.filter { $0.userId == trustedContactProfileId }[0]
         } else { return nil }
     }
     
     func getConnectionProfileID(of connection: ConnectionModel) -> String {
-        connection.connectionUsers.filter { $0 != AuthenticationService.getInstance.currentUser!.uid }[0]
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return "" }
+        return connection.connectionUsers.filter { $0 != currentUserID }[0]
     }
     
     
@@ -52,74 +60,132 @@ class ConnectionViewModel: ObservableObject {
 
     func getPendingRequests()  {
         DispatchQueue.main.async {
-            // self.appState.pendingConnectionRequestsOwner.removeAll()  /** Empty app state **/
-            // self.appState.pendingConnectionRequestsTarget.removeAll() /** Empty app state **/
-            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             self.connService.fetchPendingConnectionRequests(currentUserID)
         }
     }
     
     // get confirmed connection profiles
     func getConnectionProfiles() {
-        let currentUserID = AuthenticationService.getInstance.currentUser!.uid
-        var connectionIDS = [String]()
-        
-        for connection in self.appState.connections {
-            for userID in connection.connectionUsers {
-                if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
+        DispatchQueue.main.async {
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
+            var connectionIDS = [String]()
+            
+            for connection in self.appState.connections {
+                for userID in connection.connectionUsers {
+                    if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
+                }
             }
+            print("getConnectionProfiles -> Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
+            if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS) }
         }
-        print("getConnectionProfiles -> Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
-        if !connectionIDS.isEmpty { self.connService.fetchConnectionProfiles(connectionIDS) }
     }
     
-    func getConnections() {
-        //self.appState.connections.removeAll()
+    // get pending connection request profiles. request sent by authenticated user
+    func getProfilesOfPendingConectionRequestsSentByCurrentUser() {
         DispatchQueue.main.async {
-            //self.appState.connections.removeAll()
-            let currentUserID = AuthenticationService.getInstance.currentUser!.uid
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
+            var connectionIDS = [String]()
+            
+            for connection in self.appState.pendingConnectionRequestsOwner {
+                for userID in connection.connectionUsers {
+                    if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
+                }
+            }
+            print("getConnectionProfiles -> Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
+            if !connectionIDS.isEmpty { self.connService.fetchProfilesOfPendingConectionRequests(connectionIDS, sent: true) }
+        }
+    }
+    
+    // get pending connection request profiles. request sent by other users to authenticated user
+    func getProfilesOfPendingConectionRequestsSentToCurrentUser() {
+        DispatchQueue.main.async {
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
+            var connectionIDS = [String]()
+            
+            for connection in self.appState.pendingConnectionRequestsTarget {
+                for userID in connection.connectionUsers {
+                    if !userID.isEmpty, userID != currentUserID { connectionIDS.append(String(userID)) }
+                }
+            }
+            print("getConnectionProfiles -> Connection ids: fix -> Set -> distinquish: \(connectionIDS)")
+            if !connectionIDS.isEmpty { self.connService.fetchProfilesOfPendingConectionRequests(connectionIDS, recieved: true) }
+        }
+    }
+    
+    
+    func getConnections() { // established connections
+        DispatchQueue.main.async {
+            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             self.connService.fetchConnections(currentUserID)
         }
     }
 
    
     func addConnection() -> String? {
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return nil }
+        
         var message: String? = nil
+        var canAdd = true
 
         guard let targetProfileID = self.appState.profileSearch?.userId else {
             message = "User not found"
+            canAdd = false
             return message
         }
 
         if targetProfileID == appState.profile!.userId {
             message = "You cannot add yourself"
-            return message
+            canAdd = false
         }
-
+        
+        // USer already have connection request, do not allow to send a new one
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if userID == targetProfileID {
                     message = "This connection already exists."
-                    return message
+                    canAdd = false
                 }
             }
         }
-
-        // generate a connection ID
-        let uid = AuthenticationService.getInstance.currentUser!.uid
-        var hasher = Hasher()
-        hasher.combine(AuthenticationService.getInstance.currentUser!.uid)
-        hasher.combine(targetProfileID)
-        let connectionId = String(hasher.finalize())
-
-        let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [uid, targetProfileID], status: false)
-
-        // returns a boolean, was added or not?
-        if connService.addConnection(newConn: newConn) {
-            message = "Connection request sent successfully."
-        } else {
-            message = "An error occured while sending a connection request."
+        
+        
+        // User has already sent a connection request (pending), do not allow to send a new one
+        for connectionSentByCurrentUser in self.appState.pendingConnectionRequestsOwner {
+            if connectionSentByCurrentUser.connectionUsers[1] == targetProfileID {
+                message = "You have sent a request to this user."
+                canAdd = false
+            }
         }
+        
+        // User has already received a connection request (pending), do not allow to send a new one
+        for connectionSentToCurrentUser in self.appState.pendingConnectionRequestsTarget {
+            if connectionSentToCurrentUser.connectionUsers[1] == currentUserID {
+                message = "You have recieved a request by this user."
+                canAdd = false
+            }
+        }
+        
+
+        DispatchQueue.main.async {
+            // generate a connection ID
+            var hasher = Hasher()
+            hasher.combine(currentUserID)
+            hasher.combine(targetProfileID)
+            let connectionId = String(hasher.finalize())
+
+            let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [currentUserID, targetProfileID], status: false)
+
+            // returns a boolean, was added or not?
+            if canAdd {
+                if self.connService.addConnection(newConn: newConn) {
+                    message = "Connection request sent successfully."
+                } else {
+                    message = "An error occured while sending a connection request."
+                }
+            }
+        }
+        
         return message
     }
     

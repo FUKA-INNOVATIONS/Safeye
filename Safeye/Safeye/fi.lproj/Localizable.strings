@@ -79,7 +79,7 @@
 
 // HOME
 
-"eventsNumber" = "tapahtumat";
+"eventsNumber" = "tapahtumaa";
 "createNewEventBtn" = "Luo uusi tapahtuma";
 "yourEventsTitle" = "SINUN TAPAHTUMAT";
 "yourFriendsEventsTitle" = "YSTÄVIESI TAPAHTUMAT";

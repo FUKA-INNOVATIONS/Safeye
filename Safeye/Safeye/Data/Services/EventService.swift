@@ -32,6 +32,7 @@ class EventService {
     } // end of createEvent
     
     
+    
     func fetchEventsForCurrentUser(userID: String) {
         DispatchQueue.main.async {
             self.eventDB.whereField("ownerId", isEqualTo: userID).addSnapshotListener() { event, error in
@@ -54,6 +55,7 @@ class EventService {
             }
         }
     }
+    
     
     
     func fetchEventsOfTrustedContacts(of userID: String) {
@@ -93,7 +95,7 @@ class EventService {
     func fetchDetails(_ eventID: String) {
         let eventRef = self.eventDB.document(eventID)
         DispatchQueue.main.async {
-            eventRef.addSnapshotListener { document, error in
+            eventRef.addSnapshotListener() { document, error in
                 if let error = error as NSError? {
                     self.eventErrors = "eventService: Error getting event: \(error.localizedDescription)"
                 }
@@ -105,8 +107,8 @@ class EventService {
                             if convertedEvent.status == .PANIC {
                                 self.appState.panicMode = true
                                 for eventPanic in self.appState.eventsPanic {
-                                    if eventPanic.id != convertedEvent.id && eventPanic.ownerId != AuthenticationService.getInstance.currentUser!.uid {
-                                        //self.appState.eventsPanic = self.appState.eventsPanic.filter { $0.id != eventPanic.id }
+                                    guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
+                                    if eventPanic.id != convertedEvent.id && eventPanic.ownerId != currentUserID {
                                         self.appState.eventsPanic.append(convertedEvent)
                                     }
                                 }
@@ -138,6 +140,7 @@ class EventService {
     } // end of editEcent
     
     
+    
     func changeStatus(_ eventID: String, _ newStatus: EventStatus) {
         let eventRef = self.eventDB.document(eventID)
         
@@ -150,6 +153,8 @@ class EventService {
         }
     } // end of changeStatus
     
+    
+    
     func deleteEvent(_ eventID: String) {
         self.eventDB.document(eventID).delete() { error in
             if let error = error {
@@ -159,7 +164,6 @@ class EventService {
             }
         }
     }
-    
     
     
     

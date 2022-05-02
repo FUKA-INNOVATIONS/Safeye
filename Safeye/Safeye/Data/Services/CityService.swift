@@ -12,9 +12,6 @@ class CityService {
     static let shared = CityService() ; private init() {}
     private var appState = Store.shared
     
-    //init() { DispatchQueue.main.asyncAfter(deadline: .now() + 1) { self.isFetching = true } }
-    //@Published var isFetching = false
-    
     
     
     // Fetch list of citites of desired country and save it in appState
@@ -47,8 +44,6 @@ class CityService {
             }
         }.resume()
     }
-    
-    
     
     
     

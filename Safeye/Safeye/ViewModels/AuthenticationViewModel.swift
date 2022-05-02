@@ -72,6 +72,7 @@ class AuthenticationViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self?.signedIn = true
                 self?.appState.appLoading = false
+                self?.appState.currentUserID = result!.user.uid
                 
             }
         }

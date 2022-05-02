@@ -29,7 +29,7 @@ class ProfileService {
     
     func fetchProfileByUserID(userID: String, panicProfile: Bool = false) {
         DispatchQueue.main.async {
-            self.profileDB.whereField("userId", isEqualTo: userID).getDocuments()  { profile, error in
+            self.profileDB.whereField("userId", isEqualTo: userID).addSnapshotListener()  { profile, error in
                 if let error = error as NSError? {
                     print("profileService: Error fetching single profile: \(error.localizedDescription)")
                 }
@@ -53,9 +53,10 @@ class ProfileService {
     }
     
     
+    
     func fetchProfileByConnectionCode(connCode: String) {
         DispatchQueue.main.async {
-            self.profileDB.whereField("connectionCode", isEqualTo: connCode).getDocuments() { profiles, error in
+            self.profileDB.whereField("connectionCode", isEqualTo: connCode).addSnapshotListener() { profiles, error in
                 if let error = error as NSError? {
                     print("profileService: Error fetching  profile by connection code: \(error.localizedDescription)")
                 }
@@ -79,6 +80,7 @@ class ProfileService {
     }
     
     
+    
     func createProfile(newProfile: ProfileModel) {
         do {
             _ = try self.profileDB.addDocument(from: newProfile)
@@ -89,7 +91,6 @@ class ProfileService {
             // return false
         }
     }
-    
     
     
     
@@ -106,6 +107,8 @@ class ProfileService {
             }
     }
     
+    
+    
     func updateUserHomeLocationCoordinates(_ profileID: String, _ homeCoordinates: [Double]) {
         self.profileDB.document(profileID).updateData(["homeLatitude": homeCoordinates[0], "homeLongitude": homeCoordinates[1]]) { error in
             
@@ -114,9 +117,11 @@ class ProfileService {
         }
     }
     
+    
+    
     func fetchEventTrustedContactsProfiles(_ userIDS: [String]) {
         DispatchQueue.main.async {
-            self.profileDB.whereField("userId", in: userIDS).getDocuments() { profiles, error in
+            self.profileDB.whereField("userId", in: userIDS).addSnapshotListener() { profiles, error in
                 if let error = error {
                     print("ProfileService: Error getting profiles of trusted contacts: \(error)")
                 } else {
@@ -134,8 +139,6 @@ class ProfileService {
             }
         }
     }
-    
-    
     
     
     

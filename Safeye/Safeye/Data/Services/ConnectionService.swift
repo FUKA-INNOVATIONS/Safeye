@@ -46,6 +46,8 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    
+    
     func fetchPendingConnectionRequests (_ userID: String) { // type: received= target / sent = owner
         DispatchQueue.main.async {
             self.connectionsDB.whereField("connectionUsers", arrayContains: userID)
@@ -82,9 +84,11 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    
+    
     func confirmConnectionRequest(_ connectionRequest: ConnectionModel) {
-        let connectionRef = self.connectionsDB.document(connectionRequest.id!)
         DispatchQueue.main.async {
+            let connectionRef = self.connectionsDB.document(connectionRequest.id!)
             do {
                 try connectionRef.setData(from: connectionRequest)
             }
@@ -94,28 +98,39 @@ class ConnectionService: ObservableObject {
         }
     }
     
+    
+    
     func deleteConnection(_ connectionID: String) {
-        self.connectionsDB.document(connectionID).delete() { error in
-            if let error = error {
-                print("Error deleting event: \(error)")
-            } else {
-                print("Event successfully deleted!")
+        DispatchQueue.main.async {
+            self.connectionsDB.document(connectionID).delete() { error in
+                if let error = error {
+                    print("Error deleting connection: \(error)")
+                } else {
+                    print("Connection successfully deleted!")
+                }
             }
         }
     }
     
     
+    
     // Add user as trusted contact and create a new entry in 'connections' collection
     func addConnection(newConn: ConnectionModel) -> Bool { // TODO: FIX > check for existing connection, add only if not exist
-        do {
-            _ = try connectionsDB.addDocument(from: newConn)
-            return true
+        var didAdd = false
+        DispatchQueue.main.async {
+            do {
+                _ = try self.connectionsDB.addDocument(from: newConn)
+                didAdd = true
+            }
+            catch {
+                print(error)
+                didAdd = false
+            }
         }
-        catch {
-            print(error)
-            return false
-        }
+        return didAdd // cant be trusted since it might be returned before dispached block
     }
+    
+    
     
     func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
         DispatchQueue.main.async {
@@ -145,6 +160,32 @@ class ConnectionService: ObservableObject {
     }
     
     
-
+    
+    // Fetch profiles of pending connection request's users
+    func fetchProfilesOfPendingConectionRequests(_ userIDS: [String], sent: Bool = false, recieved: Bool = false) {
+        DispatchQueue.main.async {
+            if sent { self.appState.pendingConnectionRequestProfilesOwner.removeAll() }
+            if recieved { self.appState.pendingConnectionRequestProfilesTarget.removeAll() }
+            
+            self.profileDB.whereField("userId", in: userIDS).addSnapshotListener() { profiles, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for profile in profiles!.documents {
+                        print("\(profile.documentID) => \(profile.data())")
+                            do {
+                                let convertedProfile = try profile.data(as: ProfileModel.self)
+                                if sent { self.appState.pendingConnectionRequestProfilesOwner.append(convertedProfile) }
+                                if recieved { self.appState.pendingConnectionRequestProfilesTarget.append(convertedProfile) }
+                            } catch {
+                                print("Error while converting pending connections profiles profiles: \(error)")
+                            }
+                    }
+                }
+            }
+        }
+    }
+    
+    
 
 } // end of ConnectionService

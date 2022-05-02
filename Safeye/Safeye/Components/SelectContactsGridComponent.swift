@@ -28,6 +28,23 @@ struct SelectContactGridComponent: View {
             Text(translationManager.noAddedContacts)
 
         } else {
+            HStack {
+                Button {
+                    appStore.eventSelctedContacts.removeAll()
+                } label: {
+                    Text("Remove all contacts") // translation
+                        .font(.caption)
+                }
+                Spacer()
+                Button {
+                    appStore.eventSelctedContacts = appStore.connectionPofiles
+                } label: {
+                    Text("Select all contacts") // translation
+                        .font(.caption)
+                }
+            }
+            .buttonStyle(BorderlessButtonStyle())
+
             ForEach(appStore.connectionPofiles) { profile in
                 Section {
                     SelectContactComponent(profileDetails: profile)

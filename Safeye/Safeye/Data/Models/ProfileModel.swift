@@ -22,6 +22,6 @@ struct ProfileModel: Identifiable, Hashable, Codable {
     var allergies: String   // TODO: change to [String]
     var connectionCode: String
     var avatar: String
-    // var homeLatitude: String
-    // var homeLongitude: String
+    var homeLatitude: Double?
+    var homeLongitude: Double?
 }

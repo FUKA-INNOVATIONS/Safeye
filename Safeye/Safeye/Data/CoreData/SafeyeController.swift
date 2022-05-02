@@ -47,7 +47,9 @@ class SafeyeController: ObservableObject {
             }
         } else { print("SafeyeController: Cities not saved in device beause of no changes") }
         //print("CoreData: : \(cities.count)")
+        
     }
+    
     
     
 }

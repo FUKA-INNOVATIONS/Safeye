@@ -60,10 +60,7 @@ struct ProfileView: View {
                         }
                     }
                 }
-                //.background(Color(UIColor.lightGray))
                 
-                
-                Divider()
                 Spacer(minLength: 30)
                 
                 // Safe Spaces
@@ -72,12 +69,11 @@ struct ProfileView: View {
                     Text(translationManager.safeSpaceTitle)
                         .fontWeight(.bold)
                     
-//                    if appState.safePlaces.isEmpty { Text("You haven't yet added any places").font(.caption).padding(.top) }
                     if appState.safePlaces.isEmpty { Text(translationManager.noPlaceYet).font(.caption).padding(.top) }
                     
                     ListViewComponent(item: "safeSpace", size: 40)
                         .padding(.leading, 20)
-                        .padding(.trailing, 20)                    
+                        .padding(.trailing, 20)
                     
                     HStack{
                         Spacer()
@@ -85,10 +81,7 @@ struct ProfileView: View {
                         NavigationLink {
                             MapView()
                         } label: {
-//                            Text("View on map")
                             Text(translationManager.viewOnMap)
-
-                            
                             Image(systemName: "paperplane")
                         }
                         .font(.system(size: 15, weight: .semibold))
@@ -100,7 +93,7 @@ struct ProfileView: View {
                             withAnimation { showingAddSafePlace = true }
                             print("modal: ($showingAddSafePlace)")
                         })
-                        { //Image(systemName: "plus.magnifyingglass")
+                        {
                             Text(translationManager.addNew)
                             Image(systemName: "plus.magnifyingglass")
                         }
@@ -109,42 +102,22 @@ struct ProfileView: View {
                         
                         Spacer()
                     }
-   
+                    
                 }
-//                Spacer(minLength: 40)
-                Divider()
-//                Text("My details")
-//                    .fontWeight(.bold)
-//                    .padding(.top, 20)
-                
-                ScrollView {
-                    UserDetailsComponent()
-                }
-   
+                UserDetailsComponent() // Personal and health info
+                    .padding(.top, 10)
             }
-            //.padding(.top, -100)
             .onAppear {
                 print("profileView view appeared")
                 ProfileVM.getProfileForCurrentUser()
                 FileVM.fetchPhoto(avatarUrlFetched: appState.profile!.avatar)
-                //ProfileVM.updateUserHomeCoordinates()
             }
             AddSafePlaceView(isShowing: $showingAddSafePlace)
         }
-//        .navigationTitle("")
-//        .navigationBarHidden(true)
         .onAppear {
-            //            ConnectionVM.getConnections()
-            //            ConnectionVM.getConnectionProfiles()
             EventVM.sendNotification()
             SafePlaceVM.getSafePlacesOfAuthenticatedtUser()
         }
         
     }
 }
-
-/*struct ProfileView_Previews: PreviewProvider {
- static var previews: some View {
- ProfileView()
- }
- }*/

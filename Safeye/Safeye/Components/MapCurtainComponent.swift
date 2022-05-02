@@ -16,7 +16,10 @@ struct MapCurtainComponent: View {
     
             HStack {
                 Spacer()
-                Text(translationManager.trustedContactsMap).padding(.top, 15)
+
+                Text("^   \(translationManager.trustedContactsMap)  ^")
+                    .padding(.top, 30)
+                    .font(.title2)
                 Spacer()
             }
             

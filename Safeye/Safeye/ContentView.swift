@@ -54,6 +54,8 @@ struct ContentView: View {
                         if !appState.eventsPanic.isEmpty { AlertPanicComponent() }
                         NavItem()
                     }
+//                    .navigationTitle("Safeye")
+//                    .navigationBarTitleDisplayMode(.automatic)
                     
                 }
                 

@@ -25,6 +25,8 @@ class ProfileViewModel: NSObject, ObservableObject {
         self.getProfileForCurrentUser() // update app state
     }
     
+    
+    
     func updateUserHomeCoordinates() {
         guard let profileID = self.appState.profile?.id else {
             print("updateProfile -> profile id not found in app state")
@@ -34,11 +36,14 @@ class ProfileViewModel: NSObject, ObservableObject {
         self.profileService.updateUserHomeLocationCoordinates(profileID, [locationManager.location!.coordinate.latitude, locationManager.location!.coordinate.longitude])
     }
     
-    func  getProfileByConnectionCode(withCode connectionCode: String) {
+    
+    
+    func getProfileByConnectionCode(withCode connectionCode: String) {
         self.profileService.fetchProfileByConnectionCode(connCode: connectionCode)
     }
     
-
+    
+    
     func getProfileForCurrentUser() {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else {
             print("Fetching current user's profile: No signed in user found")
@@ -46,6 +51,8 @@ class ProfileViewModel: NSObject, ObservableObject {
         }
         self.profileService.fetchProfileByUserID(userID: currentUserID)
     }
+    
+    
     
     func createProfile(_ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String,_ allergies: String, _ avatar: String) {
         

@@ -23,9 +23,7 @@ struct AddContactView: View {
         return max(0, min(1, res))
     }
     
-    
-    
-    ///////////
+
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var FileVM: FileViewModel
@@ -79,7 +77,8 @@ struct AddContactView: View {
                     if appState.profileSearch != nil {
                         
                         if appState.searchResultPhoto != nil {
-                            ProfileImageComponent(size: 90, avatarImage: appState.searchResultPhoto!)
+                            ProfileImageComponent(size: 150, avatarImage: appState.searchResultPhoto!)
+                                .padding(.bottom, 20)
                         } else {
                             ProgressView()
                                 .onAppear {
@@ -87,28 +86,30 @@ struct AddContactView: View {
                                 }
                         }
                         
+
                         Text("\(appState.profileSearch?.fullName ?? "\(translationManager.noName)")")
+                            .font(.title)
                             .padding(.bottom)
-//                      BasicButtonComponent(label: "Add", action: {
                         Button(action: {
-                            if appState.profileSearch != nil {
-                                let message = ConnectionVM.addConnection()
-                                if message != nil {
-                                    self.error = message!
+                            DispatchQueue.main.async {
+                                if appState.profileSearch != nil {
+                                    let message = ConnectionVM.addConnection()
+                                    if message != nil {
+                                        self.error = message!
+                                    }
                                 }
+                                searchInput = ""
+                                appState.profileSearch = nil
                             }
-                            searchInput = ""
-                            appState.profileSearch = nil
                         }, label: {Text(translationManager.addBtn)})
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
                     } else {
                         VStack {
                             AnimationLottieView(lottieJson: "no-data")
-                            Text(self.error)
+                            //Text(self.error)
                         }
                         .frame(width: 150, height: 150, alignment: .center)
-                        //Text(translationManager.nothingTitle)
                         Text(self.error)
                             .frame(alignment: .center)
                             .padding()
