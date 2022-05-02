@@ -123,6 +123,8 @@ class ConnectionViewModel: ObservableObject {
 
    
     func addConnection() -> String? {
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return nil }
+        
         var message: String? = nil
         var canAdd = true
 
@@ -135,9 +137,9 @@ class ConnectionViewModel: ObservableObject {
         if targetProfileID == appState.profile!.userId {
             message = "You cannot add yourself"
             canAdd = false
-            //return message
         }
         
+        // USer already have connection request, do not allow to send a new one
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if userID == targetProfileID {
@@ -147,13 +149,20 @@ class ConnectionViewModel: ObservableObject {
             }
         }
         
-        // Sent
         
-        // resceived
+        // User has already sent a connection request (pending), do not allow to send a new one
+        for connectionSentByCurrentUser in self.appState.pendingConnectionRequestsOwner {
+            if connectionSentByCurrentUser.connectionUsers[1] == targetProfileID {
+                message = "You have sent a request to this user."
+                canAdd = false
+            }
+        }
+        
+        
+        
 
         DispatchQueue.main.async {
             // generate a connection ID
-            guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             var hasher = Hasher()
             hasher.combine(currentUserID)
             hasher.combine(targetProfileID)
