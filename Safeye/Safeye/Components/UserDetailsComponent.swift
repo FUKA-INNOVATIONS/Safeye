@@ -18,9 +18,11 @@ struct UserDetailsComponent: View {
         VStack(alignment: .leading) {
 
             GroupBox {
-                DisclosureGroup("Person details") { // TODO: translation
+//                DisclosureGroup("Person details") { // TODO: translation
+                DisclosureGroup(translationManager.personDetails) {
                     HStack{
-                        Text("Address")
+//                        Text("Address")
+                        Text(translationManager.addressTitle)
                         Spacer()
                         Text("\(appState.profile?.address ?? "Homeless")")
                     }
@@ -28,7 +30,7 @@ struct UserDetailsComponent: View {
                     .font(.subheadline)
                     
                     HStack{
-                        Text("\(Text(translationManager.bornTitle))")
+                        Text(translationManager.bornTitle)
                         Spacer()
                         Text("\(appState.profile?.birthday ?? "Still in mama's stomach")")
                     }
@@ -39,9 +41,10 @@ struct UserDetailsComponent: View {
             }
                         
             GroupBox {
-                DisclosureGroup("Health details") { // TODO: translation
+//                DisclosureGroup("Health details") { // TODO: translation
+                DisclosureGroup(translationManager.healthDetail) {
                     HStack {
-                        Text("\(Text(translationManager.illnessTitle))")
+                        Text(translationManager.illnessTitle)
                         Spacer()
                         Text("\(appState.profile?.illness ?? "Are you serious?")")
                     }
@@ -49,7 +52,7 @@ struct UserDetailsComponent: View {
                     .font(.subheadline)
 
                     HStack {
-                        Text("\(Text(translationManager.allergiesTitle)) ")
+                        Text(translationManager.allergiesTitle)
                         Spacer()
                         Text("\(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
 
@@ -58,7 +61,7 @@ struct UserDetailsComponent: View {
                     .font(.subheadline)
 
                     HStack {
-                        Text("\(Text(translationManager.bloodTitle))")
+                        Text(translationManager.bloodTitle)
                         Spacer()
                         Text("\(appState.profile?.bloodType ?? "Water engine")")
                     }

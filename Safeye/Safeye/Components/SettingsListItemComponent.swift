@@ -11,6 +11,7 @@ struct SettingsListItemComponent: View {
     // if true, displays settings item
     // if false, it shows contact details for curtain view
     let settingsItem: Bool
+    var translationManager = TranslationService.shared
     
     var body: some View {
         HStack {
@@ -21,11 +22,14 @@ struct SettingsListItemComponent: View {
             }
             VStack(alignment: .leading){
                 settingsItem ?
-                Text("Headline")
+//                Text("Headline")
+                Text(translationManager.headline)
                     .font(.system(size: 25, weight: .bold))
-                : Text("FirstName LastName")
+//                : Text("FirstName LastName")
+                : Text(translationManager.firstLastName)
                 
-                settingsItem ? Text("TLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") : Text("Maybe home address?")
+//                settingsItem ? Text("TLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") : Text("Maybe home address?")
+                settingsItem ? Text(translationManager.settingsItemText) : Text(translationManager.maybeHomeAddress)
             }
             Spacer()
             //icon size isn't adjusting, not sure why

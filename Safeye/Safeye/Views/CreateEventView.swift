@@ -21,7 +21,7 @@ struct CreateEventView: View {
     @State var otherInfo: String = ""
     @State var eventFolderPath = ""
     
-    let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"]
+    @State var eventTypesArray = TranslationService.shared.eventTypesArray
     @State var cityOfEvent = ""
     @State var selectedEventCityIndex = 0
     
@@ -66,7 +66,8 @@ struct CreateEventView: View {
                 }
                 
                 
-                Section(header: Text("Location")) { // TODO: translation
+//                Section(header: Text("Location")) { // TODO: translation
+                Section(header: Text(translationManager.location)) {
                     Picker(selection: $selectedEventCityIndex, label: Text("")) {
                         ForEach(0..<cities.count) {
                             Text(cities[$0].name!)
@@ -80,7 +81,8 @@ struct CreateEventView: View {
                 }
                 
             }.navigationBarTitle(translationManager.addEventInfo, displayMode: .inline)
-                .alert("Please fill all form fields", isPresented: $showingFormError) { // TODO: translation
+//                .alert("Please fill all form fields", isPresented: $showingFormError) { // TODO: translation
+                .alert(translationManager.alertFillAllfields, isPresented: $showingFormError) { // TODO: translation
                     Button(translationManager.okBtn, role: .cancel) { }
                 }
             Spacer()

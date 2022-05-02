@@ -12,6 +12,7 @@ struct SelectContactGridComponent: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appStore: Store
     @State var selectedContacts = [String]()
+    var translationManager = TranslationService.shared
     
     let layout = [
         GridItem(.fixed(100)),
@@ -22,20 +23,23 @@ struct SelectContactGridComponent: View {
 //        ScrollView(.vertical, showsIndicators: true) {
 //            LazyHGrid(rows: layout) {
         if appStore.connectionPofiles.isEmpty {
-            Text("You have not added any contacts.") // TODO: translation
+//            Text("You have not added any contacts.") // TODO: translation
+            Text(translationManager.noAddedContacts)
         } else {
             HStack {
                 Button {
                     appStore.eventSelctedContacts.removeAll()
                 } label: {
-                    Text("Remove all contacts") // translation
+//                    Text("Remove all contacts") // translation
+                    Text(translationManager.removeAll)
                         .font(.caption)
                 }
                 Spacer()
                 Button {
                     appStore.eventSelctedContacts = appStore.connectionPofiles
                 } label: {
-                    Text("Select all contacts") // translation
+//                    Text("Select all contacts") // translation
+                    Text(translationManager.selectAll) // translation
                         .font(.caption)
                 }
             }

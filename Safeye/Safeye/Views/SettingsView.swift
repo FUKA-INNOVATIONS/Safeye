@@ -28,13 +28,16 @@ struct SettingsView: View {
     var body: some View {
         
         Form {
-            Section(header: Text("Settings"), footer: Text("Once 'Update home coordinates' is clicked, your coordinates will be automatically updated to match your current location.")) {
+//            Section(header: Text("Settings"), footer: Text("Once 'Update home coordinates' is clicked, your coordinates will be automatically updated to match your current location.")) {
+            Section(header: Text(translationManager.settingsTitle), footer: Text(translationManager.updateCoordinatesInfo)) {
                 VStack{
                     Picker("Mode", selection: $isDarkMode){
-                    Text("Light")
-                        .tag(false)
-                    Text("Dark")
-                        .tag(true)
+                        //Text("Light")
+                        Text(translationManager.lightMode)
+                            .tag(false)
+                        //Text("Dark")
+                        Text(translationManager.darkMode)
+                            .tag(true)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
@@ -43,39 +46,46 @@ struct SettingsView: View {
                 // Update user's home coordinates
                 // TODO: add popup info box when pressed
                 if CLLocationManager().authorizationStatus.rawValue == 4 {
-                    Button("Update Home Coordinates") {
+//                    Button("Update Home Coordinates") {
+                    Button(translationManager.updateCoordinatesBtn) {
                         ProfileVM.updateUserHomeCoordinates()
                         withAnimation { showingCoordinatesUpdatedAlert.toggle() }
                     }
                 }
                 
             }
-            .alert("Home coordinates updated!", isPresented: $showingCoordinatesUpdatedAlert) { // TODO: translation
+//            .alert("Home coordinates updated!", isPresented: $showingCoordinatesUpdatedAlert) { // TODO: translation
+            .alert(translationManager.alertHomeCoordinates, isPresented: $showingCoordinatesUpdatedAlert) {
                 Button(translationManager.okBtn, role: .cancel) { }
             }
             
             
-            Section("Information") {
+//            Section("Information") {
+            Section(translationManager.settingsTitle) {
                 List{
-                    Text("About Safeye")
+//                    Text("About Safeye")
+                    Text(translationManager.aboutSafeye)
                         .onTapGesture {
                             section = "about"
                             isInfoDetailShowing = true
                         }
                     
-                    Text("How it works")
+//                    Text("How it works")
+                    Text(TranslationService.shared.howItWorksTitle)
                         .onTapGesture {
                             section = "how"
                             isInfoDetailShowing = true
                         }
                     
-                    Text("FAQ")
+//                    Text("FAQ")
+                    Text(translationManager.faqTitle)
                         .onTapGesture {
                             section = "FAQ"
                             isInfoDetailShowing = true
                         }
                     
-                    Text("Privacy")
+//                    Text("Privacy")
+                    Text(translationManager.privacyTitle)
                         .onTapGesture {
                             section = "privacy"
                             isInfoDetailShowing = true

@@ -233,8 +233,8 @@
 // Components
 "friendAlert" = "Friend needs your help!";
 "imageAvatarError" = "There was an error loading the image.";
-"focusBtn" = "Focus on";
-"trustedContactsMap" = "^   Trusted Contacts   ^";
+"focusBtn" = "Focus";
+"trustedContactsMap" = "Trusted Contacts";
 "noAddedContacts" = "You have not added any contacts.";
 "headline" = "Headline";
 "settingsItemText" = "TLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";

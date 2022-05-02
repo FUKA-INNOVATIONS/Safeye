@@ -14,6 +14,7 @@ class ConnectionViewModel: ObservableObject {
     private var connService = ConnectionService.shared
     private var profileService = ProfileService.shared
     @ObservedObject var appState = Store.shared
+    var translationManager = TranslationService.shared
     
     func filterConnectionProfileFromAppState(_ connection: ConnectionModel, established: Bool = false, recieved: Bool = false, sent: Bool = false) -> ProfileModel? { // to filter specific connection profile from appState
         
@@ -129,13 +130,15 @@ class ConnectionViewModel: ObservableObject {
         var canAdd = true
 
         guard let targetProfileID = self.appState.profileSearch?.userId else {
-            message = "User not found"
+//            message = "User not found"
+            message = "\(translationManager.userNotFound)"
             canAdd = false
             return message
         }
 
         if targetProfileID == appState.profile!.userId {
-            message = "You cannot add yourself"
+//            message = "You cannot add yourself"
+            message = "\(translationManager.cantAddYourself)"
             canAdd = false
         }
         
@@ -143,7 +146,8 @@ class ConnectionViewModel: ObservableObject {
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if userID == targetProfileID {
-                    message = "This connection already exists."
+//                    message = "This connection already exists."
+                    message = "\(translationManager.connectionAlreadyExists)"
                     canAdd = false
                 }
             }
@@ -153,7 +157,8 @@ class ConnectionViewModel: ObservableObject {
         // User has already sent a connection request (pending), do not allow to send a new one
         for connectionSentByCurrentUser in self.appState.pendingConnectionRequestsOwner {
             if connectionSentByCurrentUser.connectionUsers[1] == targetProfileID {
-                message = "You have sent a request to this user."
+//                message = "You have sent a request to this user."
+                message = "\(translationManager.requestAlreadySent)"
                 canAdd = false
             }
         }
@@ -161,7 +166,8 @@ class ConnectionViewModel: ObservableObject {
         // User has already received a connection request (pending), do not allow to send a new one
         for connectionSentToCurrentUser in self.appState.pendingConnectionRequestsTarget {
             if connectionSentToCurrentUser.connectionUsers[1] == currentUserID {
-                message = "You have recieved a request by this user."
+//                message = "You have recieved a request by this user."
+                message = "\(translationManager.requestAlreadyRecieved)"
                 canAdd = false
             }
         }
@@ -179,9 +185,13 @@ class ConnectionViewModel: ObservableObject {
             // returns a boolean, was added or not?
             if canAdd {
                 if self.connService.addConnection(newConn: newConn) {
-                    message = "Connection request sent successfully."
+//                    message = "Connection request sent successfully."
+                    message = "\(self.translationManager.connectionReqSuccesess)"
+
                 } else {
-                    message = "An error occured while sending a connection request."
+//                    message = "An error occured while sending a connection request."
+                    message = "\(self.translationManager.errorConnectionReq)"
+
                 }
             }
         }

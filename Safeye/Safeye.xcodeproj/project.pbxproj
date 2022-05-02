@@ -260,9 +260,10 @@
 		755FCBB2281683650081B160 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCBB4281683660081B160 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCBB5281683E00081B160 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
-		755FCBB7281695C40081B160 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
-		755FCBB8281695D20081B160 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCC0C281816450081B160 /* AnimationLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLottieView.swift; sourceTree = "<group>"; };
+		7578ADEB281FFB960037DD7D /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7578ADED281FFBB80037DD7D /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7578ADEE282002DC0037DD7D /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75994EF62809B8EB003244C6 /* alertBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertBoxComponent.swift; sourceTree = "<group>"; };
 		75EB684D28130B0D00F607B7 /* SafeSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeSpaceModel.swift; sourceTree = "<group>"; };
 		75EB684F28130B5000F607B7 /* SearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModel.swift; sourceTree = "<group>"; };
@@ -431,8 +432,6 @@
 		5F244A8327F70B3300BFE1FB /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				6AB23AB5281E8BA900AFB259 /* SafeSpaceSearchComponent.swift */,
-				5FACE175281B3787007CB089 /* LoginInputComponent.swift */,
 				75994EF62809B8EB003244C6 /* alertBoxComponent.swift */,
 				5F639DC2281322D600EC39E3 /* AlertPanicComponent.swift */,
 				755FCC0C281816450081B160 /* AnimationLottieView.swift */,
@@ -440,13 +439,14 @@
 				5F244AE227F71FEE00BFE1FB /* BasicButtonComponent.swift */,
 				6A2CFC2E2801BABD0046395D /* CurtainTCComponent.swift */,
 				6A2CFC2C2801B9270046395D /* CurtainTCListComponent.swift */,
-				6A382E81281C19A0002E3BAB /* LoginInputComponent.swift */,
 				5F244AE427F7200500BFE1FB /* InputFieldComponent.swift */,
 				6ABCDD2127FF096F009563E7 /* ListViewComponent.swift */,
+				5FACE175281B3787007CB089 /* LoginInputComponent.swift */,
 				6A2CFC2A280182F40046395D /* MapCurtainComponent.swift */,
 				D5148A5227FF5C8800E98347 /* NavItem.swift */,
 				5FBC1A70280DFB3F0015CC26 /* ProfileImageComponent.swift */,
 				6ABCDD2527FFEC7B009563E7 /* SafeSpaceComponent.swift */,
+				6AB23AB5281E8BA900AFB259 /* SafeSpaceSearchComponent.swift */,
 				6AE0A85F2801BB8800661B1F /* SearchFieldComponent.swift */,
 				5F2EAD8627FCA2A0006FDFD9 /* SecureInputFieldComponent.swift */,
 				6ABCDD2727FFF8F9009563E7 /* SelectContactComponent.swift */,
@@ -456,6 +456,7 @@
 				5F5962012802CD7900C8F682 /* TackingModeButtonComponent.swift */,
 				6A0F204B281808A500213FBC /* TrustContactDetailsComponent.swift */,
 				6ABCDD2327FF1B19009563E7 /* UserDetailsComponent.swift */,
+				6A382E81281C19A0002E3BAB /* LoginInputComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -504,19 +505,19 @@
 				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
 				5F244A9327F70EEA00BFE1FB /* CreateEventView.swift */,
 				5FE0B094280BD3C900CFED16 /* EventListView.swift */,
+				6AB93830281A74330077552C /* EventMapView.swift */,
 				6A29154D2803128E00988C2C /* EventView.swift */,
+				6A0F20472817193F00213FBC /* InfoDetailView.swift */,
 				5F244A8B27F70E7300BFE1FB /* LoginView.swift */,
 				5F244A9C27F711A500BFE1FB /* MapView.swift */,
 				5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */,
 				5F20CC9728006850001E9AED /* ProfileEditView.swift */,
 				5F244A9127F70EC600BFE1FB /* ProfileView.swift */,
+				5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */,
 				6A8792DF2812EFC0009B469B /* RecordingView.swift */,
 				5F244A8D27F70E8700BFE1FB /* RegisterView.swift */,
 				5F244A9E27F711B900BFE1FB /* SettingsView.swift */,
-				5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */,
-				6A0F20472817193F00213FBC /* InfoDetailView.swift */,
 				6AC44623281810E20040BD42 /* TCProfileView.swift */,
-				6AB93830281A74330077552C /* EventMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -682,6 +683,7 @@
 				fi,
 				uk,
 				lt,
+				"en-GB",
 			);
 			mainGroup = 5F0EA2EE27F6F9E000FBD77B;
 			packageReferences = (
@@ -880,8 +882,9 @@
 			children = (
 				755FCBB2281683650081B160 /* en */,
 				755FCBB4281683660081B160 /* fi */,
-				755FCBB7281695C40081B160 /* uk */,
-				755FCBB8281695D20081B160 /* lt */,
+				7578ADEB281FFB960037DD7D /* en-GB */,
+				7578ADED281FFBB80037DD7D /* uk */,
+				7578ADEE282002DC0037DD7D /* lt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

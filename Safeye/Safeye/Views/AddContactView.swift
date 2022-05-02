@@ -85,7 +85,7 @@ struct AddContactView: View {
                                 }
                         }
                         
-                        Text("\(appState.profileSearch?.fullName ?? "No name")")
+                        Text("\(appState.profileSearch?.fullName ?? "\(translationManager.noName)")")
                             .font(.title)
                             .padding(.bottom)
                         Button(action: {

@@ -28,11 +28,14 @@
 // Alert in case wrong input
 "loginAlertTitle" = "Kirjautuminen epäonnistui";
 "okBtn" = "ai että, okeei";
+// Two extra empty keys
+"extraOne" = "";
+"extraTwo" = "";
 
 
 // Create profile
 
-
+"youDecidetext" = "Sinä päätät ketkä näkevät profiilisi";
 "textProfile" = "Luo profiili ja pysy turvassa!";
 "createProfileBtn" = "Luo profiili";
 
@@ -53,7 +56,7 @@
 // Alert in case wrong input
 "fieldAlertTitle" = "Täytä kaikki kentät";
 "fieldAlertText" = "Täytä kaikki kentät jatkaaksesi";
-"okBtn" = "okei";
+"okBtn" = "Okeei";
 
 
 // SETTINGS
@@ -63,52 +66,72 @@
 "copyBtn" = "Kopioi"; // might be an icon
 "nocode" = "Ei koodia";
 
+"lightMode" = "Vaalea";
+"darkMode" = "Tumma";
+"settingsTitle" = "Asetukset";
+"updateCoordinatesBtn" = "Päivitä kotisi koordinaatit";
+"updateCoordinatesInfo" = "Painaamalla 'Päivitä kodin koordinaatit' nappia, kotisi koordinaatit päivitetään automaattisesti vastaamaan nykyistä sijaintiasi.";
+"aboutSafeye" = "Tietoa meistä";
+"faqTitle" = "UKK";
+"privacyTitle" = "Yksityisyys";
+"howItWorksTitle" = "Käyttöohjeet";
+"infoSettingsTitle" = "Tiedot";
 
 // HOME
 
 "eventsNumber" = "tapahtumaa";
 "createNewEventBtn" = "Luo uusi tapahtuma";
-"yourEventsTitle" = "SINUN TAPAHTUMAT";
-"yourFriendsEventsTitle" = "YSTÄVIESI TAPAHTUMAT";
+"yourEventsTitle" = "Sinun tapahtumat";
+"yourFriendsEventsTitle" = "Ystäviesi tapahtumat";
 "eventInfoTitle" = "Aloitettu";
 
 // Tracking mode view
 "safeStatusTitle" = "Aloitettu";
-"panicStatusTitle" = "Paniikki";
+"panicStatusTitle" = "Hädässä";
 "startedStatusTitle" = "Aloitettu";
 "deleteBtn" = "Poista";
 "trustedContactsTrack" = "Tapahtuman turvaverkko";
-"eventdDetailsTrack" = "TAPAHTUMAN TIEDOT";
-"startTrack" = "Alkaen:";
-"endTrack" = "Päättyy:";
-"eventTypeTrack" = "Tapahtumatyyppi:";
-"otherTrack" = "Muut tiedot:";
+"eventdDetailsTrack" = "Tapahtuman tiedot";
+"startTrack" = "Alkaa";
+"endTrack" = "Päättyy";
+"eventTypeTrack" = "Tapahtumatyyppi";
+"otherTrack" = "Muut tiedot";
+"viewOnMapBtn" = "Näytä käyttäjän sijainti kartalla";
+"showRecordedBtn" = "Näytä tallennetut viestit";
+"recordMessageBtn" = "Tallenna viesti";
+
 //Tracking mode copmponent
 "sosBtn" = "SOS";
-"safeBtn" = "Safe";
-
+"safeBtn" = "Turvassa";
+// Recording view
+"recordedMessages" = "Tallennetut viestit";
+"recordedYourMessages" = "Tallennetut viestit";
+"SaveUpdateBtn" = "Tallenna viestisi";
+"cancelRecording" = "Peruuta tallennus";
 
 
 // Create event view
 "selectContactsTitle" = "Määritä tapahtuman turvaverkko";
-"createEventInfoText" = "Valitut käyttäjät näkevät tapahtuman kaikki tiedot";
+"createEventInfoText" = "Valimtsemasi käyttäjät näkevät tapahtuman kaikki tiedot";
 "dateAndTime" = "Tapahtuman arivioitu ajankohta";
 "startTime" = "Alkaa";
 "endTime" = "Päättyy";
 "eventType" = "Tapahtumatyyppi";
 "addContactBtn" = "Lisää";
 "removeContactBtn" = "Poista";
+"location" = "Sijainti";
+
 // Event types
 "selectEventType" = "Valitse tapahtumatyyppi";
 "barNight" = "Baari-ilta";
 "nightClub" = "Bailaaminen";
 "dinner" = "Illallinen";
 "houseParty" = "Kotibileet";
-"firstDate" = "Treffi";
+"firstDate" = "Treffit";
 "otherType" = "Muu";
 
-"otherDetailTitle" = "MUUT TIEDOT";
-"detailPlaceholder" = "Mitään muuta?";
+"otherDetailTitle" = "Muut tiedot";
+"detailPlaceholder" = "Muuta?";
 "saveActivateBtn" = "Tallenna & aktivoi";
 "addEventInfo" = "Lisää tapahtuman tiedot";
 "savingEventInfo" = "Tallentaminen aktivoi seurantatilan";
@@ -121,11 +144,26 @@
 "illnessTitle" = "Sairaudet";
 "allergiesTitle" = "Allergiat";
 "safeSpaceTitle" = "Omat turvapaikat";
-// Add TC
-"codeInput" = "TC koodi.."; // TODO: change to "Connection code..." in FIN
+"noPlaceYet" = "Et ole vielä lisännyt paikkoja";
+"viewOnMap" = "Näytä kartalla";
+"addNew" = "Lisää uusi";
+"noName" = "Ei nimeä";
+
+// Edit profile
+"selectPhoto" = "Valitse profiilikuva";
+"country" = "Maa";
+"finland" = "Suomi";
+"sweden" = "Ruotsi";
+"estonia" = "Viro";
+"denmark" = "Tanska";
+"norway" = "Norja";
+
+// Add trusted contacts
 "searchBtn" = "Hae";
 "addBtn" = "Lisää";
 "nothingTitle" = "Ei sisältöä";
+"errorSearch" = "Syötä ystäväsi yhteyskoodi hakukenttään";
+
 // Add safe space
 "chooseMapBtn" = "Valitse kartalta";
 "addSafeBtn" = "Lisää";
@@ -133,6 +171,8 @@
 "streetSafe" = "Osoite";
 "citySafe" = "Paikkakunta";
 "zipSafe" = "Postinumero";
+"foundWord" = "Löytyi";
+"placesWord" = "paikkaa";
 
 
 // CONNECTIONS
@@ -140,11 +180,41 @@
 "connectionsTitle" = "Yhteydet";
 "receivedReqTitle" = "Vastaanotetut pyynnöt";
 "sentReqTitle" = "Lähetetyt pyynnöt";
-"acceptBtn" = "hyväksy";
-"profileBtn" = "profiili";
+"acceptBtn" = "Hyväksy";
+"profileBtn" = "Profiili";
+"cancelReq" = "Peruuttaa";
+"connectionCode" = "Yhteyskoodi";
+"connectiontInfo" = "Yhteyskoodisi on ainoa tapa, jolla ihmiset voivat löytää sinut Safeye:stä. Jaa se muiden kanssa, niin he voivat lähettää sinulle yhteyspyynnön.";
+"noCode" = "Ei koodia";
+"addNewContact" = "Lisää uusi yhteyshenkilö";
+"fullNameContact" = "Koko nimi";
+"sentContactBtn" = "Lähetetty";
 
 // NAVITEM
-"homeNav" = "Koti";
+"homeNav" = "Tapahtumat";
 "profileNav" = "Profiili";
 "connectNav" = "Yhteydet";
 "settingsNav" = "Asetukset";
+
+// Components
+"friendAlert" = "Ystäväsi tarvitsee apuasi!";
+"imageAvatarError" = "Kuvan lataamisessa tapahtui virhe.";
+"focusBtn" = "Keskitä";
+"trustedContactsMap" = "Luotetut yhteyshenkilöt";
+"noAddedContacts" = "Et ole lisännyt yhteystietoja.";
+"headline" = "Otsikko";
+"settingsItemText" = "TLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+"firstLastName" = "Etu- ja sukunimi";
+"maybeHomeAddress" = "Ehkä kotiosoite?";
+"healthDetail" = "Terveystiedot";
+"personDetails" = "Henkilötiedot";
+
+"connectionAlreadyExists" = "Tämä yhteys on jo olemassa.";
+"requestAlreadySent" = "Olet jo lähettänyt pyynnön tälle käyttäjälle.";
+"requestAlreadyRecieved" = "Olet jo vastaanottanut pyynnön tältä käyttäjältä.";
+
+"userNotFound" = "Käyttäjää ei löydy";
+"cantAddYourself" = "Et voi lisätä itseäsi";
+
+"connectionReqSuccesess" = "Yhteyspyyntö lähetetty onnistuneesti.";
+"errorConnectionReq" = "Yhteyspyynnön lähettämisessä tapahtui virhe.";

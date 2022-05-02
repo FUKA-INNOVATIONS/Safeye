@@ -38,7 +38,8 @@ struct ProfileView: View {
                     
                     HStack {
                         // display full name
-                        Text("\(appState.profile?.fullName ?? "No name")")
+                        //Text("\(appState.profile?.fullName ?? "No name")")
+                        Text("\(appState.profile?.fullName ?? "\(translationManager.noName)")")
                             .font(.system(size: 35, weight: .bold))
                             .lineLimit(1)
                             .padding(5)
@@ -65,11 +66,13 @@ struct ProfileView: View {
                 // Safe Spaces
                 VStack {
                     
-                    Text("My safe spaces")
+                    //Text("My safe spaces")
+                    Text(translationManager.safeSpaceTitle)
                         .fontWeight(.bold)
                     
                     
-                    if appState.safePlaces.isEmpty { Text("You haven't yet added any places").font(.caption).padding(.top) }
+//                    if appState.safePlaces.isEmpty { Text("You haven't yet added any places").font(.caption).padding(.top) }
+                    if appState.safePlaces.isEmpty { Text(translationManager.noPlaceYet).font(.caption).padding(.top) }
                     
                     ListViewComponent(item: "safeSpace", size: 40)
                         .padding(.leading, 20)
@@ -81,7 +84,8 @@ struct ProfileView: View {
                         NavigationLink {
                             MapView()
                         } label: {
-                            Text("View on map")
+//                            Text("View on map")
+                            Text(translationManager.viewOnMap)
                             
                             Image(systemName: "paperplane")
                         }
@@ -95,7 +99,8 @@ struct ProfileView: View {
                             print("modal: ($showingAddSafePlace)")
                         })
                         { //Image(systemName: "plus.magnifyingglass")
-                            Text("Add new")
+//                            Text("Add new")
+                            Text(translationManager.addNew)
                             Image(systemName: "plus.magnifyingglass")
                         }
                         .font(.system(size: 15, weight: .semibold))

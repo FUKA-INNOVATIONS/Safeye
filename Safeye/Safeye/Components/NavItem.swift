@@ -18,7 +18,7 @@ struct NavItem: View {
             
             EventListView()
                 .tabItem(){
-                    Image(systemName: "house")
+                    Image(systemName: "calendar.circle.fill")
                     Text(translationManager.homeNav)
                 }
             

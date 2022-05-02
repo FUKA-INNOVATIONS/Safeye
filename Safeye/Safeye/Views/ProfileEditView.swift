@@ -33,8 +33,10 @@ struct ProfileEditView: View {
     @State private var avatar = ""
     
     @State private var bloodTypes = ["A", "B", "AB", "O"]
-    @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
-    @State private var selectedCountry = "Finland"
+//    @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
+//    @State private var selectedCountry = "Finland"
+    @State private var countries = TranslationService.shared.countries
+    @State private var selectedCountry = TranslationService.shared.countries[0]
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
@@ -87,7 +89,8 @@ struct ProfileEditView: View {
                     Button {
                         isImagePickerShowing = true
                     } label: {
-                        Text("Select profile photo")
+//                        Text("Select profile photo")
+                        Text(translationManager.selectPhoto)
                     }
                     
                 }
@@ -99,7 +102,8 @@ struct ProfileEditView: View {
                 //
                 if appState.profile == nil {
                     HStack { // Picker for country of residence
-                        Text("Country")
+                        //Text("Country")
+                        Text(translationManager.country)
                         Spacer()
                         Section {
                             Picker("Country", selection: $selectedCountry) {

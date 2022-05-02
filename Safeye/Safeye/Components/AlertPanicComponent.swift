@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct AlertPanicComponent: View {
+    var translationManager = TranslationService.shared
     
     var body: some View {
         VStack {
             Group {
                 Image(systemName: "exclamationmark.triangle.fill").font(.system(size: 50, weight: .bold))
-                Text("Friend needs your help!")
+//                Text("Friend needs your help!")
+                Text(translationManager.friendAlert)
                     .multilineTextAlignment(.center)
                     .font(.title)
             }
