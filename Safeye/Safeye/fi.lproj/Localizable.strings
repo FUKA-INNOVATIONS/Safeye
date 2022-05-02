@@ -112,7 +112,7 @@
 
 // Create event view
 "selectContactsTitle" = "Määritä tapahtuman turvaverkko";
-"createEventInfoText" = "Valimtsemasi käyttäjät näkevät tapahtuman kaikki tiedot";
+"createEventInfoText" = "Valitut hekilöt näkevät tapahtuman kaikki tiedot";
 "dateAndTime" = "Tapahtuman arivioitu ajankohta";
 "startTime" = "Alkaa";
 "endTime" = "Päättyy";
@@ -182,7 +182,7 @@
 "sentReqTitle" = "Lähetetyt pyynnöt";
 "acceptBtn" = "Hyväksy";
 "profileBtn" = "Profiili";
-"cancelReq" = "Peruuttaa";
+"cancelReq" = "Peruuta";
 "connectionCode" = "Yhteyskoodi";
 "connectiontInfo" = "Yhteyskoodisi on ainoa tapa, jolla ihmiset voivat löytää sinut Safeye:stä. Jaa se muiden kanssa, niin he voivat lähettää sinulle yhteyspyynnön.";
 "noCode" = "Ei koodia";
@@ -201,7 +201,7 @@
 "imageAvatarError" = "Kuvan lataamisessa tapahtui virhe.";
 "focusBtn" = "Keskitä";
 "trustedContactsMap" = "Luotetut yhteyshenkilöt";
-"noAddedContacts" = "Et ole lisännyt yhteystietoja.";
+"noAddedContacts" = "Et ole lisännyt yhteysthenkilöitä";
 "headline" = "Otsikko";
 "settingsItemText" = "TLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 "firstLastName" = "Etu- ja sukunimi";
@@ -218,3 +218,6 @@
 
 "connectionReqSuccesess" = "Yhteyspyyntö lähetetty onnistuneesti.";
 "errorConnectionReq" = "Yhteyspyynnön lähettämisessä tapahtui virhe.";
+
+"aboutSafeyeText" = "**Safeye** is an app that will bring you the peace of mind when you or your loved ones go out and might end up in unsafe situations.\n\nWith the help of **Safeye**, you can let those closest to you know when you are heading out on a first date, a night at a bar or a dinner with friends and allow your contacts to keep an eye on you. **Safeye** allows them to see your location and you can alert your friends if you get into a dangerous situation.\n\n*Safeye is here to keep you safe!*";
+

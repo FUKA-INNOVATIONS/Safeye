@@ -23,7 +23,7 @@ struct InfoDetailView : View {
                         .padding()
                     
                     //Text("**Safeye** is an app that will bring you the peace of mind when you or your loved ones go out and might end up in unsafe situations.\n\nWith the help of **Safeye**, you can let those closest to you know when you are heading out on a first date, a night at a bar or a dinner with friends and allow your contacts to keep an eye on you. **Safeye** allows them to see your location and you can alert your friends if you get into a dangerous situation.\n\n*Safeye is here to keep you safe!*")
-                    Text(translationManager.aboutSafeye)
+                    Text(translationManager.aboutSafeyeText)
                         .paragraphStyle(alignment: .center)
                 }
                 .padding()
