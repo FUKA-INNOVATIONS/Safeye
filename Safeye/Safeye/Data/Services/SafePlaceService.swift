@@ -2,8 +2,17 @@
 //  SafePlaceService.swift
 //  Safeye
 //
-//  Created by FUKA on 23.4.2022.
+//  Created by Safeye team on 23.4.2022.
 //
+
+/*
+    This service handles communication with the database for adding/fetching/deleting safeSpaces
+    for the user.
+ 
+    1. Adds a new safe place to the database for the current user
+    2. Retrives all of the users own added safe space, stores in app state
+    3. Deletes a specific safeSpace
+ */
 
 import Foundation
 import MapKit
