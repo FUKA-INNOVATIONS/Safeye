@@ -504,19 +504,19 @@
 				5FBC1A6E280D5E6C0015CC26 /* ConnectionsView.swift */,
 				5F244A9327F70EEA00BFE1FB /* CreateEventView.swift */,
 				5FE0B094280BD3C900CFED16 /* EventListView.swift */,
+				6AB93830281A74330077552C /* EventMapView.swift */,
 				6A29154D2803128E00988C2C /* EventView.swift */,
+				6A0F20472817193F00213FBC /* InfoDetailView.swift */,
 				5F244A8B27F70E7300BFE1FB /* LoginView.swift */,
 				5F244A9C27F711A500BFE1FB /* MapView.swift */,
 				5FA4189B2807058100B6C6E9 /* PlayGroundView.swift */,
 				5F20CC9728006850001E9AED /* ProfileEditView.swift */,
 				5F244A9127F70EC600BFE1FB /* ProfileView.swift */,
+				5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */,
 				6A8792DF2812EFC0009B469B /* RecordingView.swift */,
 				5F244A8D27F70E8700BFE1FB /* RegisterView.swift */,
 				5F244A9E27F711B900BFE1FB /* SettingsView.swift */,
-				5FCC119B2816DD1F0038D565 /* RecordedMessagesView.swift */,
-				6A0F20472817193F00213FBC /* InfoDetailView.swift */,
 				6AC44623281810E20040BD42 /* TCProfileView.swift */,
-				6AB93830281A74330077552C /* EventMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
