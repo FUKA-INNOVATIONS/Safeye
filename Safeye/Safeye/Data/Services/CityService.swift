@@ -2,8 +2,13 @@
 //  CityService.swift
 //  Safeye
 //
-//  Created by FUKA on 20.4.2022.
+//  Created by Safeye Team on 20.4.2022.
 //
+
+/*
+    Service that handles fetching Json data from a network. Retrieves a list of cities
+    within the country searched for and store this data in the app state
+ */
 
 import Foundation
 import SwiftUI
