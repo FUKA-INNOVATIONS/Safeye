@@ -207,3 +207,14 @@
 "firstLastName" = "Etunimi Sukunimi";
 "maybeHomeAddress" = "Ehkä kotiosoite?";
 "healthDetail" = "Terveystiedot";
+"personDetails" = "Henkilötiedot";
+
+"connectionAlreadyExists" = "Tämä yhteys on jo olemassa.";
+"requestAlreadySent" = "Olet lähettänyt pyynnön tälle käyttäjälle.";
+"requestAlreadyRecieved" = "Olet vastaanottanut pyynnön tältä käyttäjältä.";
+
+"userNotFound" = "Käyttäjää ei löydy";
+"cantAddYourself" = "Et voi lisätä itseäsi";
+
+"connectionReqSuccesess" = "Yhteyspyyntö lähetetty onnistuneesti.";
+"errorConnectionReq" = "Tapahtui virhe lähetettäessä yhteyspyyntöä.";

@@ -240,4 +240,16 @@
 "settingsItemText" = "TLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 "firstLastName" = "Firstname Lastname";
 "maybeHomeAddress" = "Maybe home address?";
-"healthDetail" = "Health details";
+"personDetails" = "Деталі користувача";
+"healthDetails" = "Деталі здоровʼя";
+
+"connectionAlreadyExists" = "Цей звʼязок вже існує";
+"requestAlreadySent" = "You have sent a request to this user.";
+"requestAlreadyRecieved" = "You have recieved a request by this user.";
+
+"userNotFound" = "User not found";
+"cantAddYourself" = "You cannot add yourself";
+
+"connectionReqSuccesess" = "Connection request sent successfully.";
+"errorConnectionReq" = "An error occured while sending a connection request.";
+

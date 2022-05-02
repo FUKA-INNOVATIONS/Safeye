@@ -281,6 +281,16 @@ final class TranslationService {
     let personDetails:LocalizedStringKey = "personDetails"
     let healthDetails:LocalizedStringKey = "healthDetails"
 
+    let connectionAlreadyExists:LocalizedStringKey = "connectionAlreadyExists"
+    let requestAlreadySent:LocalizedStringKey = "requestAlreadySent"
+    let requestAlreadyRecieved:LocalizedStringKey = "requestAlreadyRecieved"
+    let userNotFound:LocalizedStringKey = "userNotFound"
+    let cantAddYourself:LocalizedStringKey = "cantAddYourself"
+    
+    let connectionReqSuccesess:LocalizedStringKey = "connectionReqSuccesess"
+    let errorConnectionReq:LocalizedStringKey = "errorConnectionReq"
+
+
 
     
 }

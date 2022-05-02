@@ -249,6 +249,14 @@
 "noHomeSet" = "No home set";
 "removeAll" = "Remove all contacts";
 "selectAll" = "Select all contacts";
-"personDetails" = "Person details";
-"healthDetails" = "Health details";
+
+"connectionAlreadyExists" = "This connection already exists.";
+"requestAlreadySent" = "You have sent a request to this user.";
+"requestAlreadyRecieved" = "You have recieved a request by this user.";
+
+"userNotFound" = "User not found";
+"cantAddYourself" = "You cannot add yourself";
+
+"connectionReqSuccesess" = "Connection request sent successfully.";
+"errorConnectionReq" = "An error occured while sending a connection request.";
 
