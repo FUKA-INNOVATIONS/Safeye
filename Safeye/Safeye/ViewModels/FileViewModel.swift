@@ -2,8 +2,14 @@
 //  FileViewModel.swift
 //  Safeye
 //
-//  Created by gintare on 14.4.2022.
+//  Created by Safeye team on 14.4.2022.
 //
+
+/*
+    This class communicates with the FileService, and is responsible for handling fetching and
+    retrieve of the users avatar, It has two functionalities, one for the user to upload a photo
+    and one to retrieve it so it can be displayed to the user.
+ */
 
 import SwiftUI
 
