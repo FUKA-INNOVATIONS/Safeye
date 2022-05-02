@@ -2,8 +2,18 @@
 //  SafePlaceViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 23.4.2022.
-//
+//  Created by Safeye team on 6.4.2022.
+
+
+/*
+        This class isSapfe places related functionalities:
+        Safe places are saved in database and user can view them on the map.
+ 
+        1. Adding a new safe place. User searches for safe place and selected place's coordinates and name is saved in database
+        2. Getting a list of currently authenicated user's safe places (saved safe places)
+        3. Deleting a safe place
+ */
+
 
 import Foundation
 import MapKit
@@ -49,7 +59,6 @@ class SafePlaceViewModel: ObservableObject {
             }
         }
     }
-    
     
     
     // delete specific safe place
