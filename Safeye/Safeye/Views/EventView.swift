@@ -57,11 +57,32 @@ struct EventView: View {
                     }
                     
                     Section(header: Text(translationManager.eventdDetailsTrack)) {
-                        Text("\(Text(translationManager.startTrack))  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
-                        Text("\(Text(translationManager.endTrack)) \(appState.event?.endTime.formatted(.dateTime) ?? "")")
-                        Text("\(Text(translationManager.eventTypeTrack)) \(appState.event?.eventType ?? "")")
-                        Text("\(Text("Location")): \(appState.event?.city ?? "")")  // TODO: translation > location, also in createEventView
-                        Text("\(Text(translationManager.otherTrack)) \(appState.event?.otherInfo ?? "")")
+                        HStack{
+                            Text(translationManager.startTrack)
+                            Spacer()
+                            Text(appState.event?.startTime.formatted(.dateTime) ?? "" )
+                        }
+                        HStack {
+                            Text(translationManager.endTrack)
+                            Spacer()
+                            Text(appState.event?.endTime.formatted(.dateTime) ?? "")
+                        }
+                        HStack {
+                            Text(translationManager.eventTypeTrack)
+                            Spacer()
+                            Text(appState.event?.eventType ?? "")
+                        }
+                        HStack {
+                            Text("Location")
+                            Spacer()
+                            Text(appState.event?.city ?? "")
+                        }
+                        HStack {
+                            Text(translationManager.otherTrack)
+                            Spacer()
+                            Text(appState.event?.otherInfo ?? "")
+                        }
+                        
                     }
                     if !EventVM.isEventOwner() {
                         NavigationLink {
