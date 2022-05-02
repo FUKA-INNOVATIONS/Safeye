@@ -2,11 +2,13 @@
 //  AuthenticationService.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created by Safeye team on 1.4.2022.
 //
 
 /*
- TODO: Class Explanation
+    This service handles authentication services related to the user using Firebase Authentication.
+    It communicates with the database in order to handle the five functionalities present in the
+    AuthenticationViewModel.
  */
 
 import FirebaseAuth // Import Firebase Authentication
