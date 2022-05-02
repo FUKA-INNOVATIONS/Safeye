@@ -17,7 +17,6 @@ struct EventListView: View {
     
     
     var body: some View {
-        //EventVM.sendNotification()
         
         return VStack {
             VStack {
@@ -26,7 +25,7 @@ struct EventListView: View {
                     Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
                         .accessibility(identifier: "eventListViewEventsCountText")
                     Spacer()
-    //                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
+                    //                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
                     Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn).foregroundColor(.blue) }
                         .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
                         .accessibility(identifier: "eventListViewCreateNewEventButton")

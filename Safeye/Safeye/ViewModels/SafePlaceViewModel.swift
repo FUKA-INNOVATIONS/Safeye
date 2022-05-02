@@ -13,8 +13,10 @@ class SafePlaceViewModel: ObservableObject {
     private var safePlaceService = SafePlaceService.shared
     private var appState = Store.shared
     
+    
+    
     // Create new safe place
-    func createSafePlace(_ place: MKMapItem)  -> Bool{
+    func createSafePlace(_ place: MKMapItem)  -> Bool {
         // Prevent duplicates to be stored in database
         if (self.appState.safePlaces.filter { $0.name == place.placemark.name! }.count) > 0 {
             print("Save place not saved becuase user already have created a place with same name")
@@ -34,6 +36,8 @@ class SafePlaceViewModel: ObservableObject {
         
     }
     
+    
+    
     // Get list of safe places and sotre in appState.safePlaces collection
     func getSafePlacesOfAuthenticatedtUser() {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return } // Current usre id
@@ -47,9 +51,11 @@ class SafePlaceViewModel: ObservableObject {
     }
     
     
+    
     // delete specific safe place
     func deleteSafePlaceByID(_ safePlaceID: String) {
         self.safePlaceService.deleteSafePlaceByID(safePlaceID)
     }
+    
     
 }
