@@ -2,19 +2,25 @@
 //  ProfileService.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
-//  EDited by FUKA 8.4.2022.
-//  Edited by FUKA
+//  Created by Safeye team on 1.4.2022.
+//
 
+/*
+    Service which handles communication with the database and app state for the functionalities
+    withing the ProfileViewModel. Handles creating/updating/retrieving  of user profiles
+ 
+    1. Retrives the information about a users profile using the userId and stores it in app state
+    2. Retrives profile information using connection code
+    3. Creates new profile entry in database for current authenticated user
+    4. Handles changes to profile information when a user wants to edit their own information
+    5. Sets users home locations as their current coordinates, will be displayed for their trusted contacts
+        as a safeSpace on their map
+    6. Retrives the list of trusted contacts for an event and stores them in the app state
+ */
 
 import Foundation
 import Firebase // Import firebase
 import CoreLocation
-
-
-// TODO: Database is in test mode, set rules and change to production mode
-// TODO: move connection related code to own service
-
 
 class ProfileService {
     static let shared = ProfileService() ;  private init() {}
@@ -26,7 +32,7 @@ class ProfileService {
     private var profiles: [ProfileModel] = [ProfileModel]()
     private var profileDetails: ProfileModel?
 
-    
+    // Retrives user profile by their Id
     func fetchProfileByUserID(userID: String, panicProfile: Bool = false) {
         DispatchQueue.main.async {
             self.profileDB.whereField("userId", isEqualTo: userID).addSnapshotListener()  { profile, error in
@@ -53,7 +59,7 @@ class ProfileService {
     }
     
     
-    
+    // Uses connection code to fetch user profile
     func fetchProfileByConnectionCode(connCode: String) {
         DispatchQueue.main.async {
             self.profileDB.whereField("connectionCode", isEqualTo: connCode).addSnapshotListener() { profiles, error in
@@ -93,7 +99,7 @@ class ProfileService {
     }
     
     
-    
+    // Updates the users profile base on changes in the for provided
     func updateProfile(_ profileID: String, _ fullName: String, _ address: String, _ birthday: String, _ bloodType: String, _ illness: String, _ allergies: String, _ avatar: String) {
         self.profileDB.document(profileID).setData(
             ["fullName" : fullName, "address" : address, "birthday" : birthday, "bloodType" : bloodType, "illness" : illness, "allergies" : allergies, "avatar" : avatar], merge: true) { error in
@@ -108,7 +114,7 @@ class ProfileService {
     }
     
     
-    
+    // Sets the current users location as their home coordinates
     func updateUserHomeLocationCoordinates(_ profileID: String, _ homeCoordinates: [Double]) {
         self.profileDB.document(profileID).updateData(["homeLatitude": homeCoordinates[0], "homeLongitude": homeCoordinates[1]]) { error in
             
@@ -118,7 +124,7 @@ class ProfileService {
     }
     
     
-    
+    // Retieve the profiles of the trusted contacts associated with an event
     func fetchEventTrustedContactsProfiles(_ userIDS: [String]) {
         DispatchQueue.main.async {
             self.profileDB.whereField("userId", in: userIDS).addSnapshotListener() { profiles, error in

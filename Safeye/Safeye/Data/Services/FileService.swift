@@ -2,8 +2,13 @@
  //  FileService.swift
  //  Safeye
  //
- //  Created by gintare on 14.4.2022.
+ //  Created by Safeye team on 14.4.2022.
  //
+
+/*
+    Service which communicates with the database to handle images the profile images that the user uploads.
+    Handles creates folders the data in orders to save these images.
+ */
 
  import SwiftUI
  import FirebaseStorage
@@ -18,10 +23,6 @@
      private var eventFileName = "\(UUID().uuidString)"
 
      @State private var path = "avatars/\(UUID().uuidString).jpg"
-     
-     
-     // TODO: upload a file to event folder
-     // TODO: retrieve files from event folder
      
      // creates a new event folder once new event is created
      func putEventFolder(eventFolderPath: String) {
