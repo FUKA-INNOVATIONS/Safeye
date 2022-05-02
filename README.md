@@ -17,6 +17,11 @@ Safeye was designed and developed using XCode, SwiftUI, UIKit, Git, and Figma.
 - Local notifications
 - Search for users by personal connection code
 - Send/cancel/approve connection requests, delete connections
+- Multiple languages through localization
+- Light/dark theme
+
+## Safeye pattern: solving App State issues
+![Safeye pattern](https://users.metropolia.fi/~gintares/Safeye/pattern.png)
  
  ## How it works
  ![Icon: Add a contact](https://users.metropolia.fi/~gintares/Safeye/png-64/gps-64x64-10969.png) **Add a contact**
@@ -42,23 +47,47 @@ Once the user event ends and their back to a safe location, they can delete the 
 
 Firebase Authentication, Storage and Firestore Database.
 
-## Screenshots (will add on Monday when the app is fully ready)
+## Screenshots
+![screenshot1](https://users.metropolia.fi/~gintares/Safeye/screenshots/screenshot1.png)
+![screenshot2](https://users.metropolia.fi/~gintares/Safeye/screenshots/screenshot2.png)
+![screenshot3](https://users.metropolia.fi/~gintares/Safeye/screenshots/screenshot3.png)
 
-## Future development possibilities
+## Known bugs
+- Application state is not reset upon logout
+- Missing or incorrect translations
+- Sometimes app crashes when sending a connection request
+
+## Changes after user feedback
+We had a few users test our prototype during the design process of this application. We have received a lot of valuable feedback and attempted to implement most of the suggested changes in order to improve the user experience.
+Changes implemented:
+- Allowing users to navigate within the entire app even in emergency mode.
+- Tracked events are disabled only manualy to prevent the app from stopping location tracking if user's event lasts longer than anticipated.
+- Simplified address search.
+- Changed 'Panic' button to 'SOS' button.
+- Clearer communication: consistency in terms used, explanations/alerts throughout the app, a dedicated information section explaining how the app works and answering some of the questions users might have.
+- Curtain view in map view wasn't easily findable for users so we tried to make it more visible.
+- Select/de-select all contacts at once in event creation.
+- Some design improvements.
+- ... and many other small changes.
+
+## Future development ideas
 - Disable emergency mode only with faceID/fingerprint/password etc.
 - Siri or button sequency to activate emergency mode quicker
 - Widget for the app
 - Push notifications with PushKit
 - How-to videos on how to use the app
-
+- Adding a loading indicator to all the views
+- Changing and reseting password
+- Map: pinpointing location on the map
+- Map: showing directions to locations
 
 ## Documentation
+- [Demo video](https://youtu.be/rBR6bBXuQc4)
 - [GitHub project](https://github.com/FUKA-INNOVATIONS/Safeye/projects/2?query=is%3Aopen+sort%3Aupdated-desc)
 - [GitHub milestones](https://github.com/FUKA-INNOVATIONS/Safeye/milestones)
 - [GitHub issues](https://github.com/FUKA-INNOVATIONS/Safeye/issues?q=is%3Aissue+is%3Aclosed+sort%3Acreated-asc)
 - [Figma prototype](https://www.figma.com/proto/LWi7g0OSnzDbrVc7zyeWIe/Safeye-Prototyping?node-id=21%3A86&scaling=scale-down&page-id=0%3A1&starting-point-node-id=21%3A86&show-proto-sidebar=1)
 - [Storyboard](https://users.metropolia.fi/~gintares/Safeye/safeye-highres-storyboard.png)
-
 
 
 ## Developers
