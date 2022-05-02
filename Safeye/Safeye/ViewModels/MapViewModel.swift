@@ -2,7 +2,7 @@
 //  MapViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created Safeye team on 1.4.2022.
 //
 
 /*
@@ -12,6 +12,7 @@
     permissions and creates/defines the properties of the location manager that handles the
     users own location.
  */
+
 import MapKit
 import Foundation
 import SwiftUI
@@ -46,7 +47,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
-    // asks user for permission for device location, then centers map on their location
+    // Asks user for permission for device location, then centers map on their location
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
         
