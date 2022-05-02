@@ -2,8 +2,27 @@
 //  CreateEventViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
-//  Edited by FUKA
+//  Created by Safeye team on 6.4.2022.
+
+
+/*
+        This class is handling event related functionalities:
+
+        1. Activating/deactivating panic mode
+        2. Starting/stoping recording user speech during panic mode
+        3. Calling the service to save recorded speech in the databse as text (every 5 secounds when user in panic mode)
+        4. Sending local push notification to trusted contacts if a friend is in panic mode and they missed the notification in the app (trusted contact app is in background/screen locked)
+        5. Checking if authenticated user is owner of currently active-on-screen/displayed event
+        6. Chcking if user is one of trusted contacts of an event (currently displayed event)
+        7. Creating a new event
+        8. Getting amount of current user's events
+        9. Updating an event
+        10. Clearing list of selected contacts during event creation
+        11. Changing status of a specific event. Used to activate and deactivate panic mode
+        12. Deleting a specific event. Authenticated user can delete own events
+ 
+ */
+
 
 import Foundation
 import SwiftUI
@@ -24,7 +43,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     var audioTimer : Timer?
     
-    // User presses panic mode
+    // User presses panic mode, activate panic mode
     func activatePanicMode() {
         
         DispatchQueue.main.async {
@@ -44,6 +63,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         print("Panic Mode activated")
     }
     
+    
     // User pressed the safe button -> disabling panic mode
     func disablePanicMode() {
         DispatchQueue.main.async {
@@ -59,7 +79,8 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         // TODO: remove notification
     }
     
-    // Creates a new string every 15 second and adds it to an array to send  to database
+    
+    // Creates a new string every 5 second and adds it to an array to send  to database
     func monitorSpeechWhilstInPanicMode() {
         print("monitorSpeechWhilstInPanicMode 1")
         
@@ -96,6 +117,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    
     /**
      Stops the timer function and stops listening for any audio
      runs when the user pressed the safe button
@@ -106,6 +128,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.voiceClass.stopTranscribing()
         isRecording = false
     }
+    
     
     // Send notification about panic mode
     func sendNotification() {
@@ -130,6 +153,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         //        }
     }
     
+    
     // User Pressed to disable tracking mode
     func disableTrackingMode() {
         print("Disabled tracking mode")
@@ -137,12 +161,16 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         // TODO Stop updated location for locationManager
     }
     
+    
+    // Check if current user is owner of a currently active (on screen) event
     func isEventOwner() -> Bool {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return false }
         return self.appState.event?.ownerId == currentUserID
     }
     
-    func isEventTrustedContact() -> Bool {//Not working properly, checks if user is one of trusted contacts of an event
+    
+    //Not working properly, checks if user is one of trusted contacts of an event
+    func isEventTrustedContact() -> Bool {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return false }
         let selfFound = self.appState.event!.trustedContacts.filter { $0 == currentUserID }
         if !selfFound.isEmpty {
@@ -154,6 +182,7 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
+    // Create a new event
     func createEvent(_ startDate: Date, _ endDate: Date, _ otherInfo: String, _ eventType: String, _ eventCity: String, _ eventFolderPath: String ) -> Bool {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return false }
         
@@ -211,18 +240,20 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    
+    // Get ammount of events created by authenticated user
     func getEventsCount() -> Int {
         return self.appState.eventsOfCurrentUser.count + self.appState.eventsOfTrustedContacts.count
     }
     
     
-    
+    // Update an event
     func updateEvent(_ event: Event) {
         self.eventService.updateEvent(event)
     }
     
     
-    
+    // Clear list of selected contacts during event creation
     func resetEventSelectedContacts() {
         DispatchQueue.main.async {
             self.appState.eventSelctedContacts.removeAll()
@@ -230,13 +261,14 @@ class EventViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
-    
+    // Change status of a specific event
     func changeStatus(_ eventID: String,_ newStatus: EventStatus) {
         if newStatus == EventStatus.PANIC {  DispatchQueue.main.async { self.appState.panicMode = true  } }
         eventService.changeStatus(eventID, newStatus)
     }
     
     
+    // Delete a specific event
     func deleteEvent(offsets: IndexSet) {
         let eventID = offsets.map { self.appState.eventsOfCurrentUser[$0] }[0].id!
         self.eventService.deleteEvent(eventID)
