@@ -83,6 +83,7 @@ final class TranslationService {
     let faqTitle:LocalizedStringKey = "faqTitle"
     let privacyTitle:LocalizedStringKey = "privacyTitle"
     let privacyText:LocalizedStringKey = "privacyText"
+    let aboutSafeyeText:LocalizedStringKey = "aboutSafeyeText"
 
     
     let howItWorksTitle:LocalizedStringKey = "howItWorksTitle"
