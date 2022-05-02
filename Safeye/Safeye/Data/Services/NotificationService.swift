@@ -2,8 +2,14 @@
 //  NotificationService.swift
 //  Safeye
 //
-//  Created by Pavlo Leinonen on 13.4.2022.
+//  Created by Safeye team on 13.4.2022.
 //
+
+/*
+    Service which handles the notifications that will be sent to the user. Handles asking the user
+    to enable notifications on their device. Also creates the notifications that will be sent to
+    the users.
+ */
 
 import Foundation
 import UserNotifications
