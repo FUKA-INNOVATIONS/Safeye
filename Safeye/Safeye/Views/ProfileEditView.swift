@@ -33,10 +33,8 @@ struct ProfileEditView: View {
     @State private var avatar = ""
     
     @State private var bloodTypes = ["A", "B", "AB", "O"]
-    @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
-//    @State private var countries = [TranslationService.shared.finland,TranslationService.shared.sweden, TranslationService.shared.estonia, TranslationService.shared.denmark, TranslationService.shared.norway]
-    @State private var selectedCountry = "Finland"
-//    @State private var selectedCountry = TranslationService.shared.finland
+    @State private var countries = TranslationService.shared.countries
+    @State private var selectedCountry = TranslationService.shared.countries[0]
     
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?

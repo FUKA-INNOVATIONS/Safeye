@@ -21,16 +21,13 @@ struct EventListView: View {
         
         return VStack {
             VStack {
-//                Text("\(EventVM.getEventsCount()) events")
                 Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
                     .accessibility(identifier: "eventListViewEventsCountText")
                 Spacer()
-//                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
                 Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn).foregroundColor(.blue) }
                     .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
                     .accessibility(identifier: "eventListViewCreateNewEventButton")
                 Form {
-//                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
                     Section(header: Text(" \(Text(translationManager.yourEventsTitle)) (\(appState.eventsOfCurrentUser.count)) ")) {                        ForEach(appState.eventsOfCurrentUser) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green
                             

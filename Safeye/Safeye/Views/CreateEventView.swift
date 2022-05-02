@@ -21,9 +21,8 @@ struct CreateEventView: View {
     @State var otherInfo: String = ""
     @State var eventFolderPath = ""
     
-    let eventTypesArray = ["bar night", "night club", "dinner", "house party", "first date", "other"] // TODO solve problem with array translation
-    
-//    @State private var eventTypesArray = [TranslationService.shared.barNight, TranslationService.shared.nightClub, TranslationService.shared.firstDate, TranslationService.shared.dinner, TranslationService.shared.houseParty, TranslationService.shared.otherType]
+    @State var eventTypesArray = TranslationService.shared.eventTypesArray
+
     @State var cityOfEvent = ""
     @State var selectedEventCityIndex = 0
     
@@ -38,7 +37,6 @@ struct CreateEventView: View {
         
         VStack{
             Form {
-//              Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
                 Section(header: Text(translationManager.selectContactsTitle), footer: Text(translationManager.createEventInfoText)) {
                     SelectContactGridComponent()
                 }
@@ -66,7 +64,6 @@ struct CreateEventView: View {
                 }
                 
                 
-//                Section(header: Text("Location")) {
                 Section(header: Text(translationManager.location)) {
                     Picker(selection: $selectedEventCityIndex, label: Text("")) {
                         ForEach(0..<cities.count) {

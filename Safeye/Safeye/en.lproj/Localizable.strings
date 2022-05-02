@@ -225,7 +225,7 @@
 "sentContactBtn" = "sent";
 
 // NAVITEM
-"homeNav" = "Home";
+"homeNav" = "Events";
 "profileNav" = "Profile";
 "connectNav" = "Connections";
 "settingsNav" = "Setting";

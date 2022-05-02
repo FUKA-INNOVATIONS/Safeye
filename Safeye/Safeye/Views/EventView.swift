@@ -15,7 +15,7 @@ struct EventView: View {
     
     @StateObject var locationManager = LocationViewModel()
     @StateObject var voiceRecognizer = VoiceRecognizer()
-
+    
     @State var panicMode: Bool = false
     @State private var isPresented: Bool = false
     @State private var text: String = ""
@@ -31,15 +31,15 @@ struct EventView: View {
         return VStack {
             
             VStack {
-//                Text("\(appState.event?.status.rawValue ?? "")")
-//                    .font(.largeTitle)
-                    /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
-                        EventVM.deleteEvent(eventID)
-                        goBack = true
-                    } }
-                    .background(
-                        NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
-                    )*/
+                //Text("\(appState.event?.status.rawValue ?? "")")
+                //.font(.largeTitle)
+                /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
+                 EventVM.deleteEvent(eventID)
+                 goBack = true
+                 } }
+                 .background(
+                 NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
+                 )*/
                 
                 
                 Form {
@@ -53,18 +53,42 @@ struct EventView: View {
                             }
                         }
                     }
+                    .onAppear {
+                        EventVM.getEventTrustedContactsProfiles(eventID: eventID)
+                    }
                     
                     Section(header: Text(translationManager.eventdDetailsTrack)) {
-                        Text("\(Text(translationManager.startTrack))  \(appState.event?.startTime.formatted(.dateTime) ?? "")")
-                        Text("\(Text(translationManager.endTrack)) \(appState.event?.endTime.formatted(.dateTime) ?? "")")
-                        Text("\(Text(translationManager.eventTypeTrack)) \(appState.event?.eventType ?? "")")
-                        Text("\(Text(translationManager.otherTrack)) \(appState.event?.otherInfo ?? "")")
+                        HStack{
+                            Text(translationManager.startTrack)
+                            Spacer()
+                            Text(appState.event?.startTime.formatted(.dateTime) ?? "" )
+                        }
+                        HStack {
+                            Text(translationManager.endTrack)
+                            Spacer()
+                            Text(appState.event?.endTime.formatted(.dateTime) ?? "")
+                        }
+                        HStack {
+                            Text(translationManager.eventTypeTrack)
+                            Spacer()
+                            Text(appState.event?.eventType ?? "")
+                        }
+                        HStack {
+                            Text(translationManager.location)
+                            Spacer()
+                            Text(appState.event?.city ?? "")
+                        }
+                        HStack {
+                            Text(translationManager.otherTrack)
+                            Spacer()
+                            Text(appState.event?.otherInfo ?? "")
+                        }
                     }
                     if !EventVM.isEventOwner() {
                         NavigationLink {
                             EventMapView()
                         } label: {
-//                            Text("View Tracked User On Map")
+                            //Text("View Tracked User On Map")
                             Text(translationManager.viewOnMapBtn)
                         }
                     }
@@ -73,20 +97,20 @@ struct EventView: View {
             }
             
             // Modal showing a list of recorded messages from even onwer's speech
-//            Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") }
+            //            Button { showingRecordedMessageView.toggle() } label: { Text("Show recorded messages") }
             Button { showingRecordedMessageView.toggle() } label: { Text(translationManager.showRecordedBtn) }
-
+            
                 .sheet(isPresented: $showingRecordedMessageView) { RecordedMessagesView() }
             
             if EventVM.isEventOwner() {
-//                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
+                //                Button { showingRecordMessage = true } label: { Text("Record Message"); Image(systemName: "mic.circle") }
                 Button { showingRecordMessage = true } label: { Text(translationManager.recordMessageBtn); Image(systemName: "mic.circle") }
-                .disabled( appState.panicMode == true)
-                .opacity( appState.panicMode == true ? 0 : 1)
-                .padding()
-                .sheet(isPresented: $showingRecordMessage) {
-                    RecordingView()
-                }
+                    .disabled( appState.panicMode == true)
+                    .opacity( appState.panicMode == true ? 0 : 1)
+                    .padding()
+                    .sheet(isPresented: $showingRecordMessage) {
+                        RecordingView()
+                    }
                 appState.event!.status == .STARTED ?
                 Button(action: { // Actions after panic button Has been pressed
                     EventVM.activatePanicMode()
@@ -102,7 +126,7 @@ struct EventView: View {
                 }
             } // end of Parent/Main VStack
             
-          
+            
         }
         //.navigationBarHidden(true)
         .onAppear {
@@ -110,7 +134,7 @@ struct EventView: View {
             EventVM.getDetails(for: eventID)
             if EventVM.isEventOwner() { locationManager.locationDuringTrackingMode() }
         }
-
+        
     }
     
 }

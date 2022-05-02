@@ -66,8 +66,8 @@
 "copyBtn" = "Kopioi"; // might be an icon
 "nocode" = "Ei koodia";
 
-"lightMode" = "Light";
-"darkMode" = "Dark";
+"lightMode" = "Vaalea";
+"darkMode" = "Tumma";
 "settingsTitle" = "Asetukset";
 "updateCoordinatesBtn" = "Päivitä kodin koordinaatit";
 "updateCoordinatesInfo" = "Kun napstat 'Päivitä kodin koordinaatit', koordinaatit päivitetään automaattisesti vastaamaan nykyistä sijaintiasi.";
@@ -191,7 +191,7 @@
 "sentContactBtn" = "lähetetty";
 
 // NAVITEM
-"homeNav" = "Koti";
+"homeNav" = "Tapahtumat";
 "profileNav" = "Profiili";
 "connectNav" = "Yhteydet";
 "settingsNav" = "Asetukset";

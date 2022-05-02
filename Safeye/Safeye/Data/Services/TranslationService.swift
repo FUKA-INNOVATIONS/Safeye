@@ -254,7 +254,21 @@ final class TranslationService {
     let firstLastName:LocalizedStringKey = "firstLastName"
     let maybeHomeAddress:LocalizedStringKey = "maybeHomeAddress"
     let healthDetail:LocalizedStringKey = "healthDetail"
-
+    
+    let eventTypesArray = [NSLocalizedString("barNight", comment: ""),
+                           NSLocalizedString("nightClub", comment: ""),
+                           NSLocalizedString("dinner", comment: ""),
+                           NSLocalizedString("houseParty", comment: ""),
+                           NSLocalizedString("firstDate", comment: ""),
+                           NSLocalizedString("otherType", comment: "")
+    ]
+    
+    let countries = [NSLocalizedString("finland", comment: ""),
+                     NSLocalizedString("sweden", comment: ""),
+                     NSLocalizedString("estonia", comment: ""),
+                     NSLocalizedString("denmark", comment: ""),
+                     NSLocalizedString("norway", comment: "")
+    ]
 
     
 }
