@@ -2,8 +2,12 @@
 //  AddSafePlaceView.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
+/*
+ In This view you add new Locations to your profiles,
+ as these locations are safe places you can get to them in case you are in danger or panic.
+ */
 
 import SwiftUI
 import MapKit
@@ -14,7 +18,7 @@ struct AddSafePlaceView: View {
     @State var selectedLocation: MKMapItem?
     @StateObject private var result = SearchResultModel()
     @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
-
+    
     @State private var curHeight: CGFloat = 500
     let minHeight: CGFloat = 400
     let maxHeight: CGFloat = 600
@@ -55,59 +59,53 @@ struct AddSafePlaceView: View {
             .frame(maxWidth: .infinity)
             .background(Color(UIColor.systemBackground))
             .gesture(dragGesture)
-           
-                    VStack{
-                        SafeSpaceSearchComponent(searchText: $result.searchText)
-                        if (result.locations.count != 0) {
-                        List(result.locations, id: \.self) { place in
-                            HStack {
-                                Text(place.name!)
-                                Spacer()
-                                Button("Save") {
-                                    print("Safe place: saving")
-                                    print("Safe place: Selected place name: \(place)")
-                                    let didSave = SafePlaceVM.createSafePlace(place)
-                                    print("Safe place: didSave?: \(didSave)")
-                                    isShowing = false
-                                }
-                                .foregroundColor(Color.blue)
-                                .buttonStyle(BorderlessButtonStyle())
+            
+            VStack{
+                SafeSpaceSearchComponent(searchText: $result.searchText)
+                if (result.locations.count != 0) {
+                    List(result.locations, id: \.self) { place in
+                        HStack {
+                            Text(place.name!)
+                            Spacer()
+                            Button("Save") {
+                                print("Safe place: saving")
+                                print("Safe place: Selected place name: \(place)")
+                                let didSave = SafePlaceVM.createSafePlace(place)
+                                print("Safe place: didSave?: \(didSave)")
+                                isShowing = false
                             }
+                            .foregroundColor(Color.blue)
+                            .buttonStyle(BorderlessButtonStyle())
                         }
-//                        .onAppear(perform: {
-//                                UITableView.appearance().contentInset.top = -50
-//                        })
-                        //if(result.locations.count != 0) {
-                            Text("Found \(result.locations.count) places")
-
-                                
-                                .frame(width: 150, height: 50)
-                                .padding(.bottom, 35)
-
-                        } else {
-                            VStack{
-                                AnimationLottieView(lottieJson: "find")
-                            }
-                            .frame(width: 150, height: 150, alignment: .center)
-                            .padding()
-                            
-                        }
-                        
                     }
-            Spacer(minLength: 50)
-//                    .searchable(text: $result.searchText)
-
+                    Text("Found \(result.locations.count) places")
+                    
+                    
+                        .frame(width: 150, height: 50)
+                        .padding(.bottom, 35)
+                    
+                } else {
+                    VStack{
+                        AnimationLottieView(lottieJson: "find")
+                    }
+                    .frame(width: 150, height: 150, alignment: .center)
+                    .padding()
+                    
+                }
                 
             }
-
+            Spacer(minLength: 50)
+            
+        }
+        
         .frame(minHeight: 500, maxHeight: .infinity)
-            .frame(height: curHeight)
-            .frame(maxWidth: .infinity)
-            .background(
+        .frame(height: curHeight)
+        .frame(maxWidth: .infinity)
+        .background(
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                 Rectangle()
-                .frame(height: curHeight / 2)
+                    .frame(height: curHeight / 2)
             }
                 .foregroundColor(Color(UIColor.systemBackground))
         )

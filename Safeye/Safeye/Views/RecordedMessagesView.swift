@@ -2,7 +2,7 @@
 //  RecordedMessagesView.swift
 //  Safeye
 //
-//  Created by FUKA on 25.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI

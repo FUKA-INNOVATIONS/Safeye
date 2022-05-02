@@ -2,7 +2,7 @@
 //  MapCurtainComponent.swift
 //  Safeye
 //
-//  Created by dfallow on 9.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -11,7 +11,6 @@ struct MapCurtainComponent: View {
     var body: some View {
         
         VStack {
-    
             HStack {
                 Spacer()
                 Text("^   Trusted Contacts   ^")
@@ -19,12 +18,8 @@ struct MapCurtainComponent: View {
                     .font(.title2)
                 Spacer()
             }
-            
             CurtainTCListComponent()
-            
-        }
-        .modifier(CurtainModifier())
-        
+        }.modifier(CurtainModifier())
     }
 }
 

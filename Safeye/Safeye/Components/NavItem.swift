@@ -1,8 +1,8 @@
 //
-//  navItem.swift
+//  NavItem.swift
 //  Safeye
 //
-//  Created by Ali Fahad on 7.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -39,8 +39,6 @@ struct NavItem: View {
                     Image(systemName: "slider.horizontal.3")
                     Text(translationManager.settingsNav)
                 }
-            
         }
-        
     }
 }

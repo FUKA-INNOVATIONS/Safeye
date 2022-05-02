@@ -2,9 +2,10 @@
 //  EventListView.swift
 //  Safeye
 //
-//  Created by FUKA on 17.4.2022.
-//
-
+//  Created by Safeye Team on 1.4.2022.
+/*
+ In home navigation view, you can See your events that you Created and your friends events that they chose you for Watching out for them.
+ */
 import SwiftUI
 
 struct EventListView: View {
@@ -21,12 +22,11 @@ struct EventListView: View {
         
         return VStack {
             VStack {
-                
                 HStack {
                     Text("\(EventVM.getEventsCount()) \(Text(translationManager.eventsNumber))")
                         .accessibility(identifier: "eventListViewEventsCountText")
                     Spacer()
-    //                Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
+                    //Button { showingCreateEvent.toggle() } label: { Text("Create new event") }
                     Button { showingCreateEvent.toggle() } label: { Text(translationManager.createNewEventBtn).foregroundColor(.blue) }
                         .sheet(isPresented: $showingCreateEvent) { CreateEventView() }
                         .accessibility(identifier: "eventListViewCreateNewEventButton")
@@ -34,7 +34,7 @@ struct EventListView: View {
                 .padding()
                 
                 Form {
-                    //                    Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
+                    //Section(header: Text("Your events (\(appState.eventsOfCurrentUser.count)) ")) {
                     Section(header: Text(" \(Text(translationManager.yourEventsTitle)) (\(appState.eventsOfCurrentUser.count)) ")) {
                         ForEach(appState.eventsOfCurrentUser) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green
@@ -62,7 +62,7 @@ struct EventListView: View {
                         .onDelete(perform: EventVM.deleteEvent)
                     }
                     
-                    //                    Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
+                    //Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
                     Section(header: Text(" \(Text(translationManager.yourFriendsEventsTitle)) (\(appState.eventsOfTrustedContacts.count)) ")) {
                         ForEach(appState.eventsOfTrustedContacts) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green
@@ -114,19 +114,4 @@ struct EventListView_Previews: PreviewProvider {
 
 
 
-/**
- 
- 
- .toolbar {
- ToolbarItem(placement: .navigationBarTrailing) {
- EditButton()
- }
- ToolbarItem {
- Button(action: { showingCreateEvent = true }) {
- Label("Create new event", systemImage: "plus")
- }
- }
- }
- 
- 
- */
+

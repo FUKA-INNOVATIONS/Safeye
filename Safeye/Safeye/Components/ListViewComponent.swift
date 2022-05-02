@@ -2,8 +2,8 @@
 //  ListViewComponent.swift
 //  Safeye
 //
-//  Created by gintare on 7.4.2022.
-//  Edited by FUKA
+//  Created by Safeye Team on 1.4.2022.
+
 
 import SwiftUI
 
@@ -31,7 +31,6 @@ struct ListViewComponent: View {
                 }
             }
         }.padding()
-        
     }
 }
 

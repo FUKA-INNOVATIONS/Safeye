@@ -2,9 +2,11 @@
 //  TCProfileView.swift
 //  Safeye
 //
-//  Created by gintare on 24.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
-
+/*
+ Here you can see the person you added as Trusted contacts, you can access this from Connection view
+ */
 import SwiftUI
 
 struct TCProfileView: View {

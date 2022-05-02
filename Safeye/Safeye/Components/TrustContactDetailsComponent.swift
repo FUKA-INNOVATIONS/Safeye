@@ -2,7 +2,7 @@
 //  TrustContactDetailsComponent.swift
 //  Safeye
 //
-//  Created by gintare on 24.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -14,11 +14,11 @@ struct TrustContactDetailsComponent: View {
     init(profile: ProfileModel) {
         self.profile = profile
     }
-
+    
     var body: some View {
-
+        
         VStack(alignment: .leading) {
-
+            
             GroupBox {
                 DisclosureGroup("Person details") { // TODO: translation
                     HStack{
@@ -39,7 +39,7 @@ struct TrustContactDetailsComponent: View {
                 }
                 .font(.headline)
             }
-                        
+            
             GroupBox {
                 DisclosureGroup("Health details") { // TODO: translation
                     HStack {
@@ -49,16 +49,16 @@ struct TrustContactDetailsComponent: View {
                     }
                     .padding(.top, 15)
                     .font(.subheadline)
-
+                    
                     HStack {
                         Text("\(Text(translationManager.allergiesTitle)) ")
                         Spacer()
                         Text("\(profile.allergies)")
-
+                        
                     }
                     .padding(.top, 10)
                     .font(.subheadline)
-
+                    
                     HStack {
                         Text("\(Text(translationManager.bloodTitle))")
                         Spacer()
@@ -69,38 +69,38 @@ struct TrustContactDetailsComponent: View {
                 }
                 .font(.headline)
             }
-
+            
         }
         .padding()
         
         
         
-//        VStack(alignment: .leading) {
-//            HStack{
-//                Image(systemName: "house.circle.fill")
-//                    .font(.system(size: 30))
-//                Text(profile.address)
-//                    .padding()
-//                Spacer()
-//            }
-//            HStack{
-//                Image(systemName: "person.badge.clock.fill")
-//                    .font(.system(size: 30))
-//                Text("Born: \(profile.birthday)")
-//                    .padding()
-//            }
-//
-//            HStack{
-//                Image(systemName: "stethoscope.circle.fill")
-//                    .font(.system(size: 30))
-//                VStack(alignment: .leading){
-//                    Text("Blood type: \(profile.bloodType)")
-//                    Text("Illness: \(profile.illness)")
-//                    Text("Allergies: \(profile.allergies)")
-//                }
-//                .padding()
-//            }
-//        }
+        //        VStack(alignment: .leading) {
+        //            HStack{
+        //                Image(systemName: "house.circle.fill")
+        //                    .font(.system(size: 30))
+        //                Text(profile.address)
+        //                    .padding()
+        //                Spacer()
+        //            }
+        //            HStack{
+        //                Image(systemName: "person.badge.clock.fill")
+        //                    .font(.system(size: 30))
+        //                Text("Born: \(profile.birthday)")
+        //                    .padding()
+        //            }
+        //
+        //            HStack{
+        //                Image(systemName: "stethoscope.circle.fill")
+        //                    .font(.system(size: 30))
+        //                VStack(alignment: .leading){
+        //                    Text("Blood type: \(profile.bloodType)")
+        //                    Text("Illness: \(profile.illness)")
+        //                    Text("Allergies: \(profile.allergies)")
+        //                }
+        //                .padding()
+        //            }
+        //        }
     }
     
 }

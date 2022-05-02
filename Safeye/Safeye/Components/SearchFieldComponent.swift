@@ -2,8 +2,8 @@
 //  SearchFieldComponent.swift
 //  Safeye
 //
-//  Created by gintare on 9.4.2022.
-//  Edit by gintare 10.4.2022.
+//  Created by Safeye Team on 1.4.2022.
+
 
 import SwiftUI
 
@@ -17,8 +17,6 @@ struct SearchFieldComponent: View {
         HStack {
             HStack {
                 //the icons need to be changed to FS Symbols
-                
-                
                 Image("icon-search").padding(8)
                 TextField(translationManager.codeInput, text: $searchInput)
                 Button(action: {
@@ -31,10 +29,7 @@ struct SearchFieldComponent: View {
             .background(.bar)
             .cornerRadius(10)
             .frame(width: 340, height: 20, alignment: .center)
-            
-            
-        }
-        .frame(width: 400, height: 80, alignment: .center)
+        }.frame(width: 400, height: 80, alignment: .center)
     }
 }
 

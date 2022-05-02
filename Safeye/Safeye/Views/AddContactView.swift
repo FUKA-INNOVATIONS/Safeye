@@ -2,15 +2,18 @@
 //  AddContactView.swift
 //  Safeye
 //
-//  Created by gintare on 9.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
-
+/*
+ In this view you search for you friends through the connection code that was given to you by you trusted contact,
+ after the search, you can send friend request and when they will accept it, the connection will apprear on connection view.
+ */
 import SwiftUI
 
 struct AddContactView: View {
     @Binding var isShowing: Bool
     @State var searchInput: String
-        
+    
     @State private var curHeight: CGFloat = 600
     let minHeight: CGFloat = 500
     let maxHeight: CGFloat = 700
@@ -23,7 +26,7 @@ struct AddContactView: View {
         return max(0, min(1, res))
     }
     
-
+    
     @EnvironmentObject var ConnectionVM: ConnectionViewModel
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var FileVM: FileViewModel
@@ -67,10 +70,10 @@ struct AddContactView: View {
                         Button(action: {
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
                         }, label: {Text(translationManager.searchBtn)})
-                            .foregroundColor(.blue)
-                            .buttonStyle(BorderlessButtonStyle())
+                        .foregroundColor(.blue)
+                        .buttonStyle(BorderlessButtonStyle())
                     }
-
+                    
                     Spacer()
                     //  If searched code matches an existing profile, display avatar, full name and 'add' button
                     if appState.profileSearch != nil {
@@ -100,8 +103,8 @@ struct AddContactView: View {
                                 appState.profileSearch = nil
                             }
                         }, label: {Text(translationManager.addBtn)})
-                            .foregroundColor(.blue)
-                            .buttonStyle(BorderlessButtonStyle())
+                        .foregroundColor(.blue)
+                        .buttonStyle(BorderlessButtonStyle())
                     } else {
                         VStack {
                             AnimationLottieView(lottieJson: "no-data")
@@ -120,8 +123,8 @@ struct AddContactView: View {
         }
         .frame(height: curHeight)
         .frame(maxWidth: .infinity)
-
-
+        
+        
         .background(
             ZStack {
                 RoundedRectangle(cornerRadius: 30)

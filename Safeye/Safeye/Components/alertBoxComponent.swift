@@ -2,15 +2,15 @@
 //  alertBoxComponent.swift
 //  Safeye
 //
-//  Created by Pavlo Leinonen on 15.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
+
 import UIKit
 import SwiftUI
 
 struct alertBoxComponent: View {
     @EnvironmentObject var appState: Store
     @EnvironmentObject var viewModel: EventViewModel
-    
     @Binding var buttonIsPressed: Bool
     @Binding var text:String
     @Binding var panicMode: Bool
@@ -45,8 +45,7 @@ struct alertBoxComponent: View {
             width: 250,
             height: 150)
         .background(Color(red: 255, green: 255, blue: 255))
-        .clipShape(RoundedRectangle(cornerRadius: 20.0,
-                                    style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
         .offset(y: buttonIsPressed || appState.panicMode ? 0 : screenSize.height)
         .animation(.spring(response: 1, dampingFraction: 0.9))
         .shadow(color: Color(red: 0, green: 0, blue: 0), radius: 4, x: -1, y: -1)

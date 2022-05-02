@@ -2,7 +2,7 @@
 //  SafeSpaceComponent.swift
 //  Safeye
 //
-//  Created by gintare on 8.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -42,11 +42,7 @@ struct SafeSpaceComponent: View {
             
             if showName { Text(name) }
         }
-        //            Image(systemName:"house.circle")
-        //                .font(.system(size: 40))
-        //                .frame(width: size, height: size, alignment: .center)
-        //                .scaledToFit()
-        //                .aspectRatio(contentMode: .fill)
+        .aspectRatio(contentMode: .fill)
     }
 }
 

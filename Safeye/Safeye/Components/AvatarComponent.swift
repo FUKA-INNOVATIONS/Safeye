@@ -2,7 +2,7 @@
 //  AvatarComponent.swift
 //  Safeye
 //
-//  Created by gintare on 6.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -15,20 +15,20 @@ struct AvatarComponent: View {
         self.size = size
     }
     
-        var body: some View {
-            AsyncImage(url: avatarURL) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } else if phase.error != nil {
-                    Text("There was an error loading the image.")
-                } else {
-                    ProgressView()
-                }
+    var body: some View {
+        AsyncImage(url: avatarURL) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .scaledToFit()
+            } else if phase.error != nil {
+                Text("There was an error loading the image.")
+            } else {
+                ProgressView()
             }
-            .avatarImage(size: size)
         }
+        .avatarImage(size: size)
+    }
 }
 
 struct AvatarComponent_Previews: PreviewProvider {

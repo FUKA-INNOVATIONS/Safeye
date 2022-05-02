@@ -2,7 +2,7 @@
 //  LoginInputComponent.swift
 //  Safeye
 //
-//  Created by Ali Fahad on 28.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 
@@ -25,8 +25,6 @@ struct LoginInputComponent: View {
                 .background(.bar)
                 .cornerRadius(10)
             
-                
         }   .padding()
-        
     }
 }

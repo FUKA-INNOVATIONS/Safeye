@@ -2,7 +2,7 @@
 //  ConnectionViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 13.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import Foundation
@@ -57,7 +57,7 @@ class ConnectionViewModel: ObservableObject {
             }
         }
     }
-
+    
     func getPendingRequests()  {
         DispatchQueue.main.async {
             guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
@@ -120,24 +120,24 @@ class ConnectionViewModel: ObservableObject {
             self.connService.fetchConnections(currentUserID)
         }
     }
-
-   
+    
+    
     func addConnection() -> String? {
         var message: String? = nil
         var canAdd = true
-
+        
         guard let targetProfileID = self.appState.profileSearch?.userId else {
             message = "User not found"
             canAdd = false
             return message
         }
-
+        
         if targetProfileID == appState.profile!.userId {
             message = "You cannot add yourself"
             canAdd = false
             //return message
         }
-
+        
         DispatchQueue.main.async {
             for connection in self.appState.connections {
                 for userID in connection.connectionUsers {
@@ -147,16 +147,16 @@ class ConnectionViewModel: ObservableObject {
                     }
                 }
             }
-
+            
             // generate a connection ID
             guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             var hasher = Hasher()
             hasher.combine(currentUserID)
             hasher.combine(targetProfileID)
             let connectionId = String(hasher.finalize())
-
+            
             let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [currentUserID, targetProfileID], status: false)
-
+            
             // returns a boolean, was added or not?
             if canAdd {
                 if self.connService.addConnection(newConn: newConn) {

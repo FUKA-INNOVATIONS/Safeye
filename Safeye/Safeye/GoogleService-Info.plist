@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1057963065055-h7d16hhe1o2b94boodbu7781kp14fu9n.apps.googleusercontent.com</string>
+	<string>1036305748010-htbo49uivogdfsfj5e545lfmq93fh1r2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1057963065055-h7d16hhe1o2b94boodbu7781kp14fu9n</string>
+	<string>com.googleusercontent.apps.1036305748010-htbo49uivogdfsfj5e545lfmq93fh1r2</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDt-O6d9uiH6uA6qtcV5wCDOHHgm1zowWo</string>
+	<string>AIzaSyDWHXLVl5QKyxlUF5SEkLWZ3G32lrRGqo8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1057963065055</string>
+	<string>1036305748010</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>tech.fuka.Safeye</string>
 	<key>PROJECT_ID</key>
-	<string>safeye-project</string>
+	<string>safeye-local</string>
 	<key>STORAGE_BUCKET</key>
-	<string>safeye-project.appspot.com</string>
+	<string>safeye-local.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1057963065055:ios:b8318b7c3c9348fb22736a</string>
+	<string>1:1036305748010:ios:a55ef203774ffd7c32b353</string>
 </dict>
 </plist>

@@ -2,7 +2,7 @@
 //  SwiftUIView.swift
 //  Safeye
 //
-//  Created by dfallow on 22.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -34,7 +34,6 @@ struct RecordingView: View {
                 // save current message to database
                 appState.event!.userMessage.append(voiceRecognizer.userMessage)
                 EventVM.updateEvent(appState.event!)
-                
                 voiceRecognizer.stopTranscribing()
                 isRecording = false
                 
@@ -50,7 +49,6 @@ struct RecordingView: View {
                 voiceRecognizer.stopTranscribing()
                 isRecording = false
                 self.presentationMode.wrappedValue.dismiss() } label: { Text("Cancel Recording")}
-            
         }
         .onAppear {
             voiceRecognizer.reset()
@@ -62,7 +60,7 @@ struct RecordingView: View {
             isRecording = false
         }
     }
-        
+    
 }
 
 //struct SwiftUIView_Previews: PreviewProvider {

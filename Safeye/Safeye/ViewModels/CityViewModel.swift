@@ -2,7 +2,7 @@
 //  CityViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 20.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import Foundation

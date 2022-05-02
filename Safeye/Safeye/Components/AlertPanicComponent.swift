@@ -2,7 +2,7 @@
 //  AlertPanicComponent.swift
 //  Safeye
 //
-//  Created by FUKA on 22.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -18,10 +18,6 @@ struct AlertPanicComponent: View {
                     .font(.title)
             }
             .foregroundColor(.red)
-            
-            /*ForEach(appState.panicPofiles) {
-                Text($0.fullName)
-            }*/
         }
     }
 }

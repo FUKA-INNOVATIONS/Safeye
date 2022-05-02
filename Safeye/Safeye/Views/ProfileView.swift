@@ -2,8 +2,11 @@
 //  ProfileView.swift
 //  Safeye
 //
-//  Created by gintare on 7.4.2022.
-//  Edited by FUKA on 8.4.2022.
+//  Created by Safeye Team on 1.4.2022.
+//
+/*
+Profile view includes user's info, and user's safe places and a navigation to add safe places, also edit profile info, and shows the info about the user.
+ */
 
 import SwiftUI
 
@@ -15,10 +18,8 @@ struct ProfileView: View {
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var SafePlaceVM: SafePlaceViewModel
     var translationManager = TranslationService.shared
-    
     @State private var showingEditProfile = false
     @State private var showingAddSafePlace = false
-    
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
     
@@ -26,7 +27,6 @@ struct ProfileView: View {
         
         return ZStack {
             ScrollView {
-                
                 VStack {
                     // display profile photo
                     if appState.userPhoto != nil {

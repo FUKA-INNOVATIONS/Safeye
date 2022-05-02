@@ -2,12 +2,9 @@
 //  LoginView.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
-/*
- TODO: Class Explanation
- */
 
 import SwiftUI
 
@@ -22,11 +19,8 @@ struct LoginView: View {
         VStack{
             
             AnimationLottieView(lottieJson: "sign-in-secure")
-            
-            
             LoginInputComponent(title: translationManager.emailTitle, inputText: $email, icon: "envelope")
             SecureInputFieldComponent(title: translationManager.passwordTitle, secureText: $password)
-            
             BasicButtonComponent(label: translationManager.signInButton, action: {
                 // Email and password not provided
                 guard !email.isEmpty, !password.isEmpty else {
@@ -40,15 +34,13 @@ struct LoginView: View {
             NavigationLink(translationManager.createNewAcc, destination: RegisterView(viewModel: viewModel))
                 .foregroundColor(Color.blue)
             
-            
-            
         }
         Spacer()
         // Show alert on login failure
-        .alert(translationManager.loginAlertTitle, isPresented: $viewModel.signinError) {
-            Button(translationManager.okBtn, role: .cancel) { }
-        }
-        .navigationTitle(translationManager.signInTitle)
+            .alert(translationManager.loginAlertTitle, isPresented: $viewModel.signinError) {
+                Button(translationManager.okBtn, role: .cancel) { }
+            }
+            .navigationTitle(translationManager.signInTitle)
         
     }
 }

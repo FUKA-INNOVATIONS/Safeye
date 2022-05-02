@@ -2,9 +2,8 @@
 //  ProfileViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
-//  Edit by FUKA on 8.4.2022.
-// Edit by gintare on 10.4.2022.
+//  Created by Safeye Team on 1.4.2022.
+
 
 import Foundation
 import SwiftUI
@@ -38,7 +37,7 @@ class ProfileViewModel: NSObject, ObservableObject {
         self.profileService.fetchProfileByConnectionCode(connCode: connectionCode)
     }
     
-
+    
     func getProfileForCurrentUser() {
         guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else {
             print("Fetching current user's profile: No signed in user found")

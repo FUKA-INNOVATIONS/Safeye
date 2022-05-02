@@ -2,7 +2,7 @@
 //  SelectContactsGridComponent.swift
 //  Safeye
 //
-//  Created by gintare on 8.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -19,8 +19,8 @@ struct SelectContactGridComponent: View {
     ]
     
     var body: some View {
-//        ScrollView(.vertical, showsIndicators: true) {
-//            LazyHGrid(rows: layout) {
+        //        ScrollView(.vertical, showsIndicators: true) {
+        //            LazyHGrid(rows: layout) {
         if appStore.connectionPofiles.isEmpty {
             Text("You have not added any contacts.") // TODO: translation
         } else {
@@ -38,9 +38,8 @@ struct SelectContactGridComponent: View {
                     Text("Select all contacts") // translation
                         .font(.caption)
                 }
-            }
-            .buttonStyle(BorderlessButtonStyle())
-
+            }.buttonStyle(BorderlessButtonStyle())
+            
             ForEach(appStore.connectionPofiles) { profile in
                 Section {
                     SelectContactComponent(profileDetails: profile)
@@ -50,8 +49,8 @@ struct SelectContactGridComponent: View {
                 }
             }
         }
-//            }
-//        }
+//     }
+//   }
     }
 }
 

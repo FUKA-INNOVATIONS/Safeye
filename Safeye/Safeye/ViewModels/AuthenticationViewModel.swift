@@ -2,8 +2,8 @@
 //  AuthenticationViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 6.4.2022.
-//  Edited by FUKA on 8.4.2022.
+//  Created by Safeye Team on 1.4.2022.
+
 //
 
 

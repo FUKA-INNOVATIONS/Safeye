@@ -2,7 +2,7 @@
 //  MapViewModel.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import MapKit
@@ -60,17 +60,17 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         checkLocationAuthorization()
     }
     
-//    func assignSafeSpaces() {
-//        
-//        for trusted in self.appState.connectionPofiles {
-//            
-//            let name = trusted.fullName
-//            let latitude = trusted.homeLocation[0]
-//            let longitude = trusted.homeLocation[1]
-//            let safeSpace = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), own: false)
-//            
-//            appState.safeSpacesMap.append(safeSpace)
-//        }
-//        
-//    }
+    //    func assignSafeSpaces() {
+    //
+    //        for trusted in self.appState.connectionPofiles {
+    //
+    //            let name = trusted.fullName
+    //            let latitude = trusted.homeLocation[0]
+    //            let longitude = trusted.homeLocation[1]
+    //            let safeSpace = Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), own: false)
+    //
+    //            appState.safeSpacesMap.append(safeSpace)
+    //        }
+    //
+    //    }
 }

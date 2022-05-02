@@ -2,8 +2,10 @@
 //  CreateEventView.swift
 //  Safeye
 //
-//  Created by gintare on 8.4.2022.
-//  Edited by FUKA 11.4.2022
+//  Created by Safeye Team on 1.4.2022.
+/*
+ In this view you can Create an event in home navigation view, Select Trusted contact, Type of the event, time, city and extra note.
+ */
 
 import SwiftUI
 
@@ -37,24 +39,24 @@ struct CreateEventView: View {
         
         VStack{
             Form {
-//              Section(header: Text("Select contacts for the event*"), footer: Text("These contacts will be able to see event details")) {
+                //Select contacts for the event
                 Section(header: Text(translationManager.selectContactsTitle), footer: Text(translationManager.createEventInfoText)) {
                     SelectContactGridComponent()
                 }
                 
-//                ForEach(appState.eventSelctedContacts) { selectedContact in
-//                    HStack {
-//                        Text("\(selectedContact.fullName)")
-//                        Spacer()
-//                        Image(systemName: "person.fill.checkmark")
-//                    }
-//                }
-                
+                //                ForEach(appState.eventSelctedContacts) { selectedContact in
+                //                    HStack {
+                //                        Text("\(selectedContact.fullName)")
+                //                        Spacer()
+                //                        Image(systemName: "person.fill.checkmark")
+                //                    }
+                //                }
+                // Select Time of the Event
                 Section(header: Text(translationManager.dateAndTime)) {
                     DatePicker(translationManager.startTime, selection: $startDate)
                     DatePicker(translationManager.endTime, selection: $endDate)
                 }
-
+                
                 Section(header: Text(translationManager.eventType)) {
                     Picker(selection: $eventType, label: Text(translationManager.selectEventType)) {
                         ForEach(eventTypesArray, id: \.self) {
@@ -85,6 +87,7 @@ struct CreateEventView: View {
                 }
             Spacer()
             
+            //Choose City
             BasicButtonComponent(label: translationManager.saveActivateBtn, action: {
                 print("City: \(cities[selectedEventCityIndex].name!)")
                 if eventType.isEmpty || appState.eventSelctedContacts.isEmpty || otherInfo.isEmpty { showingFormError.toggle() ; print("Fill all fields") ; return }
@@ -97,7 +100,7 @@ struct CreateEventView: View {
                     dismiss()
                 }
             })
-
+            
             Text(translationManager.savingEventInfo)
                 .font(.system(size: 15))
                 .foregroundColor(.blue)

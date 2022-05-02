@@ -2,7 +2,7 @@
 //  EventMapView.swift
 //  Safeye
 //
-//  Created by iosdev on 28.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import SwiftUI
@@ -31,11 +31,5 @@ struct EventMapView: View {
             }
             .ignoresSafeArea()
     }
-
 }
 
-//struct EventMapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EventMapView(appState: Store)
-//    }
-//}

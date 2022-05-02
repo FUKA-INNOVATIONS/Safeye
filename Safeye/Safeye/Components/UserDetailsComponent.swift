@@ -2,8 +2,8 @@
 //  UserDetailsComponent.swift
 //  Safeye
 //
-//  Created by gintare on 7.4.2022.
-//  Edited by FUKA on 8.4.2022.
+//  Created by Safeye Team on 1.4.2022.
+
 //
 
 import SwiftUI
@@ -16,7 +16,7 @@ struct UserDetailsComponent: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-
+            
             GroupBox {
                 DisclosureGroup("Person details") { // TODO: translation
                     HStack{
@@ -37,7 +37,7 @@ struct UserDetailsComponent: View {
                 }
                 .font(.headline)
             }
-                        
+            
             GroupBox {
                 DisclosureGroup("Health details") { // TODO: translation
                     HStack {
@@ -47,16 +47,16 @@ struct UserDetailsComponent: View {
                     }
                     .padding(.top, 15)
                     .font(.subheadline)
-
+                    
                     HStack {
                         Text("\(Text(translationManager.allergiesTitle)) ")
                         Spacer()
                         Text("\(appState.profile?.allergies ?? "Teachers who teaches for only getting salary")")
-
+                        
                     }
                     .padding(.top, 10)
                     .font(.subheadline)
-
+                    
                     HStack {
                         Text("\(Text(translationManager.bloodTitle))")
                         Spacer()
@@ -64,14 +64,10 @@ struct UserDetailsComponent: View {
                     }
                     .padding(.top, 10)
                     .font(.subheadline)
-                }
-                .font(.headline)
+                }.font(.headline)
             }
-
-        }
-        .padding()
+        }.padding()
     }
-    
 }
 
 struct UserDetailsComponent_Previews: PreviewProvider {

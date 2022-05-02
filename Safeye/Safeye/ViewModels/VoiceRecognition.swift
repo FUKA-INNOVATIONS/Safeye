@@ -2,7 +2,7 @@
 //  VoiceRecognition.swift
 //  Safeye
 //
-//  Created by dfallow on 22.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import AVFoundation
@@ -66,8 +66,8 @@ class VoiceRecognizer: ObservableObject {
     }
     
     /**
-        Creates a speech recogniton task that will listen to and transcribe the users speech, unit stopTranscribing() is called.
-        state message is where the users input is recorded
+     Creates a speech recogniton task that will listen to and transcribe the users speech, unit stopTranscribing() is called.
+     state message is where the users input is recorded
      */
     func transcribe() {
         DispatchQueue(label: "Speech Recognizer Queue", qos: .background).async { [weak self] in

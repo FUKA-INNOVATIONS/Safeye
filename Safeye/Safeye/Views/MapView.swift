@@ -2,8 +2,11 @@
 //  MapView.swift
 //  Safeye
 //
-//  Created by FUKA on 1.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
+/*
+ Map view you can access it from Profile or from Event View, to see your location and your trusted contacts location on the map
+ */
 
 import MapKit
 import SwiftUI
@@ -16,7 +19,7 @@ import SwiftUI
 //}
 
 struct MapView: View {
-        
+    
     @EnvironmentObject var viewModel: MapViewModel
     @EnvironmentObject var appState: Store
     @EnvironmentObject var EventVM: EventViewModel
@@ -41,7 +44,7 @@ struct MapView: View {
                 viewModel.checkIfLocationServicesIsEnabled()
                 ConnectionVM.getConnections()
                 ConnectionVM.getConnectionProfiles()
-               // viewModel.assignSafeSpaces()
+                // viewModel.assignSafeSpaces()
             }
             MapCurtainComponent()
                 .cornerRadius(20)
@@ -73,8 +76,6 @@ struct MapView: View {
                                 withAnimation { self.draggedOffset = CGSize.zero }
                             }
                         }
-                        
-                        
                     }
                     .onEnded { value in
                         // When the dragging action stops whilst opening list
@@ -106,16 +107,13 @@ struct MapView: View {
                                 withAnimation { self.draggedOffset = CGSize(width: 0, height: -250) }
                             }
                         }
-                        
-                        
-                        
                     }
                 )
         }
         .onAppear {
             SafePlacesVM.getSafePlacesOfAuthenticatedtUser()
             print("MapView -> EVENT STATE: \(appState.event?.status.rawValue ?? "")")
-
+            
             EventVM.sendNotification()
         }
     }

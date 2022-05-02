@@ -2,26 +2,25 @@
 //  ProfileEditView.swift
 //  Safeye
 //
-//  Created by FUKA on 8.4.2022.
-//  Edit by gintare on 10.4.2022.
-
+//  Created by Safeye Team on 1.4.2022.
+//
+/*
+ Here you can add phopto tou your profile, edit Your Firast name and Last name, and other details about user, you can acceses this from Profile view.
+ */
 import SwiftUI
 
 struct ProfileEditView: View {
+    
     @EnvironmentObject var ProfileVM: ProfileViewModel
     @EnvironmentObject var AuthVM: AuthenticationViewModel
     @EnvironmentObject var appState: Store
     @EnvironmentObject var EventVM: EventViewModel
     @EnvironmentObject var FileVM: FileViewModel
     var translationManager = TranslationService.shared
-    
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject private var CityVM: CityViewModel
-    
     @State private var showEmptyFieldAlert = false
-    
     @Environment(\.dismiss) var dismiss
-    
     @State private var fullName = ""
     @State private var address = ""
     @State private var birthdate = Date()
@@ -31,11 +30,9 @@ struct ProfileEditView: View {
     @State private var allergies = ""
     @State private var connectionCode = ""
     @State private var avatar = ""
-    
     @State private var bloodTypes = ["A", "B", "AB", "O"]
     @State private var countries = ["Finland","Sweden", "Estonia", "Denmark", "Norway"]
     @State private var selectedCountry = "Finland"
-    
     @State var isImagePickerShowing = false
     @State var selectedPhoto: UIImage?
     
@@ -58,11 +55,7 @@ struct ProfileEditView: View {
         }
         
         return VStack {
-            
-            
-            
             ScrollView {
-                
                 VStack {
                     if appState.profile != nil {
                         Text(translationManager.textProfileUpdate)
@@ -111,7 +104,6 @@ struct ProfileEditView: View {
                     }.padding()
                 }
                 
-                
                 HStack{
                     LoginInputComponent(title: translationManager.fullNameTitle, inputText: $fullName, icon: "person.fill")
                 }
@@ -142,10 +134,8 @@ struct ProfileEditView: View {
                         
                         LoginInputComponent(title: translationManager.illnessTitle, inputText: $illness, icon: "stethoscope.circle.fill")
                         LoginInputComponent(title: translationManager.allergiesTitle, inputText: $allergies, icon: "exclamationmark.triangle.fill")
-                        
                     }
                 }
-                
                 
                 BasicButtonComponent(label: translationManager.saveBtn) {
                     print("Save profile details pressed")
@@ -165,17 +155,17 @@ struct ProfileEditView: View {
                             showEmptyFieldAlert = true // Show alert box
                             return
                         }
-
+                        
                         // set avatar path/name to a random string that will be stored in profile // TODO: change avatar path name > userID
                         avatar = "avatars/\(UUID().uuidString).jpg"
                         // upload the image
                         FileVM.uploadPhoto(selectedPhoto: selectedPhoto, avatarUrlFetched: avatar)
-
+                        
                         // Insert new profile data into the database
                         ProfileVM.createProfile(fullName, address, birthday, bloodType, illness, allergies, avatar)
                         
                         saveCitiesInDevice(of: selectedCountry) // fetch cities and save in user device > coreData
-
+                        
                         dismiss() // Close modal
                         
                         
@@ -207,19 +197,12 @@ struct ProfileEditView: View {
                         message: Text(translationManager.fieldAlertText)
                     )
                 }
-                
-                
-                
             }
-            
-            
         }
     }
     
-    
     func saveCitiesInDevice(of userSelectedCountry: String) {
         CityVM.getCities(of: userSelectedCountry)
-        
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             // save all cities in device momeory
@@ -240,9 +223,5 @@ struct ProfileEditView: View {
                 }
             } else { print("CoreData: Cities not saved in device beause of no changes") }
         }
-        
-        
     }
-    
-    
 }

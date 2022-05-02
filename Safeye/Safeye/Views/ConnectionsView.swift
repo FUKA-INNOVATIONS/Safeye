@@ -2,8 +2,11 @@
 //  ConnectionsView.swift
 //  Safeye
 //
-//  Created by FUKA on 18.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
+/*
+ In this view you can find you connection code, and your trusted contacts that yoiu added them, also accept or reject new connectioins.
+ */
 
 import SwiftUI
 
@@ -31,21 +34,13 @@ struct ConnectionsView: View {
                         Text("\(appState.profile?.connectionCode ?? "No code")")
                         Spacer()
                         
-//                        //Copy code to clipboard
-//                        Button(action: {
-//                            let pasteboard = UIPasteboard.general
-//                            pasteboard.string = appState.profile?.connectionCode
-//                        }, label: {Text(translationManager.copyBtn)})
-//                            .foregroundColor(.blue)
-//                            .buttonStyle(BorderlessButtonStyle())
+                        //Copy code to clipboard
+                        
                         
                         Button(action: shareConnectionCode) { // Share conection code
-                                        Image(systemName: "square.and.arrow.up.fill")
-//                                            .resizable()
-//                                            .aspectRatio(contentMode: .fit)
-//                                            .frame(width: 20, height: 20)
-                                            .foregroundColor(.blue)
-                                    }
+                            Image(systemName: "square.and.arrow.up.fill")
+                                .foregroundColor(.blue)
+                        }
                     }
                 }
                 
@@ -61,7 +56,7 @@ struct ConnectionsView: View {
                             .foregroundColor(.blue)
                     }
                     .buttonStyle(BorderlessButtonStyle())
-
+                    
                 }
                 
                 // Established connections
@@ -119,7 +114,7 @@ struct ConnectionsView: View {
                         let profile = ConnectionVM.filterConnectionProfileFromAppState(request, sent: true)
                         HStack {
                             Text(profile?.fullName ?? "")
-//                            Text("Full name")
+                            //                            Text("Full name")
                             Spacer()
                             Group {
                                 Text(translationManager.cancelReq)
@@ -169,10 +164,10 @@ struct ConnectionsView: View {
     }
     
     func shareConnectionCode() {
-            guard let connectionCode = appState.profile?.connectionCode else { return }
-            let activityVC = UIActivityViewController(activityItems: [connectionCode], applicationActivities: nil)
-            UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
-        }
+        guard let connectionCode = appState.profile?.connectionCode else { return }
+        let activityVC = UIActivityViewController(activityItems: [connectionCode], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+    }
     
 }
 

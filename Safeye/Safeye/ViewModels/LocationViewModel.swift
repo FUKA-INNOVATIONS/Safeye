@@ -2,7 +2,7 @@
 //  LocationViewModel.swift
 //  Safeye
 //
-//  Created by dfallow on 25.4.2022.
+//  Created by Safeye Team on 1.4.2022.
 //
 
 import Foundation
@@ -32,7 +32,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
-
+        
         switch locationManager.authorizationStatus {
             
         case .notDetermined:

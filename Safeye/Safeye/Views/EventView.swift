@@ -2,8 +2,11 @@
 //  TrackingModeView.swift
 //  Safeye
 //
-//  Created by dfallow on 10.4.2022.
-//  Edited by FUKA
+//  Created by Safeye Team on 1.4.2022.
+//
+/*
+ Here you can See your events that you Created and you can see the Panic mode activate button, also recorde voice, Mark yourself as safe, navigate to map to see your trusted contacts location.
+ */
 
 import SwiftUI
 import nanopb
@@ -15,7 +18,7 @@ struct EventView: View {
     
     @StateObject var locationManager = LocationViewModel()
     @StateObject var voiceRecognizer = VoiceRecognizer()
-
+    
     @State var panicMode: Bool = false
     @State private var isPresented: Bool = false
     @State private var text: String = ""
@@ -33,13 +36,13 @@ struct EventView: View {
             VStack {
                 Text("\(appState.event?.status.rawValue ?? "")")
                     .font(.largeTitle).foregroundColor(appState.event?.status == .STARTED ? .green : .red)
-                    /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
-                        EventVM.deleteEvent(eventID)
-                        goBack = true
-                    } }
-                    .background(
-                        NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
-                    )*/
+                /*.toolbar { Button("\(EventVM.isEventOwner() ? "Delete" : "")") {
+                 EventVM.deleteEvent(eventID)
+                 goBack = true
+                 } }
+                 .background(
+                 NavigationLink(destination: EventListView(), isActive: $goBack) { EmptyView() }.hidden()
+                 )*/
                 
                 
                 Form {
@@ -116,7 +119,7 @@ struct EventView: View {
                 }
             } // end of Parent/Main VStack
             
-          
+            
         }
         //.navigationBarHidden(true)
         .onAppear {
@@ -124,7 +127,7 @@ struct EventView: View {
             if EventVM.isEventOwner() { locationManager.locationDuringTrackingMode() }
         }
         
-
+        
     }
     
 }
