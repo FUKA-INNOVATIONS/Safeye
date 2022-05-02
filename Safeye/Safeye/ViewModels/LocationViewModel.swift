@@ -2,8 +2,16 @@
 //  LocationViewModel.swift
 //  Safeye
 //
-//  Created by dfallow on 25.4.2022.
+//  Created by Safeye team on 25.4.2022.
 //
+
+/*
+    Class which handles tracking the users locations whilst they have an event active.
+    Initial checkes for location permissions, the time when a users location is updated
+    is dependent on the distance they travel, this distance is shorter during panic mode,
+    to allow for accurate location updates for their trusted contacts. Aslo has a function
+    that tells the delegate to update the users location whilst running in the background
+ */
 
 import Foundation
 import CoreLocation
@@ -18,18 +26,18 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager?
     
+    // Checks that location permissions are enabled
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager = CLLocationManager()
             locationManager?.desiredAccuracy = kCLLocationAccuracyBest
             locationManager?.delegate = self
-            
-            
         } else {
             print("Show Alert saying location not active")
         }
     }
     
+    // Asks user for permission if needed
     private func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
         
@@ -72,7 +80,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         checkLocationAuthorization()
     }
     
-    // Runs when a there is a location change specified by the distance filter
+    // Runs when a there is a location change specified by the distance filter even in background
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(" COORDNATES locationManager()  called")
         guard let userLoc = locations.last else { return }
