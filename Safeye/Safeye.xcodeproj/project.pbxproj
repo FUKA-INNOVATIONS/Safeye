@@ -260,9 +260,10 @@
 		755FCBB2281683650081B160 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCBB4281683660081B160 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCBB5281683E00081B160 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
-		755FCBB7281695C40081B160 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
-		755FCBB8281695D20081B160 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		755FCC0C281816450081B160 /* AnimationLottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLottieView.swift; sourceTree = "<group>"; };
+		7578ADEB281FFB960037DD7D /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7578ADEC281FFBB50037DD7D /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7578ADED281FFBB80037DD7D /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75994EF62809B8EB003244C6 /* alertBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertBoxComponent.swift; sourceTree = "<group>"; };
 		75EB684D28130B0D00F607B7 /* SafeSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeSpaceModel.swift; sourceTree = "<group>"; };
 		75EB684F28130B5000F607B7 /* SearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModel.swift; sourceTree = "<group>"; };
@@ -682,6 +683,7 @@
 				fi,
 				uk,
 				lt,
+				"en-GB",
 			);
 			mainGroup = 5F0EA2EE27F6F9E000FBD77B;
 			packageReferences = (
@@ -880,8 +882,9 @@
 			children = (
 				755FCBB2281683650081B160 /* en */,
 				755FCBB4281683660081B160 /* fi */,
-				755FCBB7281695C40081B160 /* uk */,
-				755FCBB8281695D20081B160 /* lt */,
+				7578ADEB281FFB960037DD7D /* en-GB */,
+				7578ADEC281FFBB50037DD7D /* lt */,
+				7578ADED281FFBB80037DD7D /* uk */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
