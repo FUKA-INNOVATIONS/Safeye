@@ -158,7 +158,13 @@ class ConnectionViewModel: ObservableObject {
             }
         }
         
-        
+        // User has already received a connection request (pending), do not allow to send a new one
+        for connectionSentToCurrentUser in self.appState.pendingConnectionRequestsTarget {
+            if connectionSentToCurrentUser.connectionUsers[1] == currentUserID {
+                message = "You have recieved a request by this user."
+                canAdd = false
+            }
+        }
         
 
         DispatchQueue.main.async {
