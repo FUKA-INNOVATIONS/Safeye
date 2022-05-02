@@ -2,8 +2,13 @@
 //  TranslationService.swift
 //  Safeye
 //
-//  Created by Pavlo Leinonen on 19.4.2022.
+//  Created by Safeye team on 19.4.2022.
 //
+
+/*
+    Translation service provides the keys that are used when handling the devices own language.
+    Default language is English if the phones language is not supported
+ */
 
 import Foundation
 import SwiftUI
