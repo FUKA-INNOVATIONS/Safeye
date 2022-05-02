@@ -2,8 +2,23 @@
 //  ConnectionService.swift
 //  Safeye
 //
-//  Created by FUKA on 13.4.2022.
+//  Created by Safeye team on 13.4.2022.
 //
+
+/*
+    Service which communicates with the database in order to handle connection between users and
+    their trusted contacts. Information that is retrived from the database is stored in the app
+    state.
+
+    1. Returns all of the current authenticated users connections where the status is true (connection has been aprroved),
+        array will be empty if user has no connections
+    2. Returns all pending connections for current authenticated user.
+    3. Used when the user accepts a pending connection requests
+    4. Used when the user wants to remove one of their trusted contacts
+    5. Sets up a connection request by adding a new entry in the database
+    6. Fetches the profile information from databse for the current authenticated users connections
+    7. Same as 6 but is instead for connections which are pending
+ */
 
 import Foundation
 import Firebase
@@ -16,7 +31,7 @@ class ConnectionService: ObservableObject {
     private var profileDB = Firestore.firestore().collection("profiles")
     
     
-    
+    // Fetches users connection where status == true from database and stores in app state
     func fetchConnections (_ userID: String) {
         print("fetchConnections -> userID: \(userID)")
         DispatchQueue.main.async {
@@ -47,7 +62,7 @@ class ConnectionService: ObservableObject {
     }
     
     
-    
+    // Fetches connection requests for current user that require approval
     func fetchPendingConnectionRequests (_ userID: String) { // type: received= target / sent = owner
         DispatchQueue.main.async {
             self.connectionsDB.whereField("connectionUsers", arrayContains: userID)
@@ -85,7 +100,7 @@ class ConnectionService: ObservableObject {
     }
     
     
-    
+    // Establishes the connection between users
     func confirmConnectionRequest(_ connectionRequest: ConnectionModel) {
         DispatchQueue.main.async {
             let connectionRef = self.connectionsDB.document(connectionRequest.id!)
@@ -99,7 +114,7 @@ class ConnectionService: ObservableObject {
     }
     
     
-    
+    // Deletes a users connection from database
     func deleteConnection(_ connectionID: String) {
         DispatchQueue.main.async {
             self.connectionsDB.document(connectionID).delete() { error in
@@ -131,7 +146,7 @@ class ConnectionService: ObservableObject {
     }
     
     
-    
+    // Fetches the profiles of the current users connections
     func fetchConnectionProfiles(_ userIDS: [String], eventCase: Bool = false) {
         DispatchQueue.main.async {
             eventCase ? self.appState.currentEventTrustedContacts.removeAll() : self.appState.connectionPofiles.removeAll()
