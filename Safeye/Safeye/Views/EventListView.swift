@@ -54,7 +54,6 @@ struct EventListView: View {
                         .onDelete(perform: EventVM.deleteEvent)
                     }
                     
-//                    Section(header: Text("Your friend's events (\(appState.eventsOfTrustedContacts.count)) ")) {
                     Section(header: Text(" \(Text(translationManager.yourFriendsEventsTitle)) (\(appState.eventsOfTrustedContacts.count)) ")) {
                         ForEach(appState.eventsOfTrustedContacts) { event in
                             let color = event.status == .PANIC ? Color.red : Color.green

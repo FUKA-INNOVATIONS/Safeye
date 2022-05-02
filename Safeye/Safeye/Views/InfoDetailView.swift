@@ -23,7 +23,6 @@ struct InfoDetailView : View {
                         .frame(width: 300, alignment: .center)
                         .padding()
                     
-//                    Text("**Safeye** is an app that will bring you the peace of mind when you or your loved ones go out and might end up in unsafe situations.\n\nWith the help of **Safeye**, you can let those closest to you know when you are heading out on a first date, a night at a bar or a dinner with friends and allow your contacts to keep an eye on you. **Safeye** allows them to see your location and you can alert your friends if you get into a dangerous situation.\n\n*Safeye is here to keep you safe!*")
                     Text(translationManager.aboutSafeye)
                         .paragraphStyle(alignment: .center)
                 }
@@ -31,7 +30,6 @@ struct InfoDetailView : View {
                 Spacer()
             } else if (self.section == "FAQ") {
                 ScrollView {
-//                    Text("FAQ")
                     Text(translationManager.faqTitle)
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -57,12 +55,10 @@ struct InfoDetailView : View {
                 }
             } else if (self.section == "privacy") {
                 
-//                Text("Privacy")
                 Text(translationManager.privacyTitle)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding()
-//                Text("Your privacy is important to us, therefore the users of Safeye have limited access to information about you. Bellow are the details about  information visibility.")
                 Text(translationManager.privacyText)
                     .paragraphStyle()
                 
@@ -81,7 +77,6 @@ struct InfoDetailView : View {
                 .padding()
             } else if (self.section == "how") {
                 
-//                Text("How it works")
                 Text(translationManager.howItWorksTitle)
                     .font(.largeTitle)
                     .fontWeight(.bold)

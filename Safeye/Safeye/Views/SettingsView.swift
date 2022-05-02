@@ -27,14 +27,11 @@ struct SettingsView: View {
     var body: some View {
         
         Form {
-//            Section(header: Text("Settings"), footer: Text("Once 'Update home coordinates' is clicked, your coordinates will be automatically updated to match your current location.")) {
             Section(header: Text(translationManager.settingsTitle), footer: Text(translationManager.updateCoordinatesInfo)) {
                 VStack{
                     Picker("Mode", selection: $isDarkMode){
-//                    Text("Light")
                         Text(translationManager.lightMode)
                         .tag(false)
-//                    Text("Dark")
                         Text(translationManager.darkMode)
                         .tag(true)
                     }
@@ -45,7 +42,6 @@ struct SettingsView: View {
                 // Update user's home coordinates
                 // TODO: add popup info box when pressed
                 if CLLocationManager().authorizationStatus.rawValue == 4 {
-//                    Button("Update Home Coordinates") {
                     Button(translationManager.updateCoordinatesBtn) {
                         ProfileVM.updateUserHomeCoordinates()
                     }
@@ -54,31 +50,26 @@ struct SettingsView: View {
             }
             
             
-//            Section("Information") {
             Section(translationManager.settingsTitle) {
                 List{
-//                    Text("About Safeye")
                     Text(translationManager.aboutSafeye)
                         .onTapGesture {
                             section = "about"
                             isInfoDetailShowing = true
                         }
                     
-//                    Text("How it works")
                     Text(TranslationService.shared.howItWorksTitle)
                         .onTapGesture {
                             section = "how"
                             isInfoDetailShowing = true
                         }
                     
-//                    Text("FAQ")
                     Text(translationManager.faqTitle)
                         .onTapGesture {
                             section = "FAQ"
                             isInfoDetailShowing = true
                         }
                     
-//                    Text("Privacy")
                     Text(translationManager.privacyTitle)
                         .onTapGesture {
                             section = "privacy"

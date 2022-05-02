@@ -31,7 +31,6 @@ struct AddContactView: View {
     @EnvironmentObject var FileVM: FileViewModel
     @EnvironmentObject var appState: Store
     var translationManager = TranslationService.shared
-//    @State var error = "To search, enter a valid connection code."
     @State var error = "To search, enter a valid connection code."
 
     
@@ -70,7 +69,6 @@ struct AddContactView: View {
                         SearchFieldComponent(searchInput: $searchInput)
                         Button(action: {
                             ProfileVM.getProfileByConnectionCode(withCode: searchInput)
-//                        }, label: {Text("Search")})
                         }, label: {Text(translationManager.searchBtn)})
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
@@ -105,7 +103,6 @@ struct AddContactView: View {
                             .foregroundColor(.blue)
                             .buttonStyle(BorderlessButtonStyle())
                     } else {
-//                      Text("Nothing to display.")
                         VStack {
                             AnimationLottieView(lottieJson: "no-data")
                             Text(self.error)
@@ -137,7 +134,6 @@ struct AddContactView: View {
         .onDisappear {
             curHeight = 600
             searchInput = ""
-//            self.error = "To search, enter a valid connection code."
             self.error = "To search, enter a valid connection code."
             appState.searchResultPhoto = nil
             appState.profileSearch = nil

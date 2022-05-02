@@ -22,7 +22,6 @@ struct RecordingView: View {
         VStack {
             Spacer()
             
-//            Text("Recording Your Message")
             Text(translationManager.recordedYourMessages)
                 .font(.largeTitle)
             
@@ -44,7 +43,6 @@ struct RecordingView: View {
                 // Closes the sheet
                 self.presentationMode.wrappedValue.dismiss()
                 
-//            } label: { Text("Save/Update Your Message") }
             } label: { Text(translationManager.SaveUpdateBtn) }
             
             Spacer()
@@ -53,7 +51,6 @@ struct RecordingView: View {
             Button {
                 voiceRecognizer.stopTranscribing()
                 isRecording = false
-//                self.presentationMode.wrappedValue.dismiss() } label: { Text("Cancel Recording")}
                 self.presentationMode.wrappedValue.dismiss() } label: { Text(translationManager.cancelRecording)}
 
             

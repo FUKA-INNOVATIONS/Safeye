@@ -38,7 +38,6 @@ struct RegisterView: View {
             
         }
         Spacer()
-//        .navigationTitle("Create new account")
         .navigationTitle(translationManager.createNewAcc)
 //        .navigationBarItems(
 //                    trailing: LogoComponent()

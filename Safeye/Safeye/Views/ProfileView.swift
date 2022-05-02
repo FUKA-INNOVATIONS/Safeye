@@ -38,7 +38,6 @@ struct ProfileView: View {
                     
                     HStack {
                         // display full name
-//                        Text("\(appState.profile?.fullName ?? "No name")")
                         Text("\(appState.profile?.fullName ?? "\(translationManager.noName)")")
 
                             .font(.system(size: 35, weight: .bold))
@@ -70,7 +69,6 @@ struct ProfileView: View {
                 // Safe Spaces
                 VStack {
                     
-//                    Text("My safe spaces")
                     Text(translationManager.safeSpaceTitle)
                         .fontWeight(.bold)
                     
@@ -103,7 +101,6 @@ struct ProfileView: View {
                             print("modal: ($showingAddSafePlace)")
                         })
                         { //Image(systemName: "plus.magnifyingglass")
-//                            Text("Add new")
                             Text(translationManager.addNew)
                             Image(systemName: "plus.magnifyingglass")
                         }

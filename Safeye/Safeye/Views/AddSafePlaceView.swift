@@ -65,7 +65,6 @@ struct AddSafePlaceView: View {
                             HStack {
                                 Text(place.name!)
                                 Spacer()
-//                                Button("Save") {
                                 Button(translationManager.saveBtn) {
                                 print("Safe place: saving")
                                     print("Safe place: Selected place name: \(place)")
@@ -76,7 +75,6 @@ struct AddSafePlaceView: View {
                             }
                         }
                         if(result.locations.count != 0) {
-//                            Text("Found \(result.locations.count) places")
                             HStack {
                                 Text(translationManager.foundWord)
                                 Text("\(result.locations.count)")
