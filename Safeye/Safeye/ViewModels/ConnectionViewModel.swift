@@ -137,17 +137,21 @@ class ConnectionViewModel: ObservableObject {
             canAdd = false
             //return message
         }
-
-        DispatchQueue.main.async {
-            for connection in self.appState.connections {
-                for userID in connection.connectionUsers {
-                    if userID == targetProfileID {
-                        message = "This connection already exists."
-                        canAdd = false
-                    }
+        
+        for connection in self.appState.connections {
+            for userID in connection.connectionUsers {
+                if userID == targetProfileID {
+                    message = "This connection already exists."
+                    canAdd = false
                 }
             }
+        }
+        
+        // Sent
+        
+        // resceived
 
+        DispatchQueue.main.async {
             // generate a connection ID
             guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return }
             var hasher = Hasher()
