@@ -2,8 +2,16 @@
 //  VoiceRecognition.swift
 //  Safeye
 //
-//  Created by dfallow on 22.4.2022.
+//  Created by Safeye team on 22.4.2022.
 //
+
+/*
+    Class for speech recognition. Handles creating the voiceRecognizer along with the audio
+    engine which handles reconding and transcribing the detected speech from the user. This
+    class if users for two view/functions RecordingView -> user can record their own message
+    which is displayed to their trusted contacts. EventView -> whilst in panic mode the device
+    will transcribe the audio in 15 second segments.
+ */
 
 import AVFoundation
 import Foundation
