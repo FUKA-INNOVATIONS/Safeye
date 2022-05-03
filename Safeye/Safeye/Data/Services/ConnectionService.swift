@@ -130,7 +130,7 @@ class ConnectionService: ObservableObject {
     
     
     // Add user as trusted contact and create a new entry in 'connections' collection
-    func addConnection(newConn: ConnectionModel) -> Bool { // TODO: FIX > check for existing connection, add only if not exist
+    func addConnection(newConn: ConnectionModel) -> Bool {
         var didAdd = false
         DispatchQueue.main.async {
             do {
