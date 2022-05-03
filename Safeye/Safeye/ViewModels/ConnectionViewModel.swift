@@ -152,33 +152,38 @@ class ConnectionViewModel: ObservableObject {
     }
 
     
-   // Send a new connection request
+    // Send a new connection request
     func addConnection() -> String? {
-        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else { return nil }
-        
         var message: String? = nil
         var canAdd = true
+        
+        guard let currentUserID = AuthenticationService.getInstance.currentUser?.uid else {
+            canAdd = false
+            return nil
+        }
 
         guard let targetProfileID = self.appState.profileSearch?.userId else {
-//            message = "User not found"
-            message = "\(translationManager.userNotFound)"
+            message = "User not found"
+//            message = "\(translationManager.userNotFound)"
             canAdd = false
             return message
         }
 
-        if targetProfileID == appState.profile!.userId {
-//            message = "You cannot add yourself"
-            message = "\(translationManager.cantAddYourself)"
+        if targetProfileID == currentUserID {
+            message = "You cannot add yourself"
+//            message = "\(translationManager.cantAddYourself)"
             canAdd = false
+            return message
         }
         
-        // USer already have connection request, do not allow to send a new one
+        // User already have connection, do not allow to send a new one
         for connection in self.appState.connections {
             for userID in connection.connectionUsers {
                 if userID == targetProfileID {
-//                    message = "This connection already exists."
-                    message = "\(translationManager.connectionAlreadyExists)"
+                    message = "This connection already exists."
+                    //                    message = "\(translationManager.connectionAlreadyExists)"
                     canAdd = false
+                    return message
                 }
             }
         }
@@ -187,43 +192,52 @@ class ConnectionViewModel: ObservableObject {
         // User has already sent a connection request (pending), do not allow to send a new one
         for connectionSentByCurrentUser in self.appState.pendingConnectionRequestsOwner {
             if connectionSentByCurrentUser.connectionUsers[1] == targetProfileID {
-//                message = "You have sent a request to this user."
-                message = "\(translationManager.requestAlreadySent)"
+                message = "You have sent a request to this user."
+                //                message = "\(translationManager.requestAlreadySent)"
                 canAdd = false
+                return message
             }
         }
         
         // User has already received a connection request (pending), do not allow to send a new one
         for connectionSentToCurrentUser in self.appState.pendingConnectionRequestsTarget {
             if connectionSentToCurrentUser.connectionUsers[1] == currentUserID {
-//                message = "You have recieved a request by this user."
-                message = "\(translationManager.requestAlreadyRecieved)"
+                message = "You have recieved a request from this user."
+                //                message = "\(translationManager.requestAlreadyRecieved)"
                 canAdd = false
+                return message
             }
         }
         
-
+        
         DispatchQueue.main.async {
             // generate a connection ID
             var hasher = Hasher()
             hasher.combine(currentUserID)
             hasher.combine(targetProfileID)
             let connectionId = String(hasher.finalize())
-
+            
             let newConn = ConnectionModel(connectionId: connectionId, connectionUsers: [currentUserID, targetProfileID], status: false)
-
+            
             // returns a boolean, was added or not?
+            
             if canAdd {
-                if self.connService.addConnection(newConn: newConn) {
-//                    message = "Connection request sent successfully."
-                    message = "\(self.translationManager.connectionReqSuccesess)"
-
-                } else {
-//                    message = "An error occured while sending a connection request."
-                    message = "\(self.translationManager.errorConnectionReq)"
-
-                }
+                self.connService.addConnection(newConn: newConn)
+                message = "Connection request sent successfully."
             }
+            
+            
+            //            if canAdd {
+            //                if self.connService.addConnection(newConn: newConn) {
+            //                    message = "Connection request sent successfully."
+            ////                    message = "\(self.translationManager.connectionReqSuccesess)"
+            //
+            //                } else {
+            //                    message = "An error occured while sending a connection request."
+            ////                    message = "\(self.translationManager.errorConnectionReq)"
+            //
+            //                }
+            //            }
         }
         
         return message
