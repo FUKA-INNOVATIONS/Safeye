@@ -55,7 +55,7 @@ Firebase Authentication, Storage and Firestore Database.
 ## Known bugs
 - Application state is not reset upon logout
 - Missing or incorrect translations
-- Application state is not reseted on logout
+- Missing cities if user sings in on new device without creating a profile
 
 ## Changes after user feedback
 We had a few users test our prototype during the design process of this application. We have received a lot of valuable feedback and attempted to implement most of the suggested changes in order to improve the user experience.
